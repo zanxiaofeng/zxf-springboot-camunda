@@ -1,4 +1,10 @@
 spring.datasource.url: jdbc:h2:file:./camunda-h2-database
+spring.datasource.driverClassName: org.h2.Driver
+spring.datasource.username: sa
+spring.datasource.password:
+
+spring.h2.console.enabled: true
+spring.h2.console.path: /h2
 
 camunda.bpm.admin-user:
   id: demo
