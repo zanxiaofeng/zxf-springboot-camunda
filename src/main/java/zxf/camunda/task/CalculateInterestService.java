@@ -1,4 +1,4 @@
-package zxf.example.camunda.task;
+package zxf.camunda.task;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
