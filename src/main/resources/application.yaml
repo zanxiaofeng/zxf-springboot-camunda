@@ -9,8 +9,21 @@ spring:
       enabled: true
       path: /h2
 
-camunda:
-  bpm:
+camunda.bpm:
     admin-user:
       id: demo
       password: demo
+    authorization:
+      enabled: true
+    application:
+      delete-upon-undeploy: false
+      scan-for-process-definitions: false
+      deploy-changed-only: true
+      resume-previous-versions: true
+      resume-previous-by: a value
+    job-execution:
+      enabled: true
+      core-pool-size: 10
+    metrics:
+      enabled: false
+      db-reporter-activate: false
