@@ -21,7 +21,7 @@ public class MyController {
 
     @GetMapping("/process/start/{processId}")
     public ProcessInstance startProcess(@PathVariable String processId) {
-        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(processId);
+        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("loanRequest");
         return processInstance;
     }
 
