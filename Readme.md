@@ -12,5 +12,5 @@
 
 # Document
 - https://github.com/camunda/camunda-bpm-examples/
-- https://docs.camunda.org/manual/7.18/reference/rest/
-- camunda-bpm-spring-boot-starter/7.18.0/camunda-bpm-spring-boot-starter-7.18.0.jar!/META-INF/spring-configuration-metadata.json
+- https://docs.camunda.org/manual/latest/user-guide/spring-boot-integration/
+- camunda-bpm-spring-boot-starter-7.19.0.jar!/META-INF/spring-configuration-metadata.json
