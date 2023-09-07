@@ -7,6 +7,12 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     username: camunda
     password: camunda
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 20000
+      connection-test-query: SELECT 1
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
@@ -24,22 +30,15 @@ management:
       exposure:
         include: "*"
 
-#camunda.bpm:
-#  admin-user:
-#    id: demo
-#    password: demo
-#  authorization:
-#    enabled: false
-#  application:
-#    delete-upon-undeploy: false
-#    scan-for-process-definitions: false
-#    deploy-changed-only: true
-#    resume-previous-versions: true
-#    resume-previous-by: a value
-#  job-execution:
-#    enabled: true
-#    core-pool-size: 10
-#    deployment-aware: false
-#  metrics:
-#    enabled: false
-#    db-reporter-activate: false
+camunda:
+  bpm:
+    job-execution:
+      core-pool-size: 10
+      deployment-aware: false
+      max-job-per-acquisition: 6
+      queue-capacity: 6
+    database:
+      type: mysql
+      jdbc-batch-processing: false
+    webapp:
+      enabled: false

@@ -13,25 +13,25 @@ public class SagaBuilder {
     private String name;
     private ProcessBuilder process;
 
-    public SagaBuilder(String name) {
+    private SagaBuilder(String name) {
         this.name = name;
     }
 
-    public static SagaBuilder newSaga(String name) {
+    public static SagaBuilder newSaga(String name, Boolean async) {
         SagaBuilder builder = new SagaBuilder(name);
-        return builder.start();
+        return builder.start(async);
     }
 
     public BpmnModelInstance getModel() {
-        if (bpmnModelInstance==null) {
+        if (bpmnModelInstance == null) {
             bpmnModelInstance = saga.done();
         }
         return bpmnModelInstance;
     }
 
-    public SagaBuilder start() {
+    public SagaBuilder start(Boolean async) {
         process = Bpmn.createExecutableProcess(name);
-        saga = process.startEvent("Start-" + name);
+        saga = process.startEvent("Start-" + name).camundaAsyncBefore(async);
         return this;
     }
 
@@ -56,7 +56,7 @@ public class SagaBuilder {
 
         String id = "Activity-" + name.replace(" ", "-") + "-compensation"; // risky thing ;-)
 
-        ((AbstractActivityBuilder)saga)
+        ((AbstractActivityBuilder) saga)
                 .boundaryEvent()
                 .compensateEventDefinition()
                 .compensateEventDefinitionDone()
