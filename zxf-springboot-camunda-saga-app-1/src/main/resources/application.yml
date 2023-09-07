@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/camunda?serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/camunda?useSSL=false&serverTimezone=GMT%2B8
     driverClassName: com.mysql.cj.jdbc.Driver
     username: camunda
     password: camunda
@@ -33,6 +33,7 @@ management:
 camunda:
   bpm:
     job-execution:
+      enabled: true
       core-pool-size: 10
       deployment-aware: false
       max-job-per-acquisition: 6
@@ -40,5 +41,3 @@ camunda:
     database:
       type: mysql
       jdbc-batch-processing: false
-    webapp:
-      enabled: false

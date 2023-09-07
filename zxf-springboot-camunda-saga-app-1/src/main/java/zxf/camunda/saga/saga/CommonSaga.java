@@ -34,7 +34,7 @@ public class CommonSaga {
                 log.info("zxf-common@app-1 saga had been deployed. (DeploymentId={})", processDefinition.getDeploymentId());
                 return;
             }
-            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, false).activity("Task 1", CommonTask1Adapter.class).activity("Task 2", CommonTask2Adapter.class).end();
+            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, true).activity("Task 1", CommonTask1Adapter.class).activity("Task 2", CommonTask2Adapter.class).end();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance("zxf-common.bpmn", sagaBuilder.getModel()).deploy();
             log.info("zxf-common@app-1 saga deployment is done. (DeploymentId={})", deployment.getId());
         } catch (Exception ex) {

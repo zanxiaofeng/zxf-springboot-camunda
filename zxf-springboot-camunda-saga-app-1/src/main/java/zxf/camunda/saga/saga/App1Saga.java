@@ -36,7 +36,7 @@ public class App1Saga {
                 log.info("zxf-app-1 saga had been deployed. (DeploymentId={})", processDefinition.getDeploymentId());
                 return;
             }
-            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, false).activity("Task 1", App1Task1Adapter.class).compensationActivity("Cancel Task 1", App1Task1CancelAdapter.class).activity("Task 2", App1Task2Adapter.class).compensationActivity("Cancel Task 2", App1Task2CancelAdapter.class).end().triggerCompensationOnAnyError();
+            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, true).activity("Task 1", App1Task1Adapter.class).compensationActivity("Cancel Task 1", App1Task1CancelAdapter.class).activity("Task 2", App1Task2Adapter.class).compensationActivity("Cancel Task 2", App1Task2CancelAdapter.class).end().triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance("zxf-app-1.bpmn", sagaBuilder.getModel()).deploy();
             log.info("zxf-app-1 saga deployment is done. (DeploymentId={})", deployment.getId());
         } catch (Exception ex) {
