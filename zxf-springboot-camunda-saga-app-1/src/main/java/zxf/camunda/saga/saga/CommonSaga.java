@@ -22,16 +22,19 @@ public class CommonSaga {
         try {
             SagaBuilder sagaBuilder = new SagaBuilder("zxf-common-1").start().activity("Task 1", CommonTask1Adapter.class).activity("Task 2", CommonTask2Adapter.class).end();
             processEngine.getRepositoryService().createDeployment().addModelInstance("zxf-common-1.bpmn", sagaBuilder.getModel()).deploy();
+            log.info("zxf-common-1 saga has been deployed");
         } catch (Exception ex) {
             log.error("Exception when define and deploy zxf-common-1 saga", ex);
         }
     }
 
     public void trigger(Integer count) {
+        log.info("zxf-common-1-app-1 trigger start, " + count);
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", "zxf-common-1-app-1-" + i);
             processEngine.getRuntimeService().startProcessInstanceByKey("zxf-common-1", someVariables);
         }
+        log.info("zxf-common-1-app-1 trigger end, " + count);
     }
 }

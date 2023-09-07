@@ -25,17 +25,20 @@ public class App1Saga {
         try {
             SagaBuilder sagaBuilder = new SagaBuilder("zxf-app-1").start().activity("Task 1", App1Task1Adapter.class).compensationActivity("Cancel Task 1", App1Task1CancelAdapter.class).activity("Task 2", App1Task2Adapter.class).compensationActivity("Cancel Task 2", App1Task2CancelAdapter.class).end().triggerCompensationOnAnyError();
             processEngine.getRepositoryService().createDeployment().addModelInstance("zxf-app-1.bpmn", sagaBuilder.getModel()).deploy();
+            log.info("zxf-app-1 saga has been deployed");
         } catch (Exception ex) {
             log.error("Exception when define and deploy zxf-app-1 saga", ex);
         }
     }
 
     public void trigger(Integer count) {
+        log.info("zxf-app-1 trigger start, " + count);
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", "zxf-app-1-" + i);
             processEngine.getRuntimeService().startProcessInstanceByKey("zxf-app-1", someVariables);
         }
+        log.info("zxf-app-1 trigger end, " + count);
     }
 
 }
