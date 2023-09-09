@@ -33,7 +33,6 @@ public class InfoController {
         return instances.stream().map(this::instanceInfo).collect(Collectors.toList());
     }
 
-
     private String instanceInfo(ProcessInstance instance) {
         ProcessDefinition definition = processEngine.getRepositoryService().createProcessDefinitionQuery()
                 .processDefinitionId(instance.getProcessDefinitionId()).singleResult();
@@ -41,7 +40,8 @@ public class InfoController {
     }
 
     private String definitionInfo(ProcessDefinition definition) {
-        return String.format("(Id=%s, Key=%s, Name=%s, Version=%s, isSuspended=%s)",
-                definition.getId(), definition.getKey(), definition.getName(), definition.getVersion(), definition.isSuspended());
+        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)",
+                definition.getId(), definition.getVersion(),
+                definition.getDeploymentId(), definition.isSuspended());
     }
 }

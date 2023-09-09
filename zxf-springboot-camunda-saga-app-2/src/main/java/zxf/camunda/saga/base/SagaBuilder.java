@@ -11,15 +11,17 @@ public class SagaBuilder {
     private AbstractFlowNodeBuilder saga;
     private BpmnModelInstance bpmnModelInstance;
     private String name;
+    private Boolean async;
     private ProcessBuilder process;
 
-    private SagaBuilder(String name) {
+    private SagaBuilder(String name, Boolean async) {
         this.name = name;
+        this.async = async;
     }
 
     public static SagaBuilder newSaga(String name, Boolean async) {
-        SagaBuilder builder = new SagaBuilder(name);
-        return builder.start(async);
+        SagaBuilder builder = new SagaBuilder(name, async);
+        return builder.start();
     }
 
     public BpmnModelInstance getModel() {
@@ -29,9 +31,10 @@ public class SagaBuilder {
         return bpmnModelInstance;
     }
 
-    public SagaBuilder start(Boolean async) {
+    public SagaBuilder start() {
         process = Bpmn.createExecutableProcess(name);
-        saga = process.startEvent("Start-" + name).camundaAsyncBefore(async);
+        saga = process.startEvent("Start-" + name)
+                .camundaAsyncAfter(async);
         return this;
     }
 
@@ -44,7 +47,8 @@ public class SagaBuilder {
     public SagaBuilder activity(String name, Class adapterClass) {
         // this is very handy and could also be done inline above directly
         String id = "Activity-" + name.replace(" ", "-"); // risky thing ;-)
-        saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName());
+        saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName())
+                .camundaAsyncAfter(async);
         return this;
     }
 
@@ -62,7 +66,8 @@ public class SagaBuilder {
                 .compensateEventDefinitionDone()
                 .compensationStart()
                 .serviceTask(id).name(name).camundaClass(adapterClass.getName())
-                .compensationDone();
+                .compensationDone()
+                .camundaAsyncAfter(async);
 
         return this;
     }
