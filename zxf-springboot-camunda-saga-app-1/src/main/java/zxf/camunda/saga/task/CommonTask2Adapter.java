@@ -10,7 +10,7 @@ public class CommonTask2Adapter implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         log.info("CommonTask2Adapter start, " + execution.getVariable("task-id"));
 
-        Thread.sleep(20000);
+        Thread.sleep(50000);
 
         log.info("CommonTask2Adapter end, " + execution.getVariable("task-id"));
     }

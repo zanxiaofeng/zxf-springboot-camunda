@@ -34,6 +34,7 @@ public class SagaBuilder {
     public SagaBuilder start() {
         process = Bpmn.createExecutableProcess(name);
         saga = process.startEvent("Start-" + name)
+                .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
         return this;
     }
@@ -48,6 +49,7 @@ public class SagaBuilder {
         // this is very handy and could also be done inline above directly
         String id = "Activity-" + name.replace(" ", "-"); // risky thing ;-)
         saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName())
+                .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
         return this;
     }
@@ -67,6 +69,7 @@ public class SagaBuilder {
                 .compensationStart()
                 .serviceTask(id).name(name).camundaClass(adapterClass.getName())
                 .compensationDone()
+                .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
 
         return this;
