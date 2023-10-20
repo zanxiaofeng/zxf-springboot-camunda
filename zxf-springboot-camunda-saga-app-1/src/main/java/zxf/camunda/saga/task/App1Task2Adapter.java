@@ -6,6 +6,11 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 @Slf4j
 public class App1Task2Adapter implements JavaDelegate {
+
+    public App1Task2Adapter() {
+        log.info("App1Task2Adapter()");
+    }
+
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         log.info("App1Task2Adapter start, " + execution.getVariable("task-id"));

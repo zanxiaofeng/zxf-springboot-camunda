@@ -16,6 +16,13 @@
 - camunda-bpm-spring-boot-starter-7.19.0.jar!/META-INF/spring-configuration-metadata.json
 
 
+## Key Classes
+### SpringBoot Camunda Starter
+- org.camunda.bpm.spring.boot.starter.configuration.impl.DefaultDatasourceConfiguration
+- org.camunda.bpm.spring.boot.starter.configuration.impl.DefaultJpaConfiguration
+### SpringBoot Transaction Manager
+- org.springframework.transaction.interceptor.TransactionInterceptor.invoke
+- org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction
 
 # zxf-springboot-camunda-h2
 ## Camunda UI

@@ -6,6 +6,11 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 @Slf4j
 public class App1Task1CancelAdapter  implements JavaDelegate {
+
+    public App1Task1CancelAdapter() {
+        log.info("App1Task1CancelAdapter()");
+    }
+
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         log.info("App1Task1CancelAdapter start, " + execution.getVariable("task-id"));
