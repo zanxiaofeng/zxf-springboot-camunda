@@ -11,7 +11,7 @@ public class OrderDao {
     private NamedParameterJdbcTemplate restTemplate;
 
     public boolean createOrder(String orderId) {
-        String sql = "INSERT INTO TBL_ORDER(ORDER_ID) value(:orderId)";
+        String sql = "INSERT INTO TBL_ORDER(ORDER_ID,CREATED_AT) value(:orderId, NOW())";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("orderId", orderId);
         return restTemplate.update(sql, parameterSource) > 0;

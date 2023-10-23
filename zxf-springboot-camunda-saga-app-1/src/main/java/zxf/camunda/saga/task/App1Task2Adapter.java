@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.OrderService;
 
+import java.util.UUID;
+
 @Slf4j
 @Component
 public class App1Task2Adapter implements JavaDelegate {
@@ -23,7 +25,14 @@ public class App1Task2Adapter implements JavaDelegate {
         log.info("App1Task2Adapter start, " + execution.getVariable("task-id"));
 
         Thread.sleep(20000);
-        orderService.createOrder();
+
+        try {
+            String orderId = UUID.randomUUID().toString();
+            orderService.createOrder(orderId);
+            log.info("App1Task2Adapter createOrder, " + execution.getVariable("task-id") + ", " + orderId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         log.info("App1Task2Adapter end, " + execution.getVariable("task-id"));
     }

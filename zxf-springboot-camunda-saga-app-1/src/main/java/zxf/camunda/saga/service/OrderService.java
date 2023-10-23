@@ -13,7 +13,7 @@ public class OrderService {
     private OrderDao orderDao;
 
     @Transactional(rollbackFor = Throwable.class, value = "businessTransactionManager")
-    public boolean createOrder() {
-        return orderDao.createOrder(UUID.randomUUID().toString());
+    public boolean createOrder(String orderId) {
+        return orderDao.createOrder(orderId);
     }
 }
