@@ -23,6 +23,10 @@
 ### SpringBoot Transaction Manager
 - org.springframework.transaction.interceptor.TransactionInterceptor.invoke
 - org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction
+### SpringBoot Auto Configuration - CONDITIONS EVALUATION REPORT(For SpringBoot 2)
+- org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener
+### SpringBoot Auto Configuration - AUTO-CONFIGURATION REPORT(For SpringBoot 1)
+- org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
 
 # zxf-springboot-camunda-h2
 ## Camunda UI

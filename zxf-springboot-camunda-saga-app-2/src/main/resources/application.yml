@@ -35,6 +35,10 @@ management:
       exposure:
         include: "*"
 
+logging:
+  level:
+    org.springframework.boot.autoconfigure: DEBUG
+
 camunda:
   bpm:
     job-execution:
