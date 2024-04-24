@@ -25,30 +25,30 @@ public abstract class BaseSagaController {
     private ByIdSaga byIdSaga;
 
     @GetMapping("/saga/app-1")
-    public void app1(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
+    public String app1(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
         String prefix = "app1@" + getAppName();
         log.info("Trigger {} saga start, {}", prefix, count);
-        app1Saga.trigger(prefix, counter.addAndGet(10), count, start);
+        return app1Saga.trigger(prefix, counter.addAndGet(10), count, start);
     }
 
     @GetMapping("/saga/app-2")
-    public void app2(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
+    public String app2(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
         String prefix = "app2@" + getAppName();
         log.info("Trigger {} saga start, {}", prefix, count);
-        app2Saga.trigger(prefix, counter.addAndGet(10), count, start);
+        return app2Saga.trigger(prefix, counter.addAndGet(10), count, start);
     }
 
     @GetMapping("/saga/app-3")
-    public void app3(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
+    public String app3(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
         String prefix = "app3@" + getAppName();
         log.info("Trigger {} saga start, {}", prefix, count);
-        app3Saga.trigger(prefix, counter.addAndGet(10), count, start);
+        return app3Saga.trigger(prefix, counter.addAndGet(10), count, start);
     }
 
     @GetMapping("/saga/byId")
-    public void byId(@RequestParam Integer count, @RequestParam String processDefinitionId, @RequestParam(required = false) Integer start) {
+    public String byId(@RequestParam Integer count, @RequestParam String processDefinitionId, @RequestParam(required = false) Integer start) {
         log.info("Trigger byId saga start, {}, {}", processDefinitionId, count);
-        byIdSaga.trigger(processDefinitionId, counter.addAndGet(10), count, start);
+        return byIdSaga.trigger(processDefinitionId, counter.addAndGet(10), count, start);
     }
 
     protected abstract String getAppName();

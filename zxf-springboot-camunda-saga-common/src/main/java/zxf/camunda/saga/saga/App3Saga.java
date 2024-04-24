@@ -51,7 +51,7 @@ public class App3Saga {
         log.info("{} deploySaga start", this.sagaName);
     }
 
-    public void trigger(String prefix, Integer times, Integer count, Integer start) {
+    public String trigger(String prefix, Integer times, Integer count, Integer start) {
         start = Optional.ofNullable(start).orElse(3000);
         log.info("{} trigger start, {}, {}::{}~{}", this.sagaName, prefix, times, start, count);
         for (int i = start; i < start + count; i++) {
@@ -64,6 +64,7 @@ public class App3Saga {
             log.info("{} instance, {}", this.sagaName, camundaService.instanceInfo(processInstance));
         }
         log.info("{} trigger end, {}, {}::{}~{}", this.sagaName, prefix, times, start, count);
+        return String.format("%s#%d-%d~%d", prefix, times, start, count);
     }
 
     private Boolean isSagaDeployed() {

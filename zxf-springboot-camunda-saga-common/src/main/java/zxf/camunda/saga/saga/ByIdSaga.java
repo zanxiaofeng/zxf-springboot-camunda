@@ -20,7 +20,7 @@ public class ByIdSaga {
     @Autowired
     private CamundaService camundaService;
 
-    public void trigger(String processDefinitionId, Integer times, Integer count, Integer start) {
+    public String trigger(String processDefinitionId, Integer times, Integer count, Integer start) {
         start = Optional.ofNullable(start).orElse(10000);
         log.info("ById, {} trigger start, {}::{}~{}", processDefinitionId, times, start, count);
         for (int i = start; i < start + count; i++) {
@@ -30,5 +30,6 @@ public class ByIdSaga {
             log.info("ById, {} instance, {}", processDefinitionId, camundaService.instanceInfo(processInstance));
         }
         log.info("ById, {} trigger end, {}::{}~{}", processDefinitionId, times, start, count);
+        return String.format("%s@%d-%d~%d", processDefinitionId, times, start, count);
     }
 }
