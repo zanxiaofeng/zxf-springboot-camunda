@@ -43,10 +43,21 @@ camunda:
   bpm:
     job-execution:
       enabled: true
-      core-pool-size: 10
       deployment-aware: false
-      max-job-per-acquisition: 6
+      #job executor pool settings
+      core-pool-size: 5
+      max-pool-size: 10
       queue-capacity: 6
+      #job acquisition settings
+      max-job-per-acquisition: 6
+      wait-time-in-millis:
+      wait-increase-factor:
+      max-wait:
+      #backoff settings
+      backoff-time-in-millis:
+      backoff-decrease-threshold:
+      max-backoff:
+
     database:
       type: mysql
       jdbc-batch-processing: false
