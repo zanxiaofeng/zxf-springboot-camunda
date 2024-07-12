@@ -1,5 +1,6 @@
 package zxf.camunda.saga.saga;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
@@ -10,7 +11,6 @@ import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.task.CommonTask1Adapter;
 import zxf.camunda.saga.task.CommonTask2Adapter;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;

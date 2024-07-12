@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -52,5 +53,11 @@ public class MyController {
         log.info("MyController::completeProcessTask, " + processKey, ", " + taskId);
         processEngine.getTaskService().complete(taskId);
         log.info("MyController::completeProcessTask, task: {}", taskId);
+    }
+
+    @GetMapping("/deployments/registered")
+    public Set<String> registeredDeployments() {
+        log.info("MyController::registeredDeployments");
+        return processEngine.getManagementService().getRegisteredDeployments();
     }
 }

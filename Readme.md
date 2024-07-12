@@ -6,27 +6,40 @@
 - ACT_HI_*, 代表历史(History)，存储历史数据，如过去的流程实例，变量，任务等。
 - ACT_GE_*, 代表通用(General)数据。
 - ACT_RE_PROCDEF, 所有已经部署的流程定义，包含诸如详细版本，资源名称，挂起状态等信息。
-- ACT_RU_
-
+- ACT_RE_DEPLOYMENT, 
+- ACT_RU_EXECUTION
+- ACT_RU_VARIABLE
+- ACT_RU_JOB, For automation operation
+- ACT_RU_TASK, For manual operation
 
 
 ## Document
 - https://github.com/camunda/camunda-bpm-examples/
 - https://docs.camunda.org/manual/latest/user-guide/spring-boot-integration/
-- camunda-bpm-spring-boot-starter-7.19.0.jar!/META-INF/spring-configuration-metadata.json
+- camunda-bpm-spring-boot-starter-7.21.0.jar!/META-INF/spring-configuration-metadata.json
 
 
 ## Key Classes
 ### SpringBoot Camunda Starter
 - org.camunda.bpm.spring.boot.starter.configuration.impl.DefaultDatasourceConfiguration
-- org.camunda.bpm.spring.boot.starter.configuration.impl.DefaultJpaConfiguration
 ### SpringBoot Transaction Manager
 - org.springframework.transaction.interceptor.TransactionInterceptor.invoke
 - org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction
-### SpringBoot Auto Configuration - CONDITIONS EVALUATION REPORT(For SpringBoot 2)
+### SpringBoot Auto Configuration - CONDITIONS EVALUATION REPORT(For SpringBoot 2,3)
 - org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener
 ### SpringBoot Auto Configuration - AUTO-CONFIGURATION REPORT(For SpringBoot 1)
 - org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
+### Spring Task Executor
+- org.springframework.core.task.TaskExecutor
+- org.springframework.core.task.AsyncTaskExecutor
+- org.springframework.scheduling.SchedulingTaskExecutor
+- org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
+### Key classes of Camunda
+- org.camunda.bpm.engine.impl.ProcessEngineLogger
+- org.camunda.bpm.engine.impl.jobexecutor.JobExecutor.startJobAcquisitionThread
+- org.camunda.bpm.engine.impl.jobexecutor.ThreadPoolJobExecutor
+- org.camunda.bpm.engine.impl.jobexecutor.DefaultJobExecutor
+
 
 # zxf-springboot-camunda-h2
 ## Camunda UI
@@ -39,6 +52,7 @@
 - http://localhost:8080/h2
 
 ## Start process instance
+- http://localhost:8080/deployments/registered
 - http://localhost:8080/process/loanRequest/definitions
 - http://localhost:8080/process/loanRequest/start
 - http://localhost:8080/process/loanRequest/instances

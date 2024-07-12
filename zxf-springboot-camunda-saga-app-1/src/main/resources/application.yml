@@ -48,15 +48,17 @@ camunda:
       core-pool-size: 5
       max-pool-size: 10
       queue-capacity: 6
+      keep-alive-seconds: 0
       #job acquisition settings
       max-job-per-acquisition: 6
-      wait-time-in-millis:
-      wait-increase-factor:
-      max-wait:
+      lock-time-in-millis: 300000
+      wait-time-in-millis: 5000
+      max-wait: 60000
+      wait-increase-factor: 2
       #backoff settings
-      backoff-time-in-millis:
-      backoff-decrease-threshold:
-      max-backoff:
+      backoff-time-in-millis: 0
+      max-backoff: 0
+      backoff-decrease-threshold: 100
 
     database:
       type: mysql
