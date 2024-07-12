@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,6 +32,12 @@ public class InfoController {
         log.info("instances");
         List<ProcessInstance> instances = processEngine.getRuntimeService().createProcessInstanceQuery().list();
         return instances.stream().map(this::instanceInfo).collect(Collectors.toList());
+    }
+
+    @GetMapping("/deployments/registered")
+    public Set<String> registeredDeployments() {
+        log.info("registeredDeployments");
+        return processEngine.getManagementService().getRegisteredDeployments();
     }
 
     private String instanceInfo(ProcessInstance instance) {

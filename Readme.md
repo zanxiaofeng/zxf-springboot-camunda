@@ -29,6 +29,9 @@
 - org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener
 ### SpringBoot Auto Configuration - AUTO-CONFIGURATION REPORT(For SpringBoot 1)
 - org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer
+### SpringBoot flyway config
+- org.springframework.boot.autoconfigure.flyway.FlywayProperties
+- org.springframework.boot.sql.init.dependency.DatabaseInitializerDetector=org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializerDatabaseInitializerDetector
 ### Spring Task Executor
 - org.springframework.core.task.TaskExecutor
 - org.springframework.core.task.AsyncTaskExecutor

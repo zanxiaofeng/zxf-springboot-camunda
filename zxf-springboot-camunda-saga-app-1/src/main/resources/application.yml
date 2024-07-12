@@ -25,6 +25,11 @@ spring:
         idle-timeout: 30000
         connection-timeout: 20000
         connection-test-query: SELECT 1
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: true
+    locations: classpath:db/migration
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
