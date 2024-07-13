@@ -63,16 +63,21 @@
 - http://localhost:8080/process/loanRequest/tasks/{taskId}/complete
 
 # zxf-springboot-camunda-saga
+## Camunda UI(Setup admin)
+- http://localhost:8090/
+- http://localhost:8091/
 ## app-1
 - http://localhost:8090/saga/common?count=100
 - http://localhost:8090/saga/app-1?count=100
 - http://localhost:8090/info/definitions
 - http://localhost:8090/info/instances
+- http://localhost:8090/info/deployments/registered
 ## app-2
 - http://localhost:8091/saga/common?count=100
 - http://localhost:8091/saga/app-2?count=100
 - http://localhost:8091/info/definitions
 - http://localhost:8091/info/instances
+- http://localhost:8091/info/deployments/registered
 
 # 问题：
 - 由异构应用（不同应用的不同版本）组成的Camunda集群中，如何实现特定应用版本与特定流程版本的绑定，以便特定版本的流程任务能被调度到支持的应用版本，以避免出现版本不匹配导致的错误（如找不到任务关联的JavaDelegate类）。
