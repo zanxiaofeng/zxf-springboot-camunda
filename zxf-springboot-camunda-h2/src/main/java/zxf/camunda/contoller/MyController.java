@@ -56,8 +56,16 @@ public class MyController {
     }
 
     @GetMapping("/deployments/registered")
-    public Set<String> registeredDeployments() {
+    public List<String> registeredDeployments() {
         log.info("MyController::registeredDeployments");
-        return processEngine.getManagementService().getRegisteredDeployments();
+        log.info("registeredDeployments");
+        Set<String> registeredDeployments = processEngine.getManagementService().getRegisteredDeployments();
+        return registeredDeployments.stream().map((deploymentId) -> processEngine.getRepositoryService().createProcessDefinitionQuery().deploymentId(deploymentId).singleResult()).map(this::definitionInfo).collect(Collectors.toList());
+    }
+
+    private String definitionInfo(ProcessDefinition definition) {
+        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)",
+                definition.getId(), definition.getVersion(),
+                definition.getDeploymentId(), definition.isSuspended());
     }
 }

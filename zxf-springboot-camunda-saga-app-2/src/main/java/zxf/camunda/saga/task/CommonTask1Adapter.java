@@ -15,7 +15,7 @@ public class CommonTask1Adapter implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         log.info("CommonTask1Adapter start, " + execution.getVariable("task-id"));
 
-        Thread.sleep(50000);
+        Thread.sleep(4000);
 
         log.info("CommonTask1Adapter end, " + execution.getVariable("task-id"));
     }

@@ -37,10 +37,10 @@ management:
 
 logging:
   level:
-    org.springframework.boot.autoconfigure: DEBUG
-    org.camunda.bpm.engine: ERROR
+    #org.springframework.boot.autoconfigure: DEBUG
+    #org.camunda.bpm.engine: ERROR
     org.camunda.bpm.engine.cmd: TRACE
-    org.camunda.bpm.engine.persistence: TRACE
+    #org.camunda.bpm.engine.persistence: TRACE
     org.camunda.bpm.engine.jobexecutor: TRACE
 
 camunda:

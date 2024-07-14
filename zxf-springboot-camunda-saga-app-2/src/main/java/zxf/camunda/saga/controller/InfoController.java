@@ -35,20 +35,18 @@ public class InfoController {
     }
 
     @GetMapping("/deployments/registered")
-    public Set<String> registeredDeployments() {
+    public List<String> registeredDeployments() {
         log.info("registeredDeployments");
-        return processEngine.getManagementService().getRegisteredDeployments();
+        Set<String> registeredDeployments = processEngine.getManagementService().getRegisteredDeployments();
+        return registeredDeployments.stream().map((deploymentId) -> processEngine.getRepositoryService().createProcessDefinitionQuery().deploymentId(deploymentId).singleResult()).map(this::definitionInfo).collect(Collectors.toList());
     }
 
     private String instanceInfo(ProcessInstance instance) {
-        ProcessDefinition definition = processEngine.getRepositoryService().createProcessDefinitionQuery()
-                .processDefinitionId(instance.getProcessDefinitionId()).singleResult();
+        ProcessDefinition definition = processEngine.getRepositoryService().createProcessDefinitionQuery().processDefinitionId(instance.getProcessDefinitionId()).singleResult();
         return String.format("(Id=%s, definition=%s)", instance.getId(), definitionInfo(definition));
     }
 
     private String definitionInfo(ProcessDefinition definition) {
-        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)",
-                definition.getId(), definition.getVersion(),
-                definition.getDeploymentId(), definition.isSuspended());
+        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)", definition.getId(), definition.getVersion(), definition.getDeploymentId(), definition.isSuspended());
     }
 }

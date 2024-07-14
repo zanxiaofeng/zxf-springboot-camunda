@@ -35,9 +35,10 @@ public class InfoController {
     }
 
     @GetMapping("/deployments/registered")
-    public Set<String> registeredDeployments() {
+    public List<String> registeredDeployments() {
         log.info("registeredDeployments");
-        return processEngine.getManagementService().getRegisteredDeployments();
+        Set<String> registeredDeployments = processEngine.getManagementService().getRegisteredDeployments();
+        return registeredDeployments.stream().map((deploymentId) -> processEngine.getRepositoryService().createProcessDefinitionQuery().deploymentId(deploymentId).singleResult()).map(this::definitionInfo).collect(Collectors.toList());
     }
 
     private String instanceInfo(ProcessInstance instance) {
