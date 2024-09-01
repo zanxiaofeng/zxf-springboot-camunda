@@ -13,10 +13,16 @@ public class App2Task1Adapter implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        log.info("App2Task1Adapter start, " + execution.getVariable("task-id"));
+        String taskId = (String) execution.getVariable("task-id");
+        log.info("App2Task1Adapter start, " + taskId);
+
+        if (taskId.endsWith("::1")) {
+            log.error("App2Task1Adapter Failed to process task: " + taskId);
+            throw new RuntimeException("Failed to process task: " + taskId);
+        }
 
         Thread.sleep(20000);
 
-        log.info("App2Task1Adapter end, " + execution.getVariable("task-id"));
+        log.info("App2Task1Adapter end, " + taskId);
     }
 }

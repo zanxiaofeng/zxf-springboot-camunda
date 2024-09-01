@@ -49,6 +49,17 @@ public class SagaBuilder {
         // this is very handy and could also be done inline above directly
         String id = "Activity-" + name.replace(" ", "-"); // risky thing ;-)
         saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName())
+                .camundaFailedJobRetryTimeCycle("R3/PT30S")
+                .camundaAsyncBefore(async)
+                .camundaAsyncAfter(async);
+        return this;
+    }
+
+    @SuppressWarnings("rawtypes")
+    public SagaBuilder activityWithoutRetry(String name, Class adapterClass) {
+        // this is very handy and could also be done inline above directly
+        String id = "Activity-" + name.replace(" ", "-"); // risky thing ;-)
+        saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
         return this;

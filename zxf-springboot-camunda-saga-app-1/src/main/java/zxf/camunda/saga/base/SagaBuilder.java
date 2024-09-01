@@ -49,7 +49,7 @@ public class SagaBuilder {
         // this is very handy and could also be done inline above directly
         String id = "Activity-" + name.replace(" ", "-"); // risky thing ;-)
         saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName())
-                .camundaFailedJobRetryTimeCycle("R3/PT5M")
+                .camundaFailedJobRetryTimeCycle("R2/PT2M")
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
         return this;
