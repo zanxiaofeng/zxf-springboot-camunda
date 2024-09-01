@@ -10,8 +10,8 @@ public class SagaBuilder {
     @SuppressWarnings("rawtypes")
     private AbstractFlowNodeBuilder saga;
     private BpmnModelInstance bpmnModelInstance;
-    private String name;
-    private Boolean async;
+    private final String name;
+    private final Boolean async;
     private ProcessBuilder process;
 
     private SagaBuilder(String name, Boolean async) {
@@ -46,20 +46,22 @@ public class SagaBuilder {
 
     @SuppressWarnings("rawtypes")
     public SagaBuilder activity(String name, Class adapterClass) {
-        // this is very handy and could also be done inline above directly
-        String id = "Activity-" + name.replace(" ", "-"); // risky thing ;-)
-        saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName())
-                .camundaFailedJobRetryTimeCycle("R2/PT2M")
+        String id = "Activity-" + name.replace(" ", "-");
+        saga = saga.serviceTask(id)
+                .name(name)
+                .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async);
+                .camundaAsyncAfter(async)
+                .camundaFailedJobRetryTimeCycle("R2/PT2M");
         return this;
     }
 
     @SuppressWarnings("rawtypes")
     public SagaBuilder activityWithoutRetry(String name, Class adapterClass) {
-        // this is very handy and could also be done inline above directly
-        String id = "Activity-" + name.replace(" ", "-"); // risky thing ;-)
-        saga = saga.serviceTask(id).name(name).camundaClass(adapterClass.getName())
+        String id = "Activity-" + name.replace(" ", "-");
+        saga = saga.serviceTask(id)
+                .name(name)
+                .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
         return this;
@@ -71,14 +73,16 @@ public class SagaBuilder {
             throw new RuntimeException("Compensation activity can only be specified right after activity");
         }
 
-        String id = "Activity-" + name.replace(" ", "-") + "-compensation"; // risky thing ;-)
+        String id = "Activity-" + name.replace(" ", "-") + "-compensation";
 
         ((AbstractActivityBuilder) saga)
                 .boundaryEvent()
                 .compensateEventDefinition()
                 .compensateEventDefinitionDone()
                 .compensationStart()
-                .serviceTask(id).name(name).camundaClass(adapterClass.getName())
+                .serviceTask(id)
+                .name(name)
+                .camundaClass(adapterClass.getName())
                 .compensationDone()
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
@@ -88,11 +92,13 @@ public class SagaBuilder {
 
     public SagaBuilder triggerCompensationOnAnyError() {
         process.eventSubProcess()
-                .startEvent("ErrorCatched").error("java.lang.Throwable")
-                .intermediateThrowEvent("ToBeCompensated").compensateEventDefinition().compensateEventDefinitionDone()
+                .startEvent("ErrorCatched")
+                .error("java.lang.Throwable")
+                .intermediateThrowEvent("ToBeCompensated")
+                .compensateEventDefinition()
+                .compensateEventDefinitionDone()
                 .endEvent("ErrorHandled");
 
         return this;
     }
-
 }

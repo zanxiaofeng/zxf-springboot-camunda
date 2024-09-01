@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @Component
 public class App2Saga {
-    private AtomicInteger counter = new AtomicInteger();
+    private final AtomicInteger counter = new AtomicInteger();
     @Autowired
     private ProcessEngine processEngine;
 
@@ -37,7 +37,13 @@ public class App2Saga {
                 log.info("zxf-app-2 saga had been deployed. (DeploymentId={})", processDefinition.getDeploymentId());
                 return;
             }
-            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, true).activity("Task 1", App2Task1Adapter.class).compensationActivity("Cancel Task 1", App2Task1CancelAdapter.class).activity("Task 2", App2Task2Adapter.class).compensationActivity("Cancel Task 2", App2Task2CancelAdapter.class).end().triggerCompensationOnAnyError();
+            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, true)
+                    .activityWithoutRetry("Task 1", App2Task1Adapter.class)
+                    .compensationActivity("Cancel Task 1", App2Task1CancelAdapter.class)
+                    .activityWithoutRetry("Task 2", App2Task2Adapter.class)
+                    .compensationActivity("Cancel Task 2", App2Task2CancelAdapter.class)
+                    .end()
+                    .triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance("zxf-app-2.bpmn", sagaBuilder.getModel()).deploy();
             log.info("zxf-app-2 saga deployment is done. (DeploymentId={})", deployment.getId());
         } catch (Exception ex) {

@@ -3,6 +3,7 @@ package zxf.camunda.saga.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,13 @@ public class InfoController {
         return instances.stream().map(this::instanceInfo).collect(Collectors.toList());
     }
 
+    @GetMapping("/failed-jobs")
+    public List<String> failedJobs() {
+        log.info("failedJobs");
+        List<Job> failedJobs = processEngine.getManagementService().createJobQuery().withException().list();
+        return failedJobs.stream().map(this::jobInfo).collect(Collectors.toList());
+    }
+
     @GetMapping("/deployments/registered")
     public List<String> registeredDeployments() {
         log.info("registeredDeployments");
@@ -51,5 +59,9 @@ public class InfoController {
         return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)",
                 definition.getId(), definition.getVersion(),
                 definition.getDeploymentId(), definition.isSuspended());
+    }
+
+    private String jobInfo(Job job) {
+        return job.toString();
     }
 }
