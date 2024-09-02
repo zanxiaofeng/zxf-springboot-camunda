@@ -7,12 +7,12 @@ import org.camunda.bpm.model.bpmn.builder.AbstractFlowNodeBuilder;
 import org.camunda.bpm.model.bpmn.builder.ProcessBuilder;
 
 public class SagaBuilder {
-    @SuppressWarnings("rawtypes")
-    private AbstractFlowNodeBuilder saga;
-    private BpmnModelInstance bpmnModelInstance;
     private final String name;
     private final Boolean async;
     private ProcessBuilder process;
+    @SuppressWarnings("rawtypes")
+    private AbstractFlowNodeBuilder saga;
+    private BpmnModelInstance bpmnModelInstance;
 
     private SagaBuilder(String name, Boolean async) {
         this.name = name;
@@ -49,10 +49,10 @@ public class SagaBuilder {
         String id = "Activity-" + name.replace(" ", "-");
         saga = saga.serviceTask(id)
                 .name(name)
+                .camundaFailedJobRetryTimeCycle("R2/PT2M")
                 .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async)
-                .camundaFailedJobRetryTimeCycle("R2/PT2M");
+                .camundaAsyncAfter(async);
         return this;
     }
 
@@ -82,17 +82,17 @@ public class SagaBuilder {
                 .serviceTask(id)
                 .name(name)
                 .camundaClass(adapterClass.getName())
-                .compensationDone()
                 .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async);
+                .camundaAsyncAfter(async)
+                .compensationDone();
 
         return this;
     }
 
     public SagaBuilder triggerCompensationOnAnyError() {
         process.eventSubProcess()
-                .startEvent("ErrorCaught")
-                .error()
+                .startEvent("ErrorCatched")
+                .error("java.lang.Throwable")
                 .intermediateThrowEvent("ToBeCompensated")
                 .compensateEventDefinition()
                 .compensateEventDefinitionDone()

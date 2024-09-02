@@ -14,14 +14,15 @@ public class App1Task1Adapter implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        log.info("App1Task1Adapter start, " + taskId);
+        log.info("start, " + taskId + ", " + execution.getId());
 
         if (taskId.endsWith("::1")) {
+            log.error("Failed to process task: " + taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
         }
 
         Thread.sleep(20000);
 
-        log.info("App1Task1Adapter end, " + taskId);
+        log.info("end, " + taskId + ", " + execution.getId());
     }
 }

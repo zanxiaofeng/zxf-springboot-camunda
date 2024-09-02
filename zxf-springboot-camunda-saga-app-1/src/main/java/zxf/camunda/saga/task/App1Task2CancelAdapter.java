@@ -10,15 +10,16 @@ import org.springframework.stereotype.Component;
 public class App1Task2CancelAdapter implements JavaDelegate {
 
     public App1Task2CancelAdapter() {
-        log.info("App1Task2CancelAdapter()");
+        log.info("ctor()");
     }
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        log.info("App1Task2CancelAdapter start, " + execution.getVariable("task-id"));
+        String taskId = (String) execution.getVariable("task-id");
+        log.info("start, " + taskId + ", " + execution.getId());
 
         Thread.sleep(20000);
 
-        log.info("App1Task2CancelAdapter end, " + execution.getVariable("task-id"));
+        log.info("end, " + taskId + ", " + execution.getId());
     }
 }

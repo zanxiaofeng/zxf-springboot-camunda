@@ -35,7 +35,14 @@ public class InfoController {
         return instances.stream().map(this::instanceInfo).collect(Collectors.toList());
     }
 
-    @GetMapping("/failed-jobs")
+    @GetMapping("/jobs/all")
+    public List<String> allJobs() {
+        log.info("failedJobs");
+        List<Job> allJobs = processEngine.getManagementService().createJobQuery().list();
+        return allJobs.stream().map(this::jobInfo).collect(Collectors.toList());
+    }
+
+    @GetMapping("/jobs/failed")
     public List<String> failedJobs() {
         log.info("failedJobs");
         List<Job> failedJobs = processEngine.getManagementService().createJobQuery().withException().list();

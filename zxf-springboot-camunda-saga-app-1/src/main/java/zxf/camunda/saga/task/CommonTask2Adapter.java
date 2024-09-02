@@ -8,15 +8,16 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 public class CommonTask2Adapter implements JavaDelegate {
 
     public CommonTask2Adapter() {
-        log.info("CommonTask2Adapter()");
+        log.info("ctor()");
     }
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        log.info("CommonTask2Adapter start, " + execution.getVariable("task-id"));
+        String taskId = (String) execution.getVariable("task-id");
+        log.info("start, " + taskId + ", " + execution.getId());
 
-        Thread.sleep(4000);
+        Thread.sleep(20000);
 
-        log.info("CommonTask2Adapter end, " + execution.getVariable("task-id"));
+        log.info("end, " + taskId + ", " + execution.getId());
     }
 }

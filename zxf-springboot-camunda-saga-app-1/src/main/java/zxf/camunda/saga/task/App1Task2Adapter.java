@@ -17,23 +17,24 @@ public class App1Task2Adapter implements JavaDelegate {
     private OrderService orderService;
 
     public App1Task2Adapter() {
-        log.info("App1Task2Adapter()");
+        log.info("ctor()");
     }
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        log.info("App1Task2Adapter start, " + execution.getVariable("task-id"));
+        String taskId = (String) execution.getVariable("task-id");
+        log.info("start, " + taskId + ", " + execution.getId());
 
         Thread.sleep(20000);
 
         try {
             String orderId = UUID.randomUUID().toString();
             orderService.createOrder(orderId);
-            log.info("App1Task2Adapter createOrder, " + execution.getVariable("task-id") + ", " + orderId);
+            log.info("createOrder, " + execution.getVariable("task-id") + ", " + orderId);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        log.info("App1Task2Adapter end, " + execution.getVariable("task-id"));
+        log.info("end, " + taskId + ", " + execution.getId());
     }
 }
