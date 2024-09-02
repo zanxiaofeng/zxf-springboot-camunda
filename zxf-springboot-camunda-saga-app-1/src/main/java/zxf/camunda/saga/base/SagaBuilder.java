@@ -74,7 +74,6 @@ public class SagaBuilder {
         }
 
         String id = "Activity-" + name.replace(" ", "-") + "-compensation";
-
         ((AbstractActivityBuilder) saga)
                 .boundaryEvent()
                 .compensateEventDefinition()
@@ -92,8 +91,8 @@ public class SagaBuilder {
 
     public SagaBuilder triggerCompensationOnAnyError() {
         process.eventSubProcess()
-                .startEvent("ErrorCatched")
-                .error("java.lang.Throwable")
+                .startEvent("ErrorCaught")
+                .error()
                 .intermediateThrowEvent("ToBeCompensated")
                 .compensateEventDefinition()
                 .compensateEventDefinitionDone()

@@ -52,7 +52,7 @@ public class SagaBuilder {
                 .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async)
-                .camundaFailedJobRetryTimeCycle("R3/PT60S");
+                .camundaFailedJobRetryTimeCycle("R3/PT2M");
         return this;
     }
 
@@ -74,7 +74,6 @@ public class SagaBuilder {
         }
 
         String id = "Activity-" + name.replace(" ", "-") + "-compensation";
-
         ((AbstractActivityBuilder) saga)
                 .boundaryEvent()
                 .compensateEventDefinition()

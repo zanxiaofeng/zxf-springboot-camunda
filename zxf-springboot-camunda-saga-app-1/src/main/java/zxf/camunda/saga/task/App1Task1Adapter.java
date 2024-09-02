@@ -8,7 +8,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 public class App1Task1Adapter implements JavaDelegate {
 
     public App1Task1Adapter() {
-        log.info("App1Task1Adapter()");
+        log.info("ctor()");
     }
 
     @Override
