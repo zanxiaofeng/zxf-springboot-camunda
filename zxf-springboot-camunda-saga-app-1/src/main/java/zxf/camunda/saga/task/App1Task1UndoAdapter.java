@@ -7,19 +7,19 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class App2Task2CancelAdapter implements JavaDelegate {
+public class App1Task1UndoAdapter implements JavaDelegate {
 
-    public App2Task2CancelAdapter() {
+    public App1Task1UndoAdapter() {
         log.info("ctor()");
     }
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        log.info("start, " + taskId + ", " + execution.getId());
+        log.info("start, {}, {}", taskId, execution.getId());
 
         Thread.sleep(20000);
 
-        log.info("end, " + taskId + ", " + execution.getId());
+        log.info("end, {}, {}", taskId, execution.getId());
     }
 }

@@ -23,18 +23,18 @@ public class App1Task2Adapter implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        log.info("start, " + taskId + ", " + execution.getId());
+        log.info("start, {}, {}", taskId, execution.getId());
 
         Thread.sleep(20000);
 
-        try {
-            String orderId = UUID.randomUUID().toString();
-            orderService.createOrder(orderId);
-            log.info("createOrder, " + execution.getVariable("task-id") + ", " + orderId);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        String orderId = UUID.randomUUID().toString();
+        if (!orderService.createOrder(orderId)) {
+            log.error("Failed to create order: {}, taskId: {}", orderId, taskId);
+            throw new RuntimeException("Failed to create order: " + orderId + ", taskId: " + taskId);
         }
+        log.info("createOrder, {}, {}", execution.getVariable("task-id"), orderId);
+        execution.setVariable("ORDER_ID", orderId);
 
-        log.info("end, " + taskId + ", " + execution.getId());
+        log.info("end, {}, {}", taskId, execution.getId());
     }
 }

@@ -14,10 +14,10 @@ public class CommonTask1Adapter implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        log.info("start, " + taskId + ", " + execution.getId());
+        log.info("start, {}, {}", taskId, execution.getId());
 
         Thread.sleep(20000);
 
-        log.info("end, " + taskId + ", " + execution.getId());
+        log.info("end, {}, {}", taskId, execution.getId());
     }
 }

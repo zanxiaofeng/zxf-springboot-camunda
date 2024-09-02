@@ -7,13 +7,9 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
-import zxf.camunda.saga.task.App2Task1Adapter;
-import zxf.camunda.saga.task.App2Task1CancelAdapter;
-import zxf.camunda.saga.task.App2Task2Adapter;
-import zxf.camunda.saga.task.App2Task2CancelAdapter;
+import zxf.camunda.saga.task.*;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class App2Saga {
     private final AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-app-2-v2";
+    private final String sagaName = "zxf-app-2-v3.1";
     @Autowired
     private ProcessEngine processEngine;
 
@@ -39,9 +35,10 @@ public class App2Saga {
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
                     .activityWithoutRetry("Task 1", App2Task1Adapter.class)
-                    .compensationActivity("Cancel Task 1", App2Task1CancelAdapter.class)
+                    .compensationActivity("Undo Task 1", App2Task1UndoAdapter.class)
                     .activityWithoutRetry("Task 2", App2Task2Adapter.class)
-                    .compensationActivity("Cancel Task 2", App2Task2CancelAdapter.class)
+                    .compensationActivity("Undo Task 2", App2Task2UndoAdapter.class)
+                    .activityWithoutRetry("Task 3", App2Task3Adapter.class)
                     .end()
                     .triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();

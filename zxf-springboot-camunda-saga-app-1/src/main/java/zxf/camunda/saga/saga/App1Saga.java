@@ -8,10 +8,7 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
-import zxf.camunda.saga.task.App1Task1Adapter;
-import zxf.camunda.saga.task.App1Task1CancelAdapter;
-import zxf.camunda.saga.task.App1Task2Adapter;
-import zxf.camunda.saga.task.App1Task2CancelAdapter;
+import zxf.camunda.saga.task.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,10 +35,11 @@ public class App1Saga {
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                    .activity("Task 1", App1Task1Adapter.class)
-                    .compensationActivity("Cancel Task 1", App1Task1CancelAdapter.class)
-                    .activity("Task 2", App1Task2Adapter.class)
-                    .compensationActivity("Cancel Task 2", App1Task2CancelAdapter.class)
+                    .activityWithoutRetry("Task 1", App1Task1Adapter.class)
+                    .compensationActivity("Undo Task 1", App1Task1UndoAdapter.class)
+                    .activityWithoutRetry("Task 2", App1Task2Adapter.class)
+                    .compensationActivity("Undo Task 2", App1Task2UndoAdapter.class)
+                    .activityWithoutRetry("Task 3", App1Task3Adapter.class)
                     .end()
                     .triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
