@@ -21,48 +21,49 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class App1Saga {
     private final AtomicInteger counter = new AtomicInteger();
+    private final String sagaName = "zxf-app-1-v1";
     @Autowired
     private ProcessEngine processEngine;
 
     @PostConstruct
     public void defineSaga() {
         try {
-            String sagaName = "zxf-app-1";
-            if (isSagaDeployed(sagaName)) {
+
+            if (isSagaDeployed()) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
-                        .createProcessDefinitionQuery().processDefinitionKey(sagaName).latestVersion().singleResult();
+                        .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()
                         .registerDeploymentForJobExecutor(processDefinition.getDeploymentId());
-                log.info("zxf-app-1 saga had been deployed. (DeploymentId={})", processDefinition.getDeploymentId());
+                log.info("{} saga had been deployed. (DeploymentId={})", this.sagaName, processDefinition.getDeploymentId());
                 return;
             }
-            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, true)
+            SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
                     .activity("Task 1", App1Task1Adapter.class)
                     .compensationActivity("Cancel Task 1", App1Task1CancelAdapter.class)
                     .activity("Task 2", App1Task2Adapter.class)
                     .compensationActivity("Cancel Task 2", App1Task2CancelAdapter.class)
                     .end()
                     .triggerCompensationOnAnyError();
-            Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance("zxf-app-1.bpmn", sagaBuilder.getModel()).deploy();
-            log.info("zxf-app-1 saga deployment is done. (DeploymentId={})", deployment.getId());
+            Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
+            log.info("{} saga deployment is done. (DeploymentId={})", this.sagaName, deployment.getId());
         } catch (Exception ex) {
-            log.error("Exception when define and deploy zxf-app-1 saga", ex);
+            log.error("Exception when define and deploy {} saga", this.sagaName, ex);
         }
     }
 
     public void trigger(Integer count) {
         Integer times = counter.incrementAndGet();
-        log.info("zxf-app-1 trigger start, {}::{}", times, count);
+        log.info("{} trigger start, {}::{}", this.sagaName, times, count);
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
-            someVariables.put("task-id", "zxf-app-1@" + times + "::" + i);
-            processEngine.getRuntimeService().startProcessInstanceByKey("zxf-app-1", someVariables);
+            someVariables.put("task-id", this.sagaName + "@" + times + "::" + i);
+            processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
         }
-        log.info("zxf-app-1 trigger end, {}::{}", times, count);
+        log.info("{} trigger end, {}::{}", this.sagaName, times, count);
     }
 
-    private Boolean isSagaDeployed(String sageName) {
+    private Boolean isSagaDeployed() {
         return processEngine.getRepositoryService().createProcessDefinitionQuery()
-                .processDefinitionKey(sageName).count() > 0;
+                .processDefinitionKey(this.sagaName).count() > 0;
     }
 }

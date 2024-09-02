@@ -66,13 +66,13 @@
 ## Camunda UI(Setup admin)
 - http://localhost:8090/
 - http://localhost:8091/
-## app-1
+## app-1(变更流程需要升级版本)
 - http://localhost:8090/saga/common?count=100
 - http://localhost:8090/saga/app-1?count=100
 - http://localhost:8090/info/definitions
 - http://localhost:8090/info/instances
 - http://localhost:8090/info/deployments/registered
-## app-2
+## app-2(变更流程需要升级版本)
 - http://localhost:8091/saga/common?count=100
 - http://localhost:8091/saga/app-2?count=100
 - http://localhost:8091/info/definitions
