@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class CommonSaga {
     private final AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-common-v2";
+    private final String sagaName = "zxf-common-v3.1";
     @Autowired
     private ProcessEngine processEngine;
 

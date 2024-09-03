@@ -5,6 +5,7 @@ import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.builder.AbstractActivityBuilder;
 import org.camunda.bpm.model.bpmn.builder.AbstractFlowNodeBuilder;
 import org.camunda.bpm.model.bpmn.builder.ProcessBuilder;
+import org.camunda.bpm.model.xml.impl.util.IoUtil;
 
 public class SagaBuilder {
     private final String name;
@@ -28,6 +29,7 @@ public class SagaBuilder {
         if (bpmnModelInstance == null) {
             bpmnModelInstance = saga.done();
         }
+        System.out.println("BPMN: " + IoUtil.convertXmlDocumentToString(bpmnModelInstance.getDocument()));
         return bpmnModelInstance;
     }
 
