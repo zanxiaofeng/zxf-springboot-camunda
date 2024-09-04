@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class App2Saga {
     private final AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-app-2-v3.4";
+    private final String sagaName = "zxf-app-2-v3.5";
     @Autowired
     private ProcessEngine processEngine;
 
@@ -40,7 +40,8 @@ public class App2Saga {
                     .compensationActivity("Undo Task 2", App2Task2UndoAdapter.class)
                     .activity("Task 3", App2Task3Adapter.class)
                     .end()
-                    .triggerCompensationOnAnyError();
+                    .triggerCompensationActivityOnAnyError("Finally Undo", App2TaskEndUndoAdapter.class);
+            //Undo flow: Undo Task 2 --> Undo Task 1 --> Finally Undo
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
             log.info("{} saga deployment is done. (DeploymentId={})", this.sagaName, deployment.getId());
         } catch (Exception ex) {

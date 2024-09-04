@@ -105,4 +105,22 @@ public class SagaBuilder {
 
         return this;
     }
+
+    public SagaBuilder triggerCompensationActivityOnAnyError(String name, Class adapterClass) {
+        String id = "CompensationActivity-" + name.replace(" ", "-");
+        process.eventSubProcess()
+                .startEvent("ErrorCatched")
+                .error("java.lang.Throwable")
+                .intermediateThrowEvent("ToBeCompensated")
+                .compensateEventDefinition()
+                .compensateEventDefinitionDone()
+                .serviceTask(id)
+                .name(name)
+                .camundaClass(adapterClass)
+                .camundaAsyncBefore(async)
+                .camundaAsyncAfter(async)
+                .endEvent("ErrorHandled");
+
+        return this;
+    }
 }
