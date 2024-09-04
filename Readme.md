@@ -46,6 +46,7 @@
 # Retry and Compensate Event
 - By default, a failed job will be retried three times and the retries are performed immediately after the failure
 - Compensate Event is high priority than Retry event.
+- We can disable the retry by set FailedJobRetryTimeCycle=R0/PT0S
 
 # zxf-springboot-camunda-h2
 ## Camunda UI

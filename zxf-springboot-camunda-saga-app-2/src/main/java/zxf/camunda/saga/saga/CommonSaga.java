@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.task.CommonTask1Adapter;
 import zxf.camunda.saga.task.CommonTask2Adapter;
+import zxf.camunda.saga.task.CommonTask3Adapter;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class CommonSaga {
     private final AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-common-v3.1";
+    private final String sagaName = "zxf-common-v3.3";
     @Autowired
     private ProcessEngine processEngine;
 
@@ -35,8 +36,9 @@ public class CommonSaga {
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                    .activity("Task 1", CommonTask1Adapter.class, "R3/PT5M")
-                    .activity("Task 2", CommonTask2Adapter.class, "R3/PT5M")
+                    .activity("Task 1", CommonTask1Adapter.class)
+                    .activity("Task 2", CommonTask2Adapter.class, "R0/PT0S")
+                    .activity("Task 3", CommonTask3Adapter.class, "R3/PT2M")
                     .end();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
             log.info("{}@app-2 saga deployment is done. (DeploymentId={})", this.sagaName, deployment.getId());
