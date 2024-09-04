@@ -34,11 +34,11 @@ public class App2Saga {
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                    .activityWithoutRetry("Task 1", App2Task1Adapter.class)
+                    .activity("Task 1", App2Task1Adapter.class)
                     .compensationActivity("Undo Task 1", App2Task1UndoAdapter.class)
-                    .activityWithoutRetry("Task 2", App2Task2Adapter.class)
+                    .activity("Task 2", App2Task2Adapter.class)
                     .compensationActivity("Undo Task 2", App2Task2UndoAdapter.class)
-                    .activityWithoutRetry("Task 3", App2Task3Adapter.class)
+                    .activity("Task 3", App2Task3Adapter.class)
                     .end()
                     .triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();

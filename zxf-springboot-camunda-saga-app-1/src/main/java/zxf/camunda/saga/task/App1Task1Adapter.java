@@ -16,6 +16,8 @@ public class App1Task1Adapter implements JavaDelegate {
         String taskId = (String) execution.getVariable("task-id");
         log.info("start, {}, {}", taskId, execution.getId());
 
+        execution.setVariable("VAR_OF_TASK1", "var of task1");
+
         if (taskId.endsWith("::1")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);

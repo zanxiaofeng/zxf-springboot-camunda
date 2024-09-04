@@ -26,7 +26,12 @@ public class App1Task2Adapter implements JavaDelegate {
         log.info("start, {}, {}", taskId, execution.getId());
 
         Thread.sleep(20000);
+        createOrder(execution, taskId);
 
+        log.info("end, {}, {}", taskId, execution.getId());
+    }
+
+    private void createOrder(DelegateExecution execution, String taskId) {
         String orderId = UUID.randomUUID().toString();
         if (!orderService.createOrder(orderId)) {
             log.error("Failed to create order: {}, taskId: {}", orderId, taskId);
@@ -34,7 +39,5 @@ public class App1Task2Adapter implements JavaDelegate {
         }
         log.info("createOrder, {}, {}", execution.getVariable("task-id"), orderId);
         execution.setVariable("ORDER_ID", orderId);
-
-        log.info("end, {}, {}", taskId, execution.getId());
     }
 }

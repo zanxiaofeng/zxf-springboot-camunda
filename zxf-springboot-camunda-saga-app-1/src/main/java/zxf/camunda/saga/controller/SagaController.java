@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import zxf.camunda.saga.saga.App1Saga;
+import zxf.camunda.saga.saga.App2Saga;
 import zxf.camunda.saga.saga.CommonSaga;
 
 @Slf4j
@@ -14,7 +14,7 @@ public class SagaController {
     @Autowired
     private CommonSaga commonSaga;
     @Autowired
-    private App1Saga app1Saga;
+    private App2Saga app1Saga;
 
     @GetMapping("/saga/common")
     public void common(@RequestParam Integer count) {
@@ -22,9 +22,9 @@ public class SagaController {
         commonSaga.trigger(count);
     }
 
-    @GetMapping("/saga/app-1")
+    @GetMapping("/saga/app-2")
     public void app1(@RequestParam Integer count) {
-        log.info("Trigger zxf-app-1 saga start, " + count);
+        log.info("Trigger zxf-app-2 saga start, " + count);
         app1Saga.trigger(count);
     }
 }

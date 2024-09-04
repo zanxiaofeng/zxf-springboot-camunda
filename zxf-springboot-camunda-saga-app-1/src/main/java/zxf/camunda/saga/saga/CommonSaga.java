@@ -1,6 +1,5 @@
 package zxf.camunda.saga.saga;
 
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
@@ -11,6 +10,7 @@ import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.task.CommonTask1Adapter;
 import zxf.camunda.saga.task.CommonTask2Adapter;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,8 +18,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @Component
 public class CommonSaga {
-    private AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-common";
+    private final AtomicInteger counter = new AtomicInteger();
+    private final String sagaName = "zxf-common-v3.1";
     @Autowired
     private ProcessEngine processEngine;
 
@@ -34,9 +34,9 @@ public class CommonSaga {
                 log.info("{}@app-1 saga had been deployed. (DeploymentId={})", this.sagaName, processDefinition.getDeploymentId());
                 return;
             }
-            SagaBuilder sagaBuilder = SagaBuilder.newSaga(sagaName, true)
-                    .activity("Task 1", CommonTask1Adapter.class)
-                    .activity("Task 2", CommonTask2Adapter.class)
+            SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
+                    .activityWithRetry("Task 1", CommonTask1Adapter.class, "R3/PT5M")
+                    .activityWithRetry("Task 2", CommonTask2Adapter.class, "R3/PT5M")
                     .end();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
             log.info("{}@app-1 saga deployment is done. (DeploymentId={})", this.sagaName, deployment.getId());

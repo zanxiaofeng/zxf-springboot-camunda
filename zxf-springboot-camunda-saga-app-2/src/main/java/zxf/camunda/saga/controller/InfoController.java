@@ -57,12 +57,15 @@ public class InfoController {
     }
 
     private String instanceInfo(ProcessInstance instance) {
-        ProcessDefinition definition = processEngine.getRepositoryService().createProcessDefinitionQuery().processDefinitionId(instance.getProcessDefinitionId()).singleResult();
+        ProcessDefinition definition = processEngine.getRepositoryService().createProcessDefinitionQuery()
+                .processDefinitionId(instance.getProcessDefinitionId()).singleResult();
         return String.format("(Id=%s, definition=%s)", instance.getId(), definitionInfo(definition));
     }
 
     private String definitionInfo(ProcessDefinition definition) {
-        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)", definition.getId(), definition.getVersion(), definition.getDeploymentId(), definition.isSuspended());
+        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)",
+                definition.getId(), definition.getVersion(),
+                definition.getDeploymentId(), definition.isSuspended());
     }
 
     private String jobInfo(Job job) {

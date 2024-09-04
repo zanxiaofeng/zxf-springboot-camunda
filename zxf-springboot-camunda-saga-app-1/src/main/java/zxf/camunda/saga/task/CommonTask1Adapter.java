@@ -16,6 +16,11 @@ public class CommonTask1Adapter implements JavaDelegate {
         String taskId = (String) execution.getVariable("task-id");
         log.info("start, {}, {}", taskId, execution.getId());
 
+        if (taskId.endsWith("::1")) {
+            log.error("Failed to process task: {}", taskId);
+            throw new RuntimeException("Failed to process task: " + taskId);
+        }
+
         Thread.sleep(20000);
 
         log.info("end, {}, {}", taskId, execution.getId());

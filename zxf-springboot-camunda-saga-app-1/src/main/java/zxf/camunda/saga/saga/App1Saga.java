@@ -1,6 +1,5 @@
 package zxf.camunda.saga.saga;
 
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.task.*;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,7 +25,6 @@ public class App1Saga {
     @PostConstruct
     public void defineSaga() {
         try {
-
             if (isSagaDeployed()) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
@@ -35,11 +34,11 @@ public class App1Saga {
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                    .activityWithoutRetry("Task 1", App1Task1Adapter.class)
+                    .activity("Task 1", App1Task1Adapter.class)
                     .compensationActivity("Undo Task 1", App1Task1UndoAdapter.class)
-                    .activityWithoutRetry("Task 2", App1Task2Adapter.class)
+                    .activity("Task 2", App1Task2Adapter.class)
                     .compensationActivity("Undo Task 2", App1Task2UndoAdapter.class)
-                    .activityWithoutRetry("Task 3", App1Task3Adapter.class)
+                    .activity("Task 3", App1Task3Adapter.class)
                     .end()
                     .triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();

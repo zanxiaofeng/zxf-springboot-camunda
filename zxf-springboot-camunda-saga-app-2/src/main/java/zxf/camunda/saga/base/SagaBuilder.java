@@ -5,8 +5,6 @@ import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.builder.AbstractActivityBuilder;
 import org.camunda.bpm.model.bpmn.builder.AbstractFlowNodeBuilder;
 import org.camunda.bpm.model.bpmn.builder.ProcessBuilder;
-import org.camunda.bpm.model.xml.ModelInstance;
-import org.camunda.bpm.model.xml.impl.ModelInstanceImpl;
 import org.camunda.bpm.model.xml.impl.util.IoUtil;
 
 public class SagaBuilder {
@@ -53,7 +51,6 @@ public class SagaBuilder {
         String id = "Activity-" + name.replace(" ", "-");
         saga = saga.serviceTask(id)
                 .name(name)
-                .camundaFailedJobRetryTimeCycle("R3/PT5M")
                 .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
@@ -61,10 +58,11 @@ public class SagaBuilder {
     }
 
     @SuppressWarnings("rawtypes")
-    public SagaBuilder activityWithoutRetry(String name, Class adapterClass) {
+    public SagaBuilder activityWithRetry(String name, Class adapterClass, String retryTimeCycle) {
         String id = "Activity-" + name.replace(" ", "-");
         saga = saga.serviceTask(id)
                 .name(name)
+                .camundaFailedJobRetryTimeCycle(retryTimeCycle)
                 .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);

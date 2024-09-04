@@ -19,7 +19,14 @@ public class App1Task2UndoAdapter implements JavaDelegate {
         log.info("start, {}, {}", taskId, execution.getId());
 
         Thread.sleep(20000);
+        undoCreateOrder(execution, taskId);
 
         log.info("end, {}, {}", taskId, execution.getId());
+    }
+
+    private void undoCreateOrder(DelegateExecution execution, String taskId) {
+        String orderId = (String) execution.getVariable("ORDER_ID");
+
+        log.info("vars, taskId={}, ORDER_ID={}", taskId, orderId);
     }
 }
