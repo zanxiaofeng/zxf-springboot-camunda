@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class App2Saga {
     private final AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-app-2-v3.1";
+    private final String sagaName = "zxf-app-2-v3.4";
     @Autowired
     private ProcessEngine processEngine;
 

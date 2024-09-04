@@ -35,8 +35,8 @@ public class CommonSaga {
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                    .activityWithRetry("Task 1", CommonTask1Adapter.class, "R3/PT5M")
-                    .activityWithRetry("Task 2", CommonTask2Adapter.class, "R3/PT5M")
+                    .activity("Task 1", CommonTask1Adapter.class, "R3/PT5M")
+                    .activity("Task 2", CommonTask2Adapter.class, "R3/PT5M")
                     .end();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
             log.info("{}@app-2 saga deployment is done. (DeploymentId={})", this.sagaName, deployment.getId());

@@ -43,6 +43,9 @@
 - org.camunda.bpm.engine.impl.jobexecutor.ThreadPoolJobExecutor
 - org.camunda.bpm.engine.impl.jobexecutor.DefaultJobExecutor
 
+# Retry and Compensate Event
+- By default, a failed job will be retried three times and the retries are performed immediately after the failure
+- Compensate Event is high priority than Retry event.
 
 # zxf-springboot-camunda-h2
 ## Camunda UI

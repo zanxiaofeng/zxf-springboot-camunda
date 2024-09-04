@@ -1,5 +1,6 @@
 package zxf.camunda.saga.base;
 
+import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.builder.AbstractActivityBuilder;
@@ -7,6 +8,7 @@ import org.camunda.bpm.model.bpmn.builder.AbstractFlowNodeBuilder;
 import org.camunda.bpm.model.bpmn.builder.ProcessBuilder;
 import org.camunda.bpm.model.xml.impl.util.IoUtil;
 
+@Slf4j
 public class SagaBuilder {
     private final String name;
     private final Boolean async;
@@ -29,7 +31,7 @@ public class SagaBuilder {
         if (bpmnModelInstance == null) {
             bpmnModelInstance = saga.done();
         }
-        System.out.println("BPMN: " + IoUtil.convertXmlDocumentToString(bpmnModelInstance.getDocument()));
+        log.info("BPMN: " + IoUtil.convertXmlDocumentToString(bpmnModelInstance.getDocument()));
         return bpmnModelInstance;
     }
 
@@ -49,6 +51,7 @@ public class SagaBuilder {
     @SuppressWarnings("rawtypes")
     public SagaBuilder activity(String name, Class adapterClass) {
         String id = "Activity-" + name.replace(" ", "-");
+        //By default, a failed job will be retried three times and the retries are performed immediately after the failure
         saga = saga.serviceTask(id)
                 .name(name)
                 .camundaClass(adapterClass.getName())
@@ -58,7 +61,7 @@ public class SagaBuilder {
     }
 
     @SuppressWarnings("rawtypes")
-    public SagaBuilder activityWithRetry(String name, Class adapterClass, String retryTimeCycle) {
+    public SagaBuilder activity(String name, Class adapterClass, String retryTimeCycle) {
         String id = "Activity-" + name.replace(" ", "-");
         saga = saga.serviceTask(id)
                 .name(name)
