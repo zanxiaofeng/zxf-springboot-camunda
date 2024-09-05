@@ -37,11 +37,11 @@ public class App2Saga {
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                    .activity("Task 1", App2Task1Adapter.class)
+                    .activityNoRetry("Task 1", App2Task1Adapter.class)
                     .compensationActivity("Undo Task 1", App2Task1UndoAdapter.class)
-                    .activity("Task 2", App2Task2Adapter.class)
+                    .activityNoRetry("Task 2", App2Task2Adapter.class)
                     .compensationActivity("Undo Task 2", App2Task2UndoAdapter.class)
-                    .activity("Task 3", App2Task3Adapter.class)
+                    .activityNoRetry("Task 3", App2Task3Adapter.class)
                     .end()
                     .triggerCompensationActivityOnAnyError("Finally Undo", App2TaskEndUndoAdapter.class);
             //Undo flow: Undo Task 2 --> Undo Task 1 --> Finally Undo

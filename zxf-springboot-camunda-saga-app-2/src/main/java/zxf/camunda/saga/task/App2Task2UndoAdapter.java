@@ -17,14 +17,14 @@ public class App2Task2UndoAdapter implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
         log.info("start, {}, {}", taskId, execution.getId());
-        
+
+        cancelServiceB(execution, taskId);
         Thread.sleep(20000);
-        undoCreateOrder(execution, taskId);
 
         log.info("end, {}, {}", taskId, execution.getId());
     }
 
-    private void undoCreateOrder(DelegateExecution execution, String taskId) {
+    private void cancelServiceB(DelegateExecution execution, String taskId) {
         String varOfTask1 = (String) execution.getVariable("VAR_OF_TASK1");
         String varOfTask2 = (String) execution.getVariable("VAR_OF_TASK2");
         String varOfTask3 = (String) execution.getVariable("VAR_OF_TASK3");

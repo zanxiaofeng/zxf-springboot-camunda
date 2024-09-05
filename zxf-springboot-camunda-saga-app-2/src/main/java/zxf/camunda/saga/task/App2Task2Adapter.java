@@ -18,13 +18,14 @@ public class App2Task2Adapter implements JavaDelegate {
         String taskId = (String) execution.getVariable("task-id");
         log.info("start, {}, {}", taskId, execution.getId());
 
+        orderServerB(execution, taskId);
         Thread.sleep(20000);
-        createOrder(execution, taskId);
 
         log.info("end, {}, {}", taskId, execution.getId());
     }
 
-    private void createOrder(DelegateExecution execution, String taskId) {
+
+    private static void orderServerB(DelegateExecution execution, String taskId){
         execution.setVariable("VAR_OF_TASK2", "var of task2");
 
         if (taskId.endsWith("::2")) {

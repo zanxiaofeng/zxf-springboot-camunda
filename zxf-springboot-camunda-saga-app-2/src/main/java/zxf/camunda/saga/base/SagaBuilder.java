@@ -49,13 +49,13 @@ public class SagaBuilder {
     }
 
     @SuppressWarnings("rawtypes")
-    public SagaBuilder activity(String name, Class adapterClass) {
+    public SagaBuilder activityNoRetry(String name, Class adapterClass) {
         String id = "Activity-" + name.replace(" ", "-");
         //By default, a failed job will be retried three times and the retries are performed immediately after the failure
         saga = saga.serviceTask(id)
                 .name(name)
                 //Override the value of camunda.bpm.default-number-of-retries.
-                .camundaFailedJobRetryTimeCycle("R3/PT0S")
+                .camundaFailedJobRetryTimeCycle("R0/PT0S")
                 .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);

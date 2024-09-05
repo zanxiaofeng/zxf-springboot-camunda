@@ -4,15 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.CamundaService;
 
 @Slf4j
+@Component
 public class CommonTask1Adapter implements JavaDelegate {
 
     public CommonTask1Adapter() {
         log.info("ctor()");
     }
-
     @Autowired
     private CamundaService camundaService;
 
@@ -20,7 +21,9 @@ public class CommonTask1Adapter implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
         boolean isFirstExecution = camundaService.isFirstExecution(execution);
-        log.info("start, {}, {}, isFirstExecution={}", taskId, execution.getId(), isFirstExecution);
+        boolean isLastExecution = camundaService.isLastExecution(execution);
+        log.info("start, {}, {}, isFirstExecution={}, isLastExecution={}", taskId,
+                execution.getId(), isFirstExecution, isLastExecution);
 
         if (taskId.endsWith("::1")) {
             log.error("Failed to process task: {}", taskId);
