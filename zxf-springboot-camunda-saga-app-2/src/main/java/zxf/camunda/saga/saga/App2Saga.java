@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.task.*;
@@ -21,11 +22,13 @@ public class App2Saga {
     private final String sagaName = "zxf-app-2-v3.5";
     @Autowired
     private ProcessEngine processEngine;
+    @Value("${saga.re-deploy}")
+    private boolean sagaRedeploy;
 
     @PostConstruct
     public void defineSaga() {
         try {
-            if (isSagaDeployed()) {
+            if (!sagaRedeploy && isSagaDeployed()) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()

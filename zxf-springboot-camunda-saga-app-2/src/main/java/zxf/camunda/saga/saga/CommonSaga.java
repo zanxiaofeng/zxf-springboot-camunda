@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.task.CommonTask1Adapter;
@@ -20,14 +21,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class CommonSaga {
     private final AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-common-v3.3";
+    private final String sagaName = "zxf-common-v3.8";
     @Autowired
     private ProcessEngine processEngine;
+    @Value("${saga.re-deploy}")
+    private boolean sagaRedeploy;
 
     @PostConstruct
     public void defineSaga() {
         try {
-            if (isSagaDeployed()) {
+            if (!sagaRedeploy && isSagaDeployed()) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()
@@ -38,7 +41,7 @@ public class CommonSaga {
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
                     .activity("Task 1", CommonTask1Adapter.class)
                     .activity("Task 2", CommonTask2Adapter.class, "R0/PT0S")
-                    .activity("Task 3", CommonTask3Adapter.class, "R4/PT1M")
+                    .activity("Task 3", CommonTask3Adapter.class, "R6/PT5S")
                     .end();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
             log.info("{}@app-2 saga deployment is done. (DeploymentId={})", this.sagaName, deployment.getId());

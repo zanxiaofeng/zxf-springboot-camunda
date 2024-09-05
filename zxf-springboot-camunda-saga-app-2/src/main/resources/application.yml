@@ -29,6 +29,9 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
 
+saga:
+  re-deploy: true
+
 management:
   endpoints:
     web:
@@ -45,6 +48,7 @@ logging:
 
 camunda:
   bpm:
+    default-number-of-retries: 11
     job-execution:
       enabled: true
       deployment-aware: false

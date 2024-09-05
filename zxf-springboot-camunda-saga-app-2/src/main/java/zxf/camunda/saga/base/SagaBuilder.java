@@ -54,6 +54,8 @@ public class SagaBuilder {
         //By default, a failed job will be retried three times and the retries are performed immediately after the failure
         saga = saga.serviceTask(id)
                 .name(name)
+                //Override the value of camunda.bpm.default-number-of-retries.
+                .camundaFailedJobRetryTimeCycle("R3/PT0S")
                 .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);

@@ -15,7 +15,7 @@ public class CommonTask2Adapter implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        boolean isRetry = CamundaUtils.isRetry(execution, 3);
+        boolean isRetry = CamundaUtils.isRetry(execution);
         log.info("start, {}, {}, retry={}", taskId, execution.getId(), isRetry);
 
         if (taskId.endsWith("::2")) {
