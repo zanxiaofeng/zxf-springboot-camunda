@@ -48,6 +48,7 @@ logging:
 
 camunda:
   bpm:
+    #In order to check the first call, the camunda.bmp.default-number-of-retries must be set to a special value.
     default-number-of-retries: 11
     job-execution:
       enabled: true
