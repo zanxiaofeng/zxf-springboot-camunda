@@ -49,11 +49,13 @@ public class SagaBuilder {
     }
 
     @SuppressWarnings("rawtypes")
-    public SagaBuilder activity(String name, Class adapterClass) {
+    public SagaBuilder activityNoRetry(String name, Class adapterClass) {
         String id = "Activity-" + name.replace(" ", "-");
         //By default, a failed job will be retried three times and the retries are performed immediately after the failure
         saga = saga.serviceTask(id)
                 .name(name)
+                //Override the value of camunda.bpm.default-number-of-retries.
+                .camundaFailedJobRetryTimeCycle("R0/PT0S")
                 .camundaClass(adapterClass.getName())
                 .camundaAsyncBefore(async)
                 .camundaAsyncAfter(async);
@@ -101,6 +103,24 @@ public class SagaBuilder {
                 .intermediateThrowEvent("ToBeCompensated")
                 .compensateEventDefinition()
                 .compensateEventDefinitionDone()
+                .endEvent("ErrorHandled");
+
+        return this;
+    }
+
+    public SagaBuilder triggerCompensationActivityOnAnyError(String name, Class adapterClass) {
+        String id = "CompensationActivity-" + name.replace(" ", "-");
+        process.eventSubProcess()
+                .startEvent("ErrorCatched")
+                .error("java.lang.Throwable")
+                .intermediateThrowEvent("ToBeCompensated")
+                .compensateEventDefinition()
+                .compensateEventDefinitionDone()
+                .serviceTask(id)
+                .name(name)
+                .camundaClass(adapterClass)
+                .camundaAsyncBefore(async)
+                .camundaAsyncAfter(async)
                 .endEvent("ErrorHandled");
 
         return this;

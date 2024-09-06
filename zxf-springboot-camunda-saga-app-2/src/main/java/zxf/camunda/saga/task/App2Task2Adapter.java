@@ -25,7 +25,7 @@ public class App2Task2Adapter implements JavaDelegate {
     }
 
 
-    private static void orderServerB(DelegateExecution execution, String taskId){
+    private void orderServerB(DelegateExecution execution, String taskId){
         execution.setVariable("VAR_OF_TASK2", "var of task2");
 
         if (taskId.endsWith("::2")) {

@@ -34,6 +34,9 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
 
+saga:
+  re-deploy: true
+
 management:
   endpoints:
     web:

@@ -3,25 +3,34 @@ package zxf.camunda.saga.task;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import zxf.camunda.saga.service.CamundaService;
 
 @Slf4j
+@Component
 public class CommonTask2Adapter implements JavaDelegate {
 
     public CommonTask2Adapter() {
         log.info("ctor()");
     }
-
+    @Autowired
+    private CamundaService camundaService;
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        log.info("start, {}, {}", taskId, execution.getId());
+        boolean isFirstExecution = camundaService.isFirstExecution(execution);
+        boolean isLastExecution = camundaService.isLastExecution(execution);
+        log.info("start, {}, {}, isFirstExecution={}, isLastExecution={}", taskId,
+                execution.getId(), isFirstExecution, isLastExecution);
 
         if (taskId.endsWith("::2")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
+            //After this, all camunda database change in this method  will be rollback(VARS...).
         }
 
-        Thread.sleep(20000);
+        Thread.sleep(5000);
 
         log.info("end, {}, {}", taskId, execution.getId());
     }

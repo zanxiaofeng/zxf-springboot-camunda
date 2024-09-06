@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.task.*;
@@ -21,11 +22,13 @@ public class App1Saga {
     private final String sagaName = "zxf-app-1-v1";
     @Autowired
     private ProcessEngine processEngine;
+    @Value("${saga.re-deploy}")
+    private boolean sagaRedeploy;
 
     @PostConstruct
     public void defineSaga() {
         try {
-            if (isSagaDeployed()) {
+            if (!sagaRedeploy && isSagaDeployed()) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()
@@ -34,11 +37,11 @@ public class App1Saga {
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                    .activity("Task 1", App1Task1Adapter.class)
+                    .activityNoRetry("Task 1", App1Task1Adapter.class)
                     .compensationActivity("Undo Task 1", App1Task1UndoAdapter.class)
-                    .activity("Task 2", App1Task2Adapter.class)
+                    .activityNoRetry("Task 2", App1Task2Adapter.class)
                     .compensationActivity("Undo Task 2", App1Task2UndoAdapter.class)
-                    .activity("Task 3", App1Task3Adapter.class)
+                    .activityNoRetry("Task 3", App1Task3Adapter.class)
                     .end()
                     .triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();

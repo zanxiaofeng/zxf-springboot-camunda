@@ -18,15 +18,18 @@ public class App1Task3Adapter implements JavaDelegate {
         String taskId = (String) execution.getVariable("task-id");
         log.info("start, {}, {}", taskId, execution.getId());
 
+        orderServerC(execution, taskId);
+        Thread.sleep(20000);
+
+        log.info("end, {}, {}", taskId, execution.getId());
+    }
+
+    private static void orderServerC(DelegateExecution execution, String taskId) {
         execution.setVariable("VAR_OF_TASK3", "var of task3");
 
         if (taskId.endsWith("::3")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
         }
-
-        Thread.sleep(20000);
-
-        log.info("end, {}, {}", taskId, execution.getId());
     }
 }
