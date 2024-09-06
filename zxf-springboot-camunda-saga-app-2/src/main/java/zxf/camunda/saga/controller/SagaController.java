@@ -14,17 +14,17 @@ public class SagaController {
     @Autowired
     private CommonSaga commonSaga;
     @Autowired
-    private App2Saga app1Saga;
+    private App2Saga appSaga;
 
     @GetMapping("/saga/common")
     public void common(@RequestParam Integer count) {
-        log.info("Trigger zxf-common-1 saga start, " + count);
+        log.info("Trigger zxf-common saga start, {}", count);
         commonSaga.trigger(count);
     }
 
     @GetMapping("/saga/app-2")
     public void app1(@RequestParam Integer count) {
-        log.info("Trigger zxf-app-2 saga start, " + count);
-        app1Saga.trigger(count);
+        log.info("Trigger zxf-app-2 saga start, {}", count);
+        appSaga.trigger(count);
     }
 }
