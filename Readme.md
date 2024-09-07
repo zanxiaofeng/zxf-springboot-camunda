@@ -55,6 +55,7 @@
 - Deployment Aware即是指Job Executor和Deployment(版本)绑定，Job Executor只能处理特定Deployment(版本)的任务.
 - Job acquisition在获取任务时将根据Deployment Aware的配置设置任务获取的参数(Version specified or Version ignored).
 - RegisterDeploymentForJobExecutor只有在Deployment Aware=true时才有效.
+- Deployment Aware=false的进程可以收到当前系统中的所有的流程任务.
 
 # zxf-springboot-camunda-h2
 ## Camunda UI
@@ -108,6 +109,8 @@
 - 由异构应用（不同应用的不同版本）组成的Camunda集群中，如何实现特定应用版本与特定流程版本的绑定，以便特定版本的流程任务能被调度到支持的应用版本，以避免出现版本不匹配导致的错误（如找不到任务关联的JavaDelegate类）。
 ## 问题二
 - 如何确定那个进程能处理那些Job呢？是看Job对应的Class是否在进程中存在吗？
+- 是否一个工作流实例中的多个Java Activity Job可以被分散调度到多个不同的Java进程里执行?
+- 如果一个Java进程里没有包含运行一个工作流实例的所有Java Activity Job对应的Java类，会发生什么？
 
 # 日志：
 1. Controller一定要记录入口日志

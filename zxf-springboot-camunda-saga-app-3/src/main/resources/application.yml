@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    camunda:
+      url: jdbc:mysql://localhost:3306/camunda?useSSL=false&serverTimezone=GMT%2B8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: camunda
+      password: camunda
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 5
+        idle-timeout: 30000
+        connection-timeout: 20000
+        connection-test-query: SELECT 1
+    business:
+      url: jdbc:mysql://localhost:3307/business?useSSL=false&serverTimezone=GMT%2B8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: business
+      password: business
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 5
+        idle-timeout: 30000
+        connection-timeout: 20000
+        connection-test-query: SELECT 1
+
+logging:
+  level:
+    #org.springframework.boot.autoconfigure: DEBUG
+    org.camunda.bpm.engine: ERROR
+    org.camunda.bpm.engine.cmd: TRACE
+    org.camunda.bpm.engine.persistence: ERROR
+    org.camunda.bpm.engine.jobexecutor: TRACE
+
+camunda:
+  bpm:
+    #In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
+    default-number-of-retries: 11
+    job-execution:
+      enabled: true
+      #Set it to true will bind the job executor to the specified version of definition(deployment)
+      #Set it to false will ignore the version of definition(deployment)
+      deployment-aware: false
+      #job executor pool settings
+      core-pool-size: 10
+      max-pool-size: 10
+      queue-capacity: 6
+      max-job-per-acquisition: 6
+    database:
+      type: mysql
+      jdbc-batch-processing: false
