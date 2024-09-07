@@ -42,13 +42,15 @@ public class CamundaService {
     }
 
     public String instanceInfo(ProcessInstance instance) {
-        return String.format("(Id=%s, Definition=%s)", instance.getId(), instance.getProcessDefinitionId());
+        return String.format("(ProcessInstanceId=%s,%s, ProcessDefinitionId=%s, BusinessKey=%s, CaseInstanceId=%s, isSuspended=%s)"
+                , instance.getProcessInstanceId(), instance.getRootProcessInstanceId(), instance.getProcessDefinitionId(),
+                instance.getBusinessKey(), instance.getCaseInstanceId(), instance.isSuspended());
     }
 
     public String definitionInfo(ProcessDefinition definition) {
-        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)",
-                definition.getId(), definition.getVersion(),
-                definition.getDeploymentId(), definition.isSuspended());
+        return String.format("(Id=%s, Category=%s, Key=%s, Version=%s, ResourceName=%s, DeploymentId=%s, isSuspended=%s,HistoryTimeToLive=%d)",
+                definition.getId(), definition.getCategory(), definition.getKey(), definition.getVersion(), definition.getResourceName(),
+                definition.getDeploymentId(), definition.isSuspended(), definition.getHistoryTimeToLive());
     }
 
     public String jobInfo(Job job) {
