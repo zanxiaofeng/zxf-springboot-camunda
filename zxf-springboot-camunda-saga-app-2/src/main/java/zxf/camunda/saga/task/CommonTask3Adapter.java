@@ -32,6 +32,6 @@ public class CommonTask3Adapter implements JavaDelegate {
 
         Thread.sleep(5000);
 
-        log.info("end, {}, {}", taskId, execution.getId());
+        log.info("end, {}, {}, {}", taskId, execution.getId(), execution.getProcessDefinitionId());
     }
 }

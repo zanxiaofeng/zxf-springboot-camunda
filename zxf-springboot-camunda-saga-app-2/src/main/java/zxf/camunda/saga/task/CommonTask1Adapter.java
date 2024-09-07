@@ -14,6 +14,7 @@ public class CommonTask1Adapter implements JavaDelegate {
     public CommonTask1Adapter() {
         log.info("ctor()");
     }
+
     @Autowired
     private CamundaService camundaService;
 
@@ -22,8 +23,8 @@ public class CommonTask1Adapter implements JavaDelegate {
         String taskId = (String) execution.getVariable("task-id");
         boolean isFirstExecution = camundaService.isFirstExecution(execution);
         boolean isLastExecution = camundaService.isLastExecution(execution);
-        log.info("start, {}, {}, isFirstExecution={}, isLastExecution={}", taskId,
-                execution.getId(), isFirstExecution, isLastExecution);
+        log.info("start, {}, {}, {}, isFirstExecution={}, isLastExecution={}", taskId,
+                execution.getId(), execution.getProcessDefinitionId(), isFirstExecution, isLastExecution);
 
         if (taskId.endsWith("::1")) {
             log.error("Failed to process task: {}", taskId);
@@ -33,6 +34,6 @@ public class CommonTask1Adapter implements JavaDelegate {
 
         Thread.sleep(5000);
 
-        log.info("end, {}, {}", taskId, execution.getId());
+        log.info("end, {}, {}, {}", taskId, execution.getId(), execution.getProcessDefinitionId());
     }
 }

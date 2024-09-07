@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -57,7 +58,8 @@ public class App1Saga {
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", this.sagaName + "@" + times + "::" + i);
-            processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
+            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
+            logProcessInstance(processInstance);
         }
         log.info("{} trigger end, {}::{}", this.sagaName, times, count);
     }
@@ -65,5 +67,9 @@ public class App1Saga {
     private Boolean isSagaDeployed() {
         return processEngine.getRepositoryService().createProcessDefinitionQuery()
                 .processDefinitionKey(this.sagaName).count() > 0;
+    }
+
+    private void logProcessInstance(ProcessInstance processInstance) {
+        log.info("{} instance, {}::{}", this.sagaName, processInstance.getProcessInstanceId(), processInstance.getProcessDefinitionId());
     }
 }

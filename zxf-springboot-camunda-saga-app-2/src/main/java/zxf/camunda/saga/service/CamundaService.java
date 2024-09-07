@@ -21,8 +21,8 @@ public class CamundaService {
         int leftRetryTimes = getLeftRetryTimes(execution);
 
         boolean isFirstExecution = leftRetryTimes == initialRetryNumber;
-        log.info("Check isFirstExecution={}, {}， {}, total={}, rest={}", isFirstExecution, taskId,
-                execution.getCurrentActivityName(), totalRetryCount, leftRetryTimes);
+        log.info("Check isFirstExecution={}, {}, {}， {}, total={}, rest={}", isFirstExecution, taskId,
+                execution.getCurrentActivityName(), execution.getProcessDefinitionId(), totalRetryCount, leftRetryTimes);
         return isFirstExecution;
     }
 
@@ -32,8 +32,8 @@ public class CamundaService {
         int leftRetryTimes = getLeftRetryTimes(execution);
 
         boolean isLastExecution = totalRetryCount == 1 || leftRetryTimes == 1;
-        log.info("Check isLastExecution={}, {}， {}, total={}, rest={}", isLastExecution, taskId,
-                execution.getCurrentActivityName(), totalRetryCount, leftRetryTimes);
+        log.info("Check isLastExecution={}, {}， {}, {}, total={}, rest={}", isLastExecution, taskId,
+                execution.getCurrentActivityName(), execution.getProcessDefinitionId(), totalRetryCount, leftRetryTimes);
         return isLastExecution;
     }
 
