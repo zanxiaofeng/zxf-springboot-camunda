@@ -17,7 +17,9 @@ public class SagaController {
     private CommonSaga commonSaga;
     @Autowired
     private App1Saga app1Saga;
+    @Autowired
     private App2Saga app2Saga;
+    @Autowired
     private ByIdSaga byIdSaga;
 
     @GetMapping("/saga/common")
