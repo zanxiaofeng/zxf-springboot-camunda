@@ -50,6 +50,11 @@
 - 在Retry模式下，如果发生异常，当前Job的状态变更会被回顾，新设置的变量会丢失。
 - 在Compensate模式下，如果发生异常，当前Job的状态会被持久化，新设置的变量不会失去。
 
+# Deployment and Version
+- Deployment即是一次部署，指特定的版本
+- Deployment Aware即是指Job Executor和Deployment(版本)绑定，Job Executor只能处理特定Deployment(版本)的任务.
+- Job acquisition在获取任务时将根据Deployment Aware的配置设置任务获取的参数(Version specified or Version ignored).
+
 # zxf-springboot-camunda-h2
 ## Camunda UI
 - http://localhost:8080/
