@@ -81,15 +81,27 @@
 ## app-1(变更流程需要升级版本)
 - http://localhost:8090/saga/common?count=100
 - http://localhost:8090/saga/app-1?count=100
+- http://localhost:8091/saga/byId?count=100&processDefinitionId=zxf-common-v3.8:11:734c0b76-6be9-11ef-aa6f-ae65bba2d6aa
 - http://localhost:8090/info/definitions
 - http://localhost:8090/info/instances
+- http://localhost:8091/info/jobs/all
+- http://localhost:8091/info/jobs/failed
 - http://localhost:8090/info/deployments/registered
 ## app-2(变更流程需要升级版本)
-- http://localhost:8091/saga/common?count=100&processDefinitionId=zxf-common-v3.8:11:734c0b76-6be9-11ef-aa6f-ae65bba2d6aa
+- http://localhost:8091/saga/common?count=100
 - http://localhost:8091/saga/app-2?count=100
+- http://localhost:8091/saga/byId?count=100&processDefinitionId=zxf-common-v3.8:11:734c0b76-6be9-11ef-aa6f-ae65bba2d6aa
 - http://localhost:8091/info/definitions
 - http://localhost:8091/info/instances
+- http://localhost:8091/info/jobs/all
+- http://localhost:8091/info/jobs/failed
 - http://localhost:8091/info/deployments/registered
+
+# 测试模式
+- saga.re-deploy=true, camunda.bpm.job-execution.deployment-aware=true
+- saga.re-deploy=true, camunda.bpm.job-execution.deployment-aware=false
+- saga.re-deploy=false, camunda.bpm.job-execution.deployment-aware=true
+- saga.re-deploy=false, camunda.bpm.job-execution.deployment-aware=false
 
 # 问题：
 ## 问题一
