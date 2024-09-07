@@ -14,6 +14,7 @@ import zxf.camunda.saga.service.CamundaService;
 import zxf.camunda.saga.task.*;
 
 import javax.annotation.PostConstruct;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -57,12 +58,11 @@ public class CommonSaga {
         }
     }
 
-    public void trigger(String processDefinitionId,Integer count) {
+    public void trigger(Integer count) {
         Integer times = counter.incrementAndGet();
         log.info("{} trigger start, {}::{}", this.eventName, times, count);
         for (int i = 0; i < count; i++) {
-            Map<String, Object> someVariables = new HashMap<>();
-            someVariables.put("task-id", this.eventName + "@" + times + "::" + i);
+            Map<String, Object> someVariables = Collections.singletonMap("task-id", this.eventName + "@" + times + "::" + i);
             //This method will always create instance base on the latest version.
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
             log.info("{} instance, {}", this.eventName, camundaService.instanceInfo(processInstance));

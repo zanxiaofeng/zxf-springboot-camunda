@@ -58,18 +58,13 @@ public class App2Saga {
         }
     }
 
-    public void trigger(String processDefinitionId, Integer count) {
+    public void trigger(Integer count) {
         Integer times = counter.incrementAndGet();
         log.info("{} trigger start, {}::{}", this.eventName, times, count);
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = Collections.singletonMap("task-id", this.eventName + "@" + times + "::" + i);
-            ProcessInstance processInstance = null;
-            if (StringUtils.isEmpty(processDefinitionId)) {
-                //This method will always create instance base on the latest version.
-                processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
-            } else {
-                processInstance = processEngine.getRuntimeService().startProcessInstanceById(processDefinitionId, someVariables);
-            }
+            //This method will always create instance base on the latest version.
+            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
             log.info("{} instance, {}", this.eventName, camundaService.instanceInfo(processInstance));
         }
         log.info("{} trigger end, {}::{}", this.eventName, times, count);

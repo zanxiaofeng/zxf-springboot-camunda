@@ -103,11 +103,11 @@
 - http://localhost:8091/info/jobs/failed
 - http://localhost:8091/info/deployments/registered
 
-# 测试模式
-- saga.re-deploy=true, camunda.bpm.job-execution.deployment-aware=true
-- saga.re-deploy=true, camunda.bpm.job-execution.deployment-aware=false
-- saga.re-deploy=false, camunda.bpm.job-execution.deployment-aware=true
-- saga.re-deploy=false, camunda.bpm.job-execution.deployment-aware=false
+# re-deploy & deployment-aware 模式
+- re-deploy=false，只在开发模式下使用
+- re-deploy=true, deployment-aware=true，必须用于生产模式
+- deployment-aware=true模式下，app1只能收到app1和common的特定版本的任务,app2只能收到app2和common的特定版本的任务.
+- deployment-aware=false模式下，app1,app2能收到所有流程(app1,app2,common)的所有版本的任务.
 
 # 问题：
 ## 问题一
