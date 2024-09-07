@@ -54,6 +54,7 @@
 - Deployment即是一次部署，指特定的版本
 - Deployment Aware即是指Job Executor和Deployment(版本)绑定，Job Executor只能处理特定Deployment(版本)的任务.
 - Job acquisition在获取任务时将根据Deployment Aware的配置设置任务获取的参数(Version specified or Version ignored).
+- RegisterDeploymentForJobExecutor只有在Deployment Aware=true时才有效.
 
 # zxf-springboot-camunda-h2
 ## Camunda UI
