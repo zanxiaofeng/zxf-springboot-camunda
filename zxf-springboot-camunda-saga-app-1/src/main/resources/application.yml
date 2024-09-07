@@ -34,10 +34,6 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
 
-saga:
-  #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
-  re-deploy: false
-
 management:
   endpoints:
     web:
@@ -52,6 +48,10 @@ logging:
     #org.camunda.bpm.engine.persistence: TRACE
     org.camunda.bpm.engine.jobexecutor: ERROR
 
+saga:
+  #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
+  re-deploy: false
+
 camunda:
   bpm:
     #In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
@@ -60,7 +60,7 @@ camunda:
       enabled: true
       #Set it to true will bind the job executor to the specified version of definition(deployment)
       #Set it to false will ignore the version of definition(deployment)
-      deployment-aware: true
+      deployment-aware: false
       #job executor pool settings
       core-pool-size: 10
       max-pool-size: 10

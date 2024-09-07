@@ -85,7 +85,7 @@
 - http://localhost:8090/info/instances
 - http://localhost:8090/info/deployments/registered
 ## app-2(变更流程需要升级版本)
-- http://localhost:8091/saga/common?count=100
+- http://localhost:8091/saga/common?count=100&processDefinitionId=zxf-common-v3.8:11:734c0b76-6be9-11ef-aa6f-ae65bba2d6aa
 - http://localhost:8091/saga/app-2?count=100
 - http://localhost:8091/info/definitions
 - http://localhost:8091/info/instances

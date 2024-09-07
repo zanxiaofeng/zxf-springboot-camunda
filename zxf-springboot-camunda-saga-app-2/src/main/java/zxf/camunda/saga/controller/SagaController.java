@@ -22,7 +22,7 @@ public class SagaController {
         commonSaga.trigger(processDefinitionId, count);
     }
 
-    @GetMapping("/saga/app-1")
+    @GetMapping("/saga/app-2")
     public void app(@RequestParam Integer count, @RequestParam(required = false) String processDefinitionId) {
         log.info("Trigger zxf-app-2 saga start, {}, {}", processDefinitionId, count);
         appSaga.trigger(processDefinitionId, count);

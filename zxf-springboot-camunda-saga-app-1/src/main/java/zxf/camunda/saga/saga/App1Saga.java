@@ -31,7 +31,7 @@ public class App1Saga {
     private CamundaService camundaService;
     @Value("${saga.re-deploy}")
     private boolean sagaRedeploy;
-    @Value("${camunda.bpm.deployment-aware}")
+    @Value("${camunda.bpm.job-execution.deployment-aware}")
     private boolean deploymentAware;
 
     @PostConstruct
