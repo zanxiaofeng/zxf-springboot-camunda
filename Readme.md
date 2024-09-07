@@ -53,9 +53,13 @@
 # Deployment and Version
 - Deployment即是一次部署，指特定的版本
 - Deployment Aware即是指Job Executor和Deployment(版本)绑定，Job Executor只能处理特定Deployment(版本)的任务.
-- Job acquisition在获取任务时将根据Deployment Aware的配置设置任务获取的参数(Version specified or Version ignored).
+- Deployment Aware=false模式下的进程可以获取到当前系统中的所有的流程任务，如果流程执行需要的Java Delegate类找不到, 则会报错.
+- Deployment Aware=true模式下的进程只能获取到特定Deployment相关的任务，Job acquisition在获取任务时将根据RegisterDeploymentForJobExecutor来过滤任务.
+
+# Register Deployment For JobExecutor
 - RegisterDeploymentForJobExecutor只有在Deployment Aware=true时才有效.
-- Deployment Aware=false模式下的进程可以收到当前系统中的所有的流程任务，如果流程执行需要的Java Delegate类找不到, 则会报错.
+- 进程部署或重新部署的流程Deployment会在部署后自动注册.
+- 可以通过调用ManagementService::registerDeploymentForJobExecutor来注册特定的部署.
 
 # zxf-springboot-camunda-h2
 ## Camunda UI
