@@ -1,8 +1,13 @@
 package zxf.camunda.saga.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.Job;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,26 +20,44 @@ public class CamundaService {
     @Value("${camunda.bpm.default-number-of-retries}")
     private int initialRetryNumber;
 
+    @Autowired
+    private ProcessEngine processEngine;
+
     public boolean isFirstExecution(DelegateExecution execution) {
-        String taskId = (String) execution.getVariable("task-id");
         int totalRetryCount = getTotalRetryCount(execution);
         int leftRetryTimes = getLeftRetryTimes(execution);
 
         boolean isFirstExecution = leftRetryTimes == initialRetryNumber;
-        log.info("Check isFirstExecution={}, {}, {}， {}, total={}, rest={}", isFirstExecution, taskId,
-                execution.getCurrentActivityName(), execution.getProcessDefinitionId(), totalRetryCount, leftRetryTimes);
+        log.info("check, isFirstExecution={}, total={}, rest={}, {}", isFirstExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
         return isFirstExecution;
     }
 
     public boolean isLastExecution(DelegateExecution execution) {
-        String taskId = (String) execution.getVariable("task-id");
         int totalRetryCount = getTotalRetryCount(execution);
         int leftRetryTimes = getLeftRetryTimes(execution);
 
         boolean isLastExecution = totalRetryCount == 1 || leftRetryTimes == 1;
-        log.info("Check isLastExecution={}, {}， {}, {}, total={}, rest={}", isLastExecution, taskId,
-                execution.getCurrentActivityName(), execution.getProcessDefinitionId(), totalRetryCount, leftRetryTimes);
+        log.info("check, isLastExecution={}, total={}, rest={}, {}", isLastExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
         return isLastExecution;
+    }
+
+    public String instanceInfo(ProcessInstance instance) {
+        return String.format("(Id=%s, Definition=%s)", instance.getId(), instance.getProcessDefinitionId());
+    }
+
+    public String definitionInfo(ProcessDefinition definition) {
+        return String.format("(Id=%s, Version=%s, DeploymentId=%s, isSuspended=%s)",
+                definition.getId(), definition.getVersion(),
+                definition.getDeploymentId(), definition.isSuspended());
+    }
+
+    public String jobInfo(Job job) {
+        return job.toString();
+    }
+
+    public String taskInfo(DelegateExecution execution) {
+        String taskId = (String) execution.getVariable("task-id");
+        return String.format("{%s, %s, %s, %s}", execution.getCurrentActivityName(), taskId, execution.getId(), execution.getProcessDefinitionId());
     }
 
     private int getLeftRetryTimes(DelegateExecution execution) {

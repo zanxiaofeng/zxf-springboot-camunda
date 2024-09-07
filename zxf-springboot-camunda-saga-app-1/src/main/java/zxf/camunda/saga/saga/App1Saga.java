@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
+import zxf.camunda.saga.service.CamundaService;
 import zxf.camunda.saga.task.*;
 
 import javax.annotation.PostConstruct;
@@ -20,9 +21,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class App1Saga {
     private final AtomicInteger counter = new AtomicInteger();
-    private final String sagaName = "zxf-app-1-v1";
+    private final String sagaName = "zxf-app-1-v2";
+    private final String eventName = sagaName;
     @Autowired
     private ProcessEngine processEngine;
+    @Autowired
+    private CamundaService camundaService;
     @Value("${saga.re-deploy}")
     private boolean sagaRedeploy;
 
@@ -34,7 +38,7 @@ public class App1Saga {
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()
                         .registerDeploymentForJobExecutor(processDefinition.getDeploymentId());
-                log.info("{} saga had been deployed. (DeploymentId={})", this.sagaName, processDefinition.getDeploymentId());
+                log.info("{} saga had been deployed. (DeploymentId={})", this.eventName, processDefinition.getDeploymentId());
                 return;
             }
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
@@ -46,30 +50,27 @@ public class App1Saga {
                     .end()
                     .triggerCompensationOnAnyError();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
-            log.info("{} saga deployment is done. (DeploymentId={})", this.sagaName, deployment.getId());
+            log.info("{} saga deployment is done. (DeploymentId={})", this.eventName, deployment.getId());
         } catch (Exception ex) {
-            log.error("Exception when define and deploy {} saga", this.sagaName, ex);
+            log.error("Exception when define and deploy {} saga", this.eventName, ex);
         }
     }
 
     public void trigger(Integer count) {
         Integer times = counter.incrementAndGet();
-        log.info("{} trigger start, {}::{}", this.sagaName, times, count);
+        log.info("{} trigger start, {}::{}", this.eventName, times, count);
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
-            someVariables.put("task-id", this.sagaName + "@" + times + "::" + i);
-            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
-            logProcessInstance(processInstance);
+            someVariables.put("task-id", this.eventName + "@" + times + "::" + i);
+            ProcessInstance processInstance = processEngine.getRuntimeService()
+                    .startProcessInstanceByKey(this.sagaName, someVariables);
+            log.info("{} instance, {}", this.eventName, camundaService.instanceInfo(processInstance));
         }
-        log.info("{} trigger end, {}::{}", this.sagaName, times, count);
+        log.info("{} trigger end, {}::{}", this.eventName, times, count);
     }
 
     private Boolean isSagaDeployed() {
         return processEngine.getRepositoryService().createProcessDefinitionQuery()
                 .processDefinitionKey(this.sagaName).count() > 0;
-    }
-
-    private void logProcessInstance(ProcessInstance processInstance) {
-        log.info("{} instance, {}::{}", this.sagaName, processInstance.getProcessInstanceId(), processInstance.getProcessDefinitionId());
     }
 }

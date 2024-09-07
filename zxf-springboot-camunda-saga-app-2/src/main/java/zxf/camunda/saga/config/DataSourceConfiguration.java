@@ -44,13 +44,13 @@ public class DataSourceConfiguration {
 
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.camunda")
-    public DataSourceProperties camundaBpmDataSourceProperties(){
+    public DataSourceProperties camundaBpmDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean("camundaBpmDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.camunda.hikari")
-    public HikariDataSource camundaBpmDataSource(){
+    public HikariDataSource camundaBpmDataSource() {
         return camundaBpmDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
     }
 

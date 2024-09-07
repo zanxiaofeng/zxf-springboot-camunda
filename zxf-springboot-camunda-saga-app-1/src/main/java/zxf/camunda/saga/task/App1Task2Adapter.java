@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import zxf.camunda.saga.service.CamundaService;
 import zxf.camunda.saga.service.OrderService;
 
 import java.util.UUID;
@@ -20,15 +21,18 @@ public class App1Task2Adapter implements JavaDelegate {
         log.info("ctor()");
     }
 
+    @Autowired
+    private CamundaService camundaService;
+
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        log.info("start, {}, {}", taskId, execution.getId());
+        log.info("start, {}", camundaService.taskInfo(execution));
 
         orderServerB(execution, taskId);
         Thread.sleep(20000);
 
-        log.info("end, {}, {}", taskId, execution.getId());
+        log.info("end  , {}", camundaService.taskInfo(execution));
     }
 
     private void orderServerB(DelegateExecution execution, String taskId) {
