@@ -18,14 +18,14 @@ public class SagaController {
     private App1Saga appSaga;
 
     @GetMapping("/saga/common")
-    public void common(@RequestParam Integer count) {
-        log.info("Trigger zxf-common saga start, {}", count);
-        commonSaga.trigger(count);
+    public void common(@RequestParam Integer count, @RequestParam(required = false) String processDefinitionId) {
+        log.info("Trigger zxf-common saga start, {}, {}", processDefinitionId, count);
+        commonSaga.trigger(processDefinitionId, count);
     }
 
     @GetMapping("/saga/app-1")
-    public void app1(@RequestParam Integer count) {
-        log.info("Trigger zxf-app-2 saga start, {}", count);
-        appSaga.trigger(count);
+    public void app(@RequestParam Integer count, @RequestParam(required = false) String processDefinitionId) {
+        log.info("Trigger zxf-app-2 saga start, {}, {}", processDefinitionId, count);
+        appSaga.trigger(processDefinitionId, count);
     }
 }
