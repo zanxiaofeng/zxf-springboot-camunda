@@ -63,6 +63,7 @@ public class App2Saga {
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", this.eventName + "@" + times + "::" + i);
+            //This method will always create instance base on the latest version.
             ProcessInstance processInstance = processEngine.getRuntimeService()
                     .startProcessInstanceByKey(this.sagaName, someVariables);
             log.info("{} instance, {}", this.eventName, camundaService.instanceInfo(processInstance));

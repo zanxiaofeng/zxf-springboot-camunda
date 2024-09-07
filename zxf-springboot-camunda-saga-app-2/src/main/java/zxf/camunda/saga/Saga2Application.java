@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 @SpringBootApplication
 @EnableProcessApplication
-public class SagaApplication {
+public class Saga2Application {
     public static void main(String... args) {
-        SpringApplication.run(SagaApplication.class, args);
+        SpringApplication.run(Saga2Application.class, args);
     }
 }

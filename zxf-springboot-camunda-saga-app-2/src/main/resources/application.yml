@@ -30,7 +30,8 @@ spring:
       FAIL_ON_EMPTY_BEANS: false
 
 saga:
-  re-deploy: true
+  #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
+  re-deploy: false
 
 management:
   endpoints:
@@ -52,7 +53,9 @@ camunda:
     default-number-of-retries: 11
     job-execution:
       enabled: true
-      deployment-aware: false
+      #Set it to true will bind the job executor to the specified version of definition(deployment)
+      #Set it to false will ignore the version of definition(deployment)
+      deployment-aware: true
       #job executor pool settings
       core-pool-size: 10
       max-pool-size: 10

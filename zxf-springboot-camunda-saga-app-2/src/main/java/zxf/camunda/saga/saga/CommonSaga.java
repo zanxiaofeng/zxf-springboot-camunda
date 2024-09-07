@@ -46,7 +46,7 @@ public class CommonSaga {
             SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
                     .activity("Task 1", CommonTask1Adapter.class, "R3/PT0S")
                     .activityNoRetry("Task 2", CommonTask2Adapter.class)
-                    .activity("Task 3", CommonTask3Adapter.class, "R6/PT5S")
+                    .activity("Task 3", CommonTask3Adapter.class, "R3/PT5S")
                     .end();
             Deployment deployment = processEngine.getRepositoryService().createDeployment().addModelInstance(this.sagaName + ".bpmn", sagaBuilder.getModel()).deploy();
             log.info("{} saga deployment is done. (DeploymentId={})", this.eventName, deployment.getId());
@@ -61,6 +61,7 @@ public class CommonSaga {
         for (int i = 0; i < count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", this.eventName + "@" + times + "::" + i);
+            //This method will always create instance base on the latest version.
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
             log.info("{} instance, {}", this.eventName, camundaService.instanceInfo(processInstance));
         }
