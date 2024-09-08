@@ -15,13 +15,12 @@ import zxf.camunda.saga.task.*;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Component
 public class CommonSaga {
-    private final AtomicInteger counter = new AtomicInteger();
     private final String sagaName = "zxf-common-v3.8";
     private final String eventName = sagaName + "@app-2";
     @Autowired
@@ -57,16 +56,16 @@ public class CommonSaga {
         }
     }
 
-    public void trigger(Integer count) {
-        Integer times = counter.incrementAndGet();
-        log.info("{} trigger start, {}::{}", this.eventName, times, count);
+    public void trigger(String prefix, Integer times, Integer count) {
+        log.info("{} trigger start, {}::{}", prefix, times, count);
         for (int i = 0; i < count; i++) {
-            Map<String, Object> someVariables = Collections.singletonMap("task-id", this.eventName + "@" + times + "::" + i);
+            Map<String, Object> someVariables = new HashMap<>();
+            someVariables.put("task-id", prefix + "#" + times + "::" + i);
             //This method will always create instance base on the latest version.
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
-            log.info("{} instance, {}", this.eventName, camundaService.instanceInfo(processInstance));
+            log.info("{} instance, {}", prefix, camundaService.instanceInfo(processInstance));
         }
-        log.info("{} trigger end, {}::{}", this.eventName, times, count);
+        log.info("{} trigger end, {}::{}", prefix, times, count);
     }
 
     private BpmnModelInstance buildSaga() {

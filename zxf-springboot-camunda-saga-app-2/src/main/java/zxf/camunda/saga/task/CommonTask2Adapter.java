@@ -25,13 +25,13 @@ public class CommonTask2Adapter implements JavaDelegate {
         boolean isLastExecution = camundaService.isLastExecution(execution);
         log.info("start, {}, isFirstExecution={}, isLastExecution={}", camundaService.taskInfo(execution), isFirstExecution, isLastExecution);
 
-        if (taskId.endsWith("::2")) {
+        if (taskId.endsWith("::2000")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
             //After this, all camunda database change in this method  will be rollback(VARS...).
         }
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }

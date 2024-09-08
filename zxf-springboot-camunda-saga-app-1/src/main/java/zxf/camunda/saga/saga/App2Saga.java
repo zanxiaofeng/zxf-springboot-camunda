@@ -8,29 +8,27 @@ import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.CamundaService;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Component
 public class App2Saga {
-    private final AtomicInteger counter = new AtomicInteger();
     private final String sagaName = "zxf-app-2-v4";
-    private final String eventName = sagaName;
     @Autowired
     private ProcessEngine processEngine;
     @Autowired
     private CamundaService camundaService;
 
-    public void trigger(Integer count) {
-        Integer times = counter.incrementAndGet();
-        log.info("{} trigger start, {}::{}", this.eventName, times, count);
+    public void trigger(String prefix, Integer times, Integer count) {
+        log.info("{} trigger start, {}::{}", prefix, times, count);
         for (int i = 0; i < count; i++) {
-            Map<String, Object> someVariables = Collections.singletonMap("task-id", this.eventName + "@" + times + "::" + i);
+            Map<String, Object> someVariables = new HashMap<>();
+            someVariables.put("task-id", prefix + "#" + times + "::" + i);
             //This method will always create instance base on the latest version.
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
-            log.info("{} instance, {}", this.eventName, camundaService.instanceInfo(processInstance));
+            log.info("{} instance, {}", prefix, camundaService.instanceInfo(processInstance));
         }
-        log.info("{} trigger end, {}::{}", this.eventName, times, count);
+        log.info("{} trigger end, {}::{}", prefix, times, count);
     }
 }

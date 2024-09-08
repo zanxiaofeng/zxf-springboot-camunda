@@ -24,7 +24,7 @@ public class CommonTask3Adapter implements JavaDelegate {
         boolean isLastExecution = camundaService.isLastExecution(execution);
         log.info("start, {}, isFirstExecution={}, isLastExecution={}", camundaService.taskInfo(execution), isFirstExecution, isLastExecution);
 
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }

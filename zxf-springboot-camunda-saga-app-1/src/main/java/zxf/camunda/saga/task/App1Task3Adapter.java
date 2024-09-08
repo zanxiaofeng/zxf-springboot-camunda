@@ -24,7 +24,7 @@ public class App1Task3Adapter implements JavaDelegate {
         log.info("start, {}", camundaService.taskInfo(execution));
 
         orderServerC(execution, taskId);
-        Thread.sleep(20000);
+        Thread.sleep(3000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }
@@ -32,7 +32,7 @@ public class App1Task3Adapter implements JavaDelegate {
     private static void orderServerC(DelegateExecution execution, String taskId) {
         execution.setVariable("VAR_OF_TASK3", "var of task3");
 
-        if (taskId.endsWith("::3")) {
+        if (taskId.endsWith("::3000")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
         }

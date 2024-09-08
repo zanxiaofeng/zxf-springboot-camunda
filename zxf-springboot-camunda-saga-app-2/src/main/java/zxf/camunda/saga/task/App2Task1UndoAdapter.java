@@ -23,7 +23,7 @@ public class App2Task1UndoAdapter implements JavaDelegate {
         log.info("start, {}", camundaService.taskInfo(execution));
 
         cancelServiceA(execution, taskId);
-        Thread.sleep(20000);
+        Thread.sleep(3000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }

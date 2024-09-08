@@ -8,23 +8,22 @@ import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.CamundaService;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Component
 public class ByIdSaga {
-    private final AtomicInteger counter = new AtomicInteger();
     @Autowired
     private ProcessEngine processEngine;
     @Autowired
     private CamundaService camundaService;
 
-    public void trigger(String processDefinitionId, Integer count) {
-        Integer times = counter.incrementAndGet();
+    public void trigger(String processDefinitionId, Integer times, Integer count) {
         log.info("ById, {} trigger start, {}::{}", processDefinitionId, times, count);
         for (int i = 0; i < count; i++) {
-            Map<String, Object> someVariables = Collections.singletonMap("task-id", processDefinitionId + "@" + times + "::" + i);
+            Map<String, Object> someVariables = new HashMap<>();
+            someVariables.put("task-id", processDefinitionId + "@" + times + "::" + i);
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceById(processDefinitionId, someVariables);
             log.info("ById, {} instance, {}", processDefinitionId, camundaService.instanceInfo(processInstance));
         }

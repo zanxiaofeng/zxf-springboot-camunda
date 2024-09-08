@@ -25,6 +25,11 @@ spring:
         idle-timeout: 30000
         connection-timeout: 20000
         connection-test-query: SELECT 1
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: true
+    locations: classpath:db/migration
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
@@ -62,7 +67,18 @@ camunda:
       core-pool-size: 10
       max-pool-size: 10
       queue-capacity: 6
+      #keep-alive-seconds: 0
+      #job acquisition settings
       max-job-per-acquisition: 6
+      #lock-time-in-millis: 300000
+      #wait-time-in-millis: 5000
+      #max-wait: 60000
+      #wait-increase-factor: 2
+      #backoff settings
+      #backoff-time-in-millis: 0
+      #max-backoff: 0
+      #backoff-decrease-threshold: 100
+
     database:
       type: mysql
       jdbc-batch-processing: false

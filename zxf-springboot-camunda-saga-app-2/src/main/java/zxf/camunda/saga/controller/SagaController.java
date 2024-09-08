@@ -10,9 +10,12 @@ import zxf.camunda.saga.saga.App2Saga;
 import zxf.camunda.saga.saga.ByIdSaga;
 import zxf.camunda.saga.saga.CommonSaga;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Slf4j
 @RestController
 public class SagaController {
+    private final AtomicInteger counter = new AtomicInteger();
     @Autowired
     private CommonSaga commonSaga;
     @Autowired
@@ -24,25 +27,28 @@ public class SagaController {
 
     @GetMapping("/saga/common")
     public void common(@RequestParam Integer count) {
-        log.info("Trigger zxf-common saga start, {}", count);
-        commonSaga.trigger(count);
+        String prefix = "common@zxf-app-2";
+        log.info("Trigger {} saga start, {}", prefix, count);
+        commonSaga.trigger(prefix, counter.incrementAndGet(), count);
     }
 
     @GetMapping("/saga/app-1")
     public void app1(@RequestParam Integer count) {
-        log.info("Trigger zxf-app-1 saga start, {}", count);
-        app1Saga.trigger(count);
+        String prefix = "app1@zxf-app-2";
+        log.info("Trigger {} saga start, {}", prefix, count);
+        app1Saga.trigger(prefix, counter.incrementAndGet(), count);
     }
 
     @GetMapping("/saga/app-2")
     public void app2(@RequestParam Integer count) {
-        log.info("Trigger zxf-app-2 saga start, {}", count);
-        app2Saga.trigger(count);
+        String prefix = "app2@zxf-app-2";
+        log.info("Trigger {} saga start, {}", prefix, count);
+        app2Saga.trigger(prefix, counter.incrementAndGet(), count);
     }
 
     @GetMapping("/saga/byId")
     public void byId(@RequestParam Integer count, @RequestParam String processDefinitionId) {
-        log.info("Trigger saga byId start, {}, {}", processDefinitionId, count);
-        byIdSaga.trigger(processDefinitionId, count);
+        log.info("Trigger byId saga start, {}, {}", processDefinitionId, count);
+        byIdSaga.trigger(processDefinitionId, counter.incrementAndGet(), count);
     }
 }
