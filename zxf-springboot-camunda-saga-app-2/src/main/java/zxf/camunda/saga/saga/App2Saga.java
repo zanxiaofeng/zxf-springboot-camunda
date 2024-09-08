@@ -9,7 +9,6 @@ import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.service.CamundaService;
 import zxf.camunda.saga.task.*;

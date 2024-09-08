@@ -2,17 +2,11 @@ package zxf.camunda.saga.saga;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.repository.Deployment;
-import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.service.CamundaService;
 
-import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;

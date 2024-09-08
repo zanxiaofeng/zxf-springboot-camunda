@@ -20,18 +20,11 @@ public class CommonTask1Adapter implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        String taskId = (String) execution.getVariable("task-id");
         boolean isFirstExecution = camundaService.isFirstExecution(execution);
         boolean isLastExecution = camundaService.isLastExecution(execution);
         log.info("start, {}, isFirstExecution={}, isLastExecution={}", camundaService.taskInfo(execution), isFirstExecution, isLastExecution);
 
-        if (taskId.endsWith("::1")) {
-            log.error("Failed to process task: {}", taskId);
-            throw new RuntimeException("Failed to process task: " + taskId);
-            //After this, all camunda database change in this method  will be rollback(VARS...).
-        }
-
-        Thread.sleep(5000);
+        Thread.sleep(1000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }

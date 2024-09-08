@@ -45,6 +45,22 @@ public class InfoController {
         return allJobs.stream().map(camundaService::jobInfo).collect(Collectors.toList());
     }
 
+    @GetMapping("/jobs/active")
+    public List<String> activeJobs() {
+        log.info("failedJobs");
+        List<Job> failedJobs = processEngine.getManagementService().createJobQuery()
+                .active().orderByJobRetries().desc().list();
+        return failedJobs.stream().map(camundaService::jobInfo).collect(Collectors.toList());
+    }
+
+    @GetMapping("/jobs/retry")
+    public List<String> retryJobs() {
+        log.info("failedJobs");
+        List<Job> failedJobs = processEngine.getManagementService().createJobQuery()
+                .withRetriesLeft().orderByJobRetries().desc().list();
+        return failedJobs.stream().map(camundaService::jobInfo).collect(Collectors.toList());
+    }
+
     @GetMapping("/jobs/failed")
     public List<String> failedJobs() {
         log.info("failedJobs");
