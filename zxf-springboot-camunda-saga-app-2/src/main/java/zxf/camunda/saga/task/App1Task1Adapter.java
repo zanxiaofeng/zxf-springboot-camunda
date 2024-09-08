@@ -9,9 +9,9 @@ import zxf.camunda.saga.service.CamundaService;
 
 @Slf4j
 @Component
-public class CommonTask2Adapter implements JavaDelegate {
+public class App1Task1Adapter implements JavaDelegate {
 
-    public CommonTask2Adapter() {
+    public App1Task1Adapter() {
         log.info("ctor()");
     }
 
@@ -21,18 +21,20 @@ public class CommonTask2Adapter implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
-        boolean isFirstExecution = camundaService.isFirstExecution(execution);
-        boolean isLastExecution = camundaService.isLastExecution(execution);
-        log.info("start, {}, isFirstExecution={}, isLastExecution={}", camundaService.taskInfo(execution), isFirstExecution, isLastExecution);
+        log.info("start, {}", camundaService.taskInfo(execution));
 
-        if (taskId.endsWith("::2000")) {
-            log.error("Failed to process task: {}", taskId);
-            throw new RuntimeException("Failed to process task: " + taskId);
-            //After this, all camunda database change in this method  will be rollback(VARS...).
-        }
-
+        orderServerA(execution, taskId);
         Thread.sleep(3000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
+    }
+
+    private static void orderServerA(DelegateExecution execution, String taskId) {
+        execution.setVariable("VAR_OF_TASK1", "var of task1");
+
+        if (taskId.endsWith("::1000")) {
+            log.error("Failed to process task: {}", taskId);
+            throw new RuntimeException("Failed to process task: " + taskId);
+        }
     }
 }

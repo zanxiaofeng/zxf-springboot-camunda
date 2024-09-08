@@ -9,9 +9,9 @@ import zxf.camunda.saga.service.CamundaService;
 
 @Slf4j
 @Component
-public class CommonTask2Adapter implements JavaDelegate {
+public class App3Task3Adapter implements JavaDelegate {
 
-    public CommonTask2Adapter() {
+    public App3Task3Adapter() {
         log.info("ctor()");
     }
 
@@ -25,7 +25,7 @@ public class CommonTask2Adapter implements JavaDelegate {
         boolean isLastExecution = camundaService.isLastExecution(execution);
         log.info("start, {}, isFirstExecution={}, isLastExecution={}", camundaService.taskInfo(execution), isFirstExecution, isLastExecution);
 
-        if (taskId.endsWith("::2000")) {
+        if (taskId.endsWith("::3000")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
             //After this, all camunda database change in this method  will be rollback(VARS...).

@@ -20,8 +20,8 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class App2Saga {
-    private final String sagaName = "zxf-app-2-v4";
+public class App3Saga {
+    private final String sagaName = "zxf-app-3-v1";
     private final String eventName = sagaName;
     @Autowired
     private ProcessEngine processEngine;
@@ -71,14 +71,10 @@ public class App2Saga {
 
     private BpmnModelInstance buildSaga() {
         SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                .activityNoRetry("Task 1", App2Task1Adapter.class)
-                .compensationActivity("Undo Task 1", App2Task1UndoAdapter.class)
-                .activityNoRetry("Task 2", App2Task2Adapter.class)
-                .compensationActivity("Undo Task 2", App2Task2UndoAdapter.class)
-                .activityNoRetry("Task 3", App2Task3Adapter.class)
-                .end()
-                .triggerCompensationActivityOnAnyError("Finally Undo", App2TaskEndUndoAdapter.class);
-        //Undo flow: Undo Task 2 --> Undo Task 1 --> Finally Undo
+                .activity("Task 1", App3Task1Adapter.class, "R3/PT0S")
+                .activityNoRetry("Task 2", App3Task2Adapter.class)
+                .activity("Task 3", App3Task3Adapter.class, "R3/PT5S")
+                .end();
         return sagaBuilder.getModel();
     }
 

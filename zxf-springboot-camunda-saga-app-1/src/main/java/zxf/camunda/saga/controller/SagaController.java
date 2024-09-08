@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import zxf.camunda.saga.saga.App1Saga;
-import zxf.camunda.saga.saga.App2Saga;
-import zxf.camunda.saga.saga.ByIdSaga;
-import zxf.camunda.saga.saga.CommonSaga;
+import zxf.camunda.saga.saga.*;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -22,6 +19,8 @@ public class SagaController {
     private App1Saga app1Saga;
     @Autowired
     private App2Saga app2Saga;
+    @Autowired
+    private App3Saga app3Saga;
     @Autowired
     private ByIdSaga byIdSaga;
 
@@ -44,6 +43,13 @@ public class SagaController {
         String prefix = "app2@zxf-app-1";
         log.info("Trigger {} saga start, {}", prefix, count);
         app2Saga.trigger(prefix, counter.incrementAndGet(), count);
+    }
+
+    @GetMapping("/saga/app-3")
+    public void app3(@RequestParam Integer count) {
+        String prefix = "app3@zxf-app-1";
+        log.info("Trigger {} saga start, {}", prefix, count);
+        app3Saga.trigger(prefix, counter.incrementAndGet(), count);
     }
 
     @GetMapping("/saga/byId")

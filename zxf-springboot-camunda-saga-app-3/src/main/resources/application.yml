@@ -1,3 +1,6 @@
+server:
+  port: 8092
+
 spring:
   datasource:
     camunda:
@@ -11,6 +14,31 @@ spring:
         idle-timeout: 30000
         connection-timeout: 20000
         connection-test-query: SELECT 1
+    business:
+      url: jdbc:mysql://localhost:3307/business?useSSL=false&serverTimezone=GMT%2B8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: business
+      password: business
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 5
+        idle-timeout: 30000
+        connection-timeout: 20000
+        connection-test-query: SELECT 1
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: true
+    locations: classpath:db/migration
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 logging:
   level:
@@ -21,6 +49,10 @@ logging:
     org.camunda.bpm.engine.jobexecutor: ERROR
     org.camunda.bpm.engine.impl.persistence.entity: ERROR
     org.camunda.bpm.engine.impl.persistence.entity.JobManager: ERROR
+
+saga:
+  #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
+  re-deploy: false
 
 camunda:
   bpm:
@@ -35,7 +67,18 @@ camunda:
       core-pool-size: 10
       max-pool-size: 10
       queue-capacity: 6
+      #keep-alive-seconds: 0
+      #job acquisition settings
       max-job-per-acquisition: 6
+      #lock-time-in-millis: 300000
+      #wait-time-in-millis: 5000
+      #max-wait: 60000
+      #wait-increase-factor: 2
+      #backoff settings
+      #backoff-time-in-millis: 0
+      #max-backoff: 0
+      #backoff-decrease-threshold: 100
+
     database:
       type: mysql
       jdbc-batch-processing: false

@@ -7,14 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.CamundaService;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 @Component
-public class App2Saga {
-    private final String sagaName = "zxf-app-2-v4";
+public class App3Saga {
+    private final String sagaName = "zxf-app-3-v1";
     @Autowired
     private ProcessEngine processEngine;
     @Autowired

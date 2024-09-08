@@ -9,9 +9,9 @@ import zxf.camunda.saga.service.CamundaService;
 
 @Slf4j
 @Component
-public class CommonTask2Adapter implements JavaDelegate {
+public class App3Task2Adapter implements JavaDelegate {
 
-    public CommonTask2Adapter() {
+    public App3Task2Adapter() {
         log.info("ctor()");
     }
 

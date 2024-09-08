@@ -59,10 +59,11 @@ public class CommonSaga {
     public void trigger(String prefix, Integer times, Integer count) {
         log.info("{} trigger start, {}::{}", prefix, times, count);
         for (int i = 0; i < count; i++) {
+            String taskId = prefix + "#" + times + "::" + i;
             Map<String, Object> someVariables = new HashMap<>();
-            someVariables.put("task-id", prefix + "#" + times + "::" + i);
+            someVariables.put("task-id", taskId);
             //This method will always create instance base on the latest version.
-            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
+            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, taskId, someVariables);
             log.info("{} instance, {}", prefix, camundaService.instanceInfo(processInstance));
         }
         log.info("{} trigger end, {}::{}", prefix, times, count);
