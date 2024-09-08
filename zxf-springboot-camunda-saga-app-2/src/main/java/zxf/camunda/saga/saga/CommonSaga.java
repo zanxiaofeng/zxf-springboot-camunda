@@ -80,7 +80,9 @@ public class CommonSaga {
     }
 
     private Boolean isSagaDeployed() {
-        return processEngine.getRepositoryService().createProcessDefinitionQuery()
+        Boolean hadBeenDeployed = processEngine.getRepositoryService().createProcessDefinitionQuery()
                 .processDefinitionKey(this.sagaName).count() > 0;
+        log.info("{} isSagaDeployed, {}", this.eventName, hadBeenDeployed);
+        return hadBeenDeployed;
     }
 }

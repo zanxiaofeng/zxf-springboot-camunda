@@ -42,6 +42,7 @@
 - org.camunda.bpm.engine.impl.jobexecutor.JobExecutor.startJobAcquisitionThread
 - org.camunda.bpm.engine.impl.jobexecutor.ThreadPoolJobExecutor
 - org.camunda.bpm.engine.impl.jobexecutor.DefaultJobExecutor
+- org.camunda.bpm.engine.impl.persistence.entity.JobManager.findNextJobsToExecute
 
 # Retry and Compensate Event
 - By default, a failed job will be retried three times and the retries are performed immediately after the failure
