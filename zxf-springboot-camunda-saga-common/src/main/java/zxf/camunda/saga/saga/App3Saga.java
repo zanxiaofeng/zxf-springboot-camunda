@@ -61,7 +61,8 @@ public class App3Saga {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", taskId);
             //This method will always create instance base on the latest version.
-            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, taskId, someVariables);
+            //If you use business key, that business key must be unique.
+            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
             log.info("{} instance, {}", this.sagaName, camundaService.instanceInfo(processInstance));
         }
         log.info("{} trigger end, {}, {}::{}", this.sagaName, prefix, times, count);
