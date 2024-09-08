@@ -111,9 +111,10 @@
 - deployment-aware=false模式下，app1,app2能收到所有流程(app1,app2,common)的所有版本的任务.
 
 # Job & JavaDelegate
-# app2中可以获取到属于App1Task2Adapter的Job,并成功执行.
-# app1中可以获取到属于App2Task1Adapter的Job，但其执行结束后要加载zxf.camunda.saga.task.App2TaskEndUndoAdapter类，如果加载不到就会报Exception. 也就是说App2Task1Adapter和App2TaskEndUndoAdapter必须同时存在
-
+- app1中可以获取到属于App2Task1Adapter的Job，但其执行结束后要加载zxf.camunda.saga.task.App2TaskEndUndoAdapter类，如果加载不到就会报Exception. 也就是说App2Task1Adapter和App2TaskEndUndoAdapter必须同时存在
+- app2中可以获取到属于App1Task1Adapter的Job,但如果进程中没有后续的类就会报错.
+- app3中可以获取到属于CommonTask1Adapter的Job,但如果进程中没有后续的类就会报错.
+- 
 # 问题：
 ## 问题一
 - 由异构应用（不同应用的不同版本）组成的Camunda集群中，如何实现特定应用版本与特定流程版本的绑定，以便特定版本的流程任务能被调度到支持的应用版本，以避免出现版本不匹配导致的错误（如找不到任务关联的JavaDelegate类）。
