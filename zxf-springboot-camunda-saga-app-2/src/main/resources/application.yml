@@ -64,12 +64,13 @@ camunda:
       #Set it to false will ignore the version of definition(deployment)
       deployment-aware: false
       #job executor pool settings
-      core-pool-size: 10
-      max-pool-size: 10
+      core-pool-size: 1
+      max-pool-size: 3
       queue-capacity: 6
       #keep-alive-seconds: 0
       #job acquisition settings
-      max-job-per-acquisition: 6
+      # set to a small value for monitor the deployment-aware
+      max-job-per-acquisition: 1
       #lock-time-in-millis: 300000
       #wait-time-in-millis: 5000
       #max-wait: 60000

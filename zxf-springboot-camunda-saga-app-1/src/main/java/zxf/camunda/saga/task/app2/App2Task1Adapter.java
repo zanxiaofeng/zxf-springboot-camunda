@@ -24,7 +24,7 @@ public class App2Task1Adapter implements JavaDelegate {
         log.info("start, {}", camundaService.taskInfo(execution));
 
         orderServerA(execution, taskId);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }
