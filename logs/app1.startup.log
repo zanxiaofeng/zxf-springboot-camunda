@@ -1,0 +1,2035 @@
+/usr/lib/jvm/java-22-openjdk-amd64/bin/java -javaagent:/home/davis/Apps/idea-2023.3.6/lib/idea_rt.jar=35541:/home/davis/Apps/idea-2023.3.6/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /home/davis/Work/zxf-springboot-camunda/zxf-springboot-camunda-saga-app-1/target/classes:/home/davis/Work/zxf-springboot-camunda/zxf-springboot-camunda-saga-common/target/classes:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.4/spring-boot-starter-web-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.4/spring-boot-starter-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot/3.2.4/spring-boot-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.4/spring-boot-autoconfigure-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.4/spring-boot-starter-logging-3.2.4.jar:/home/davis/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/davis/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/davis/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/davis/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/davis/.m2/repository/org/slf4j/jul-to-slf4j/2.0.12/jul-to-slf4j-2.0.12.jar:/home/davis/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/davis/.m2/repository/org/springframework/spring-core/6.1.5/spring-core-6.1.5.jar:/home/davis/.m2/repository/org/springframework/spring-jcl/6.1.5/spring-jcl-6.1.5.jar:/home/davis/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.4/spring-boot-starter-json-3.2.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.4/jackson-datatype-jdk8-2.15.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.4/jackson-datatype-jsr310-2.15.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.4/jackson-module-parameter-names-2.15.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.4/spring-boot-starter-tomcat-3.2.4.jar:/home/davis/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar:/home/davis/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.19/tomcat-embed-el-10.1.19.jar:/home/davis/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.19/tomcat-embed-websocket-10.1.19.jar:/home/davis/.m2/repository/org/springframework/spring-web/6.1.5/spring-web-6.1.5.jar:/home/davis/.m2/repository/org/springframework/spring-beans/6.1.5/spring-beans-6.1.5.jar:/home/davis/.m2/repository/org/springframework/spring-webmvc/6.1.5/spring-webmvc-6.1.5.jar:/home/davis/.m2/repository/org/springframework/spring-aop/6.1.5/spring-aop-6.1.5.jar:/home/davis/.m2/repository/org/springframework/spring-context/6.1.5/spring-context-6.1.5.jar:/home/davis/.m2/repository/org/springframework/spring-expression/6.1.5/spring-expression-6.1.5.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-data-jdbc/3.2.4/spring-boot-starter-data-jdbc-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.2.4/spring-boot-starter-jdbc-3.2.4.jar:/home/davis/.m2/repository/com/zaxxer/HikariCP/5.0.1/HikariCP-5.0.1.jar:/home/davis/.m2/repository/org/springframework/spring-jdbc/6.1.5/spring-jdbc-6.1.5.jar:/home/davis/.m2/repository/org/springframework/data/spring-data-jdbc/3.2.4/spring-data-jdbc-3.2.4.jar:/home/davis/.m2/repository/org/springframework/data/spring-data-relational/3.2.4/spring-data-relational-3.2.4.jar:/home/davis/.m2/repository/com/github/jsqlparser/jsqlparser/4.6/jsqlparser-4.6.jar:/home/davis/.m2/repository/org/springframework/data/spring-data-commons/3.2.4/spring-data-commons-3.2.4.jar:/home/davis/.m2/repository/org/springframework/spring-tx/6.1.5/spring-tx-6.1.5.jar:/home/davis/.m2/repository/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.2.4/spring-boot-starter-actuator-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.2.4/spring-boot-actuator-autoconfigure-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-actuator/3.2.4/spring-boot-actuator-3.2.4.jar:/home/davis/.m2/repository/io/micrometer/micrometer-observation/1.12.4/micrometer-observation-1.12.4.jar:/home/davis/.m2/repository/io/micrometer/micrometer-commons/1.12.4/micrometer-commons-1.12.4.jar:/home/davis/.m2/repository/io/micrometer/micrometer-jakarta9/1.12.4/micrometer-jakarta9-1.12.4.jar:/home/davis/.m2/repository/io/micrometer/micrometer-core/1.12.4/micrometer-core-1.12.4.jar:/home/davis/.m2/repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar:/home/davis/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/home/davis/.m2/repository/org/camunda/bpm/springboot/camunda-bpm-spring-boot-starter-webapp/7.21.0/camunda-bpm-spring-boot-starter-webapp-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/springboot/camunda-bpm-spring-boot-starter-webapp-core/7.21.0/camunda-bpm-spring-boot-starter-webapp-core-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/webapp/camunda-webapp-jakarta/7.21.0/camunda-webapp-jakarta-7.21.0-classes.jar:/home/davis/.m2/repository/org/camunda/commons/camunda-commons-logging/1.13.0/camunda-commons-logging-1.13.0.jar:/home/davis/.m2/repository/org/camunda/bpm/webapp/camunda-webapp-webjar/7.21.0/camunda-webapp-webjar-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/springboot/camunda-bpm-spring-boot-starter-rest/7.21.0/camunda-bpm-spring-boot-starter-rest-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/springboot/camunda-bpm-spring-boot-starter/7.21.0/camunda-bpm-spring-boot-starter-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/camunda-engine-spring-6/7.21.0/camunda-engine-spring-6-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/camunda-engine/7.21.0/camunda-engine-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/model/camunda-bpmn-model/7.21.0/camunda-bpmn-model-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/model/camunda-xml-model/7.21.0/camunda-xml-model-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/model/camunda-cmmn-model/7.21.0/camunda-cmmn-model-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/juel/camunda-juel/7.21.0/camunda-juel-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/dmn/camunda-engine-dmn/7.21.0/camunda-engine-dmn-7.21.0.jar:/home/davis/.m2/repository/org/camunda/commons/camunda-commons-utils/1.13.0/camunda-commons-utils-1.13.0.jar:/home/davis/.m2/repository/org/camunda/bpm/model/camunda-dmn-model/7.21.0/camunda-dmn-model-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-api/7.21.0/camunda-engine-feel-api-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-juel/7.21.0/camunda-engine-feel-juel-7.21.0.jar:/home/davis/.m2/repository/org/camunda/bpm/dmn/camunda-engine-feel-scala/7.21.0/camunda-engine-feel-scala-7.21.0.jar:/home/davis/.m2/repository/org/camunda/feel/feel-engine/1.17.5/feel-engine-1.17.5-scala-shaded.jar:/home/davis/.m2/repository/org/camunda/commons/camunda-commons-typed-values/7.21.0/camunda-commons-typed-values-7.21.0.jar:/home/davis/.m2/repository/org/mybatis/mybatis/3.5.15/mybatis-3.5.15.jar:/home/davis/.m2/repository/joda-time/joda-time/2.12.5/joda-time-2.12.5.jar:/home/davis/.m2/repository/org/camunda/connect/camunda-connect-core/1.6.0/camunda-connect-core-1.6.0.jar:/home/davis/.m2/repository/org/camunda/connect/camunda-connect-connectors-all/1.6.0/camunda-connect-connectors-all-1.6.0.jar:/home/davis/.m2/repository/org/springframework/spring-orm/6.1.5/spring-orm-6.1.5.jar:/home/davis/.m2/repository/org/apache/commons/commons-lang3/3.13.0/commons-lang3-3.13.0.jar:/home/davis/.m2/repository/com/fasterxml/uuid/java-uuid-generator/4.3.0/java-uuid-generator-4.3.0.jar:/home/davis/.m2/repository/com/sun/xml/bind/jaxb-impl/4.0.5/jaxb-impl-4.0.5.jar:/home/davis/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/home/davis/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/home/davis/.m2/repository/org/camunda/bpm/camunda-engine-rest-core-jakarta/7.21.0/camunda-engine-rest-core-jakarta-7.21.0.jar:/home/davis/.m2/repository/commons-fileupload/commons-fileupload/1.5/commons-fileupload-1.5.jar:/home/davis/.m2/repository/commons-io/commons-io/2.8.0/commons-io-2.8.0.jar:/home/davis/.m2/repository/com/fasterxml/jackson/jakarta/rs/jackson-jakarta-rs-json-provider/2.15.4/jackson-jakarta-rs-json-provider-2.15.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/jakarta/rs/jackson-jakarta-rs-base/2.15.4/jackson-jakarta-rs-base-2.15.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/module/jackson-module-jakarta-xmlbind-annotations/2.15.4/jackson-module-jakarta-xmlbind-annotations-2.15.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-jersey/3.2.4/spring-boot-starter-jersey-3.2.4.jar:/home/davis/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.2.4/spring-boot-starter-validation-3.2.4.jar:/home/davis/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar:/home/davis/.m2/repository/com/fasterxml/classmate/1.6.0/classmate-1.6.0.jar:/home/davis/.m2/repository/org/glassfish/jersey/containers/jersey-container-servlet-core/3.1.5/jersey-container-servlet-core-3.1.5.jar:/home/davis/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/home/davis/.m2/repository/org/glassfish/jersey/core/jersey-common/3.1.5/jersey-common-3.1.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.jar:/home/davis/.m2/repository/jakarta/ws/rs/jakarta.ws.rs-api/3.1.0/jakarta.ws.rs-api-3.1.0.jar:/home/davis/.m2/repository/org/glassfish/jersey/containers/jersey-container-servlet/3.1.5/jersey-container-servlet-3.1.5.jar:/home/davis/.m2/repository/org/glassfish/jersey/core/jersey-server/3.1.5/jersey-server-3.1.5.jar:/home/davis/.m2/repository/org/glassfish/jersey/core/jersey-client/3.1.5/jersey-client-3.1.5.jar:/home/davis/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/home/davis/.m2/repository/org/glassfish/jersey/ext/jersey-bean-validation/3.1.5/jersey-bean-validation-3.1.5.jar:/home/davis/.m2/repository/org/jboss/logging/jboss-logging/3.5.3.Final/jboss-logging-3.5.3.Final.jar:/home/davis/.m2/repository/org/glassfish/jersey/ext/jersey-spring6/3.1.5/jersey-spring6-3.1.5.jar:/home/davis/.m2/repository/org/glassfish/jersey/inject/jersey-hk2/3.1.5/jersey-hk2-3.1.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/hk2-locator/3.0.5/hk2-locator-3.0.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/external/aopalliance-repackaged/3.0.5/aopalliance-repackaged-3.0.5.jar:/home/davis/.m2/repository/org/javassist/javassist/3.29.2-GA/javassist-3.29.2-GA.jar:/home/davis/.m2/repository/org/glassfish/hk2/hk2/3.0.5/hk2-3.0.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/hk2-utils/3.0.5/hk2-utils-3.0.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/hk2-api/3.0.5/hk2-api-3.0.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/hk2-core/3.0.5/hk2-core-3.0.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/hk2-runlevel/3.0.5/hk2-runlevel-3.0.5.jar:/home/davis/.m2/repository/org/glassfish/hk2/class-model/3.0.5/class-model-3.0.5.jar:/home/davis/.m2/repository/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/home/davis/.m2/repository/org/ow2/asm/asm-commons/9.6/asm-commons-9.6.jar:/home/davis/.m2/repository/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/home/davis/.m2/repository/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/home/davis/.m2/repository/org/glassfish/hk2/spring-bridge/3.0.5/spring-bridge-3.0.5.jar:/home/davis/.m2/repository/org/glassfish/jersey/media/jersey-media-json-jackson/3.1.5/jersey-media-json-jackson-3.1.5.jar:/home/davis/.m2/repository/org/glassfish/jersey/ext/jersey-entity-filtering/3.1.5/jersey-entity-filtering-3.1.5.jar:/home/davis/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/home/davis/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/home/davis/.m2/repository/mysql/mysql-connector-java/8.0.15/mysql-connector-java-8.0.15.jar:/home/davis/.m2/repository/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.jar:/home/davis/.m2/repository/javax/annotation/javax.annotation-api/1.3.2/javax.annotation-api-1.3.2.jar:/home/davis/.m2/repository/org/flywaydb/flyway-core/10.1.0/flyway-core-10.1.0.jar:/home/davis/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.15.4/jackson-dataformat-toml-2.15.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.4/jackson-databind-2.15.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.4/jackson-annotations-2.15.4.jar:/home/davis/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.4/jackson-core-2.15.4.jar:/home/davis/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar:/home/davis/.m2/repository/org/flywaydb/flyway-mysql/10.1.0/flyway-mysql-10.1.0.jar zxf.camunda.saga.Saga1Application
+Picked up _JAVA_OPTIONS: -Dawt.useSystemAAFontSettings=on -Dswing.aatext=true
+
+ ____                                 _         ____  _       _    __
+/ ___| __ _ _ __ ___  _   _ _ __   __| | __ _  |  _ \| | __ _| |_ / _| ___  _ __ _ __ ___
+| |   / _` | '_ ` _ \| | | | '_ \ / _` |/ _` | | |_) | |/ _` | __| |_ / _ \| '__| '_ ` _ \
+| |__| (_| | | | | | | |_| | | | | (_| | (_| | |  __/| | (_| | |_|  _| (_) | |  | | | | | |
+\____/\__,_|_| |_| |_|\__,_|_| |_|\__,_|\__,_| |_|   |_|\__,_|\__|_|  \___/|_|  |_| |_| |_|
+
+  Spring-Boot:  (v3.2.4)
+  Camunda Platform: (v7.21.0)
+  Camunda Platform Spring Boot Starter: (v7.21.0)
+
+2024-09-09T08:38:00.331+08:00  INFO 22507 --- [           main] zxf.camunda.saga.Saga1Application        : Starting Saga1Application using Java 22.0.1 with PID 22507 (/home/davis/Work/zxf-springboot-camunda/zxf-springboot-camunda-saga-app-1/target/classes started by davis in /home/davis/Work/zxf-springboot-camunda)
+2024-09-09T08:38:00.366+08:00  INFO 22507 --- [           main] zxf.camunda.saga.Saga1Application        : No active profile set, falling back to 1 default profile: "default"
+2024-09-09T08:38:00.993+08:00  INFO 22507 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-09-09T08:38:01.006+08:00  INFO 22507 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 JDBC repository interfaces.
+2024-09-09T08:38:01.369+08:00  INFO 22507 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8090 (http)
+2024-09-09T08:38:01.381+08:00  INFO 22507 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-09-09T08:38:01.381+08:00  INFO 22507 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-09-09T08:38:01.427+08:00  INFO 22507 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-09-09T08:38:01.428+08:00  INFO 22507 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1030 ms
+2024-09-09T08:38:01.443+08:00  INFO 22507 --- [           main] .c.b.s.b.s.r.CamundaJerseyResourceConfig : Configuring camunda rest api.
+2024-09-09T08:38:01.455+08:00  INFO 22507 --- [           main] .c.b.s.b.s.r.CamundaJerseyResourceConfig : Finished configuring camunda rest api.
+2024-09-09T08:38:01.694+08:00 TRACE 22507 --- [LockHandlerImpl] o.c.b.e.r.impl.FetchAndLockHandlerImpl   : Acquire start
+2024-09-09T08:38:01.695+08:00 TRACE 22507 --- [LockHandlerImpl] o.c.b.e.r.impl.FetchAndLockHandlerImpl   : Number of pending requests 0
+2024-09-09T08:38:01.696+08:00 TRACE 22507 --- [LockHandlerImpl] o.c.b.e.r.impl.FetchAndLockHandlerImpl   : Suspend acquisition for 9,223,372,036,854,775,807ms
+2024-09-09T08:38:01.756+08:00  INFO 22507 --- [           main] org.camunda.bpm.spring.boot              : STARTER-SB040 Setting up jobExecutor with corePoolSize=10, maxPoolSize:10
+2024-09-09T08:38:01.789+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.cfg               : ENGINE-12003 Plugin 'CompositeProcessEnginePlugin[genericPropertiesConfiguration, camundaProcessEngineConfiguration, camundaDatasourceConfiguration, camundaJobConfiguration, camundaHistoryConfiguration, camundaMetricsConfiguration, camundaAuthorizationConfiguration, failedJobConfiguration, disableDeploymentResourcePattern, eventPublisherPlugin, ApplicationContextClassloaderSwitchPlugin]' activated on process engine 'default'
+2024-09-09T08:38:01.791+08:00  INFO 22507 --- [           main] org.camunda.bpm.spring.boot              : STARTER-SB020 ProcessApplication enabled: autoDeployment via springConfiguration#deploymentResourcePattern is disabled
+2024-09-09T08:38:01.791+08:00  INFO 22507 --- [           main] o.c.b.s.b.s.event.EventPublisherPlugin   : EVENTING-001: Initialized Camunda Spring Boot Eventing Engine Plugin.
+2024-09-09T08:38:01.791+08:00  INFO 22507 --- [           main] o.c.b.s.b.s.event.EventPublisherPlugin   : EVENTING-003: Task events will be published as Spring Events.
+2024-09-09T08:38:01.791+08:00  INFO 22507 --- [           main] o.c.b.s.b.s.event.EventPublisherPlugin   : EVENTING-005: Execution events will be published as Spring Events.
+2024-09-09T08:38:01.791+08:00  INFO 22507 --- [           main] o.c.b.s.b.s.event.EventPublisherPlugin   : EVENTING-009: Listeners will not be invoked if a skipCustomListeners API parameter is set to true by user.
+2024-09-09T08:38:01.794+08:00  INFO 22507 --- [           main] o.c.b.s.b.s.event.EventPublisherPlugin   : EVENTING-007: History events will be published as Spring events.
+2024-09-09T08:38:01.957+08:00  INFO 22507 --- [           main] org.camunda.feel.FeelEngine              : Engine created. [value-mapper: CompositeValueMapper(List(org.camunda.feel.impl.JavaValueMapper@5d2e6f62)), function-provider: org.camunda.bpm.dmn.feel.impl.scala.function.CustomFunctionTransformer@3d88ce0e, clock: SystemClock, configuration: {externalFunctionsEnabled: false}]
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+2024-09-09T08:38:02.890+08:00  INFO 22507 --- [           main] org.camunda.bpm.connect                  : CNCT-01004 Discovered provider for connector id 'http-connector' and class 'org.camunda.connect.httpclient.impl.HttpConnectorImpl': 'org.camunda.connect.httpclient.impl.HttpConnectorProviderImpl'
+2024-09-09T08:38:02.891+08:00  INFO 22507 --- [           main] org.camunda.bpm.connect                  : CNCT-01004 Discovered provider for connector id 'soap-http-connector' and class 'org.camunda.connect.httpclient.soap.impl.SoapHttpConnectorImpl': 'org.camunda.connect.httpclient.soap.impl.SoapHttpConnectorProviderImpl'
+2024-09-09T08:38:02.900+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- SchemaOperationsProcessEngineBuild ----------------------
+2024-09-09T08:38:02.903+08:00  INFO 22507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-09-09T08:38:02.982+08:00  INFO 22507 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@29174dfe
+2024-09-09T08:38:02.983+08:00  INFO 22507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-09-09T08:38:02.988+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:04.597+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03016 Performing database operation 'create' on component 'engine' with resource 'org/camunda/bpm/engine/db/create/activiti.mysql.create.engine.sql'
+2024-09-09T08:38:04.597+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03062 Executing Schmema DDL [
+  Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+  under one or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information regarding copyright
+  ownership. Camunda licenses this file to you under the Apache License,
+  Version 2.0; you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  --
+--
+--
+--
+create table ACT_GE_PROPERTY (
+NAME_ varchar(64),
+VALUE_ varchar(300),
+REV_ integer,
+primary key (NAME_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  insert into ACT_GE_PROPERTY
+values ('schema.version', 'fox', 1)
+  insert into ACT_GE_PROPERTY
+values ('schema.history', 'create(fox)', 1)
+  insert into ACT_GE_PROPERTY
+values ('next.dbid', '1', 1)
+  insert into ACT_GE_PROPERTY
+values ('deployment.lock', '0', 1)
+  insert into ACT_GE_PROPERTY
+values ('history.cleanup.job.lock', '0', 1)
+  insert into ACT_GE_PROPERTY
+values ('startup.lock', '0', 1)
+  insert into ACT_GE_PROPERTY
+values ('telemetry.lock', '0', 1)
+  insert into ACT_GE_PROPERTY
+values ('installationId.lock', '0', 1)
+  create table ACT_GE_BYTEARRAY (
+ID_ varchar(64),
+REV_ integer,
+NAME_ varchar(255),
+DEPLOYMENT_ID_ varchar(64),
+BYTES_ LONGBLOB,
+GENERATED_ TINYINT,
+TENANT_ID_ varchar(64),
+TYPE_ integer,
+CREATE_TIME_ datetime,
+ROOT_PROC_INST_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_GE_SCHEMA_LOG (
+ID_ varchar(64),
+TIMESTAMP_ datetime,
+VERSION_ varchar(255),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  insert into ACT_GE_SCHEMA_LOG
+values ('0', CURRENT_TIMESTAMP, '7.21.0')
+  create table ACT_RE_DEPLOYMENT (
+ID_ varchar(64),
+NAME_ varchar(255),
+DEPLOY_TIME_ datetime,
+SOURCE_ varchar(255),
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_EXECUTION (
+ID_ varchar(64),
+REV_ integer,
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+BUSINESS_KEY_ varchar(255),
+PARENT_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+SUPER_EXEC_ varchar(64),
+SUPER_CASE_EXEC_ varchar(64),
+CASE_INST_ID_ varchar(64),
+ACT_ID_ varchar(255),
+ACT_INST_ID_ varchar(64),
+IS_ACTIVE_ TINYINT,
+IS_CONCURRENT_ TINYINT,
+IS_SCOPE_ TINYINT,
+IS_EVENT_SCOPE_ TINYINT,
+SUSPENSION_STATE_ integer,
+CACHED_ENT_STATE_ integer,
+SEQUENCE_COUNTER_ bigint,
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_JOB (
+ID_ varchar(64) NOT NULL,
+REV_ integer,
+TYPE_ varchar(255) NOT NULL,
+LOCK_EXP_TIME_ datetime NULL,
+LOCK_OWNER_ varchar(255),
+EXCLUSIVE_ boolean,
+EXECUTION_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROCESS_INSTANCE_ID_ varchar(64),
+PROCESS_DEF_ID_ varchar(64),
+PROCESS_DEF_KEY_ varchar(255),
+RETRIES_ integer,
+EXCEPTION_STACK_ID_ varchar(64),
+EXCEPTION_MSG_ varchar(4000),
+FAILED_ACT_ID_ varchar(255),
+DUEDATE_ datetime NULL,
+REPEAT_ varchar(255),
+REPEAT_OFFSET_ bigint DEFAULT 0,
+HANDLER_TYPE_ varchar(255),
+HANDLER_CFG_ varchar(4000),
+DEPLOYMENT_ID_ varchar(64),
+SUSPENSION_STATE_ integer NOT NULL DEFAULT 1,
+JOB_DEF_ID_ varchar(64),
+PRIORITY_ bigint NOT NULL DEFAULT 0,
+SEQUENCE_COUNTER_ bigint,
+TENANT_ID_ varchar(64),
+CREATE_TIME_ datetime,
+LAST_FAILURE_LOG_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_JOBDEF (
+ID_ varchar(64) NOT NULL,
+REV_ integer,
+PROC_DEF_ID_ varchar(64),
+PROC_DEF_KEY_ varchar(255),
+ACT_ID_ varchar(255),
+JOB_TYPE_ varchar(255) NOT NULL,
+JOB_CONFIGURATION_ varchar(255),
+SUSPENSION_STATE_ integer,
+JOB_PRIORITY_ bigint,
+TENANT_ID_ varchar(64),
+DEPLOYMENT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RE_PROCDEF (
+ID_ varchar(64) not null,
+REV_ integer,
+CATEGORY_ varchar(255),
+NAME_ varchar(255),
+KEY_ varchar(255) not null,
+VERSION_ integer not null,
+DEPLOYMENT_ID_ varchar(64),
+RESOURCE_NAME_ varchar(4000),
+DGRM_RESOURCE_NAME_ varchar(4000),
+HAS_START_FORM_KEY_ TINYINT,
+SUSPENSION_STATE_ integer,
+TENANT_ID_ varchar(64),
+VERSION_TAG_ varchar(64),
+HISTORY_TTL_ integer,
+STARTABLE_ boolean NOT NULL default TRUE,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RE_CAMFORMDEF (
+ID_ varchar(64) not null,
+REV_ integer,
+KEY_ varchar(255) not null,
+VERSION_ integer not null,
+DEPLOYMENT_ID_ varchar(64),
+RESOURCE_NAME_ varchar(4000),
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_TASK (
+ID_ varchar(64),
+REV_ integer,
+EXECUTION_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+CASE_EXECUTION_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+CASE_DEF_ID_ varchar(64),
+NAME_ varchar(255),
+PARENT_TASK_ID_ varchar(64),
+DESCRIPTION_ varchar(4000),
+TASK_DEF_KEY_ varchar(255),
+OWNER_ varchar(255),
+ASSIGNEE_ varchar(255),
+DELEGATION_ varchar(64),
+PRIORITY_ integer,
+CREATE_TIME_ datetime,
+LAST_UPDATED_ datetime,
+DUE_DATE_ datetime,
+FOLLOW_UP_DATE_ datetime,
+SUSPENSION_STATE_ integer,
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_IDENTITYLINK (
+ID_ varchar(64),
+REV_ integer,
+GROUP_ID_ varchar(255),
+TYPE_ varchar(255),
+USER_ID_ varchar(255),
+TASK_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_VARIABLE (
+ID_ varchar(64) not null,
+REV_ integer,
+TYPE_ varchar(255) not null,
+NAME_ varchar(255) not null,
+EXECUTION_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+CASE_EXECUTION_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+TASK_ID_ varchar(64),
+BATCH_ID_ varchar(64),
+BYTEARRAY_ID_ varchar(64),
+DOUBLE_ double,
+LONG_ bigint,
+TEXT_ varchar(4000),
+TEXT2_ varchar(4000),
+VAR_SCOPE_ varchar(64) not null,
+SEQUENCE_COUNTER_ bigint,
+IS_CONCURRENT_LOCAL_ TINYINT,
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_EVENT_SUBSCR (
+ID_ varchar(64) not null,
+REV_ integer,
+EVENT_TYPE_ varchar(255) not null,
+EVENT_NAME_ varchar(255),
+EXECUTION_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+ACTIVITY_ID_ varchar(255),
+CONFIGURATION_ varchar(255),
+CREATED_ datetime not null,
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_INCIDENT (
+ID_ varchar(64) not null,
+REV_ integer not null,
+INCIDENT_TIMESTAMP_ datetime not null,
+INCIDENT_MSG_ varchar(4000),
+INCIDENT_TYPE_ varchar(255) not null,
+EXECUTION_ID_ varchar(64),
+ACTIVITY_ID_ varchar(255),
+FAILED_ACTIVITY_ID_ varchar(255),
+PROC_INST_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+CAUSE_INCIDENT_ID_ varchar(64),
+ROOT_CAUSE_INCIDENT_ID_ varchar(64),
+CONFIGURATION_ varchar(255),
+TENANT_ID_ varchar(64),
+JOB_DEF_ID_ varchar(64),
+ANNOTATION_ varchar(4000),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_AUTHORIZATION (
+ID_ varchar(64) not null,
+REV_ integer not null,
+TYPE_ integer not null,
+GROUP_ID_ varchar(255),
+USER_ID_ varchar(255),
+RESOURCE_TYPE_ integer not null,
+RESOURCE_ID_ varchar(255),
+PERMS_ integer,
+REMOVAL_TIME_ datetime,
+ROOT_PROC_INST_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_FILTER (
+ID_ varchar(64) not null,
+REV_ integer not null,
+RESOURCE_TYPE_ varchar(255) not null,
+NAME_ varchar(255) not null,
+OWNER_ varchar(255),
+QUERY_ LONGTEXT not null,
+PROPERTIES_ LONGTEXT,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_METER_LOG (
+ID_ varchar(64) not null,
+NAME_ varchar(64) not null,
+REPORTER_ varchar(255),
+VALUE_ bigint,
+TIMESTAMP_ datetime,
+MILLISECONDS_ bigint DEFAULT 0,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_TASK_METER_LOG (
+ID_ varchar(64) not null,
+ASSIGNEE_HASH_ bigint,
+TIMESTAMP_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_EXT_TASK (
+ID_ varchar(64) not null,
+REV_ integer not null,
+WORKER_ID_ varchar(255),
+TOPIC_NAME_ varchar(255),
+RETRIES_ integer,
+ERROR_MSG_ varchar(4000),
+ERROR_DETAILS_ID_ varchar(64),
+LOCK_EXP_TIME_ datetime NULL,
+CREATE_TIME_ datetime NULL,
+SUSPENSION_STATE_ integer,
+EXECUTION_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+PROC_DEF_KEY_ varchar(255),
+ACT_ID_ varchar(255),
+ACT_INST_ID_ varchar(64),
+TENANT_ID_ varchar(64),
+PRIORITY_ bigint NOT NULL DEFAULT 0,
+LAST_FAILURE_LOG_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_RU_BATCH (
+ID_ varchar(64) not null,
+REV_ integer not null,
+TYPE_ varchar(255),
+TOTAL_JOBS_ integer,
+JOBS_CREATED_ integer,
+JOBS_PER_SEED_ integer,
+INVOCATIONS_PER_JOB_ integer,
+SEED_JOB_DEF_ID_ varchar(64),
+BATCH_JOB_DEF_ID_ varchar(64),
+MONITOR_JOB_DEF_ID_ varchar(64),
+SUSPENSION_STATE_ integer,
+CONFIGURATION_ varchar(255),
+TENANT_ID_ varchar(64),
+CREATE_USER_ID_ varchar(255),
+START_TIME_ datetime,
+EXEC_START_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create index ACT_IDX_EXEC_ROOT_PI on ACT_RU_EXECUTION(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_EXEC_BUSKEY on ACT_RU_EXECUTION(BUSINESS_KEY_)
+  create index ACT_IDX_EXEC_TENANT_ID on ACT_RU_EXECUTION(TENANT_ID_)
+  create index ACT_IDX_TASK_CREATE on ACT_RU_TASK(CREATE_TIME_)
+  create index ACT_IDX_TASK_LAST_UPDATED on ACT_RU_TASK(LAST_UPDATED_)
+  create index ACT_IDX_TASK_ASSIGNEE on ACT_RU_TASK(ASSIGNEE_)
+  create index ACT_IDX_TASK_OWNER on ACT_RU_TASK(OWNER_)
+  create index ACT_IDX_TASK_TENANT_ID on ACT_RU_TASK(TENANT_ID_)
+  create index ACT_IDX_IDENT_LNK_USER on ACT_RU_IDENTITYLINK(USER_ID_)
+  create index ACT_IDX_IDENT_LNK_GROUP on ACT_RU_IDENTITYLINK(GROUP_ID_)
+  create index ACT_IDX_EVENT_SUBSCR_CONFIG_ on ACT_RU_EVENT_SUBSCR(CONFIGURATION_)
+  create index ACT_IDX_EVENT_SUBSCR_TENANT_ID on ACT_RU_EVENT_SUBSCR(TENANT_ID_)
+  create index ACT_IDX_VARIABLE_TASK_ID on ACT_RU_VARIABLE(TASK_ID_)
+  create index ACT_IDX_VARIABLE_TENANT_ID on ACT_RU_VARIABLE(TENANT_ID_)
+  create index ACT_IDX_VARIABLE_TASK_NAME_TYPE on ACT_RU_VARIABLE(TASK_ID_, NAME_, TYPE_)
+  create index ACT_IDX_ATHRZ_PROCEDEF on ACT_RU_IDENTITYLINK(PROC_DEF_ID_)
+  create index ACT_IDX_INC_CONFIGURATION on ACT_RU_INCIDENT(CONFIGURATION_)
+  create index ACT_IDX_INC_TENANT_ID on ACT_RU_INCIDENT(TENANT_ID_)
+  CAM-5914
+  create index ACT_IDX_JOB_EXECUTION_ID on ACT_RU_JOB(EXECUTION_ID_)
+  this index needs to be limited in mysql see CAM-6938
+  create index ACT_IDX_JOB_HANDLER on ACT_RU_JOB(HANDLER_TYPE_(100),HANDLER_CFG_(155))
+  create index ACT_IDX_JOB_PROCINST on ACT_RU_JOB(PROCESS_INSTANCE_ID_)
+  create index ACT_IDX_JOB_ROOT_PROCINST on ACT_RU_JOB(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_JOB_TENANT_ID on ACT_RU_JOB(TENANT_ID_)
+  create index ACT_IDX_JOBDEF_TENANT_ID on ACT_RU_JOBDEF(TENANT_ID_)
+  new metric milliseconds column
+  CREATE INDEX ACT_IDX_METER_LOG_MS ON ACT_RU_METER_LOG(MILLISECONDS_)
+  CREATE INDEX ACT_IDX_METER_LOG_NAME_MS ON ACT_RU_METER_LOG(NAME_, MILLISECONDS_)
+  CREATE INDEX ACT_IDX_METER_LOG_REPORT ON ACT_RU_METER_LOG(NAME_, REPORTER_, MILLISECONDS_)
+  old metric timestamp column
+  CREATE INDEX ACT_IDX_METER_LOG_TIME ON ACT_RU_METER_LOG(TIMESTAMP_)
+  CREATE INDEX ACT_IDX_METER_LOG ON ACT_RU_METER_LOG(NAME_, TIMESTAMP_)
+  task metric timestamp column
+  CREATE INDEX ACT_IDX_TASK_METER_LOG_TIME ON ACT_RU_TASK_METER_LOG(TIMESTAMP_)
+  create index ACT_IDX_EXT_TASK_TOPIC on ACT_RU_EXT_TASK(TOPIC_NAME_)
+  create index ACT_IDX_EXT_TASK_TENANT_ID on ACT_RU_EXT_TASK(TENANT_ID_)
+  create index ACT_IDX_EXT_TASK_PRIORITY ON ACT_RU_EXT_TASK(PRIORITY_)
+  create index ACT_IDX_EXT_TASK_ERR_DETAILS ON ACT_RU_EXT_TASK(ERROR_DETAILS_ID_)
+  create index ACT_IDX_AUTH_GROUP_ID on ACT_RU_AUTHORIZATION(GROUP_ID_)
+  create index ACT_IDX_JOB_JOB_DEF_ID on ACT_RU_JOB(JOB_DEF_ID_)
+  alter table ACT_GE_BYTEARRAY
+add constraint ACT_FK_BYTEARR_DEPL
+foreign key (DEPLOYMENT_ID_)
+references ACT_RE_DEPLOYMENT (ID_)
+  alter table ACT_RU_EXECUTION
+add constraint ACT_FK_EXE_PROCINST
+foreign key (PROC_INST_ID_)
+references ACT_RU_EXECUTION (ID_) on delete cascade on update cascade
+  alter table ACT_RU_EXECUTION
+add constraint ACT_FK_EXE_PARENT
+foreign key (PARENT_ID_)
+references ACT_RU_EXECUTION (ID_)
+  alter table ACT_RU_EXECUTION
+add constraint ACT_FK_EXE_SUPER
+foreign key (SUPER_EXEC_)
+references ACT_RU_EXECUTION (ID_)
+  alter table ACT_RU_EXECUTION
+add constraint ACT_FK_EXE_PROCDEF
+foreign key (PROC_DEF_ID_)
+references ACT_RE_PROCDEF (ID_)
+  alter table ACT_RU_IDENTITYLINK
+add constraint ACT_FK_TSKASS_TASK
+foreign key (TASK_ID_)
+references ACT_RU_TASK (ID_)
+  alter table ACT_RU_IDENTITYLINK
+add constraint ACT_FK_ATHRZ_PROCEDEF
+foreign key (PROC_DEF_ID_)
+references ACT_RE_PROCDEF(ID_)
+  alter table ACT_RU_TASK
+add constraint ACT_FK_TASK_EXE
+foreign key (EXECUTION_ID_)
+references ACT_RU_EXECUTION (ID_)
+  alter table ACT_RU_TASK
+add constraint ACT_FK_TASK_PROCINST
+foreign key (PROC_INST_ID_)
+references ACT_RU_EXECUTION (ID_)
+  alter table ACT_RU_TASK
+add constraint ACT_FK_TASK_PROCDEF
+foreign key (PROC_DEF_ID_)
+references ACT_RE_PROCDEF (ID_)
+  alter table ACT_RU_VARIABLE
+add constraint ACT_FK_VAR_EXE
+foreign key (EXECUTION_ID_)
+references ACT_RU_EXECUTION (ID_)
+  alter table ACT_RU_VARIABLE
+add constraint ACT_FK_VAR_PROCINST
+foreign key (PROC_INST_ID_)
+references ACT_RU_EXECUTION(ID_)
+  alter table ACT_RU_VARIABLE
+add constraint ACT_FK_VAR_BYTEARRAY
+foreign key (BYTEARRAY_ID_)
+references ACT_GE_BYTEARRAY (ID_)
+  alter table ACT_RU_JOB
+add constraint ACT_FK_JOB_EXCEPTION
+foreign key (EXCEPTION_STACK_ID_)
+references ACT_GE_BYTEARRAY (ID_)
+  alter table ACT_RU_EVENT_SUBSCR
+add constraint ACT_FK_EVENT_EXEC
+foreign key (EXECUTION_ID_)
+references ACT_RU_EXECUTION(ID_)
+  alter table ACT_RU_INCIDENT
+add constraint ACT_FK_INC_EXE
+foreign key (EXECUTION_ID_)
+references ACT_RU_EXECUTION (ID_)
+  alter table ACT_RU_INCIDENT
+add constraint ACT_FK_INC_PROCINST
+foreign key (PROC_INST_ID_)
+references ACT_RU_EXECUTION (ID_)
+  alter table ACT_RU_INCIDENT
+add constraint ACT_FK_INC_PROCDEF
+foreign key (PROC_DEF_ID_)
+references ACT_RE_PROCDEF (ID_)
+  alter table ACT_RU_INCIDENT
+add constraint ACT_FK_INC_CAUSE
+foreign key (CAUSE_INCIDENT_ID_)
+references ACT_RU_INCIDENT (ID_) on delete cascade on update cascade
+  alter table ACT_RU_INCIDENT
+add constraint ACT_FK_INC_RCAUSE
+foreign key (ROOT_CAUSE_INCIDENT_ID_)
+references ACT_RU_INCIDENT (ID_) on delete cascade on update cascade
+  alter table ACT_RU_EXT_TASK
+add constraint ACT_FK_EXT_TASK_ERROR_DETAILS
+foreign key (ERROR_DETAILS_ID_)
+references ACT_GE_BYTEARRAY (ID_)
+  create index ACT_IDX_INC_JOB_DEF on ACT_RU_INCIDENT(JOB_DEF_ID_)
+  alter table ACT_RU_INCIDENT
+add constraint ACT_FK_INC_JOB_DEF
+foreign key (JOB_DEF_ID_)
+references ACT_RU_JOBDEF (ID_)
+  alter table ACT_RU_AUTHORIZATION
+add constraint ACT_UNIQ_AUTH_USER
+unique (USER_ID_,TYPE_,RESOURCE_TYPE_,RESOURCE_ID_)
+  alter table ACT_RU_AUTHORIZATION
+add constraint ACT_UNIQ_AUTH_GROUP
+unique (GROUP_ID_,TYPE_,RESOURCE_TYPE_,RESOURCE_ID_)
+  alter table ACT_RU_VARIABLE
+add constraint ACT_UNIQ_VARIABLE
+unique (VAR_SCOPE_, NAME_)
+  alter table ACT_RU_EXT_TASK
+add constraint ACT_FK_EXT_TASK_EXE
+foreign key (EXECUTION_ID_)
+references ACT_RU_EXECUTION (ID_)
+  create index ACT_IDX_BATCH_SEED_JOB_DEF ON ACT_RU_BATCH(SEED_JOB_DEF_ID_)
+  alter table ACT_RU_BATCH
+add constraint ACT_FK_BATCH_SEED_JOB_DEF
+foreign key (SEED_JOB_DEF_ID_)
+references ACT_RU_JOBDEF (ID_)
+  create index ACT_IDX_BATCH_MONITOR_JOB_DEF ON ACT_RU_BATCH(MONITOR_JOB_DEF_ID_)
+  alter table ACT_RU_BATCH
+add constraint ACT_FK_BATCH_MONITOR_JOB_DEF
+foreign key (MONITOR_JOB_DEF_ID_)
+references ACT_RU_JOBDEF (ID_)
+  create index ACT_IDX_BATCH_JOB_DEF ON ACT_RU_BATCH(BATCH_JOB_DEF_ID_)
+  alter table ACT_RU_BATCH
+add constraint ACT_FK_BATCH_JOB_DEF
+foreign key (BATCH_JOB_DEF_ID_)
+references ACT_RU_JOBDEF (ID_)
+  create index ACT_IDX_BATCH_ID ON ACT_RU_VARIABLE(BATCH_ID_)
+  alter table ACT_RU_VARIABLE
+add constraint ACT_FK_VAR_BATCH
+foreign key (BATCH_ID_)
+references ACT_RU_BATCH (ID_)
+  indexes for deadlock problems - https://app.camunda.com/jira/browse/CAM-2567 --
+  create index ACT_IDX_INC_CAUSEINCID on ACT_RU_INCIDENT(CAUSE_INCIDENT_ID_)
+  create index ACT_IDX_INC_EXID on ACT_RU_INCIDENT(EXECUTION_ID_)
+  create index ACT_IDX_INC_PROCDEFID on ACT_RU_INCIDENT(PROC_DEF_ID_)
+  create index ACT_IDX_INC_PROCINSTID on ACT_RU_INCIDENT(PROC_INST_ID_)
+  create index ACT_IDX_INC_ROOTCAUSEINCID on ACT_RU_INCIDENT(ROOT_CAUSE_INCIDENT_ID_)
+  index for deadlock problem - https://app.camunda.com/jira/browse/CAM-4440 --
+  create index ACT_IDX_AUTH_RESOURCE_ID on ACT_RU_AUTHORIZATION(RESOURCE_ID_)
+  index to prevent deadlock on fk constraint - https://app.camunda.com/jira/browse/CAM-5440 --
+  create index ACT_IDX_EXT_TASK_EXEC on ACT_RU_EXT_TASK(EXECUTION_ID_)
+  indexes to improve deployment
+  create index ACT_IDX_BYTEARRAY_ROOT_PI on ACT_GE_BYTEARRAY(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_BYTEARRAY_RM_TIME on ACT_GE_BYTEARRAY(REMOVAL_TIME_)
+  create index ACT_IDX_BYTEARRAY_NAME on ACT_GE_BYTEARRAY(NAME_)
+  create index ACT_IDX_DEPLOYMENT_NAME on ACT_RE_DEPLOYMENT(NAME_)
+  create index ACT_IDX_DEPLOYMENT_TENANT_ID on ACT_RE_DEPLOYMENT(TENANT_ID_)
+  create index ACT_IDX_JOBDEF_PROC_DEF_ID ON ACT_RU_JOBDEF(PROC_DEF_ID_)
+  create index ACT_IDX_JOB_HANDLER_TYPE ON ACT_RU_JOB(HANDLER_TYPE_)
+  create index ACT_IDX_EVENT_SUBSCR_EVT_NAME ON ACT_RU_EVENT_SUBSCR(EVENT_NAME_)
+  create index ACT_IDX_PROCDEF_DEPLOYMENT_ID ON ACT_RE_PROCDEF(DEPLOYMENT_ID_)
+  create index ACT_IDX_PROCDEF_TENANT_ID ON ACT_RE_PROCDEF(TENANT_ID_)
+  create index ACT_IDX_PROCDEF_VER_TAG ON ACT_RE_PROCDEF(VERSION_TAG_)
+  indices for history cleanup: https://jira.camunda.com/browse/CAM-11616
+  create index ACT_IDX_AUTH_ROOT_PI on ACT_RU_AUTHORIZATION(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_AUTH_RM_TIME on ACT_RU_AUTHORIZATION(REMOVAL_TIME_)
+]
+2024-09-09T08:38:04.597+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03Database schema operation 'engine' for component '{}' was successful. create
+2024-09-09T08:38:05.469+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03016 Performing database operation 'create' on component 'history' with resource 'org/camunda/bpm/engine/db/create/activiti.mysql.create.history.sql'
+2024-09-09T08:38:05.469+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03062 Executing Schmema DDL [
+  Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+  under one or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information regarding copyright
+  ownership. Camunda licenses this file to you under the Apache License,
+  Version 2.0; you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  --
+--
+--
+--
+create table ACT_HI_PROCINST (
+ID_ varchar(64) not null,
+PROC_INST_ID_ varchar(64) not null,
+BUSINESS_KEY_ varchar(255),
+PROC_DEF_KEY_ varchar(255),
+PROC_DEF_ID_ varchar(64) not null,
+START_TIME_ datetime not null,
+END_TIME_ datetime,
+REMOVAL_TIME_ datetime,
+DURATION_ bigint,
+START_USER_ID_ varchar(255),
+START_ACT_ID_ varchar(255),
+END_ACT_ID_ varchar(255),
+SUPER_PROCESS_INSTANCE_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+SUPER_CASE_INSTANCE_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+DELETE_REASON_ varchar(4000),
+TENANT_ID_ varchar(64),
+STATE_ varchar(255),
+primary key (ID_),
+unique (PROC_INST_ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_ACTINST (
+ID_ varchar(64) not null,
+PARENT_ACT_INST_ID_ varchar(64),
+PROC_DEF_KEY_ varchar(255),
+PROC_DEF_ID_ varchar(64) not null,
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64) not null,
+EXECUTION_ID_ varchar(64) not null,
+ACT_ID_ varchar(255) not null,
+TASK_ID_ varchar(64),
+CALL_PROC_INST_ID_ varchar(64),
+CALL_CASE_INST_ID_ varchar(64),
+ACT_NAME_ varchar(255),
+ACT_TYPE_ varchar(255) not null,
+ASSIGNEE_ varchar(255),
+START_TIME_ datetime not null,
+END_TIME_ datetime,
+DURATION_ bigint,
+ACT_INST_STATE_ integer,
+SEQUENCE_COUNTER_ bigint,
+TENANT_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_TASKINST (
+ID_ varchar(64) not null,
+TASK_DEF_KEY_ varchar(255),
+PROC_DEF_KEY_ varchar(255),
+PROC_DEF_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+EXECUTION_ID_ varchar(64),
+CASE_DEF_KEY_ varchar(255),
+CASE_DEF_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+CASE_EXECUTION_ID_ varchar(64),
+ACT_INST_ID_ varchar(64),
+NAME_ varchar(255),
+PARENT_TASK_ID_ varchar(64),
+DESCRIPTION_ varchar(4000),
+OWNER_ varchar(255),
+ASSIGNEE_ varchar(255),
+START_TIME_ datetime not null,
+END_TIME_ datetime,
+DURATION_ bigint,
+DELETE_REASON_ varchar(4000),
+PRIORITY_ integer,
+DUE_DATE_ datetime,
+FOLLOW_UP_DATE_ datetime,
+TENANT_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_VARINST (
+ID_ varchar(64) not null,
+PROC_DEF_KEY_ varchar(255),
+PROC_DEF_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+EXECUTION_ID_ varchar(64),
+ACT_INST_ID_ varchar(64),
+CASE_DEF_KEY_ varchar(255),
+CASE_DEF_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+CASE_EXECUTION_ID_ varchar(64),
+TASK_ID_ varchar(64),
+NAME_ varchar(255) not null,
+VAR_TYPE_ varchar(100),
+CREATE_TIME_ datetime,
+REV_ integer,
+BYTEARRAY_ID_ varchar(64),
+DOUBLE_ double,
+LONG_ bigint,
+TEXT_ varchar(4000),
+TEXT2_ varchar(4000),
+TENANT_ID_ varchar(64),
+STATE_ varchar(20),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_DETAIL (
+ID_ varchar(64) not null,
+TYPE_ varchar(255) not null,
+PROC_DEF_KEY_ varchar(255),
+PROC_DEF_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+EXECUTION_ID_ varchar(64),
+CASE_DEF_KEY_ varchar(255),
+CASE_DEF_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+CASE_EXECUTION_ID_ varchar(64),
+TASK_ID_ varchar(64),
+ACT_INST_ID_ varchar(64),
+VAR_INST_ID_ varchar(64),
+NAME_ varchar(255) not null,
+VAR_TYPE_ varchar(255),
+REV_ integer,
+TIME_ datetime not null,
+BYTEARRAY_ID_ varchar(64),
+DOUBLE_ double,
+LONG_ bigint,
+TEXT_ varchar(4000),
+TEXT2_ varchar(4000),
+SEQUENCE_COUNTER_ bigint,
+TENANT_ID_ varchar(64),
+OPERATION_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+INITIAL_ boolean,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_IDENTITYLINK (
+ID_ varchar(64) not null,
+TIMESTAMP_ timestamp not null,
+TYPE_ varchar(255),
+USER_ID_ varchar(255),
+GROUP_ID_ varchar(255),
+TASK_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+OPERATION_TYPE_ varchar(64),
+ASSIGNER_ID_ varchar(64),
+PROC_DEF_KEY_ varchar(255),
+TENANT_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_COMMENT (
+ID_ varchar(64) not null,
+TYPE_ varchar(255),
+TIME_ datetime not null,
+USER_ID_ varchar(255),
+TASK_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+ACTION_ varchar(255),
+MESSAGE_ varchar(4000),
+FULL_MSG_ LONGBLOB,
+TENANT_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_ATTACHMENT (
+ID_ varchar(64) not null,
+REV_ integer,
+USER_ID_ varchar(255),
+NAME_ varchar(255),
+DESCRIPTION_ varchar(4000),
+TYPE_ varchar(255),
+TASK_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+URL_ varchar(4000),
+CONTENT_ID_ varchar(64),
+TENANT_ID_ varchar(64),
+CREATE_TIME_ datetime,
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_OP_LOG (
+ID_ varchar(64) not null,
+DEPLOYMENT_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+PROC_DEF_KEY_ varchar(255),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+EXECUTION_ID_ varchar(64),
+CASE_DEF_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+CASE_EXECUTION_ID_ varchar(64),
+TASK_ID_ varchar(64),
+JOB_ID_ varchar(64),
+JOB_DEF_ID_ varchar(64),
+BATCH_ID_ varchar(64),
+USER_ID_ varchar(255),
+TIMESTAMP_ timestamp not null,
+OPERATION_TYPE_ varchar(64),
+OPERATION_ID_ varchar(64),
+ENTITY_TYPE_ varchar(30),
+PROPERTY_ varchar(64),
+ORG_VALUE_ varchar(4000),
+NEW_VALUE_ varchar(4000),
+TENANT_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+CATEGORY_ varchar(64),
+EXTERNAL_TASK_ID_ varchar(64),
+ANNOTATION_ varchar(4000),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_INCIDENT (
+ID_ varchar(64) not null,
+PROC_DEF_KEY_ varchar(255),
+PROC_DEF_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+EXECUTION_ID_ varchar(64),
+CREATE_TIME_ timestamp not null,
+END_TIME_ timestamp null,
+INCIDENT_MSG_ varchar(4000),
+INCIDENT_TYPE_ varchar(255) not null,
+ACTIVITY_ID_ varchar(255),
+FAILED_ACTIVITY_ID_ varchar(255),
+CAUSE_INCIDENT_ID_ varchar(64),
+ROOT_CAUSE_INCIDENT_ID_ varchar(64),
+CONFIGURATION_ varchar(255),
+HISTORY_CONFIGURATION_ varchar(255),
+INCIDENT_STATE_ integer,
+TENANT_ID_ varchar(64),
+JOB_DEF_ID_ varchar(64),
+ANNOTATION_ varchar(4000),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_JOB_LOG (
+ID_ varchar(64) not null,
+TIMESTAMP_ datetime not null,
+JOB_ID_ varchar(64) not null,
+JOB_DUEDATE_ datetime NULL,
+JOB_RETRIES_ integer,
+JOB_PRIORITY_ bigint NOT NULL DEFAULT 0,
+JOB_EXCEPTION_MSG_ varchar(4000),
+JOB_EXCEPTION_STACK_ID_ varchar(64),
+JOB_STATE_ integer,
+JOB_DEF_ID_ varchar(64),
+JOB_DEF_TYPE_ varchar(255),
+JOB_DEF_CONFIGURATION_ varchar(255),
+ACT_ID_ varchar(255),
+FAILED_ACT_ID_ varchar(255),
+EXECUTION_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROCESS_INSTANCE_ID_ varchar(64),
+PROCESS_DEF_ID_ varchar(64),
+PROCESS_DEF_KEY_ varchar(255),
+DEPLOYMENT_ID_ varchar(64),
+SEQUENCE_COUNTER_ bigint,
+TENANT_ID_ varchar(64),
+HOSTNAME_ varchar(255),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_BATCH (
+ID_ varchar(64) not null,
+TYPE_ varchar(255),
+TOTAL_JOBS_ integer,
+JOBS_PER_SEED_ integer,
+INVOCATIONS_PER_JOB_ integer,
+SEED_JOB_DEF_ID_ varchar(64),
+MONITOR_JOB_DEF_ID_ varchar(64),
+BATCH_JOB_DEF_ID_ varchar(64),
+TENANT_ID_  varchar(64),
+CREATE_USER_ID_ varchar(255),
+START_TIME_ datetime not null,
+END_TIME_ datetime,
+REMOVAL_TIME_ datetime,
+EXEC_START_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_EXT_TASK_LOG (
+ID_ varchar(64) not null,
+TIMESTAMP_ timestamp not null,
+EXT_TASK_ID_ varchar(64) not null,
+RETRIES_ integer,
+TOPIC_NAME_ varchar(255),
+WORKER_ID_ varchar(255),
+PRIORITY_ bigint not null default 0,
+ERROR_MSG_ varchar(4000),
+ERROR_DETAILS_ID_ varchar(64),
+ACT_ID_ varchar(255),
+ACT_INST_ID_ varchar(64),
+EXECUTION_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+PROC_DEF_ID_ varchar(64),
+PROC_DEF_KEY_ varchar(255),
+TENANT_ID_ varchar(64),
+STATE_ integer,
+REV_ integer,
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create index ACT_IDX_HI_PRO_INST_END on ACT_HI_PROCINST(END_TIME_)
+  create index ACT_IDX_HI_PRO_I_BUSKEY on ACT_HI_PROCINST(BUSINESS_KEY_)
+  create index ACT_IDX_HI_PRO_INST_TENANT_ID on ACT_HI_PROCINST(TENANT_ID_)
+  create index ACT_IDX_HI_PRO_INST_PROC_DEF_KEY on ACT_HI_PROCINST(PROC_DEF_KEY_)
+  create index ACT_IDX_HI_PRO_INST_PROC_TIME on ACT_HI_PROCINST(START_TIME_, END_TIME_)
+  create index ACT_IDX_HI_PI_PDEFID_END_TIME on ACT_HI_PROCINST(PROC_DEF_ID_, END_TIME_)
+  create index ACT_IDX_HI_PRO_INST_ROOT_PI on ACT_HI_PROCINST(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_PRO_INST_RM_TIME on ACT_HI_PROCINST(REMOVAL_TIME_)
+  create index ACT_IDX_HI_ACTINST_ROOT_PI on ACT_HI_ACTINST(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_ACT_INST_START_END on ACT_HI_ACTINST(START_TIME_, END_TIME_)
+  create index ACT_IDX_HI_ACT_INST_END on ACT_HI_ACTINST(END_TIME_)
+  create index ACT_IDX_HI_ACT_INST_PROCINST on ACT_HI_ACTINST(PROC_INST_ID_, ACT_ID_)
+  create index ACT_IDX_HI_ACT_INST_COMP on ACT_HI_ACTINST(EXECUTION_ID_, ACT_ID_, END_TIME_, ID_)
+  create index ACT_IDX_HI_ACT_INST_STATS on ACT_HI_ACTINST(PROC_DEF_ID_, PROC_INST_ID_, ACT_ID_, END_TIME_, ACT_INST_STATE_)
+  create index ACT_IDX_HI_ACT_INST_TENANT_ID on ACT_HI_ACTINST(TENANT_ID_)
+  create index ACT_IDX_HI_ACT_INST_PROC_DEF_KEY on ACT_HI_ACTINST(PROC_DEF_KEY_)
+  create index ACT_IDX_HI_AI_PDEFID_END_TIME on ACT_HI_ACTINST(PROC_DEF_ID_, END_TIME_)
+  create index ACT_IDX_HI_ACT_INST_RM_TIME on ACT_HI_ACTINST(REMOVAL_TIME_)
+  create index ACT_IDX_HI_TASKINST_ROOT_PI on ACT_HI_TASKINST(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_TASK_INST_TENANT_ID on ACT_HI_TASKINST(TENANT_ID_)
+  create index ACT_IDX_HI_TASK_INST_PROC_DEF_KEY on ACT_HI_TASKINST(PROC_DEF_KEY_)
+  create index ACT_IDX_HI_TASKINST_PROCINST on ACT_HI_TASKINST(PROC_INST_ID_)
+  create index ACT_IDX_HI_TASKINSTID_PROCINST on ACT_HI_TASKINST(ID_,PROC_INST_ID_)
+  create index ACT_IDX_HI_TASK_INST_RM_TIME on ACT_HI_TASKINST(REMOVAL_TIME_)
+  create index ACT_IDX_HI_TASK_INST_START on ACT_HI_TASKINST(START_TIME_)
+  create index ACT_IDX_HI_TASK_INST_END on ACT_HI_TASKINST(END_TIME_)
+  create index ACT_IDX_HI_DETAIL_ROOT_PI on ACT_HI_DETAIL(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_DETAIL_PROC_INST on ACT_HI_DETAIL(PROC_INST_ID_)
+  create index ACT_IDX_HI_DETAIL_ACT_INST on ACT_HI_DETAIL(ACT_INST_ID_)
+  create index ACT_IDX_HI_DETAIL_CASE_INST on ACT_HI_DETAIL(CASE_INST_ID_)
+  create index ACT_IDX_HI_DETAIL_CASE_EXEC on ACT_HI_DETAIL(CASE_EXECUTION_ID_)
+  create index ACT_IDX_HI_DETAIL_TIME on ACT_HI_DETAIL(TIME_)
+  create index ACT_IDX_HI_DETAIL_NAME on ACT_HI_DETAIL(NAME_)
+  create index ACT_IDX_HI_DETAIL_TASK_ID on ACT_HI_DETAIL(TASK_ID_)
+  create index ACT_IDX_HI_DETAIL_TENANT_ID on ACT_HI_DETAIL(TENANT_ID_)
+  create index ACT_IDX_HI_DETAIL_PROC_DEF_KEY on ACT_HI_DETAIL(PROC_DEF_KEY_)
+  create index ACT_IDX_HI_DETAIL_BYTEAR on ACT_HI_DETAIL(BYTEARRAY_ID_)
+  create index ACT_IDX_HI_DETAIL_RM_TIME on ACT_HI_DETAIL(REMOVAL_TIME_)
+  create index ACT_IDX_HI_DETAIL_TASK_BYTEAR on ACT_HI_DETAIL(BYTEARRAY_ID_, TASK_ID_)
+  create index ACT_IDX_HI_DETAIL_VAR_INST_ID on ACT_HI_DETAIL(VAR_INST_ID_)
+  create index ACT_IDX_HI_IDENT_LNK_ROOT_PI on ACT_HI_IDENTITYLINK(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_IDENT_LNK_USER on ACT_HI_IDENTITYLINK(USER_ID_)
+  create index ACT_IDX_HI_IDENT_LNK_GROUP on ACT_HI_IDENTITYLINK(GROUP_ID_)
+  create index ACT_IDX_HI_IDENT_LNK_TENANT_ID on ACT_HI_IDENTITYLINK(TENANT_ID_)
+  create index ACT_IDX_HI_IDENT_LNK_PROC_DEF_KEY on ACT_HI_IDENTITYLINK(PROC_DEF_KEY_)
+  create index ACT_IDX_HI_IDENT_LINK_TASK on ACT_HI_IDENTITYLINK(TASK_ID_)
+  create index ACT_IDX_HI_IDENT_LINK_RM_TIME on ACT_HI_IDENTITYLINK(REMOVAL_TIME_)
+  create index ACT_IDX_HI_IDENT_LNK_TIMESTAMP on ACT_HI_IDENTITYLINK(TIMESTAMP_)
+  create index ACT_IDX_HI_VARINST_ROOT_PI on ACT_HI_VARINST(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_PROCVAR_PROC_INST on ACT_HI_VARINST(PROC_INST_ID_)
+  create index ACT_IDX_HI_PROCVAR_NAME_TYPE on ACT_HI_VARINST(NAME_, VAR_TYPE_)
+  create index ACT_IDX_HI_CASEVAR_CASE_INST on ACT_HI_VARINST(CASE_INST_ID_)
+  create index ACT_IDX_HI_VAR_INST_TENANT_ID on ACT_HI_VARINST(TENANT_ID_)
+  create index ACT_IDX_HI_VAR_INST_PROC_DEF_KEY on ACT_HI_VARINST(PROC_DEF_KEY_)
+  create index ACT_IDX_HI_VARINST_BYTEAR on ACT_HI_VARINST(BYTEARRAY_ID_)
+  create index ACT_IDX_HI_VARINST_RM_TIME on ACT_HI_VARINST(REMOVAL_TIME_)
+  create index ACT_IDX_HI_VAR_PI_NAME_TYPE on ACT_HI_VARINST(PROC_INST_ID_, NAME_, VAR_TYPE_)
+  create index ACT_IDX_HI_VARINST_NAME on ACT_HI_VARINST(NAME_)
+  create index ACT_IDX_HI_VARINST_ACT_INST_ID on ACT_HI_VARINST(ACT_INST_ID_)
+  create index ACT_IDX_HI_INCIDENT_TENANT_ID on ACT_HI_INCIDENT(TENANT_ID_)
+  create index ACT_IDX_HI_INCIDENT_PROC_DEF_KEY on ACT_HI_INCIDENT(PROC_DEF_KEY_)
+  create index ACT_IDX_HI_INCIDENT_ROOT_PI on ACT_HI_INCIDENT(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_INCIDENT_PROCINST on ACT_HI_INCIDENT(PROC_INST_ID_)
+  create index ACT_IDX_HI_INCIDENT_RM_TIME on ACT_HI_INCIDENT(REMOVAL_TIME_)
+  create index ACT_IDX_HI_INCIDENT_CREATE_TIME on ACT_HI_INCIDENT(CREATE_TIME_)
+  create index ACT_IDX_HI_INCIDENT_END_TIME on ACT_HI_INCIDENT(END_TIME_)
+  create index ACT_IDX_HI_JOB_LOG_ROOT_PI on ACT_HI_JOB_LOG(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_JOB_LOG_PROCINST on ACT_HI_JOB_LOG(PROCESS_INSTANCE_ID_)
+  create index ACT_IDX_HI_JOB_LOG_PROCDEF on ACT_HI_JOB_LOG(PROCESS_DEF_ID_)
+  create index ACT_IDX_HI_JOB_LOG_TENANT_ID on ACT_HI_JOB_LOG(TENANT_ID_)
+  create index ACT_IDX_HI_JOB_LOG_JOB_DEF_ID on ACT_HI_JOB_LOG(JOB_DEF_ID_)
+  create index ACT_IDX_HI_JOB_LOG_PROC_DEF_KEY on ACT_HI_JOB_LOG(PROCESS_DEF_KEY_)
+  create index ACT_IDX_HI_JOB_LOG_EX_STACK on ACT_HI_JOB_LOG(JOB_EXCEPTION_STACK_ID_)
+  create index ACT_IDX_HI_JOB_LOG_RM_TIME on ACT_HI_JOB_LOG(REMOVAL_TIME_)
+  create index ACT_IDX_HI_JOB_LOG_JOB_CONF on ACT_HI_JOB_LOG(JOB_DEF_CONFIGURATION_)
+  create index ACT_HI_BAT_RM_TIME on ACT_HI_BATCH(REMOVAL_TIME_)
+  create index ACT_HI_EXT_TASK_LOG_ROOT_PI on ACT_HI_EXT_TASK_LOG(ROOT_PROC_INST_ID_)
+  create index ACT_HI_EXT_TASK_LOG_PROCINST on ACT_HI_EXT_TASK_LOG(PROC_INST_ID_)
+  create index ACT_HI_EXT_TASK_LOG_PROCDEF on ACT_HI_EXT_TASK_LOG(PROC_DEF_ID_)
+  create index ACT_HI_EXT_TASK_LOG_PROC_DEF_KEY on ACT_HI_EXT_TASK_LOG(PROC_DEF_KEY_)
+  create index ACT_HI_EXT_TASK_LOG_TENANT_ID on ACT_HI_EXT_TASK_LOG(TENANT_ID_)
+  create index ACT_IDX_HI_EXTTASKLOG_ERRORDET on ACT_HI_EXT_TASK_LOG(ERROR_DETAILS_ID_)
+  create index ACT_HI_EXT_TASK_LOG_RM_TIME on ACT_HI_EXT_TASK_LOG(REMOVAL_TIME_)
+  create index ACT_IDX_HI_OP_LOG_ROOT_PI on ACT_HI_OP_LOG(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_OP_LOG_PROCINST on ACT_HI_OP_LOG(PROC_INST_ID_)
+  create index ACT_IDX_HI_OP_LOG_PROCDEF on ACT_HI_OP_LOG(PROC_DEF_ID_)
+  create index ACT_IDX_HI_OP_LOG_TASK on ACT_HI_OP_LOG(TASK_ID_)
+  create index ACT_IDX_HI_OP_LOG_RM_TIME on ACT_HI_OP_LOG(REMOVAL_TIME_)
+  create index ACT_IDX_HI_OP_LOG_TIMESTAMP on ACT_HI_OP_LOG(TIMESTAMP_)
+  create index ACT_IDX_HI_OP_LOG_USER_ID on ACT_HI_OP_LOG(USER_ID_)
+  create index ACT_IDX_HI_OP_LOG_OP_TYPE on ACT_HI_OP_LOG(OPERATION_TYPE_)
+  create index ACT_IDX_HI_OP_LOG_ENTITY_TYPE on ACT_HI_OP_LOG(ENTITY_TYPE_)
+  create index ACT_IDX_HI_ATTACHMENT_CONTENT on ACT_HI_ATTACHMENT(CONTENT_ID_)
+  create index ACT_IDX_HI_ATTACHMENT_ROOT_PI on ACT_HI_ATTACHMENT(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_ATTACHMENT_PROCINST on ACT_HI_ATTACHMENT(PROC_INST_ID_)
+  create index ACT_IDX_HI_ATTACHMENT_TASK on ACT_HI_ATTACHMENT(TASK_ID_)
+  create index ACT_IDX_HI_ATTACHMENT_RM_TIME on ACT_HI_ATTACHMENT(REMOVAL_TIME_)
+  create index ACT_IDX_HI_COMMENT_TASK on ACT_HI_COMMENT(TASK_ID_)
+  create index ACT_IDX_HI_COMMENT_ROOT_PI on ACT_HI_COMMENT(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_COMMENT_PROCINST on ACT_HI_COMMENT(PROC_INST_ID_)
+  create index ACT_IDX_HI_COMMENT_RM_TIME on ACT_HI_COMMENT(REMOVAL_TIME_)
+]
+2024-09-09T08:38:05.469+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03Database schema operation 'history' for component '{}' was successful. create
+2024-09-09T08:38:05.619+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03016 Performing database operation 'create' on component 'identity' with resource 'org/camunda/bpm/engine/db/create/activiti.mysql.create.identity.sql'
+2024-09-09T08:38:05.619+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03062 Executing Schmema DDL [
+  Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+  under one or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information regarding copyright
+  ownership. Camunda licenses this file to you under the Apache License,
+  Version 2.0; you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  --
+--
+--
+--
+create table ACT_ID_GROUP (
+ID_ varchar(64),
+REV_ integer,
+NAME_ varchar(255),
+TYPE_ varchar(255),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_ID_MEMBERSHIP (
+USER_ID_ varchar(64),
+GROUP_ID_ varchar(64),
+primary key (USER_ID_, GROUP_ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_ID_USER (
+ID_ varchar(64),
+REV_ integer,
+FIRST_ varchar(255),
+LAST_ varchar(255),
+EMAIL_ varchar(255),
+PWD_ varchar(255),
+SALT_ varchar(255),
+LOCK_EXP_TIME_ datetime NULL,
+ATTEMPTS_ integer,
+PICTURE_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_ID_INFO (
+ID_ varchar(64),
+REV_ integer,
+USER_ID_ varchar(64),
+TYPE_ varchar(64),
+KEY_ varchar(255),
+VALUE_ varchar(255),
+PASSWORD_ LONGBLOB,
+PARENT_ID_ varchar(255),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_ID_TENANT (
+ID_ varchar(64),
+REV_ integer,
+NAME_ varchar(255),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_ID_TENANT_MEMBER (
+ID_ varchar(64) not null,
+TENANT_ID_ varchar(64) not null,
+USER_ID_ varchar(64),
+GROUP_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  alter table ACT_ID_MEMBERSHIP
+add constraint ACT_FK_MEMB_GROUP
+foreign key (GROUP_ID_)
+references ACT_ID_GROUP (ID_)
+  alter table ACT_ID_MEMBERSHIP
+add constraint ACT_FK_MEMB_USER
+foreign key (USER_ID_)
+references ACT_ID_USER (ID_)
+  alter table ACT_ID_TENANT_MEMBER
+add constraint ACT_UNIQ_TENANT_MEMB_USER
+unique (TENANT_ID_, USER_ID_)
+  alter table ACT_ID_TENANT_MEMBER
+add constraint ACT_UNIQ_TENANT_MEMB_GROUP
+unique (TENANT_ID_, GROUP_ID_)
+  alter table ACT_ID_TENANT_MEMBER
+add constraint ACT_FK_TENANT_MEMB
+foreign key (TENANT_ID_)
+references ACT_ID_TENANT (ID_)
+  alter table ACT_ID_TENANT_MEMBER
+add constraint ACT_FK_TENANT_MEMB_USER
+foreign key (USER_ID_)
+references ACT_ID_USER (ID_)
+  alter table ACT_ID_TENANT_MEMBER
+add constraint ACT_FK_TENANT_MEMB_GROUP
+foreign key (GROUP_ID_)
+references ACT_ID_GROUP (ID_)
+]
+2024-09-09T08:38:05.619+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03Database schema operation 'identity' for component '{}' was successful. create
+2024-09-09T08:38:05.905+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03016 Performing database operation 'create' on component 'case.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.mysql.create.case.engine.sql'
+2024-09-09T08:38:05.905+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03062 Executing Schmema DDL [
+  Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+  under one or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information regarding copyright
+  ownership. Camunda licenses this file to you under the Apache License,
+  Version 2.0; you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  create case definition table --
+  --
+--
+--
+--
+create table ACT_RE_CASE_DEF (
+ID_ varchar(64) not null,
+REV_ integer,
+CATEGORY_ varchar(255),
+NAME_ varchar(255),
+KEY_ varchar(255) not null,
+VERSION_ integer not null,
+DEPLOYMENT_ID_ varchar(64),
+RESOURCE_NAME_ varchar(4000),
+DGRM_RESOURCE_NAME_ varchar(4000),
+TENANT_ID_ varchar(64),
+HISTORY_TTL_ integer,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create case execution table --
+  create table ACT_RU_CASE_EXECUTION (
+ID_ varchar(64) NOT NULL,
+REV_ integer,
+CASE_INST_ID_ varchar(64),
+SUPER_CASE_EXEC_ varchar(64),
+SUPER_EXEC_ varchar(64),
+BUSINESS_KEY_ varchar(255),
+PARENT_ID_ varchar(64),
+CASE_DEF_ID_ varchar(64),
+ACT_ID_ varchar(255),
+PREV_STATE_ integer,
+CURRENT_STATE_ integer,
+REQUIRED_ boolean,
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create case sentry part table --
+  create table ACT_RU_CASE_SENTRY_PART (
+ID_ varchar(64) NOT NULL,
+REV_ integer,
+CASE_INST_ID_ varchar(64),
+CASE_EXEC_ID_ varchar(64),
+SENTRY_ID_ varchar(255),
+TYPE_ varchar(255),
+SOURCE_CASE_EXEC_ID_ varchar(64),
+STANDARD_EVENT_ varchar(255),
+SOURCE_ varchar(255),
+VARIABLE_EVENT_ varchar(255),
+VARIABLE_NAME_ varchar(255),
+SATISFIED_ boolean,
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create index on business key --
+  create index ACT_IDX_CASE_EXEC_BUSKEY on ACT_RU_CASE_EXECUTION(BUSINESS_KEY_)
+  https://app.camunda.com/jira/browse/CAM-9165
+  create index ACT_IDX_CASE_EXE_CASE_INST on ACT_RU_CASE_EXECUTION(CASE_INST_ID_)
+  create foreign key constraints on ACT_RU_CASE_EXECUTION --
+  alter table ACT_RU_CASE_EXECUTION
+add constraint ACT_FK_CASE_EXE_CASE_INST
+foreign key (CASE_INST_ID_)
+references ACT_RU_CASE_EXECUTION(ID_) on delete cascade on update cascade
+  alter table ACT_RU_CASE_EXECUTION
+add constraint ACT_FK_CASE_EXE_PARENT
+foreign key (PARENT_ID_)
+references ACT_RU_CASE_EXECUTION(ID_)
+  alter table ACT_RU_CASE_EXECUTION
+add constraint ACT_FK_CASE_EXE_CASE_DEF
+foreign key (CASE_DEF_ID_)
+references ACT_RE_CASE_DEF(ID_)
+  create foreign key constraints on ACT_RU_VARIABLE --
+  alter table ACT_RU_VARIABLE
+add constraint ACT_FK_VAR_CASE_EXE
+foreign key (CASE_EXECUTION_ID_)
+references ACT_RU_CASE_EXECUTION(ID_)
+  alter table ACT_RU_VARIABLE
+add constraint ACT_FK_VAR_CASE_INST
+foreign key (CASE_INST_ID_)
+references ACT_RU_CASE_EXECUTION(ID_)
+  create foreign key constraints on ACT_RU_TASK --
+  alter table ACT_RU_TASK
+add constraint ACT_FK_TASK_CASE_EXE
+foreign key (CASE_EXECUTION_ID_)
+references ACT_RU_CASE_EXECUTION(ID_)
+  alter table ACT_RU_TASK
+add constraint ACT_FK_TASK_CASE_DEF
+foreign key (CASE_DEF_ID_)
+references ACT_RE_CASE_DEF(ID_)
+  create foreign key constraints on ACT_RU_CASE_SENTRY_PART --
+  alter table ACT_RU_CASE_SENTRY_PART
+add constraint ACT_FK_CASE_SENTRY_CASE_INST
+foreign key (CASE_INST_ID_)
+references ACT_RU_CASE_EXECUTION(ID_)
+  alter table ACT_RU_CASE_SENTRY_PART
+add constraint ACT_FK_CASE_SENTRY_CASE_EXEC
+foreign key (CASE_EXEC_ID_)
+references ACT_RU_CASE_EXECUTION(ID_)
+  create index ACT_IDX_CASE_DEF_TENANT_ID on ACT_RE_CASE_DEF(TENANT_ID_)
+  create index ACT_IDX_CASE_EXEC_TENANT_ID on ACT_RU_CASE_EXECUTION(TENANT_ID_)
+]
+2024-09-09T08:38:05.905+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03Database schema operation 'case.engine' for component '{}' was successful. create
+2024-09-09T08:38:05.982+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03016 Performing database operation 'create' on component 'case.history' with resource 'org/camunda/bpm/engine/db/create/activiti.mysql.create.case.history.sql'
+2024-09-09T08:38:05.982+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03062 Executing Schmema DDL [
+  Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+  under one or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information regarding copyright
+  ownership. Camunda licenses this file to you under the Apache License,
+  Version 2.0; you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  --
+--
+--
+--
+create table ACT_HI_CASEINST (
+ID_ varchar(64) not null,
+CASE_INST_ID_ varchar(64) not null,
+BUSINESS_KEY_ varchar(255),
+CASE_DEF_ID_ varchar(64) not null,
+CREATE_TIME_ datetime not null,
+CLOSE_TIME_ datetime,
+DURATION_ bigint,
+STATE_ integer,
+CREATE_USER_ID_ varchar(255),
+SUPER_CASE_INSTANCE_ID_ varchar(64),
+SUPER_PROCESS_INSTANCE_ID_ varchar(64),
+TENANT_ID_ varchar(64),
+primary key (ID_),
+unique (CASE_INST_ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create table ACT_HI_CASEACTINST (
+ID_ varchar(64) not null,
+PARENT_ACT_INST_ID_ varchar(64),
+CASE_DEF_ID_ varchar(64) not null,
+CASE_INST_ID_ varchar(64) not null,
+CASE_ACT_ID_ varchar(255) not null,
+TASK_ID_ varchar(64),
+CALL_PROC_INST_ID_ varchar(64),
+CALL_CASE_INST_ID_ varchar(64),
+CASE_ACT_NAME_ varchar(255),
+CASE_ACT_TYPE_ varchar(255),
+CREATE_TIME_ datetime not null,
+END_TIME_ datetime,
+DURATION_ bigint,
+STATE_ integer,
+REQUIRED_ boolean,
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create index ACT_IDX_HI_CAS_I_CLOSE on ACT_HI_CASEINST(CLOSE_TIME_)
+  create index ACT_IDX_HI_CAS_I_BUSKEY on ACT_HI_CASEINST(BUSINESS_KEY_)
+  create index ACT_IDX_HI_CAS_I_TENANT_ID on ACT_HI_CASEINST(TENANT_ID_)
+  create index ACT_IDX_HI_CAS_A_I_CREATE on ACT_HI_CASEACTINST(CREATE_TIME_)
+  create index ACT_IDX_HI_CAS_A_I_END on ACT_HI_CASEACTINST(END_TIME_)
+  create index ACT_IDX_HI_CAS_A_I_COMP on ACT_HI_CASEACTINST(CASE_ACT_ID_, END_TIME_, ID_)
+  create index ACT_IDX_HI_CAS_A_I_CASEINST on ACT_HI_CASEACTINST(CASE_INST_ID_, CASE_ACT_ID_)
+  create index ACT_IDX_HI_CAS_A_I_TENANT_ID on ACT_HI_CASEACTINST(TENANT_ID_)
+]
+2024-09-09T08:38:05.982+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03Database schema operation 'case.history' for component '{}' was successful. create
+2024-09-09T08:38:06.036+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03016 Performing database operation 'create' on component 'decision.engine' with resource 'org/camunda/bpm/engine/db/create/activiti.mysql.create.decision.engine.sql'
+2024-09-09T08:38:06.036+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03062 Executing Schmema DDL [
+  Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+  under one or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information regarding copyright
+  ownership. Camunda licenses this file to you under the Apache License,
+  Version 2.0; you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  create decision definition table --
+  --
+--
+--
+--
+create table ACT_RE_DECISION_DEF (
+ID_ varchar(64) not null,
+REV_ integer,
+CATEGORY_ varchar(255),
+NAME_ varchar(255),
+KEY_ varchar(255) not null,
+VERSION_ integer not null,
+DEPLOYMENT_ID_ varchar(64),
+RESOURCE_NAME_ varchar(4000),
+DGRM_RESOURCE_NAME_ varchar(4000),
+DEC_REQ_ID_ varchar(64),
+DEC_REQ_KEY_ varchar(255),
+TENANT_ID_ varchar(64),
+HISTORY_TTL_ integer,
+VERSION_TAG_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create decision requirements definition table --
+  create table ACT_RE_DECISION_REQ_DEF (
+ID_ varchar(64) NOT NULL,
+REV_ integer,
+CATEGORY_ varchar(255),
+NAME_ varchar(255),
+KEY_ varchar(255) NOT NULL,
+VERSION_ integer NOT NULL,
+DEPLOYMENT_ID_ varchar(64),
+RESOURCE_NAME_ varchar(4000),
+DGRM_RESOURCE_NAME_ varchar(4000),
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  alter table ACT_RE_DECISION_DEF
+add constraint ACT_FK_DEC_REQ
+foreign key (DEC_REQ_ID_)
+references ACT_RE_DECISION_REQ_DEF(ID_)
+  create index ACT_IDX_DEC_DEF_TENANT_ID on ACT_RE_DECISION_DEF(TENANT_ID_)
+  create index ACT_IDX_DEC_DEF_REQ_ID on ACT_RE_DECISION_DEF(DEC_REQ_ID_)
+  create index ACT_IDX_DEC_REQ_DEF_TENANT_ID on ACT_RE_DECISION_REQ_DEF(TENANT_ID_)
+]
+2024-09-09T08:38:06.036+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03Database schema operation 'decision.engine' for component '{}' was successful. create
+2024-09-09T08:38:06.211+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03016 Performing database operation 'create' on component 'decision.history' with resource 'org/camunda/bpm/engine/db/create/activiti.mysql.create.decision.history.sql'
+2024-09-09T08:38:06.211+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03062 Executing Schmema DDL [
+  Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+  under one or more contributor license agreements. See the NOTICE file
+  distributed with this work for additional information regarding copyright
+  ownership. Camunda licenses this file to you under the Apache License,
+  Version 2.0; you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  create history decision instance table --
+  --
+--
+--
+--
+create table ACT_HI_DECINST (
+ID_ varchar(64) NOT NULL,
+DEC_DEF_ID_ varchar(64) NOT NULL,
+DEC_DEF_KEY_ varchar(255) NOT NULL,
+DEC_DEF_NAME_ varchar(255),
+PROC_DEF_KEY_ varchar(255),
+PROC_DEF_ID_ varchar(64),
+PROC_INST_ID_ varchar(64),
+CASE_DEF_KEY_ varchar(255),
+CASE_DEF_ID_ varchar(64),
+CASE_INST_ID_ varchar(64),
+ACT_INST_ID_ varchar(64),
+ACT_ID_ varchar(255),
+EVAL_TIME_ datetime not null,
+REMOVAL_TIME_ datetime,
+COLLECT_VALUE_ double,
+USER_ID_ varchar(255),
+ROOT_DEC_INST_ID_ varchar(64),
+ROOT_PROC_INST_ID_ varchar(64),
+DEC_REQ_ID_ varchar(64),
+DEC_REQ_KEY_ varchar(255),
+TENANT_ID_ varchar(64),
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create history decision input table --
+  create table ACT_HI_DEC_IN (
+ID_ varchar(64) NOT NULL,
+DEC_INST_ID_ varchar(64) NOT NULL,
+CLAUSE_ID_ varchar(64),
+CLAUSE_NAME_ varchar(255),
+VAR_TYPE_ varchar(100),
+BYTEARRAY_ID_ varchar(64),
+DOUBLE_ double,
+LONG_ bigint,
+TEXT_ varchar(4000),
+TEXT2_ varchar(4000),
+TENANT_ID_ varchar(64),
+CREATE_TIME_ datetime,
+ROOT_PROC_INST_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create history decision output table --
+  create table ACT_HI_DEC_OUT (
+ID_ varchar(64) NOT NULL,
+DEC_INST_ID_ varchar(64) NOT NULL,
+CLAUSE_ID_ varchar(64),
+CLAUSE_NAME_ varchar(255),
+RULE_ID_ varchar(64),
+RULE_ORDER_ integer,
+VAR_NAME_ varchar(255),
+VAR_TYPE_ varchar(100),
+BYTEARRAY_ID_ varchar(64),
+DOUBLE_ double,
+LONG_ bigint,
+TEXT_ varchar(4000),
+TEXT2_ varchar(4000),
+TENANT_ID_ varchar(64),
+CREATE_TIME_ datetime,
+ROOT_PROC_INST_ID_ varchar(64),
+REMOVAL_TIME_ datetime,
+primary key (ID_)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_bin
+  create index ACT_IDX_HI_DEC_INST_ID on ACT_HI_DECINST(DEC_DEF_ID_)
+  create index ACT_IDX_HI_DEC_INST_KEY on ACT_HI_DECINST(DEC_DEF_KEY_)
+  create index ACT_IDX_HI_DEC_INST_PI on ACT_HI_DECINST(PROC_INST_ID_)
+  create index ACT_IDX_HI_DEC_INST_CI on ACT_HI_DECINST(CASE_INST_ID_)
+  create index ACT_IDX_HI_DEC_INST_ACT on ACT_HI_DECINST(ACT_ID_)
+  create index ACT_IDX_HI_DEC_INST_ACT_INST on ACT_HI_DECINST(ACT_INST_ID_)
+  create index ACT_IDX_HI_DEC_INST_TIME on ACT_HI_DECINST(EVAL_TIME_)
+  create index ACT_IDX_HI_DEC_INST_TENANT_ID on ACT_HI_DECINST(TENANT_ID_)
+  create index ACT_IDX_HI_DEC_INST_ROOT_ID on ACT_HI_DECINST(ROOT_DEC_INST_ID_)
+  create index ACT_IDX_HI_DEC_INST_REQ_ID on ACT_HI_DECINST(DEC_REQ_ID_)
+  create index ACT_IDX_HI_DEC_INST_REQ_KEY on ACT_HI_DECINST(DEC_REQ_KEY_)
+  create index ACT_IDX_HI_DEC_INST_ROOT_PI on ACT_HI_DECINST(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_DEC_INST_RM_TIME on ACT_HI_DECINST(REMOVAL_TIME_)
+  create index ACT_IDX_HI_DEC_IN_INST on ACT_HI_DEC_IN(DEC_INST_ID_)
+  create index ACT_IDX_HI_DEC_IN_CLAUSE on ACT_HI_DEC_IN(DEC_INST_ID_, CLAUSE_ID_)
+  create index ACT_IDX_HI_DEC_IN_ROOT_PI on ACT_HI_DEC_IN(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_DEC_IN_RM_TIME on ACT_HI_DEC_IN(REMOVAL_TIME_)
+  create index ACT_IDX_HI_DEC_OUT_INST on ACT_HI_DEC_OUT(DEC_INST_ID_)
+  create index ACT_IDX_HI_DEC_OUT_RULE on ACT_HI_DEC_OUT(RULE_ORDER_, CLAUSE_ID_)
+  create index ACT_IDX_HI_DEC_OUT_ROOT_PI on ACT_HI_DEC_OUT(ROOT_PROC_INST_ID_)
+  create index ACT_IDX_HI_DEC_OUT_RM_TIME on ACT_HI_DEC_OUT(REMOVAL_TIME_)
+]
+2024-09-09T08:38:06.211+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03Database schema operation 'decision.history' for component '{}' was successful. create
+2024-09-09T08:38:06.211+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:06.215+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- SchemaOperationsProcessEngineBuild ----------------------
+2024-09-09T08:38:06.215+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- HistoryLevelSetupCommand ----------------------
+2024-09-09T08:38:06.215+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:06.222+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.231+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: startup.lock(String)
+2024-09-09T08:38:06.239+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==    Columns: NAME_, VALUE_, REV_
+2024-09-09T08:38:06.239+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==        Row: startup.lock, 0, 1
+2024-09-09T08:38:06.241+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 1
+2024-09-09T08:38:06.243+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.243+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: historyLevel(String)
+2024-09-09T08:38:06.244+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 0
+2024-09-09T08:38:06.245+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.lockStartupLockProperty  : ==>  Preparing: SELECT VALUE_ FROM ACT_GE_PROPERTY WHERE NAME_ = 'startup.lock' for update
+2024-09-09T08:38:06.245+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.lockStartupLockProperty  : ==> Parameters:
+2024-09-09T08:38:06.248+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.248+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: historyLevel(String)
+2024-09-09T08:38:06.249+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 0
+2024-09-09T08:38:06.249+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03067 No history level property found in database
+2024-09-09T08:38:06.251+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03065 Creating historyLevel property in database for level: HistoryLevelFull(name=full, id=3)
+2024-09-09T08:38:06.251+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:06.252+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+  PERSISTENT PropertyEntity[startup.lock]
+  PERSISTENT PropertyEntity[historyLevel]
+]
+2024-09-09T08:38:06.252+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03008 Flush Summary: [
+  INSERT PropertyEntity[historyLevel]
+]
+2024-09-09T08:38:06.252+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'PropertyEntity[id=historyLevel]'
+2024-09-09T08:38:06.253+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : ==>  Preparing: insert into ACT_GE_PROPERTY ( NAME_, VALUE_, REV_ ) values ( ?, ?, 1 )
+2024-09-09T08:38:06.253+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : ==> Parameters: historyLevel(String), 3(String)
+2024-09-09T08:38:06.254+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : <==    Updates: 1
+2024-09-09T08:38:06.256+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- HistoryLevelSetupCommand ----------------------
+2024-09-09T08:38:06.256+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- BootstrapEngineCommand ----------------------
+2024-09-09T08:38:06.257+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:06.257+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.257+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: installationId.lock(String)
+2024-09-09T08:38:06.258+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==    Columns: NAME_, VALUE_, REV_
+2024-09-09T08:38:06.258+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==        Row: installationId.lock, 0, 1
+2024-09-09T08:38:06.258+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 1
+2024-09-09T08:38:06.258+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.258+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: camunda.installation.id(String)
+2024-09-09T08:38:06.258+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 0
+2024-09-09T08:38:06.259+08:00 DEBUG 22507 --- [           main] e.i.p.e.P.lockInstallationIdLockProperty : ==>  Preparing: SELECT VALUE_ FROM ACT_GE_PROPERTY WHERE NAME_ = 'installationId.lock' for update
+2024-09-09T08:38:06.259+08:00 DEBUG 22507 --- [           main] e.i.p.e.P.lockInstallationIdLockProperty : ==> Parameters:
+2024-09-09T08:38:06.259+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.259+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: camunda.installation.id(String)
+2024-09-09T08:38:06.259+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 0
+2024-09-09T08:38:06.259+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03096 No installation id property found in database
+2024-09-09T08:38:06.259+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03097 Creating the installation id property in database with the value: 8385df0d-43fb-461a-b255-0b67dcc88b59
+2024-09-09T08:38:06.260+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.260+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: deployment.lock(String)
+2024-09-09T08:38:06.260+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==    Columns: NAME_, VALUE_, REV_
+2024-09-09T08:38:06.260+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==        Row: deployment.lock, 0, 1
+2024-09-09T08:38:06.260+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 1
+2024-09-09T08:38:06.260+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.260+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: history.cleanup.job.lock(String)
+2024-09-09T08:38:06.260+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==    Columns: NAME_, VALUE_, REV_
+2024-09-09T08:38:06.261+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==        Row: history.cleanup.job.lock, 0, 1
+2024-09-09T08:38:06.261+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 1
+2024-09-09T08:38:06.261+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- GetTableMetaDataCmd ----------------------
+2024-09-09T08:38:06.261+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13010 reusing existing command context
+2024-09-09T08:38:06.268+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- GetTableMetaDataCmd ----------------------
+2024-09-09T08:38:06.269+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- HistoryCleanupCmd ----------------------
+2024-09-09T08:38:06.269+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13010 reusing existing command context
+2024-09-09T08:38:06.269+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13038 History cleanup won't be scheduled. Either configure batch window or call it with immediatelyDue = true.
+2024-09-09T08:38:06.270+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.selectJobsByHandlerType  : ==>  Preparing: select * from ACT_RU_JOB where HANDLER_TYPE_ = ?
+2024-09-09T08:38:06.270+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.selectJobsByHandlerType  : ==> Parameters: history-cleanup(String)
+2024-09-09T08:38:06.271+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.selectJobsByHandlerType  : <==      Total: 0
+2024-09-09T08:38:06.271+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- HistoryCleanupCmd ----------------------
+2024-09-09T08:38:06.271+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.271+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: telemetry.lock(String)
+2024-09-09T08:38:06.272+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==    Columns: NAME_, VALUE_, REV_
+2024-09-09T08:38:06.272+08:00 TRACE 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==        Row: telemetry.lock, 0, 1
+2024-09-09T08:38:06.272+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 1
+2024-09-09T08:38:06.272+08:00 DEBUG 22507 --- [           main] .c.b.e.i.p.e.P.lockTelemetryLockProperty : ==>  Preparing: SELECT VALUE_ FROM ACT_GE_PROPERTY WHERE NAME_ = 'telemetry.lock' for update
+2024-09-09T08:38:06.272+08:00 DEBUG 22507 --- [           main] .c.b.e.i.p.e.P.lockTelemetryLockProperty : ==> Parameters:
+2024-09-09T08:38:06.273+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.273+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: camunda.telemetry.enabled(String)
+2024-09-09T08:38:06.273+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 0
+2024-09-09T08:38:06.274+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03092 No telemetry property found in the database
+2024-09-09T08:38:06.274+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03093 Creating the telemetry property in database with the value: false
+2024-09-09T08:38:06.274+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- GetLicenseKeyCmd ----------------------
+2024-09-09T08:38:06.275+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13010 reusing existing command context
+2024-09-09T08:38:06.275+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.275+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: camunda-license-key-id(String)
+2024-09-09T08:38:06.276+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 0
+2024-09-09T08:38:06.276+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:38:06.276+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: camunda-license-key(String)
+2024-09-09T08:38:06.276+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 0
+2024-09-09T08:38:06.276+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- GetLicenseKeyCmd ----------------------
+2024-09-09T08:38:06.277+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- IsTelemetryEnabledCmd ----------------------
+2024-09-09T08:38:06.277+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13010 reusing existing command context
+2024-09-09T08:38:06.277+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- IsTelemetryEnabledCmd ----------------------
+2024-09-09T08:38:06.277+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:06.277+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+  PERSISTENT PropertyEntity[camunda.telemetry.enabled]
+  PERSISTENT PropertyEntity[installationId.lock]
+  PERSISTENT PropertyEntity[telemetry.lock]
+  PERSISTENT PropertyEntity[camunda.installation.id]
+  PERSISTENT PropertyEntity[deployment.lock]
+  PERSISTENT PropertyEntity[history.cleanup.job.lock]
+]
+2024-09-09T08:38:06.278+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03008 Flush Summary: [
+  INSERT PropertyEntity[camunda.installation.id]
+  INSERT PropertyEntity[camunda.telemetry.enabled]
+]
+2024-09-09T08:38:06.278+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'PropertyEntity[id=camunda.installation.id]'
+2024-09-09T08:38:06.278+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : ==>  Preparing: insert into ACT_GE_PROPERTY ( NAME_, VALUE_, REV_ ) values ( ?, ?, 1 )
+2024-09-09T08:38:06.278+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : ==> Parameters: camunda.installation.id(String), 8385df0d-43fb-461a-b255-0b67dcc88b59(String)
+2024-09-09T08:38:06.278+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : <==    Updates: 1
+2024-09-09T08:38:06.278+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'PropertyEntity[id=camunda.telemetry.enabled]'
+2024-09-09T08:38:06.278+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : ==>  Preparing: insert into ACT_GE_PROPERTY ( NAME_, VALUE_, REV_ ) values ( ?, ?, 1 )
+2024-09-09T08:38:06.279+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : ==> Parameters: camunda.telemetry.enabled(String), false(String)
+2024-09-09T08:38:06.279+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProperty           : <==    Updates: 1
+2024-09-09T08:38:06.281+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- BootstrapEngineCommand ----------------------
+2024-09-09T08:38:06.281+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine                   : ENGINE-00001 Process Engine default created.
+2024-09-09T08:38:06.291+08:00  INFO 22507 --- [           main] zxf.camunda.saga.saga.App1Saga           : app1-v10 deploySaga start
+2024-09-09T08:38:06.291+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- ProcessDefinitionQueryImpl ----------------------
+2024-09-09T08:38:06.291+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:06.312+08:00 DEBUG 22507 --- [           main] ectProcessDefinitionCountByQueryCriteria : ==>  Preparing: select count(distinct RES.ID_ ) from ACT_RE_PROCDEF RES WHERE RES.KEY_ = ?
+2024-09-09T08:38:06.313+08:00 DEBUG 22507 --- [           main] ectProcessDefinitionCountByQueryCriteria : ==> Parameters: app1-v10(String)
+2024-09-09T08:38:06.313+08:00 TRACE 22507 --- [           main] ectProcessDefinitionCountByQueryCriteria : <==    Columns: count(distinct RES.ID_ )
+2024-09-09T08:38:06.313+08:00 TRACE 22507 --- [           main] ectProcessDefinitionCountByQueryCriteria : <==        Row: 0
+2024-09-09T08:38:06.314+08:00 DEBUG 22507 --- [           main] ectProcessDefinitionCountByQueryCriteria : <==      Total: 1
+2024-09-09T08:38:06.314+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:06.314+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+]
+2024-09-09T08:38:06.315+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- ProcessDefinitionQueryImpl ----------------------
+2024-09-09T08:38:06.315+08:00  INFO 22507 --- [           main] zxf.camunda.saga.saga.App1Saga           : app1-v10 isSagaDeployed, false
+2024-09-09T08:38:06.521+08:00  INFO 22507 --- [           main] zxf.camunda.saga.base.SagaBuilder        : BPMN: <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="definitions_07af7c99-b2d2-49ab-8e39-58a973d493c6" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+  <process camunda:historyTimeToLive="P180D" id="app1-v10" isExecutable="true">
+    <startEvent camunda:asyncAfter="true" camunda:asyncBefore="true" id="Start-app1-v10" name="Start-app1-v10">
+      <outgoing>sequenceFlow_26ec2a82-2073-42ed-84da-0a793d95121f</outgoing>
+    </startEvent>
+    <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task1Adapter" id="Activity-Task-1" name="Task 1">
+      <extensionElements>
+        <camunda:failedJobRetryTimeCycle>R0/PT0S</camunda:failedJobRetryTimeCycle>
+      </extensionElements>
+      <incoming>sequenceFlow_26ec2a82-2073-42ed-84da-0a793d95121f</incoming>
+      <outgoing>sequenceFlow_6a95a7c8-6857-466c-9dcc-50f8879925df</outgoing>
+    </serviceTask>
+    <sequenceFlow id="sequenceFlow_26ec2a82-2073-42ed-84da-0a793d95121f" sourceRef="Start-app1-v10" targetRef="Activity-Task-1"/>
+    <boundaryEvent attachedToRef="Activity-Task-1" id="boundaryEvent_17b2ffe1-c6ac-4a49-89fd-4ce30d4e3608">
+      <compensateEventDefinition id="compensateEventDefinition_ecd99084-5d6e-45a1-949c-7a210da45dba"/>
+    </boundaryEvent>
+    <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task1UndoAdapter" id="Activity-Undo-Task-1-compensation" isForCompensation="true" name="Undo Task 1"/>
+    <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task2Adapter" id="Activity-Task-2" name="Task 2">
+      <extensionElements>
+        <camunda:failedJobRetryTimeCycle>R0/PT0S</camunda:failedJobRetryTimeCycle>
+      </extensionElements>
+      <incoming>sequenceFlow_6a95a7c8-6857-466c-9dcc-50f8879925df</incoming>
+      <outgoing>sequenceFlow_91bc6873-0812-402e-978e-1bcdca43b4d5</outgoing>
+    </serviceTask>
+    <sequenceFlow id="sequenceFlow_6a95a7c8-6857-466c-9dcc-50f8879925df" sourceRef="Activity-Task-1" targetRef="Activity-Task-2"/>
+    <boundaryEvent attachedToRef="Activity-Task-2" id="boundaryEvent_e89c0608-c1c4-42ee-8832-4bbe28d3df38">
+      <compensateEventDefinition id="compensateEventDefinition_a6d7bfc2-24ea-4164-b276-353127e2a7a1"/>
+    </boundaryEvent>
+    <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task2UndoAdapter" id="Activity-Undo-Task-2-compensation" isForCompensation="true" name="Undo Task 2"/>
+    <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task3Adapter" id="Activity-Task-3" name="Task 3">
+      <extensionElements>
+        <camunda:failedJobRetryTimeCycle>R0/PT0S</camunda:failedJobRetryTimeCycle>
+      </extensionElements>
+      <incoming>sequenceFlow_91bc6873-0812-402e-978e-1bcdca43b4d5</incoming>
+      <outgoing>sequenceFlow_15fa98db-c7f2-4002-b119-85078c96ff8d</outgoing>
+    </serviceTask>
+    <sequenceFlow id="sequenceFlow_91bc6873-0812-402e-978e-1bcdca43b4d5" sourceRef="Activity-Task-2" targetRef="Activity-Task-3"/>
+    <endEvent id="End-app1-v10" name="End-app1-v10">
+      <incoming>sequenceFlow_15fa98db-c7f2-4002-b119-85078c96ff8d</incoming>
+    </endEvent>
+    <sequenceFlow id="sequenceFlow_15fa98db-c7f2-4002-b119-85078c96ff8d" sourceRef="Activity-Task-3" targetRef="End-app1-v10"/>
+    <subProcess id="subProcess_60a3a9ef-bd07-4644-a7d1-ad798030d889" triggeredByEvent="true">
+      <startEvent id="ErrorCatched" name="ErrorCatched">
+        <outgoing>sequenceFlow_d226d3d8-d7e2-42c4-8c52-c2a6889649d4</outgoing>
+        <errorEventDefinition errorRef="error_46dfd576-66ba-4d1f-9238-6bd35029c7df" id="errorEventDefinition_b1f42297-2124-4bd1-b609-bc2065898acb"/>
+      </startEvent>
+      <intermediateThrowEvent id="ToBeCompensated" name="ToBeCompensated">
+        <incoming>sequenceFlow_d226d3d8-d7e2-42c4-8c52-c2a6889649d4</incoming>
+        <outgoing>sequenceFlow_ef13e732-5f53-461c-b30a-6700b29e01d0</outgoing>
+        <compensateEventDefinition id="compensateEventDefinition_5421ea5f-3dd1-40e1-a643-9ad53499df07"/>
+      </intermediateThrowEvent>
+      <sequenceFlow id="sequenceFlow_d226d3d8-d7e2-42c4-8c52-c2a6889649d4" sourceRef="ErrorCatched" targetRef="ToBeCompensated"/>
+      <endEvent id="ErrorHandled" name="ErrorHandled">
+        <incoming>sequenceFlow_ef13e732-5f53-461c-b30a-6700b29e01d0</incoming>
+      </endEvent>
+      <sequenceFlow id="sequenceFlow_ef13e732-5f53-461c-b30a-6700b29e01d0" sourceRef="ToBeCompensated" targetRef="ErrorHandled"/>
+    </subProcess>
+    <association associationDirection="One" id="association_4464eeed-dbb5-4582-91d3-68a3d2e8b6c9" sourceRef="boundaryEvent_17b2ffe1-c6ac-4a49-89fd-4ce30d4e3608" targetRef="Activity-Undo-Task-1-compensation"/>
+    <association associationDirection="One" id="association_a6ee9333-e8c4-4ae9-96d3-f36d91a9cf53" sourceRef="boundaryEvent_e89c0608-c1c4-42ee-8832-4bbe28d3df38" targetRef="Activity-Undo-Task-2-compensation"/>
+  </process>
+  <error errorCode="java.lang.Throwable" id="error_46dfd576-66ba-4d1f-9238-6bd35029c7df"/>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_ac32eb28-2a26-4c1c-b5e9-5e21d1be5171">
+    <bpmndi:BPMNPlane bpmnElement="app1-v10" id="BPMNPlane_c7e63ea3-8b23-4f1d-a361-f34e76b4deda">
+      <bpmndi:BPMNShape bpmnElement="Start-app1-v10" id="BPMNShape_21095505-c433-47b8-9694-7dc5b3a0c922">
+        <dc:Bounds height="36.0" width="36.0" x="100.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity-Task-1" id="BPMNShape_ba940f95-5363-43cd-b750-3bd8931d0993">
+        <dc:Bounds height="80.0" width="100.0" x="186.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_26ec2a82-2073-42ed-84da-0a793d95121f" id="BPMNEdge_0c163b55-4581-4ec7-852e-8386c58eeb5b">
+        <di:waypoint x="136.0" y="118.0"/>
+        <di:waypoint x="186.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="boundaryEvent_17b2ffe1-c6ac-4a49-89fd-4ce30d4e3608" id="BPMNShape_21e5fa54-f8ef-4f90-8b30-7ccd61387a9b">
+        <dc:Bounds height="36.0" width="36.0" x="218.0" y="140.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity-Undo-Task-1-compensation" id="BPMNShape_24d5824f-61a7-4048-94ff-ef895fc62ca8">
+        <dc:Bounds height="80.0" width="100.0" x="266.5" y="186.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="association_4464eeed-dbb5-4582-91d3-68a3d2e8b6c9" id="BPMNEdge_f4b6c0cf-64f4-4b60-bcf7-825f8bdaa4c8">
+        <di:waypoint x="236.0" y="176.0"/>
+        <di:waypoint x="236.0" y="226.0"/>
+        <di:waypoint x="266.5" y="226.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="Activity-Task-2" id="BPMNShape_caaf1ad7-6ee7-43aa-b1ee-44bf7c4d82d1">
+        <dc:Bounds height="80.0" width="100.0" x="336.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_6a95a7c8-6857-466c-9dcc-50f8879925df" id="BPMNEdge_0bdbe9b4-a8fc-4fe6-a301-ff52f118504a">
+        <di:waypoint x="286.0" y="118.0"/>
+        <di:waypoint x="336.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="boundaryEvent_e89c0608-c1c4-42ee-8832-4bbe28d3df38" id="BPMNShape_c7f0965d-c138-4489-9d3c-a9189299fe46">
+        <dc:Bounds height="36.0" width="36.0" x="368.0" y="140.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity-Undo-Task-2-compensation" id="BPMNShape_eceb7a2e-acbd-40ed-8292-905fe8a1bc42">
+        <dc:Bounds height="80.0" width="100.0" x="416.5" y="186.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="association_a6ee9333-e8c4-4ae9-96d3-f36d91a9cf53" id="BPMNEdge_024cbe2d-6073-4cd6-8922-94535dea7ca6">
+        <di:waypoint x="386.0" y="176.0"/>
+        <di:waypoint x="386.0" y="226.0"/>
+        <di:waypoint x="416.5" y="226.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="Activity-Task-3" id="BPMNShape_24360814-1b36-4fb3-b50b-4e98f604bc5c">
+        <dc:Bounds height="80.0" width="100.0" x="486.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_91bc6873-0812-402e-978e-1bcdca43b4d5" id="BPMNEdge_8247b421-2ab6-43eb-9e70-65ecf6c40733">
+        <di:waypoint x="436.0" y="118.0"/>
+        <di:waypoint x="486.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="End-app1-v10" id="BPMNShape_3c578715-3258-48d2-aaf3-a1da7aa369eb">
+        <dc:Bounds height="36.0" width="36.0" x="636.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_15fa98db-c7f2-4002-b119-85078c96ff8d" id="BPMNEdge_06862351-7ad7-48e4-8ca7-9b476aa45324">
+        <di:waypoint x="586.0" y="118.0"/>
+        <di:waypoint x="636.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="subProcess_60a3a9ef-bd07-4644-a7d1-ad798030d889" id="BPMNShape_76e178fe-5f32-44fd-bfaf-f0a728c7ba39" isExpanded="true">
+        <dc:Bounds height="200.0" width="350.0" x="100.0" y="316.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ErrorCatched" id="BPMNShape_e088afb9-d93e-4ba9-a0ff-a94fddbcc78a">
+        <dc:Bounds height="36.0" width="36.0" x="150.0" y="398.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ToBeCompensated" id="BPMNShape_62caef17-8187-4320-af4b-56046716530c">
+        <dc:Bounds height="36.0" width="36.0" x="236.0" y="398.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_d226d3d8-d7e2-42c4-8c52-c2a6889649d4" id="BPMNEdge_96381d2d-a4be-41f7-9e84-033c1a3baa20">
+        <di:waypoint x="186.0" y="416.0"/>
+        <di:waypoint x="236.0" y="416.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape bpmnElement="ErrorHandled" id="BPMNShape_5b267559-b0e8-4a5b-8b35-3690b0355e0a">
+        <dc:Bounds height="36.0" width="36.0" x="322.0" y="398.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceFlow_ef13e732-5f53-461c-b30a-6700b29e01d0" id="BPMNEdge_dedde130-509b-44f6-818c-f06664b40890">
+        <di:waypoint x="272.0" y="416.0"/>
+        <di:waypoint x="322.0" y="416.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
+
+2024-09-09T08:38:06.535+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- DeployCmd ----------------------
+2024-09-09T08:38:06.535+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:06.536+08:00 DEBUG 22507 --- [           main] c.b.e.i.p.e.P.lockDeploymentLockProperty : ==>  Preparing: SELECT VALUE_ FROM ACT_GE_PROPERTY WHERE NAME_ = 'deployment.lock' for update
+2024-09-09T08:38:06.537+08:00 DEBUG 22507 --- [           main] c.b.e.i.p.e.P.lockDeploymentLockProperty : ==> Parameters:
+2024-09-09T08:38:06.538+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13001 Creating new deployment
+2024-09-09T08:38:06.542+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13018 Processing deployment null
+2024-09-09T08:38:06.542+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13019 Processing resource app1-v10.bpmn
+2024-09-09T08:38:06.565+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'process' with id 'app1-v10'
+2024-09-09T08:38:06.565+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'Start-app1-v10'
+2024-09-09T08:38:06.567+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'Activity-Task-1'
+2024-09-09T08:38:06.572+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'Activity-Task-2'
+2024-09-09T08:38:06.572+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'Activity-Task-3'
+2024-09-09T08:38:06.572+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'subProcess_60a3a9ef-bd07-4644-a7d1-ad798030d889'
+2024-09-09T08:38:06.572+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'ErrorCatched'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'ToBeCompensated'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'ErrorHandled'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'End-app1-v10'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'boundary event' with id 'boundaryEvent_17b2ffe1-c6ac-4a49-89fd-4ce30d4e3608'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'boundaryEvent_17b2ffe1-c6ac-4a49-89fd-4ce30d4e3608'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'boundary event' with id 'boundaryEvent_e89c0608-c1c4-42ee-8832-4bbe28d3df38'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'boundaryEvent_e89c0608-c1c4-42ee-8832-4bbe28d3df38'
+2024-09-09T08:38:06.573+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'Activity-Undo-Task-1-compensation'
+2024-09-09T08:38:06.574+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.bpmn.parser       : ENGINE-01001 Parsing element from type 'activity' with id 'Activity-Undo-Task-2-compensation'
+2024-09-09T08:38:06.574+08:00 DEBUG 22507 --- [           main] estProcessDefinitionByKeyWithoutTenantId : ==>  Preparing: select * from ACT_RE_PROCDEF RES where KEY_ = ? and TENANT_ID_ is null and VERSION_ = ( select max(VERSION_) from ACT_RE_PROCDEF where KEY_ = ? and TENANT_ID_ is null)
+2024-09-09T08:38:06.574+08:00 DEBUG 22507 --- [           main] estProcessDefinitionByKeyWithoutTenantId : ==> Parameters: app1-v10(String), app1-v10(String)
+2024-09-09T08:38:06.575+08:00 DEBUG 22507 --- [           main] estProcessDefinitionByKeyWithoutTenantId : <==      Total: 0
+2024-09-09T08:38:06.578+08:00 DEBUG 22507 --- [           main] .c.b.e.i.p.e.J.selectJobsByConfiguration : ==>  Preparing: select * from ACT_RU_JOB where HANDLER_TYPE_ = ? and TENANT_ID_ is null and (HANDLER_CFG_ = ? or HANDLER_CFG_ = ? )
+2024-09-09T08:38:06.578+08:00 DEBUG 22507 --- [           main] .c.b.e.i.p.e.J.selectJobsByConfiguration : ==> Parameters: timer-start-event(String), app1-v10(String), app1-v10$followUpJobCreated(String)
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] .c.b.e.i.p.e.J.selectJobsByConfiguration : <==      Total: 0
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13018 Processing deployment null
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13019 Processing resource app1-v10.bpmn
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13018 Processing deployment null
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13019 Processing resource app1-v10.bpmn
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13018 Processing deployment null
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13019 Processing resource app1-v10.bpmn
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13018 Processing deployment null
+2024-09-09T08:38:06.579+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13019 Processing resource app1-v10.bpmn
+2024-09-09T08:38:06.580+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:06.580+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+  PERSISTENT JobDefinitionEntity[c7cd7620-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd7621-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd7622-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd7623-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd761e-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd7624-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd761f-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd7625-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd761c-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd761d-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd761b-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT JobDefinitionEntity[c7cd761a-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT ResourceEntity[c7c81ee8-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT ProcessDefinitionEntity[app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT DeploymentEntity[c7c782a7-6e43-11ef-bc92-66f8f673b182]
+]
+2024-09-09T08:38:06.581+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03008 Flush Summary: [
+  INSERT JobDefinitionEntity[c7cd761a-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd761b-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd761c-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd761d-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd761e-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd761f-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd7620-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd7621-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd7622-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd7623-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd7624-6e43-11ef-bc92-66f8f673b182]
+  INSERT JobDefinitionEntity[c7cd7625-6e43-11ef-bc92-66f8f673b182]
+  INSERT DeploymentEntity[c7c782a7-6e43-11ef-bc92-66f8f673b182]
+  INSERT ResourceEntity[c7c81ee8-6e43-11ef-bc92-66f8f673b182]
+  INSERT ProcessDefinitionEntity[app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182]
+]
+2024-09-09T08:38:06.581+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd761a-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.581+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.582+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd761a-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Start-app1-v10(String), async-continuation(String), async-before(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.583+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.583+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd761b-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.583+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.583+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd761b-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Start-app1-v10(String), async-continuation(String), async-after(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.583+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.583+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd761c-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.583+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.584+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd761c-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Task-1(String), async-continuation(String), async-before(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.584+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.584+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd761d-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.584+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.584+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd761d-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Task-1(String), async-continuation(String), async-after(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.585+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.585+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd761e-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.585+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.585+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd761e-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Task-2(String), async-continuation(String), async-before(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.585+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.585+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd761f-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.585+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd761f-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Task-2(String), async-continuation(String), async-after(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd7620-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd7620-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Task-3(String), async-continuation(String), async-before(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd7621-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.586+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.587+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd7621-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Task-3(String), async-continuation(String), async-after(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.587+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.587+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd7622-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.587+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.587+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd7622-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Undo-Task-1-compensation(String), async-continuation(String), async-before(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.587+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.588+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd7623-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.588+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.588+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd7623-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Undo-Task-1-compensation(String), async-continuation(String), async-after(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.588+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.588+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd7624-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.588+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.588+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd7624-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Undo-Task-2-compensation(String), async-continuation(String), async-before(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.589+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.589+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'JobDefinitionEntity[id=c7cd7625-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.589+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==>  Preparing: insert into ACT_RU_JOBDEF ( ID_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, JOB_PRIORITY_, SUSPENSION_STATE_, TENANT_ID_, DEPLOYMENT_ID_, REV_ ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.589+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : ==> Parameters: c7cd7625-6e43-11ef-bc92-66f8f673b182(String), app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), app1-v10(String), Activity-Undo-Task-2-compensation(String), async-continuation(String), async-after(String), null, 1(Integer), null, null
+2024-09-09T08:38:06.589+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.J.insertJobDefinition      : <==    Updates: 1
+2024-09-09T08:38:06.589+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'DeploymentEntity[id=c7c782a7-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.589+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.D.insertDeployment         : ==>  Preparing: insert into ACT_RE_DEPLOYMENT(ID_, NAME_, DEPLOY_TIME_, SOURCE_, TENANT_ID_) values(?, ?, ?, ?, ?)
+2024-09-09T08:38:06.591+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.D.insertDeployment         : ==> Parameters: c7c782a7-6e43-11ef-bc92-66f8f673b182(String), null, 2024-09-09 08:38:06.537(Timestamp), null, null
+2024-09-09T08:38:06.591+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.D.insertDeployment         : <==    Updates: 1
+2024-09-09T08:38:06.591+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'ResourceEntity[id=c7c81ee8-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.591+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.R.insertResource           : ==>  Preparing: insert into ACT_GE_BYTEARRAY( ID_, NAME_, BYTES_, DEPLOYMENT_ID_, GENERATED_, TENANT_ID_, TYPE_, CREATE_TIME_, REV_) values ( ?, ?, ?, ?, ?, ?, ?, ?, 1)
+2024-09-09T08:38:06.592+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.R.insertResource           : ==> Parameters: c7c81ee8-6e43-11ef-bc92-66f8f673b182(String), app1-v10.bpmn(String), java.io.ByteArrayInputStream@2c750b69(ByteArrayInputStream), c7c782a7-6e43-11ef-bc92-66f8f673b182(String), false(Boolean), null, 1(Integer), 2024-09-09 08:38:06.542(Timestamp)
+2024-09-09T08:38:06.594+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.R.insertResource           : <==    Updates: 1
+2024-09-09T08:38:06.594+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'ProcessDefinitionEntity[id=app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:38:06.594+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProcessDefinition  : ==>  Preparing: insert into ACT_RE_PROCDEF(ID_, CATEGORY_, NAME_, KEY_, VERSION_, DEPLOYMENT_ID_, RESOURCE_NAME_, DGRM_RESOURCE_NAME_, HAS_START_FORM_KEY_, SUSPENSION_STATE_, TENANT_ID_, VERSION_TAG_, HISTORY_TTL_, STARTABLE_, REV_) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1 )
+2024-09-09T08:38:06.594+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProcessDefinition  : ==> Parameters: app1-v10:1:c7cd27f9-6e43-11ef-bc92-66f8f673b182(String), http://www.omg.org/spec/BPMN/20100524/MODEL(String), null, app1-v10(String), 1(Integer), c7c782a7-6e43-11ef-bc92-66f8f673b182(String), app1-v10.bpmn(String), null, false(Boolean), 1(Integer), null, null, 180(Integer), true(Boolean)
+2024-09-09T08:38:06.595+08:00 DEBUG 22507 --- [           main] o.c.b.e.i.p.e.P.insertProcessDefinition  : <==    Updates: 1
+2024-09-09T08:38:06.598+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- DeployCmd ----------------------
+2024-09-09T08:38:06.598+08:00  INFO 22507 --- [           main] zxf.camunda.saga.saga.App1Saga           : app1-v10 saga deployment is done. (DeploymentId=c7c782a7-6e43-11ef-bc92-66f8f673b182)
+2024-09-09T08:38:06.598+08:00  INFO 22507 --- [           main] z.c.saga.task.app1.App1Task1Adapter      : ctor()
+2024-09-09T08:38:06.599+08:00  INFO 22507 --- [           main] z.c.saga.task.app1.App1Task1UndoAdapter  : ctor()
+2024-09-09T08:38:06.600+08:00  INFO 22507 --- [           main] z.c.saga.task.app1.App1Task2Adapter      : ctor()
+2024-09-09T08:38:06.619+08:00  INFO 22507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-09-09T08:38:06.622+08:00  INFO 22507 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7a57c5d9
+2024-09-09T08:38:06.623+08:00  INFO 22507 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-09-09T08:38:06.693+08:00  INFO 22507 --- [           main] o.f.c.i.s.classpath.ClassPathScanner     : Flyway OSS Edition 10.1.0 by Redgate
+2024-09-09T08:38:06.693+08:00  INFO 22507 --- [           main] o.f.c.i.s.classpath.ClassPathScanner     :
+2024-09-09T08:38:06.693+08:00  INFO 22507 --- [           main] o.f.c.i.s.classpath.ClassPathScanner     : See release notes here: https://rd.gt/416ObMi
+2024-09-09T08:38:06.704+08:00  INFO 22507 --- [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:mysql://localhost:3307/business (MySQL 8.0)
+2024-09-09T08:38:06.736+08:00  INFO 22507 --- [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table `business`.`flyway_schema_history` does not exist yet
+2024-09-09T08:38:06.739+08:00  INFO 22507 --- [           main] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.010s)
+2024-09-09T08:38:06.749+08:00  INFO 22507 --- [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table `business`.`flyway_schema_history` ...
+2024-09-09T08:38:06.789+08:00  INFO 22507 --- [           main] o.f.core.internal.command.DbMigrate      : Current version of schema `business`: << Empty Schema >>
+2024-09-09T08:38:06.792+08:00  INFO 22507 --- [           main] o.f.core.internal.command.DbMigrate      : Migrating schema `business` to version "20240712 - TBL ORDER"
+2024-09-09T08:38:06.813+08:00  INFO 22507 --- [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration to schema `business`, now at version v20240712 (execution time 00:00.007s)
+2024-09-09T08:38:06.836+08:00  INFO 22507 --- [           main] z.c.saga.task.app1.App1Task2UndoAdapter  : ctor()
+2024-09-09T08:38:06.837+08:00  INFO 22507 --- [           main] z.c.saga.task.app1.App1Task3Adapter      : ctor()
+2024-09-09T08:38:06.837+08:00  INFO 22507 --- [           main] z.c.saga.task.app2.App2Task1Adapter      : ctor()
+2024-09-09T08:38:06.838+08:00  INFO 22507 --- [           main] z.c.saga.task.app2.App2Task1UndoAdapter  : ctor()
+2024-09-09T08:38:06.838+08:00  INFO 22507 --- [           main] z.c.saga.task.app2.App2Task2Adapter      : ctor()
+2024-09-09T08:38:06.838+08:00  INFO 22507 --- [           main] z.c.saga.task.app2.App2Task2UndoAdapter  : ctor()
+2024-09-09T08:38:06.839+08:00  INFO 22507 --- [           main] z.c.saga.task.app2.App2Task3Adapter      : ctor()
+2024-09-09T08:38:06.839+08:00  INFO 22507 --- [           main] z.c.s.task.app2.App2TaskEndUndoAdapter   : ctor()
+2024-09-09T08:38:06.839+08:00  INFO 22507 --- [           main] z.c.saga.task.app3.App3Task3Adapter      : ctor()
+2024-09-09T08:38:07.065+08:00  INFO 22507 --- [           main] o.c.b.s.b.s.w.f.LazyInitRegistration     : lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazyProcessEnginesFilter@20256a0b
+2024-09-09T08:38:07.073+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.EngineRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.073+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.EngineRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.073+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.EngineRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.073+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.EngineRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.073+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.EngineRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.073+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.EngineRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.073+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.ApplicationRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.074+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.ApplicationRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.074+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.ApplicationRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.074+08:00 DEBUG 22507 --- [           main] org.camunda.bpm.engine.util              : ENGINE-09016 Attempting to load class 'org.camunda.bpm.webapp.impl.security.filter.ApplicationRequestAuthorizer' with current thread context classloader: jdk.internal.loader.ClassLoaders$AppClassLoader@4e0e2f2a
+2024-09-09T08:38:07.074+08:00  INFO 22507 --- [           main] o.c.b.s.b.s.w.f.LazyInitRegistration     : lazy initialized org.camunda.bpm.spring.boot.starter.webapp.filter.LazySecurityFilter@7364f68
+2024-09-09T08:38:07.317+08:00  INFO 22507 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2024-09-09T08:38:07.366+08:00  INFO 22507 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8090 (http) with context path ''
+2024-09-09T08:38:07.440+08:00  INFO 22507 --- [           main] org.camunda.bpm.container                : ENGINE-08026 No processes.xml file found in process application 'saga1Application'
+2024-09-09T08:38:07.441+08:00  INFO 22507 --- [           main] org.camunda.bpm.container                : ENGINE-08050 Process application saga1Application successfully deployed
+2024-09-09T08:38:07.442+08:00  INFO 22507 --- [           main] zxf.camunda.saga.Saga1Application        : Started Saga1Application in 7.372 seconds (process running for 7.584)
+2024-09-09T08:38:07.446+08:00  INFO 22507 --- [           main] org.camunda.bpm.engine.jobexecutor       : ENGINE-14014 Starting up the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor].
+2024-09-09T08:38:07.447+08:00  INFO 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14018 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] starting to acquire jobs
+2024-09-09T08:38:07.448+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:07.450+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:07.452+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==>  Preparing: select RES.ID_, RES.REV_, RES.DUEDATE_, RES.PROCESS_INSTANCE_ID_, RES.EXCLUSIVE_ from ACT_RU_JOB RES where (RES.RETRIES_ > 0) and ( RES.DUEDATE_ is null or RES.DUEDATE_ <= ? ) and (RES.LOCK_OWNER_ is null or RES.LOCK_EXP_TIME_ < ?) and RES.SUSPENSION_STATE_ = 1 and ( ( RES.EXCLUSIVE_ = 1 and not exists( select J2.ID_ from ACT_RU_JOB J2 where J2.PROCESS_INSTANCE_ID_ = RES.PROCESS_INSTANCE_ID_ and (J2.EXCLUSIVE_ = 1) -- also exclusive and (J2.LOCK_OWNER_ is not null and J2.LOCK_EXP_TIME_ >= ?) -- in progress ) ) or RES.EXCLUSIVE_ = 0 ) LIMIT ? OFFSET ?
+2024-09-09T08:38:07.453+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==> Parameters: 2024-09-09 08:38:07.45(Timestamp), 2024-09-09 08:38:07.45(Timestamp), 2024-09-09 08:38:07.45(Timestamp), 3(Integer), 0(Integer)
+2024-09-09T08:38:07.455+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : <==      Total: 0
+2024-09-09T08:38:07.455+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:07.455+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+]
+2024-09-09T08:38:07.455+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:07.455+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14022 Acquired 0 jobs for process engine 'default': []
+2024-09-09T08:38:07.456+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14011 Job acquisition thread sleeping for 4992 millis
+2024-09-09T08:38:12.448+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14012 Job acquisition thread woke up
+2024-09-09T08:38:12.448+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:12.449+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:12.449+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==>  Preparing: select RES.ID_, RES.REV_, RES.DUEDATE_, RES.PROCESS_INSTANCE_ID_, RES.EXCLUSIVE_ from ACT_RU_JOB RES where (RES.RETRIES_ > 0) and ( RES.DUEDATE_ is null or RES.DUEDATE_ <= ? ) and (RES.LOCK_OWNER_ is null or RES.LOCK_EXP_TIME_ < ?) and RES.SUSPENSION_STATE_ = 1 and ( ( RES.EXCLUSIVE_ = 1 and not exists( select J2.ID_ from ACT_RU_JOB J2 where J2.PROCESS_INSTANCE_ID_ = RES.PROCESS_INSTANCE_ID_ and (J2.EXCLUSIVE_ = 1) -- also exclusive and (J2.LOCK_OWNER_ is not null and J2.LOCK_EXP_TIME_ >= ?) -- in progress ) ) or RES.EXCLUSIVE_ = 0 ) LIMIT ? OFFSET ?
+2024-09-09T08:38:12.450+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==> Parameters: 2024-09-09 08:38:12.449(Timestamp), 2024-09-09 08:38:12.449(Timestamp), 2024-09-09 08:38:12.449(Timestamp), 3(Integer), 0(Integer)
+2024-09-09T08:38:12.451+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : <==      Total: 0
+2024-09-09T08:38:12.451+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:12.451+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+]
+2024-09-09T08:38:12.451+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:12.451+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14022 Acquired 0 jobs for process engine 'default': []
+2024-09-09T08:38:12.451+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14011 Job acquisition thread sleeping for 9997 millis
+2024-09-09T08:38:22.448+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14012 Job acquisition thread woke up
+2024-09-09T08:38:22.449+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:22.449+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:22.450+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==>  Preparing: select RES.ID_, RES.REV_, RES.DUEDATE_, RES.PROCESS_INSTANCE_ID_, RES.EXCLUSIVE_ from ACT_RU_JOB RES where (RES.RETRIES_ > 0) and ( RES.DUEDATE_ is null or RES.DUEDATE_ <= ? ) and (RES.LOCK_OWNER_ is null or RES.LOCK_EXP_TIME_ < ?) and RES.SUSPENSION_STATE_ = 1 and ( ( RES.EXCLUSIVE_ = 1 and not exists( select J2.ID_ from ACT_RU_JOB J2 where J2.PROCESS_INSTANCE_ID_ = RES.PROCESS_INSTANCE_ID_ and (J2.EXCLUSIVE_ = 1) -- also exclusive and (J2.LOCK_OWNER_ is not null and J2.LOCK_EXP_TIME_ >= ?) -- in progress ) ) or RES.EXCLUSIVE_ = 0 ) LIMIT ? OFFSET ?
+2024-09-09T08:38:22.450+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==> Parameters: 2024-09-09 08:38:22.449(Timestamp), 2024-09-09 08:38:22.449(Timestamp), 2024-09-09 08:38:22.449(Timestamp), 3(Integer), 0(Integer)
+2024-09-09T08:38:22.451+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : <==      Total: 0
+2024-09-09T08:38:22.451+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:22.451+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+]
+2024-09-09T08:38:22.452+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:22.452+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14022 Acquired 0 jobs for process engine 'default': []
+2024-09-09T08:38:22.452+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14011 Job acquisition thread sleeping for 19997 millis
+2024-09-09T08:38:42.449+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14012 Job acquisition thread woke up
+2024-09-09T08:38:42.450+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:42.453+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:38:42.455+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==>  Preparing: select RES.ID_, RES.REV_, RES.DUEDATE_, RES.PROCESS_INSTANCE_ID_, RES.EXCLUSIVE_ from ACT_RU_JOB RES where (RES.RETRIES_ > 0) and ( RES.DUEDATE_ is null or RES.DUEDATE_ <= ? ) and (RES.LOCK_OWNER_ is null or RES.LOCK_EXP_TIME_ < ?) and RES.SUSPENSION_STATE_ = 1 and ( ( RES.EXCLUSIVE_ = 1 and not exists( select J2.ID_ from ACT_RU_JOB J2 where J2.PROCESS_INSTANCE_ID_ = RES.PROCESS_INSTANCE_ID_ and (J2.EXCLUSIVE_ = 1) -- also exclusive and (J2.LOCK_OWNER_ is not null and J2.LOCK_EXP_TIME_ >= ?) -- in progress ) ) or RES.EXCLUSIVE_ = 0 ) LIMIT ? OFFSET ?
+2024-09-09T08:38:42.456+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : ==> Parameters: 2024-09-09 08:38:42.454(Timestamp), 2024-09-09 08:38:42.454(Timestamp), 2024-09-09 08:38:42.454(Timestamp), 3(Integer), 0(Integer)
+2024-09-09T08:38:42.457+08:00 DEBUG 22507 --- [ingJobExecutor]] o.c.b.e.i.p.e.J.selectNextJobsToExecute  : <==      Total: 0
+2024-09-09T08:38:42.458+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:38:42.458+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+]
+2024-09-09T08:38:42.460+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- AcquireJobsCmd ----------------------
+2024-09-09T08:38:42.460+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14022 Acquired 0 jobs for process engine 'default': []
+2024-09-09T08:38:42.460+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14011 Job acquisition thread sleeping for 39990 millis
+2024-09-09T08:39:12.037+08:00  INFO 22507 --- [ionShutdownHook] org.camunda.bpm.container                : ENGINE-08051 Process application saga1Application undeployed
+2024-09-09T08:39:12.055+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- MetricsCollectionTask$MetricsCollectionCmd ----------------------
+2024-09-09T08:39:12.056+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:39:12.056+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:39:12.056+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+  PERSISTENT MeterLogEntity[eed4c3a1-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c399-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c39c-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c397-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c398-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c39d-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c396-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c39a-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c39b-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c39f-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c3a0-6e43-11ef-bc92-66f8f673b182]
+  PERSISTENT MeterLogEntity[eed4c39e-6e43-11ef-bc92-66f8f673b182]
+]
+2024-09-09T08:39:12.057+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03008 Flush Summary: [
+  INSERT MeterLogEntity[eed4c396-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c397-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c398-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c399-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c39a-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c39b-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c39c-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c39d-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c39e-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c39f-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c3a0-6e43-11ef-bc92-66f8f673b182]
+  INSERT MeterLogEntity[eed4c3a1-6e43-11ef-bc92-66f8f673b182]
+]
+2024-09-09T08:39:12.057+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c396-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.057+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.058+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c396-6e43-11ef-bc92-66f8f673b182(String), root-process-instance-start(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.059+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.059+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c397-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.059+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.059+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c397-6e43-11ef-bc92-66f8f673b182(String), activity-instance-start(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.060+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.060+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c398-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.060+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.060+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c398-6e43-11ef-bc92-66f8f673b182(String), job-acquired-failure(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.061+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.061+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c399-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.061+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.061+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c399-6e43-11ef-bc92-66f8f673b182(String), job-locked-exclusive(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.061+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.062+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c39a-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.062+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.062+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c39a-6e43-11ef-bc92-66f8f673b182(String), job-execution-rejected(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.063+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.063+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c39b-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.063+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.064+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c39b-6e43-11ef-bc92-66f8f673b182(String), executed-decision-elements(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.065+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.065+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c39c-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.065+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.066+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c39c-6e43-11ef-bc92-66f8f673b182(String), activity-instance-end(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.067+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.068+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c39d-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.068+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.070+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c39d-6e43-11ef-bc92-66f8f673b182(String), job-successful(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.072+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.072+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c39e-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.072+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.073+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c39e-6e43-11ef-bc92-66f8f673b182(String), job-acquired-success(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.075+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.075+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c39f-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.075+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.077+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c39f-6e43-11ef-bc92-66f8f673b182(String), job-acquisition-attempt(String), 127.0.1.1$default(String), 4(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.078+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.079+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c3a0-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.079+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.080+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c3a0-6e43-11ef-bc92-66f8f673b182(String), executed-decision-instances(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.081+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.082+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03009 SQL operation: 'INSERT'; Entity: 'MeterLogEntity[id=eed4c3a1-6e43-11ef-bc92-66f8f673b182]'
+2024-09-09T08:39:12.082+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==>  Preparing: insert into ACT_RU_METER_LOG (ID_, NAME_, REPORTER_, VALUE_, TIMESTAMP_, MILLISECONDS_) values ( ?, ?, ?, ?, ?, ? )
+2024-09-09T08:39:12.083+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : ==> Parameters: eed4c3a1-6e43-11ef-bc92-66f8f673b182(String), job-failed(String), 127.0.1.1$default(String), 0(Long), 2024-09-09 08:39:12.054(Timestamp), 1725842352054(Long)
+2024-09-09T08:39:12.084+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.M.insertMeterLog           : <==    Updates: 1
+2024-09-09T08:39:12.087+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- MetricsCollectionTask$MetricsCollectionCmd ----------------------
+2024-09-09T08:39:12.087+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.telemetry         : ENGINE-28001 Start telemetry sending task.
+2024-09-09T08:39:12.087+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- IsTelemetryEnabledCmd ----------------------
+2024-09-09T08:39:12.087+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:39:12.087+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.P.selectProperty           : ==>  Preparing: select * from ACT_GE_PROPERTY where NAME_ = ?
+2024-09-09T08:39:12.087+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.P.selectProperty           : ==> Parameters: camunda.telemetry.enabled(String)
+2024-09-09T08:39:12.088+08:00 TRACE 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.P.selectProperty           : <==    Columns: NAME_, VALUE_, REV_
+2024-09-09T08:39:12.088+08:00 TRACE 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.P.selectProperty           : <==        Row: camunda.telemetry.enabled, false, 1
+2024-09-09T08:39:12.088+08:00 DEBUG 22507 --- [ionShutdownHook] o.c.b.e.i.p.e.P.selectProperty           : <==      Total: 1
+2024-09-09T08:39:12.088+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:39:12.088+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.persistence       : ENGINE-03006 Cache state after flush: [
+  PERSISTENT PropertyEntity[camunda.telemetry.enabled]
+]
+2024-09-09T08:39:12.089+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- IsTelemetryEnabledCmd ----------------------
+2024-09-09T08:39:12.089+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.telemetry         : ENGINE-28009 Sending telemetry is disabled.
+2024-09-09T08:39:12.089+08:00  INFO 22507 --- [ionShutdownHook] org.camunda.bpm.engine.jobexecutor       : ENGINE-14015 Shutting down the JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor]
+2024-09-09T08:39:12.089+08:00 DEBUG 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14012 Job acquisition thread woke up
+2024-09-09T08:39:12.089+08:00  INFO 22507 --- [ingJobExecutor]] org.camunda.bpm.engine.jobexecutor       : ENGINE-14020 JobExecutor[org.camunda.bpm.engine.spring.components.jobexecutor.SpringJobExecutor] stopped job acquisition
+2024-09-09T08:39:12.089+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13005 Starting command -------------------- SchemaOperationProcessEngineClose ----------------------
+2024-09-09T08:39:12.089+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13009 opening new command context
+2024-09-09T08:39:12.089+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13011 closing existing command context
+2024-09-09T08:39:12.089+08:00 DEBUG 22507 --- [ionShutdownHook] org.camunda.bpm.engine.cmd               : ENGINE-13006 Finishing command -------------------- SchemaOperationProcessEngineClose ----------------------
+2024-09-09T08:39:12.090+08:00  INFO 22507 --- [ionShutdownHook] org.camunda.bpm.engine                   : ENGINE-00007 Process Engine default closed
+2024-09-09T08:39:12.091+08:00  INFO 22507 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-09-09T08:39:12.092+08:00  INFO 22507 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-09-09T08:39:12.092+08:00  INFO 22507 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-09-09T08:39:12.093+08:00  INFO 22507 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+
+Process finished with exit code 130 (interrupted by signal 2:SIGINT)
