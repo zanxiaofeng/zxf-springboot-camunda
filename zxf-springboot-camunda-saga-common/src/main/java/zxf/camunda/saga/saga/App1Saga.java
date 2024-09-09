@@ -25,6 +25,8 @@ public class App1Saga {
     private CamundaService camundaService;
     @Value("${saga.re-deploy}")
     private boolean sagaRedeploy;
+    @Value("${saga.register-deployment}")
+    private boolean registerDeployment;
     @Value("${camunda.bpm.job-execution.deployment-aware}")
     private boolean deploymentAware;
 
@@ -40,7 +42,7 @@ public class App1Saga {
                 return;
             }
 
-            if (deploymentAware) {
+            if (registerDeployment) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()
