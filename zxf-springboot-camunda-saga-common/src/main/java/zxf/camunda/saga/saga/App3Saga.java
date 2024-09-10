@@ -79,9 +79,9 @@ public class App3Saga {
 
     private BpmnModelInstance buildSaga() {
         SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                .activity("Task 1", "zxf.camunda.saga.task.app2.App3Task1Adapter", "R3/PT0S")
-                .activityNoRetry("Task 2", "zxf.camunda.saga.task.app2.App3Task2Adapter")
-                .activity("Task 3", "zxf.camunda.saga.task.app2.App3Task3Adapter", "R3/PT5S")
+                .activity("Task 1", "zxf.camunda.saga.task.app3.App3Task1Adapter", "R3/PT0S")
+                .activityNoRetry("Task 2", "zxf.camunda.saga.task.app3.App3Task2Adapter")
+                .activity("Task 3", "zxf.camunda.saga.task.app3.App3Task3Adapter", "R3/PT5S")
                 .end();
         return sagaBuilder.getModel();
     }

@@ -59,6 +59,7 @@ camunda:
   bpm:
     #In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
     default-number-of-retries: 11
+    auto-deployment-enabled: false
     #Disable insert data to history tables.
     history-level: none
     metrics:
