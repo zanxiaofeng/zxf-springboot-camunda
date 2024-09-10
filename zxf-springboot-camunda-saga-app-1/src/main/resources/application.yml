@@ -59,6 +59,7 @@ camunda:
   bpm:
     #In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
     default-number-of-retries: 11
+    history-level: none
     job-execution:
       enabled: true
       #Set it to true will bind the job executor to the specified version of definition(deployment)
@@ -80,7 +81,6 @@ camunda:
       #backoff-time-in-millis: 0
       #max-backoff: 0
       #backoff-decrease-threshold: 100
-
     database:
       type: mysql
       jdbc-batch-processing: false
