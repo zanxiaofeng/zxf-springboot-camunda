@@ -7,6 +7,7 @@
 - ACT_GE_*, 代表通用(General)数据。
 - ACT_RE_PROCDEF, 所有已经部署的流程定义，包含诸如详细版本，资源名称，挂起状态等信息。
 - ACT_RE_DEPLOYMENT, 
+- ACT_RU_JOBDEF, Job DEF of PROC DEF
 - ACT_RU_EXECUTION
 - ACT_RU_VARIABLE
 - ACT_RU_JOB, For automation operation

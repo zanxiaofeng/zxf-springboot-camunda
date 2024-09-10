@@ -59,7 +59,12 @@ camunda:
   bpm:
     #In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
     default-number-of-retries: 11
+    #Disable insert data to history tables.
     history-level: none
+    metrics:
+      #Disable insert data to meter tables.
+      enabled: false
+      db-reporter-activate: false
     job-execution:
       enabled: true
       #Set it to true will bind the job executor to the specified version of definition(deployment)
@@ -67,7 +72,7 @@ camunda:
       deployment-aware: false
       #job executor pool settings
       core-pool-size: 1
-      max-pool-size: 3
+      max-pool-size: 1
       queue-capacity: 6
       #keep-alive-seconds: 0
       #job acquisition settings
