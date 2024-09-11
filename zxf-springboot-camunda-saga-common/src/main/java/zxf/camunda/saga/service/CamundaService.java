@@ -23,8 +23,29 @@ public class CamundaService {
     @Value("${camunda.bpm.default-number-of-retries}")
     private int initialRetryNumber;
 
+    @Value("${saga.re-deploy}")
+    private boolean sagaRedeploy;
+    @Value("${saga.register-deployment}")
+    private boolean registerDeployment;
+
+    @Value("${saga.throw-exception}")
+    private boolean throwException;
+
     @Autowired
     private ProcessEngine processEngine;
+
+    public boolean sagaRedeploy() {
+        return sagaRedeploy;
+    }
+
+    public boolean registerDeployment() {
+        return throwException;
+    }
+
+    public boolean throwException() {
+        return throwException;
+    }
+
 
     public boolean isFirstExecution(DelegateExecution execution) {
         int totalRetryCount = getTotalRetryCount(execution);

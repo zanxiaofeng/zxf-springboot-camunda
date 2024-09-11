@@ -1,6 +1,5 @@
 # Test Step
 ## Step 1
-- Initial start app1 for create tables
 - Start App1(job-execution.enable=false, job-execution.deployment-aware=false)
 - curl http://localhost:8090/saga/app-1?count=1
 - curl http://localhost:8090/saga/app-2?count=1

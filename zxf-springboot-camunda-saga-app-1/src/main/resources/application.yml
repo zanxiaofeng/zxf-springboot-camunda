@@ -45,15 +45,16 @@ logging:
     #org.springframework.boot.autoconfigure: DEBUG
     org.camunda.bpm.engine: ERROR
     org.camunda.bpm.engine.cmd: ERROR
-    org.camunda.bpm.engine.persistence: TRACE
+    org.camunda.bpm.engine.persistence: ERROR
     org.camunda.bpm.engine.jobexecutor: ERROR
-    org.camunda.bpm.engine.impl.persistence.entity: TRACE
-    org.camunda.bpm.engine.impl.persistence.entity.JobManager: TRACE
+    org.camunda.bpm.engine.impl.persistence.entity: ERROR
+    org.camunda.bpm.engine.impl.persistence.entity.JobManager: ERROR
 
 saga:
   #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
   re-deploy: false
   register-deployment: true
+  throw-exception: true
 
 camunda:
   bpm:

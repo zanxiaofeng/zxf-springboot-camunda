@@ -29,10 +29,10 @@ public class App2Task3Adapter implements JavaDelegate {
         log.info("end  , {}", camundaService.taskInfo(execution));
     }
 
-    private static void orderServerC(DelegateExecution execution, String taskId) {
+    private void orderServerC(DelegateExecution execution, String taskId) {
         execution.setVariable("VAR_OF_TASK3", "var of task3");
 
-        if (taskId.endsWith("::3000")) {
+        if (camundaService.throwException() && taskId.endsWith("-3")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
         }

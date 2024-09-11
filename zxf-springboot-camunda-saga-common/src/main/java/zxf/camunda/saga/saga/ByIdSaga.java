@@ -19,9 +19,12 @@ public class ByIdSaga {
     @Autowired
     private CamundaService camundaService;
 
-    public void trigger(String processDefinitionId, Integer times, Integer count) {
+    public void trigger(String processDefinitionId, Integer times, Integer count, Integer start) {
         log.info("ById, {} trigger start, {}::{}", processDefinitionId, times, count);
-        for (int i = 0; i < count; i++) {
+        if (start == null) {
+            start = 10000;
+        }
+        for (int i = start; i < start + count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", processDefinitionId + "@" + times + "::" + i);
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceById(processDefinitionId, someVariables);

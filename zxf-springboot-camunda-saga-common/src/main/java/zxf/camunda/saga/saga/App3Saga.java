@@ -23,18 +23,12 @@ public class App3Saga {
     private ProcessEngine processEngine;
     @Autowired
     private CamundaService camundaService;
-    @Value("${saga.re-deploy}")
-    private boolean sagaRedeploy;
-    @Value("${saga.register-deployment}")
-    private boolean registerDeployment;
-    @Value("${camunda.bpm.job-execution.deployment-aware}")
-    private boolean deploymentAware;
 
     public void deploySaga() {
         log.info("{} deploySaga start", this.sagaName);
 
         try {
-            if (sagaRedeploy || !isSagaDeployed()) {
+            if (camundaService.sagaRedeploy() || !isSagaDeployed()) {
                 BpmnModelInstance bpmnModelInstance = buildSaga();
                 Deployment deployment = processEngine.getRepositoryService().createDeployment()
                         .addModelInstance(this.sagaName + ".bpmn", bpmnModelInstance).deploy();
@@ -42,7 +36,7 @@ public class App3Saga {
                 return;
             }
 
-            if (registerDeployment) {
+            if (camundaService.registerDeployment()) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()
@@ -56,9 +50,12 @@ public class App3Saga {
         log.info("{} deploySaga start", this.sagaName);
     }
 
-    public void trigger(String prefix, Integer times, Integer count) {
+    public void trigger(String prefix, Integer times, Integer count, Integer start) {
         log.info("{} trigger start, {}, {}::{}", this.sagaName, prefix, times, count);
-        for (int i = 0; i < count; i++) {
+        if (start == null) {
+            start = 3000;
+        }
+        for (int i = start; i < start + count; i++) {
             String taskId = prefix + "#" + times + "-" + i;
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", taskId);
@@ -79,9 +76,9 @@ public class App3Saga {
 
     private BpmnModelInstance buildSaga() {
         SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                .activity("Task 1", "zxf.camunda.saga.task.app3.App3Task1Adapter", "R3/PT0S")
-                .activityNoRetry("Task 2", "zxf.camunda.saga.task.app3.App3Task2Adapter")
-                .activity("Task 3", "zxf.camunda.saga.task.app3.App3Task3Adapter", "R3/PT5S")
+                .activity("App3-Task 1", "zxf.camunda.saga.task.app3.App3Task1Adapter", "R3/PT0S")
+                .activityNoRetry("App3-Task 2", "zxf.camunda.saga.task.app3.App3Task2Adapter")
+                .activity("App3-Task 3", "zxf.camunda.saga.task.app3.App3Task3Adapter", "R3/PT5S")
                 .end();
         return sagaBuilder.getModel();
     }

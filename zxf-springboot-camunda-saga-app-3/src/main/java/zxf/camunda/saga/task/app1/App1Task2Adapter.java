@@ -38,7 +38,7 @@ public class App1Task2Adapter implements JavaDelegate {
     private void orderServerB(DelegateExecution execution, String taskId) {
         execution.setVariable("VAR_OF_TASK2", "var of task2");
 
-        if (taskId.endsWith("::2000")) {
+        if (camundaService.throwException() && taskId.endsWith("-2")) {
             log.error("Failed to process task: {}", taskId);
             throw new RuntimeException("Failed to process task: " + taskId);
         }

@@ -23,18 +23,12 @@ public class App2Saga {
     private ProcessEngine processEngine;
     @Autowired
     private CamundaService camundaService;
-    @Value("${saga.re-deploy}")
-    private boolean sagaRedeploy;
-    @Value("${saga.register-deployment}")
-    private boolean registerDeployment;
-    @Value("${camunda.bpm.job-execution.deployment-aware}")
-    private boolean deploymentAware;
 
     public void deploySaga() {
         log.info("{} deploySaga start", this.sagaName);
 
         try {
-            if (sagaRedeploy || !isSagaDeployed()) {
+            if (camundaService.sagaRedeploy() || !isSagaDeployed()) {
                 BpmnModelInstance bpmnModelInstance = buildSaga();
                 Deployment deployment = processEngine.getRepositoryService().createDeployment()
                         .addModelInstance(this.sagaName + ".bpmn", bpmnModelInstance).deploy();
@@ -42,7 +36,7 @@ public class App2Saga {
                 return;
             }
 
-            if (registerDeployment) {
+            if (camundaService.registerDeployment()) {
                 ProcessDefinition processDefinition = processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().processDefinitionKey(this.sagaName).latestVersion().singleResult();
                 processEngine.getManagementService()
@@ -56,9 +50,12 @@ public class App2Saga {
         log.info("{} deploySaga start", this.sagaName);
     }
 
-    public void trigger(String prefix, Integer times, Integer count) {
+    public void trigger(String prefix, Integer times, Integer count, Integer start) {
         log.info("{} trigger start, {}, {}::{}", this.sagaName, prefix, times, count);
-        for (int i = 0; i < count; i++) {
+        if (start == null) {
+            start = 2000;
+        }
+        for (int i = start; i < start + count; i++) {
             String taskId = prefix + "#" + times + "-" + i;
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", taskId);
@@ -79,13 +76,13 @@ public class App2Saga {
 
     private BpmnModelInstance buildSaga() {
         SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
-                .activityNoRetry("Task 1", "zxf.camunda.saga.task.app2.App2Task1Adapter")
-                .compensationActivity("Undo Task 1", "zxf.camunda.saga.task.app2.App2Task1UndoAdapter")
-                .activityNoRetry("Task 2", "zxf.camunda.saga.task.app2.App2Task2Adapter")
-                .compensationActivity("Undo Task 2", "zxf.camunda.saga.task.app2.App2Task2UndoAdapter")
-                .activityNoRetry("Task 3", "zxf.camunda.saga.task.app2.App2Task3Adapter")
+                .activityNoRetry("App2-Task 1", "zxf.camunda.saga.task.app2.App2Task1Adapter")
+                .compensationActivity("App2-Undo Task 1", "zxf.camunda.saga.task.app2.App2Task1UndoAdapter")
+                .activityNoRetry("App2-Task 2", "zxf.camunda.saga.task.app2.App2Task2Adapter")
+                .compensationActivity("App2-Undo Task 2", "zxf.camunda.saga.task.app2.App2Task2UndoAdapter")
+                .activityNoRetry("App2-Task 3", "zxf.camunda.saga.task.app2.App2Task3Adapter")
                 .end()
-                .triggerCompensationActivityOnAnyError("Finally Undo", "zxf.camunda.saga.task.app2.App2TaskEndUndoAdapter");
+                .triggerCompensationActivityOnAnyError("App2-Finally Undo", "zxf.camunda.saga.task.app2.App2TaskEndUndoAdapter");
         //Undo flow: Undo Task 2 --> Undo Task 1 --> Finally Undo
         return sagaBuilder.getModel();
     }
