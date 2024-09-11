@@ -45,6 +45,10 @@
 - org.camunda.bpm.engine.impl.jobexecutor.DefaultJobExecutor
 - org.camunda.bpm.engine.impl.persistence.entity.JobManager.findNextJobsToExecute
 
+# Core Concept
+- The process engine is a piece of passive Java code which works in the Thread of the client. For instance, if you have a web application allowing users to start a new process instance and a user clicks on the corresponding button, some thread from the application server’s http-thread-pool will invoke the API method runtimeService.startProcessInstanceByKey(...), thus entering the process engine and starting a new process instance. We call this “borrowing the client thread”.
+- On any such external trigger (i.e., start a process, complete a task, signal an execution), the engine runtime will advance in the process until it reaches wait states on each active path of execution. A wait state is a task which is performed later, which means that the engine persists the current execution to the database and waits to be triggered again. For example in case of a user task, the external trigger on task completion causes the runtime to execute the next bit of the process until wait states are reached again (or the instance ends). In contrast to user tasks, a timer event is not triggered externally. Instead it is continued by an internal trigger. That is why the engine also needs an active component, the job executor, which is able to fetch registered jobs and process them asynchronously.
+
 # Retry and Compensate Event
 - By default, a failed job will be retried three times and the retries are performed immediately after the failure
 - Compensate Event is high priority than Retry event.
@@ -177,7 +181,16 @@
 2024-09-12T07:00:11.285+08:00 TRACE 24904 --- [nio-8090-exec-1] electJobDefinitionsByProcessDefinitionId : <==        Row: 6dad5768-7091-11ef-b9fc-26d3701852af, 1, app1-v10:3:6dad0943-7091-11ef-b9fc-26d3701852af, app1-v10, Activity-App1-Undo-Task-2-compensation, async-continuation, async-after, 1, null, null, null
 2024-09-12T07:00:11.285+08:00 DEBUG 24904 --- [nio-8090-exec-1] electJobDefinitionsByProcessDefinitionId : <==      Total: 5
 
-
+2024-09-12T07:10:39.396+08:00 DEBUG 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : ==>  Preparing: select * from ACT_RU_JOBDEF where PROC_DEF_ID_ = ?
+2024-09-12T07:10:39.396+08:00 DEBUG 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : ==> Parameters: app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af(String)
+2024-09-12T07:10:39.396+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==    Columns: ID_, REV_, PROC_DEF_ID_, PROC_DEF_KEY_, ACT_ID_, JOB_TYPE_, JOB_CONFIGURATION_, SUSPENSION_STATE_, JOB_PRIORITY_, TENANT_ID_, DEPLOYMENT_ID_
+2024-09-12T07:10:39.397+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==        Row: dcd2523a-708f-11ef-9523-26d3701852af, 1, app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af, app1-v10, Start-app1-v10, async-continuation, async-after, 1, null, null, null
+2024-09-12T07:10:39.397+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==        Row: dcd2523b-708f-11ef-9523-26d3701852af, 1, app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af, app1-v10, Activity-App1-Task-1, async-continuation, async-after, 1, null, null, null
+2024-09-12T07:10:39.397+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==        Row: dcd2523c-708f-11ef-9523-26d3701852af, 1, app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af, app1-v10, Activity-App1-Task-2, async-continuation, async-after, 1, null, null, null
+2024-09-12T07:10:39.397+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==        Row: dcd2523d-708f-11ef-9523-26d3701852af, 1, app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af, app1-v10, Activity-App1-Task-3, async-continuation, async-after, 1, null, null, null
+2024-09-12T07:10:39.398+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==        Row: dcd2523e-708f-11ef-9523-26d3701852af, 1, app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af, app1-v10, Activity-App1-Undo-Task-1-compensation, async-continuation, async-after, 1, null, null, null
+2024-09-12T07:10:39.398+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==        Row: dcd2523f-708f-11ef-9523-26d3701852af, 1, app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af, app1-v10, Activity-App1-Undo-Task-2-compensation, async-continuation, async-after, 1, null, null, null
+2024-09-12T07:10:39.398+08:00 DEBUG 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==      Total: 6
 
 # 日志：
 1. Controller一定要记录入口日志

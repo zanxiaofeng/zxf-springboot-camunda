@@ -53,8 +53,8 @@ logging:
 saga:
   #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
   re-deploy: false
-  async-before: false
-  async-after: true
+  async-before: true
+  async-after: false
   register-deployment: true
   throw-exception: true
 
@@ -70,7 +70,7 @@ camunda:
       enabled: false
       db-reporter-activate: false
     job-execution:
-      enabled: false
+      enabled: true
       #Set it to true will bind the job executor to the specified version of definition(deployment)
       #Set it to false will ignore the version of definition(deployment)
       deployment-aware: false
