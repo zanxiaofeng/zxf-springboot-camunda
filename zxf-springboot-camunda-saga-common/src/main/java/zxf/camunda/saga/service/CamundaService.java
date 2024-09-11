@@ -52,7 +52,7 @@ public class CamundaService {
         int leftRetryTimes = getLeftRetryTimes(execution);
 
         boolean isFirstExecution = leftRetryTimes == initialRetryNumber;
-        log.info("check, isFirstExecution={}, total={}, rest={}, {}", isFirstExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
+        log.info("check, isFirstCall={}, total={}, rest={}, {}", isFirstExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
         return isFirstExecution;
     }
 
@@ -61,7 +61,7 @@ public class CamundaService {
         int leftRetryTimes = getLeftRetryTimes(execution);
 
         boolean isLastExecution = totalRetryCount == 1 || leftRetryTimes == 1;
-        log.info("check, isLastExecution={}, total={}, rest={}, {}", isLastExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
+        log.info("check, isLastCall={}, total={}, rest={}, {}", isLastExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
         return isLastExecution;
     }
 
