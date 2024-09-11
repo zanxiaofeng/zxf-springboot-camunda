@@ -14,6 +14,7 @@ import zxf.camunda.saga.service.CamundaService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -51,10 +52,8 @@ public class App3Saga {
     }
 
     public void trigger(String prefix, Integer times, Integer count, Integer start) {
-        log.info("{} trigger start, {}, {}::{}", this.sagaName, prefix, times, count);
-        if (start == null) {
-            start = 3000;
-        }
+        start = Optional.ofNullable(start).orElse(3000);
+        log.info("{} trigger start, {}, {}::{}~{}", this.sagaName, prefix, times, start, count);
         for (int i = start; i < start + count; i++) {
             String taskId = prefix + "#" + times + "-" + i;
             Map<String, Object> someVariables = new HashMap<>();
@@ -64,7 +63,7 @@ public class App3Saga {
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
             log.info("{} instance, {}", this.sagaName, camundaService.instanceInfo(processInstance));
         }
-        log.info("{} trigger end, {}, {}::{}", this.sagaName, prefix, times, count);
+        log.info("{} trigger end, {}, {}::{}~{}", this.sagaName, prefix, times, start, count);
     }
 
     private Boolean isSagaDeployed() {

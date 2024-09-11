@@ -10,6 +10,7 @@ import zxf.camunda.saga.service.CamundaService;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -20,16 +21,14 @@ public class ByIdSaga {
     private CamundaService camundaService;
 
     public void trigger(String processDefinitionId, Integer times, Integer count, Integer start) {
-        log.info("ById, {} trigger start, {}::{}", processDefinitionId, times, count);
-        if (start == null) {
-            start = 10000;
-        }
+        start = Optional.ofNullable(start).orElse(10000);
+        log.info("ById, {} trigger start, {}::{}~{}", processDefinitionId, times, start, count);
         for (int i = start; i < start + count; i++) {
             Map<String, Object> someVariables = new HashMap<>();
             someVariables.put("task-id", processDefinitionId + "@" + times + "::" + i);
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceById(processDefinitionId, someVariables);
             log.info("ById, {} instance, {}", processDefinitionId, camundaService.instanceInfo(processInstance));
         }
-        log.info("ById, {} trigger end, {}::{}", processDefinitionId, times, count);
+        log.info("ById, {} trigger end, {}::{}~{}", processDefinitionId, times, start, count);
     }
 }
