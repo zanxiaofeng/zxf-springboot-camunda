@@ -11,19 +11,21 @@ import org.camunda.bpm.model.xml.impl.util.IoUtil;
 @Slf4j
 public class SagaBuilder {
     private final String name;
-    private final Boolean async;
+    private final Boolean asyncBefore;
+    private final Boolean asyncAfter;
     private ProcessBuilder process;
     @SuppressWarnings("rawtypes")
     private AbstractFlowNodeBuilder saga;
     private BpmnModelInstance bpmnModelInstance;
 
-    private SagaBuilder(String name, Boolean async) {
+    private SagaBuilder(String name, Boolean asyncBefore, Boolean asyncAfter) {
         this.name = name;
-        this.async = async;
+        this.asyncBefore = asyncBefore;
+        this.asyncAfter = asyncAfter;
     }
 
-    public static SagaBuilder newSaga(String name, Boolean async) {
-        SagaBuilder builder = new SagaBuilder(name, async);
+    public static SagaBuilder newSaga(String name, Boolean asyncBefore, Boolean asyncAfter) {
+        SagaBuilder builder = new SagaBuilder(name, asyncBefore, asyncAfter);
         return builder.start();
     }
 
@@ -37,9 +39,7 @@ public class SagaBuilder {
 
     public SagaBuilder start() {
         process = Bpmn.createExecutableProcess(name);
-        saga = process.startEvent("Start-" + name)
-                .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async);
+        saga = process.startEvent("Start-" + name);
         return this;
     }
 
@@ -57,8 +57,8 @@ public class SagaBuilder {
                 //Override the value of camunda.bpm.default-number-of-retries.
                 .camundaFailedJobRetryTimeCycle("R0/PT0S")
                 .camundaClass(adapterClass)
-                .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async);
+                .camundaAsyncBefore(asyncBefore)
+                .camundaAsyncAfter(asyncAfter);
         return this;
     }
 
@@ -69,8 +69,8 @@ public class SagaBuilder {
                 .name(name)
                 .camundaFailedJobRetryTimeCycle(retryTimeCycle)
                 .camundaClass(adapterClass)
-                .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async);
+                .camundaAsyncBefore(asyncBefore)
+                .camundaAsyncAfter(asyncAfter);
         return this;
     }
 
@@ -89,8 +89,8 @@ public class SagaBuilder {
                 .serviceTask(id)
                 .name(name)
                 .camundaClass(adapterClass)
-                .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async)
+                .camundaAsyncBefore(asyncBefore)
+                .camundaAsyncAfter(asyncAfter)
                 .compensationDone();
 
         return this;
@@ -119,8 +119,8 @@ public class SagaBuilder {
                 .serviceTask(id)
                 .name(name)
                 .camundaClass(adapterClass)
-                .camundaAsyncBefore(async)
-                .camundaAsyncAfter(async)
+                .camundaAsyncBefore(asyncBefore)
+                .camundaAsyncAfter(asyncAfter)
                 .endEvent("ErrorHandled");
 
         return this;

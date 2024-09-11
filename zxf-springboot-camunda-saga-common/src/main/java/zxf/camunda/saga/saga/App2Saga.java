@@ -75,7 +75,7 @@ public class App2Saga {
     }
 
     private BpmnModelInstance buildSaga() {
-        SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, true)
+        SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, camundaService.asyncBefore(), camundaService.asyncAfter())
                 .activityNoRetry("App2-Task 1", "zxf.camunda.saga.task.app2.App2Task1Adapter")
                 .compensationActivity("App2-Undo Task 1", "zxf.camunda.saga.task.app2.App2Task1UndoAdapter")
                 .activityNoRetry("App2-Task 2", "zxf.camunda.saga.task.app2.App2Task2Adapter")

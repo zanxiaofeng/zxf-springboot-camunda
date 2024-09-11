@@ -22,12 +22,14 @@ public class CamundaService {
     //In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
     @Value("${camunda.bpm.default-number-of-retries}")
     private int initialRetryNumber;
-
     @Value("${saga.re-deploy}")
     private boolean sagaRedeploy;
+    @Value("${saga.async-before}")
+    private boolean asyncBefore;
+    @Value("${saga.async-after}")
+    private boolean asyncAfter;
     @Value("${saga.register-deployment}")
     private boolean registerDeployment;
-
     @Value("${saga.throw-exception}")
     private boolean throwException;
 
@@ -36,6 +38,14 @@ public class CamundaService {
 
     public boolean sagaRedeploy() {
         return sagaRedeploy;
+    }
+
+    public boolean asyncBefore() {
+        return asyncBefore;
+    }
+
+    public boolean asyncAfter() {
+        return asyncAfter;
     }
 
     public boolean registerDeployment() {
