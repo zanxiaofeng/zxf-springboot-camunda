@@ -29,7 +29,7 @@ public class App2Task3Adapter implements JavaDelegate {
         log.info("end  , {}", camundaService.taskInfo(execution));
     }
 
-    private  void orderServerC(DelegateExecution execution, String taskId) {
+    private void orderServerC(DelegateExecution execution, String taskId) {
         execution.setVariable("VAR_OF_TASK3", "var of task3");
 
         if (camundaService.throwException() && taskId.endsWith("-3")) {

@@ -17,6 +17,7 @@ public class App2Task2Adapter implements JavaDelegate {
 
     @Autowired
     private CamundaService camundaService;
+
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
@@ -29,7 +30,7 @@ public class App2Task2Adapter implements JavaDelegate {
     }
 
 
-    private void orderServerB(DelegateExecution execution, String taskId){
+    private void orderServerB(DelegateExecution execution, String taskId) {
         execution.setVariable("VAR_OF_TASK2", "var of task2");
 
         if (camundaService.throwException() && taskId.endsWith("-2")) {

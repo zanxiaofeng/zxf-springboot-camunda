@@ -17,6 +17,7 @@ public class App1Task1UndoAdapter implements JavaDelegate {
 
     @Autowired
     private CamundaService camundaService;
+
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
