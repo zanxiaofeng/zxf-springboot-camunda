@@ -125,28 +125,21 @@
 # re-deploy & deployment-aware 模式
 - re-deploy=false，只在开发模式下使用
 - re-deploy=true, deployment-aware=true，必须用于生产模式
-- deployment-aware=true模式下，app1只能收到app1和common的特定版本的任务,app2只能收到app2和common的特定版本的任务.
-- deployment-aware=false模式下，app1,app2能收到所有流程(app1,app2,common)的所有版本的任务.
+- deployment-aware=true模式下，App1只能收到app1Saga和app3Saga的特定版本的任务,App2只能收到app2Saga和app4Saga的特定版本的任务,App3能收到app1Saga,app2Saga,app3Saga,app4Saga的特定版本的任务.
+- deployment-aware=false模式下，App1，App2，App3都能收到app1Saga,app2Saga,app3Saga,app4Saga的任务(不区分版本)，App3能成功执行所有Saga的任务，App1只能成功执行app1Saga,app3Sage的任务，App2只能成功执行app2Saga,app4Sage的任务; App1,App2不能处理部分Saga任务是因为相关Task的Java类不存在，执行会报错ProcessEngineException(cause=ClassNotFoundException).
 
 # Job & JavaDelegate
-- app1中可以获取到属于App2Task1Adapter的Job，但其执行结束后要加载zxf.camunda.saga.task.App2TaskEndUndoAdapter类，如果加载不到就会报Exception. 也就是说App2Task1Adapter和App2TaskEndUndoAdapter必须同时存在
-- app2中可以获取到属于App1Task1Adapter的Job,但如果进程中没有后续的类就会报错.
-- app3中可以获取到属于CommonTask1Adapter的Job,但如果进程中没有后续的类就会报错.
-- 
+- App从Camunda数据库中获取到的Job，如果该Job相关联的JavaDelegate类不存在，执行就会出错.ProcessEngineException(cause=ClassNotFoundException)
+- deployment-aware=false模式下,App可以从Camunda数据库中获取到任何的Job.
+- deployment-aware=true模式下,App只可以从Camunda数据库中获取到与已注册Deployment相关的Job.
+
 # 问题：
 ## 问题一
 - 由异构应用（不同应用的不同版本）组成的Camunda集群中，如何实现特定应用版本与特定流程版本的绑定，以便特定版本的流程任务能被调度到支持的应用版本，以避免出现版本不匹配导致的错误（如找不到任务关联的JavaDelegate类）。
 ## 问题二
 - 如何确定那个进程能处理那些Job呢？是看Job对应的Class是否在进程中存在吗？
-- 是否一个工作流实例中的多个Java Activity Job可以被分散调度到多个不同的Java进程里执行? >> 可以的。
+- 是否一个工作流实例中的多个Java Activity Job可以被分散调度到多个不同的Java进程里执行? 
 - 如果一个Java进程里没有包含运行一个工作流实例的所有Java Activity Job对应的Java类，会发生什么？
-
-
-# Deployment-Aware 模式下App的行为模式
-- App1 可以创建App3的流程，也可以收到App3的task，会因为没有相关Task类报错ProcessEngineException(cause=ClassNotFoundException)
-- App2 可以创建App1的流程，也可以收到App1的task，会因为没有相关Task类报错ProcessEngineException(cause=ClassNotFoundException)
-- App3 可以创建App2的流程，也可以收到App2的task，会因为没有相关Task类报错ProcessEngineException(cause=ClassNotFoundException)
-
 
 # 日志：
 1. Controller一定要记录入口日志
