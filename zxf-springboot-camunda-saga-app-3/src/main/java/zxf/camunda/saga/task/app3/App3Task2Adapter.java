@@ -24,6 +24,7 @@ public class App3Task2Adapter implements JavaDelegate {
         boolean isFirstExecution = camundaService.isFirstExecution(execution);
         boolean isLastExecution = camundaService.isLastExecution(execution);
         log.info("start, {}, isFirstExecution={}, isLastExecution={}", camundaService.taskInfo(execution), isFirstExecution, isLastExecution);
+        log.info("threads, {}", camundaService.threadInfo(execution));
 
         if (camundaService.throwException() && taskId.endsWith("-2")) {
             log.error("Failed to process task: {}", taskId);

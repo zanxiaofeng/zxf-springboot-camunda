@@ -11,6 +11,7 @@ import org.camunda.bpm.model.xml.impl.util.IoUtil;
 @Slf4j
 public class SagaBuilder {
     private final String name;
+    private final Boolean asyncStart;
     private final Boolean asyncBefore;
     private final Boolean asyncAfter;
     private ProcessBuilder process;
@@ -18,14 +19,15 @@ public class SagaBuilder {
     private AbstractFlowNodeBuilder saga;
     private BpmnModelInstance bpmnModelInstance;
 
-    private SagaBuilder(String name, Boolean asyncBefore, Boolean asyncAfter) {
+    private SagaBuilder(String name, Boolean asyncStart, Boolean asyncBefore, Boolean asyncAfter) {
         this.name = name;
+        this.asyncStart = asyncStart;
         this.asyncBefore = asyncBefore;
         this.asyncAfter = asyncAfter;
     }
 
-    public static SagaBuilder newSaga(String name, Boolean asyncBefore, Boolean asyncAfter) {
-        SagaBuilder builder = new SagaBuilder(name, asyncBefore, asyncAfter);
+    public static SagaBuilder newSaga(String name, Boolean asyncStart, Boolean asyncBefore, Boolean asyncAfter) {
+        SagaBuilder builder = new SagaBuilder(name, asyncStart, asyncBefore, asyncAfter);
         return builder.start();
     }
 
@@ -39,7 +41,9 @@ public class SagaBuilder {
 
     public SagaBuilder start() {
         process = Bpmn.createExecutableProcess(name);
-        saga = process.startEvent("Start-" + name);
+        saga = process.startEvent("Start-" + name)
+                .camundaAsyncBefore(asyncStart && asyncBefore)
+                .camundaAsyncAfter(asyncStart && asyncAfter);
         return this;
     }
 

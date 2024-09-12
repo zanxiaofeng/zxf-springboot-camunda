@@ -22,6 +22,7 @@ public class App2TaskEndUndoAdapter implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");
         log.info("start, {}", camundaService.taskInfo(execution));
+        log.info("threads, {}", camundaService.threadInfo(execution));
 
         String varOfTask1 = (String) execution.getVariable("VAR_OF_TASK1");
         String varOfTask2 = (String) execution.getVariable("VAR_OF_TASK2");

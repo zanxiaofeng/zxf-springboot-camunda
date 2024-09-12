@@ -24,6 +24,8 @@ public class CamundaService {
     private int initialRetryNumber;
     @Value("${saga.re-deploy}")
     private boolean sagaRedeploy;
+    @Value("${saga.async-start}")
+    private boolean asyncStart;
     @Value("${saga.async-before}")
     private boolean asyncBefore;
     @Value("${saga.async-after}")
@@ -42,6 +44,10 @@ public class CamundaService {
 
     public boolean asyncBefore() {
         return asyncBefore;
+    }
+
+    public boolean asyncStart() {
+        return asyncStart;
     }
 
     public boolean asyncAfter() {
@@ -73,6 +79,13 @@ public class CamundaService {
         boolean isLastExecution = totalRetryCount == 1 || leftRetryTimes == 1;
         log.info("check, lastCall={}, total={}, rest={}, {}", isLastExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
         return isLastExecution;
+    }
+
+    public String threadInfo(DelegateExecution execution) {
+        String threads = (String) execution.getVariable("THREADS");
+        threads = (threads == null ? "" : threads + ", ") + execution.getCurrentActivityName() + ":" + Thread.currentThread().getName();
+        execution.setVariable("THREADS", threads);
+        return threads;
     }
 
     public String instanceInfo(ProcessInstance instance) {
