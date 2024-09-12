@@ -32,7 +32,7 @@ public class App3Task3Adapter implements JavaDelegate {
             //After this, all camunda database change in this method  will be rollback(VARS...).
         }
 
-        Thread.sleep(5000);
+        Thread.sleep(8000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }

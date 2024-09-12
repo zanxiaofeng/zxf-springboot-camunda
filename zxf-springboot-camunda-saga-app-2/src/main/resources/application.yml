@@ -74,7 +74,7 @@ camunda:
       enabled: true
       #Set it to true will bind the job executor to the specified version of definition(deployment)
       #Set it to false will ignore the version of definition(deployment)
-      deployment-aware: false
+      deployment-aware: true
       #job executor pool settings
       core-pool-size: 1
       max-pool-size: 3

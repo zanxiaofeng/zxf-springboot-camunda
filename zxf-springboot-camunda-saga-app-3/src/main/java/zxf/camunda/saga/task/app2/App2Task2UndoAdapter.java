@@ -24,7 +24,7 @@ public class App2Task2UndoAdapter implements JavaDelegate {
         log.info("threads, {}", camundaService.threadInfo(execution));
 
         cancelServiceB(execution, taskId);
-        Thread.sleep(5000);
+        Thread.sleep(6000);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
     }
