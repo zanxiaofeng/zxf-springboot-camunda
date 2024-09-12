@@ -50,6 +50,13 @@ public class SagaController {
         return app3Saga.trigger(prefix, counter.addAndGet(10) + 3, count, start);
     }
 
+    @GetMapping("/saga/app-4")
+    public String app4(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
+        String prefix = "app4@" + camundaService.appName();
+        log.info("Trigger {} saga start, {}", prefix, count);
+        return app3Saga.trigger(prefix, counter.addAndGet(10) + 4, count, start);
+    }
+
     @GetMapping("/saga/byId")
     public String byId(@RequestParam Integer count, @RequestParam String processDefinitionId, @RequestParam(required = false) Integer start) {
         log.info("Trigger byId saga start, {}, {}", processDefinitionId, count);

@@ -19,7 +19,7 @@ import java.util.Optional;
 @Slf4j
 @Component
 public class App2Saga {
-    private final String sagaName = "app2-v15";
+    private final String sagaName = "app2-v16";
     @Autowired
     private ProcessEngine processEngine;
     @Autowired
