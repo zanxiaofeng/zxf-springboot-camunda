@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import zxf.camunda.saga.saga.App1Saga;
-import zxf.camunda.saga.saga.App2Saga;
-import zxf.camunda.saga.saga.App3Saga;
-import zxf.camunda.saga.saga.ByIdSaga;
+import zxf.camunda.saga.saga.*;
 import zxf.camunda.saga.service.CamundaService;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,6 +21,8 @@ public class SagaController {
     private App2Saga app2Saga;
     @Autowired
     private App3Saga app3Saga;
+    @Autowired
+    private App4Saga app4Saga;
     @Autowired
     private ByIdSaga byIdSaga;
     @Autowired
@@ -54,7 +53,7 @@ public class SagaController {
     public String app4(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
         String prefix = "app4@" + camundaService.appName();
         log.info("Trigger {} saga start, {}", prefix, count);
-        return app3Saga.trigger(prefix, counter.addAndGet(10) + 4, count, start);
+        return app4Saga.trigger(prefix, counter.addAndGet(10) + 4, count, start);
     }
 
     @GetMapping("/saga/byId")
