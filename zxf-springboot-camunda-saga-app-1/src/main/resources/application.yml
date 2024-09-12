@@ -45,9 +45,9 @@ logging:
     #org.springframework.boot.autoconfigure: DEBUG
     org.camunda.bpm.engine: ERROR
     org.camunda.bpm.engine.cmd: ERROR
-    org.camunda.bpm.engine.persistence: TRACE
+    org.camunda.bpm.engine.persistence: ERROR
     org.camunda.bpm.engine.jobexecutor: ERROR
-    org.camunda.bpm.engine.impl.persistence.entity: TRACE
+    org.camunda.bpm.engine.impl.persistence.entity: ERROR
     org.camunda.bpm.engine.impl.persistence.entity.JobManager: ERROR
 
 saga:
@@ -78,12 +78,12 @@ camunda:
       deployment-aware: false
       #job executor pool settings
       core-pool-size: 1
-      max-pool-size: 1
+      max-pool-size: 3
       queue-capacity: 6
       #keep-alive-seconds: 0
       #job acquisition settings
       # set to a small value for monitor the deployment-aware
-      max-job-per-acquisition: 1
+      max-job-per-acquisition: 2
       #lock-time-in-millis: 300000
       #wait-time-in-millis: 5000
       #max-wait: 60000

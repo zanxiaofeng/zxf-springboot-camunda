@@ -61,7 +61,7 @@ public class App1Saga {
             //This method will always create instance base on the latest version.
             //If you use business key, that business key must be unique.
             ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
-            log.info("{} instance, {}", this.sagaName, camundaService.instanceInfo(processInstance));
+            log.info("{} instance, {}, {}", this.sagaName, taskId, camundaService.instanceInfo(processInstance));
         }
         log.info("{} trigger end, {}, {}::{}~{}", this.sagaName, prefix, times, start, count);
         return String.format("%s#%d-%d~%d", prefix, times, start, count);
