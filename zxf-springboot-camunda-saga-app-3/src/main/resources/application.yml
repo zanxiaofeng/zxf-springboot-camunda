@@ -53,6 +53,7 @@ logging:
 saga:
   #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
   re-deploy: false
+  app-name: zxf-app-3
   async-start: false
   async-before: true
   async-after: false

@@ -22,6 +22,8 @@ public class CamundaService {
     //In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
     @Value("${camunda.bpm.default-number-of-retries}")
     private int initialRetryNumber;
+    @Value("${saga.app-name}")
+    private boolean appName;
     @Value("${saga.re-deploy}")
     private boolean sagaRedeploy;
     @Value("${saga.async-start}")
@@ -37,6 +39,10 @@ public class CamundaService {
 
     @Autowired
     private ProcessEngine processEngine;
+
+    public boolean appName() {
+        return appName;
+    }
 
     public boolean sagaRedeploy() {
         return sagaRedeploy;
@@ -83,7 +89,7 @@ public class CamundaService {
 
     public String threadInfo(DelegateExecution execution) {
         String threads = (String) execution.getVariable("THREADS");
-        threads = (threads == null ? "" : threads + ", ") + execution.getCurrentActivityName() + ":" + Thread.currentThread().getName();
+        threads = (threads == null ? "" : threads + ", ") + execution.getCurrentActivityName() + ":" + Thread.currentThread().getName() + "@" + appName;
         execution.setVariable("THREADS", threads);
         return threads;
     }
