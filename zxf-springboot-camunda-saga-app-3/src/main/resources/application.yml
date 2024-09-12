@@ -43,7 +43,7 @@ management:
 logging:
   level:
     #org.springframework.boot.autoconfigure: DEBUG
-    org.camunda.bpm.engine: TRACE
+    org.camunda.bpm.engine: ERROR
     org.camunda.bpm.engine.cmd: TRACE
     org.camunda.bpm.engine.bpmn.parser: TRACE
     org.camunda.bpm.engine.persistence: TRACE
@@ -71,7 +71,7 @@ camunda:
       enabled: false
       db-reporter-activate: false
     job-execution:
-      enabled: true
+      enabled: false
       #Set it to true will bind the job executor to the specified version of definition(deployment)
       #Set it to false will ignore the version of definition(deployment)
       deployment-aware: true
@@ -82,7 +82,7 @@ camunda:
       #keep-alive-seconds: 0
       #job acquisition settings
       # set to a small value for monitor the deployment-aware
-      max-job-per-acquisition: 2
+      max-job-per-acquisition: 1
       #lock-time-in-millis: 300000
       #wait-time-in-millis: 5000
       #max-wait: 60000

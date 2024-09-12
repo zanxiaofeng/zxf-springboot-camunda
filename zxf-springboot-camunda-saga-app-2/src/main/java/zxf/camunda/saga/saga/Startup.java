@@ -10,11 +10,11 @@ public class Startup {
     @Autowired
     private App2Saga app2Saga;
     @Autowired
-    private App3Saga app3Saga;
+    private App4Saga app4Saga;
 
     @PostConstruct
     public void startUp() {
         app2Saga.deploySaga();
-        app3Saga.deploySaga();
+        app4Saga.deploySaga();
     }
 }

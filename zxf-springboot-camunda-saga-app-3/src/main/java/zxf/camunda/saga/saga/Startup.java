@@ -9,12 +9,10 @@ import javax.annotation.PostConstruct;
 public class Startup {
     @Autowired
     private App1Saga app1Saga;
-
     @Autowired
     private App2Saga app2Saga;
     @Autowired
     private App3Saga app3Saga;
-
     @Autowired
     private App4Saga app4Saga;
 

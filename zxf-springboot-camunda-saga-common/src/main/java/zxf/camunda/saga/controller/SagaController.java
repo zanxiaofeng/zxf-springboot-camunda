@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import zxf.camunda.saga.saga.*;
 import zxf.camunda.saga.service.CamundaService;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
@@ -28,32 +30,43 @@ public class SagaController {
     @Autowired
     private CamundaService camundaService;
 
+    @GetMapping("/saga/all")
+    public String all(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
+        int times = counter.addAndGet(10);
+        start = Optional.ofNullable(start).orElse(10000);
+        log.info("Trigger all@{} saga start, {}::{}-{}", camundaService.appName(), times, start, count);
+        for (int number = start; number < start + count; number++) {
+            app1Saga.createInstance(times, number);
+            app2Saga.createInstance(times, number);
+            app3Saga.createInstance(times, number);
+            app4Saga.createInstance(times, number);
+        }
+        log.info("Trigger all@{} saga end, {}::{}-{}", camundaService.appName(), times, start, count);
+        return LocalDateTime.now().toString();
+    }
+
     @GetMapping("/saga/app-1")
     public String app1(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
-        String prefix = "app1@" + camundaService.appName();
-        log.info("Trigger {} saga start, {}", prefix, count);
-        return app1Saga.trigger(prefix, counter.addAndGet(10) + 1, count, start);
+        log.info("Trigger {} saga start, {}", app1Saga.getPrefix(), count);
+        return app1Saga.trigger(counter.addAndGet(10) + 1, count, start);
     }
 
     @GetMapping("/saga/app-2")
     public String app2(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
-        String prefix = "app2@" + camundaService.appName();
-        log.info("Trigger {} saga start, {}", prefix, count);
-        return app2Saga.trigger(prefix, counter.addAndGet(10) + 2, count, start);
+        log.info("Trigger {} saga start, {}", app2Saga.getPrefix(), count);
+        return app2Saga.trigger(counter.addAndGet(10) + 2, count, start);
     }
 
     @GetMapping("/saga/app-3")
     public String app3(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
-        String prefix = "app3@" + camundaService.appName();
-        log.info("Trigger {} saga start, {}", prefix, count);
-        return app3Saga.trigger(prefix, counter.addAndGet(10) + 3, count, start);
+        log.info("Trigger {} saga start, {}", app3Saga.getPrefix(), count);
+        return app3Saga.trigger(counter.addAndGet(10) + 3, count, start);
     }
 
     @GetMapping("/saga/app-4")
     public String app4(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
-        String prefix = "app4@" + camundaService.appName();
-        log.info("Trigger {} saga start, {}", prefix, count);
-        return app4Saga.trigger(prefix, counter.addAndGet(10) + 4, count, start);
+        log.info("Trigger {} saga start, {}", app4Saga.getPrefix(), count);
+        return app4Saga.trigger(counter.addAndGet(10) + 4, count, start);
     }
 
     @GetMapping("/saga/byId")

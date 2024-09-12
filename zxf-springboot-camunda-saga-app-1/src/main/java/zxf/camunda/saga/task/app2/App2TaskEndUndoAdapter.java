@@ -1,4 +1,4 @@
-package zxf.camunda.saga.task.app1;
+package zxf.camunda.saga.task.app2;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -9,9 +9,9 @@ import zxf.camunda.saga.service.CamundaService;
 
 @Slf4j
 @Component
-public class App1Task3Adapter implements JavaDelegate {
+public class App2TaskEndUndoAdapter implements JavaDelegate {
 
-    public App1Task3Adapter() {
+    public App2TaskEndUndoAdapter() {
         log.info("ctor()");
     }
 
@@ -24,18 +24,11 @@ public class App1Task3Adapter implements JavaDelegate {
         log.info("start, {}", camundaService.taskInfo(execution));
         log.info("threads, {}", camundaService.threadInfo(execution));
 
-        orderServerC(execution, taskId);
-        Thread.sleep(5000);
+        String varOfTask1 = (String) execution.getVariable("VAR_OF_TASK1");
+        String varOfTask2 = (String) execution.getVariable("VAR_OF_TASK2");
+        String varOfTask3 = (String) execution.getVariable("VAR_OF_TASK3");
+        log.info("vars, taskId={}, VAR_OF_TASK1={}, VAR_OF_TASK2={}, VAR_OF_TASK3={}", taskId, varOfTask1, varOfTask2, varOfTask3);
 
         log.info("end  , {}", camundaService.taskInfo(execution));
-    }
-
-    private void orderServerC(DelegateExecution execution, String taskId) {
-        execution.setVariable("VAR_OF_TASK3", "var of task3");
-
-        if (camundaService.throwException() && taskId.endsWith("-3")) {
-            log.error("Failed to process task: {}", taskId);
-            throw new RuntimeException("Failed to process task: " + taskId);
-        }
     }
 }

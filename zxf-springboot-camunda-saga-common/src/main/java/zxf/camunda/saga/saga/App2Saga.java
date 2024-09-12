@@ -7,7 +7,6 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.service.CamundaService;
@@ -51,20 +50,28 @@ public class App2Saga {
         log.info("{} deploySaga start", this.sagaName);
     }
 
-    public String trigger(String prefix, Integer times, Integer count, Integer start) {
+    public String trigger(Integer times, Integer count, Integer start) {
         start = Optional.ofNullable(start).orElse(2000);
-        log.info("{} trigger start, {}, {}::{}~{}", this.sagaName, prefix, times, start, count);
+        log.info("{} trigger start, {}, {}::{}~{}", this.sagaName, getPrefix(), times, start, count);
         for (int i = start; i < start + count; i++) {
-            String taskId = prefix + "#" + times + "-" + i;
-            Map<String, Object> someVariables = new HashMap<>();
-            someVariables.put("task-id", taskId);
-            //This method will always create instance base on the latest version.
-            //If you use business key, that business key must be unique.
-            ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
-            log.info("{} instance, {}", this.sagaName, camundaService.instanceInfo(processInstance));
+            createInstance(times, i);
         }
-        log.info("{} trigger end, {}, {}::{}~{}", this.sagaName, prefix, times, start, count);
-        return String.format("%s#%d-%d~%d", prefix, times, start, count);
+        log.info("{} trigger end, {}, {}::{}~{}", this.sagaName, getPrefix(), times, start, count);
+        return String.format("%s#%d-%d~%d", getPrefix(), times, start, count);
+    }
+
+    public void createInstance(Integer times, int number) {
+        String taskId = getPrefix() + "#" + times + "-" + number;
+        Map<String, Object> someVariables = new HashMap<>();
+        someVariables.put("task-id", taskId);
+        //This method will always create instance base on the latest version.
+        //If you use business key, that business key must be unique.
+        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey(this.sagaName, someVariables);
+        log.info("{} instance, {}, {}", this.sagaName, taskId, camundaService.instanceInfo(processInstance));
+    }
+
+    public String getPrefix() {
+        return "app2@" + camundaService.appName();
     }
 
     private Boolean isSagaDeployed() {

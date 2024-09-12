@@ -9,13 +9,12 @@ import javax.annotation.PostConstruct;
 public class Startup {
     @Autowired
     private App1Saga app1Saga;
-
     @Autowired
-    private App2Saga app2Saga;
+    private App3Saga app3Saga;
 
     @PostConstruct
     public void startUp() {
         app1Saga.deploySaga();
-        app2Saga.deploySaga();
+        app3Saga.deploySaga();
     }
 }
