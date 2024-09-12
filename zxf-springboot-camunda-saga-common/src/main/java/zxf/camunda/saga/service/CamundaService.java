@@ -26,8 +26,6 @@ public class CamundaService {
     private String appName;
     @Value("${saga.re-deploy}")
     private boolean sagaRedeploy;
-    @Value("${saga.async-start}")
-    private boolean asyncStart;
     @Value("${saga.async-before}")
     private boolean asyncBefore;
     @Value("${saga.async-after}")
@@ -46,10 +44,6 @@ public class CamundaService {
 
     public boolean sagaRedeploy() {
         return sagaRedeploy;
-    }
-
-    public boolean asyncStart() {
-        return asyncStart;
     }
 
     public boolean asyncBefore() {

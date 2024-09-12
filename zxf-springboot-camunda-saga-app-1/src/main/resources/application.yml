@@ -48,13 +48,11 @@ logging:
     org.camunda.bpm.engine.persistence: ERROR
     org.camunda.bpm.engine.jobexecutor: ERROR
     org.camunda.bpm.engine.impl.persistence.entity: ERROR
-    org.camunda.bpm.engine.impl.persistence.entity.JobManager: ERROR
 
 saga:
   #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
   re-deploy: false
   app-name: zxf-app-1
-  async-start: false
   async-before: true
   async-after: false
   register-deployment: true
