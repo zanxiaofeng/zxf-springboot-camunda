@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @RestController
 public class SagaController {
-    private final AtomicInteger counter = new AtomicInteger(7);
+    private final AtomicInteger counter = new AtomicInteger(0);
     @Autowired
     private App1Saga app1Saga;
     @Autowired
@@ -33,26 +33,26 @@ public class SagaController {
     public String app1(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
         String prefix = "app1@" + camundaService.appName();
         log.info("Trigger {} saga start, {}", prefix, count);
-        return app1Saga.trigger(prefix, counter.addAndGet(10), count, start);
+        return app1Saga.trigger(prefix, counter.addAndGet(10) + 1, count, start);
     }
 
     @GetMapping("/saga/app-2")
     public String app2(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
         String prefix = "app2@" + camundaService.appName();
         log.info("Trigger {} saga start, {}", prefix, count);
-        return app2Saga.trigger(prefix, counter.addAndGet(10), count, start);
+        return app2Saga.trigger(prefix, counter.addAndGet(10) + 2, count, start);
     }
 
     @GetMapping("/saga/app-3")
     public String app3(@RequestParam Integer count, @RequestParam(required = false) Integer start) {
         String prefix = "app3@" + camundaService.appName();
         log.info("Trigger {} saga start, {}", prefix, count);
-        return app3Saga.trigger(prefix, counter.addAndGet(10), count, start);
+        return app3Saga.trigger(prefix, counter.addAndGet(10) + 3, count, start);
     }
 
     @GetMapping("/saga/byId")
     public String byId(@RequestParam Integer count, @RequestParam String processDefinitionId, @RequestParam(required = false) Integer start) {
         log.info("Trigger byId saga start, {}, {}", processDefinitionId, count);
-        return byIdSaga.trigger(processDefinitionId, counter.addAndGet(10), count, start);
+        return byIdSaga.trigger(processDefinitionId, counter.addAndGet(10) + 4, count, start);
     }
 }

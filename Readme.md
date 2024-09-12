@@ -192,6 +192,12 @@
 2024-09-12T07:10:39.398+08:00 TRACE 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==        Row: dcd2523f-708f-11ef-9523-26d3701852af, 1, app1-v10:2:dcd20419-708f-11ef-9523-26d3701852af, app1-v10, Activity-App1-Undo-Task-2-compensation, async-continuation, async-after, 1, null, null, null
 2024-09-12T07:10:39.398+08:00 DEBUG 31411 --- [aTaskExecutor-1] electJobDefinitionsByProcessDefinitionId : <==      Total: 6
 
+# 
+- app1 不能创建app3的流程，因为没有app3的起始类，但可以收到app3的task，会报错ProcessEngineException(cause=ClassNotFoundException)
+- app2 不能创建app1的流程，因为没有app1的起始类，但可以收到app3的task，会报错ProcessEngineException(cause=ClassNotFoundException)
+- app3 可以创建app2的流程，因为有app2的起始类，也可以收到app2的task，会报错ProcessEngineException(cause=ClassNotFoundException)
+
+
 # 日志：
 1. Controller一定要记录入口日志
 2. 通过线程起的任务也要有入口日志

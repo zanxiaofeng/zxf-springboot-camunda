@@ -47,7 +47,7 @@ logging:
     org.camunda.bpm.engine.cmd: ERROR
     org.camunda.bpm.engine.persistence: ERROR
     org.camunda.bpm.engine.jobexecutor: ERROR
-    org.camunda.bpm.engine.impl.persistence.entity: ERROR
+    org.camunda.bpm.engine.impl.persistence.entity: TRACE
     org.camunda.bpm.engine.impl.persistence.entity.JobManager: ERROR
 
 saga:

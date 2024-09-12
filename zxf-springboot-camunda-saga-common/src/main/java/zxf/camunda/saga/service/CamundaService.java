@@ -48,12 +48,12 @@ public class CamundaService {
         return sagaRedeploy;
     }
 
-    public boolean asyncBefore() {
-        return asyncBefore;
-    }
-
     public boolean asyncStart() {
         return asyncStart;
+    }
+
+    public boolean asyncBefore() {
+        return asyncBefore;
     }
 
     public boolean asyncAfter() {
