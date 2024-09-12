@@ -54,7 +54,7 @@ saga:
   re-deploy: false
   app-name: zxf-app-1
   async-before: true
-  async-after: false
+  async-after: true
   register-deployment: true
   throw-exception: true
 
