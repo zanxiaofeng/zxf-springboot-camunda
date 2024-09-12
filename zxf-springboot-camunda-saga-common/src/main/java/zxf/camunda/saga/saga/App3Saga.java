@@ -19,7 +19,7 @@ import java.util.Optional;
 @Slf4j
 @Component
 public class App3Saga {
-    private final String sagaName = "app3-v14";
+    private final String sagaName = "app3-v15";
     @Autowired
     private ProcessEngine processEngine;
     @Autowired
@@ -75,7 +75,7 @@ public class App3Saga {
     }
 
     private BpmnModelInstance buildSaga() {
-        SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, camundaService.asyncStart(), camundaService.asyncBefore(), camundaService.asyncAfter())
+        SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, camundaService.asyncBefore(), camundaService.asyncAfter())
                 .activity("App3-Task 1", "zxf.camunda.saga.task.app3.App3Task1Adapter", "R3/PT0S")
                 .activityNoRetry("App3-Task 2", "zxf.camunda.saga.task.app3.App3Task2Adapter")
                 .activity("App3-Task 3", "zxf.camunda.saga.task.app3.App3Task3Adapter", "R3/PT5S")

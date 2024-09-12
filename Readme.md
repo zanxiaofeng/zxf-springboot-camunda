@@ -143,9 +143,9 @@
 
 
 # Deployment-Aware 模式下App的行为模式
-- App1 不能创建App3的流程，因为没有App3的起始类，但可以收到app3的task，会报错ProcessEngineException(cause=ClassNotFoundException)
-- App2 不能创建App1的流程，因为没有app1的起始类，但可以收到app3的task，会报错ProcessEngineException(cause=ClassNotFoundException)
-- App3 可以创建App2的流程，因为它有App2的起始类，也可以收到app2的task，会报错ProcessEngineException(cause=ClassNotFoundException)
+- App1 可以创建App3的流程，也可以收到App3的task，会因为没有相关Task类报错ProcessEngineException(cause=ClassNotFoundException)
+- App2 可以创建App1的流程，也可以收到App1的task，会因为没有相关Task类报错ProcessEngineException(cause=ClassNotFoundException)
+- App3 可以创建App2的流程，也可以收到App2的task，会因为没有相关Task类报错ProcessEngineException(cause=ClassNotFoundException)
 
 
 # 日志：

@@ -44,6 +44,8 @@ logging:
   level:
     #org.springframework.boot.autoconfigure: DEBUG
     org.camunda.bpm.engine: ERROR
+    org.camunda.bpm.engine.util: TRACE
+
     org.camunda.bpm.engine.cmd: ERROR
     org.camunda.bpm.engine.persistence: ERROR
     org.camunda.bpm.engine.jobexecutor: ERROR
