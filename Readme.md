@@ -18,6 +18,7 @@
 - https://github.com/camunda/camunda-bpm-examples/
 - https://docs.camunda.org/manual/latest/user-guide/spring-boot-integration/
 - camunda-bpm-spring-boot-starter-7.21.0.jar!/META-INF/spring-configuration-metadata.json
+- camunda-engine-7.21.0.jar!/org/camunda/bpm/engine/impl/mapping/entity/ProcessDefinition.xml
 
 
 ## Key Classes
@@ -90,7 +91,9 @@
 ## Camunda UI(Setup admin)
 - http://localhost:8090/
 - http://localhost:8091/
+- http://localhost:8092/
 ## app-1(变更流程需要升级版本)
+- http://localhost:8090/saga/all?count=100
 - http://localhost:8090/saga/app-1?count=100
 - http://localhost:8090/saga/app-2?count=100
 - http://localhost:8090/saga/app-3?count=100
@@ -101,6 +104,7 @@
 - http://localhost:8091/info/jobs/failed
 - http://localhost:8090/info/deployments/registered
 ## app-2(变更流程需要升级版本)
+- http://localhost:8091/saga/all?count=100
 - http://localhost:8091/saga/app-1?count=100
 - http://localhost:8091/saga/app-2?count=100
 - http://localhost:8091/saga/app-3?count=100
@@ -112,6 +116,7 @@
 - http://localhost:8091/info/deployments/registered
 
 ## app-3(变更流程需要升级版本)
+- http://localhost:8092/saga/all?count=100
 - http://localhost:8092/saga/app-1?count=100
 - http://localhost:8092/saga/app-2?count=100
 - http://localhost:8092/saga/app-3?count=100
