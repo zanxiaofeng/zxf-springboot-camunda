@@ -138,6 +138,10 @@
 - deployment-aware=false模式下,App可以从Camunda数据库中获取到任何的Job.
 - deployment-aware=true模式下,App只可以从Camunda数据库中获取到与已注册Deployment相关的Job.
 
+# Job Acquisition
+- 连续多次获取不到Job，Job Acquisition会逐渐降低获取Job的频率，直到下次获取到Job后Reset.
+- 当前实例在调用startProcessInstanceBy**函数后，会立即触发Job Acquisition并Reset Job Acquisition.
+
 # 问题：
 ## 问题一
 - 由异构应用（不同应用的不同版本）组成的Camunda集群中，如何实现特定应用版本与特定流程版本的绑定，以便特定版本的流程任务能被调度到支持的应用版本，以避免出现版本不匹配导致的错误（如找不到任务关联的JavaDelegate类）。
