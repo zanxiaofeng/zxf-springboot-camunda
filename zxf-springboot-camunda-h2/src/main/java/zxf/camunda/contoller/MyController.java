@@ -52,13 +52,11 @@ public class MyController {
     public void completeProcessTask(@PathVariable String processKey, @PathVariable String taskId) {
         log.info("MyController::completeProcessTask, " + processKey, ", " + taskId);
         processEngine.getTaskService().complete(taskId);
-        log.info("MyController::completeProcessTask, task: {}", taskId);
     }
 
     @GetMapping("/deployments/registered")
     public List<String> registeredDeployments() {
         log.info("MyController::registeredDeployments");
-        log.info("registeredDeployments");
         Set<String> registeredDeployments = processEngine.getManagementService().getRegisteredDeployments();
         return registeredDeployments.stream().map((deploymentId) -> processEngine.getRepositoryService().createProcessDefinitionQuery().deploymentId(deploymentId).singleResult()).map(this::definitionInfo).collect(Collectors.toList());
     }
