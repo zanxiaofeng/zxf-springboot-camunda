@@ -24,7 +24,7 @@ public class MyController {
     }
 
     @GetMapping("/task-complete")
-    public void completeTask(@PathVariable String taskId) {
+    public void completeTask(@RequestParam String taskId) {
         log.info("completeTask, {}", taskId);
         processEngine.getTaskService().complete(taskId);
     }
