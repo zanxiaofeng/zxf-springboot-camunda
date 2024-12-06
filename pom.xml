@@ -10,6 +10,8 @@
 
     <modules>
         <module>zxf-springboot-camunda-h2</module>
+        <module>zxf-springboot-camunda-arch-app</module>
+        <module>zxf-springboot-camunda-arch-rest</module>
         <module>zxf-springboot-camunda-saga-common</module>
         <module>zxf-springboot-camunda-saga-app-1</module>
         <module>zxf-springboot-camunda-saga-app-2</module>

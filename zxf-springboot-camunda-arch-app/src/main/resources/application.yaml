@@ -1,0 +1,66 @@
+server:
+  port: 8190
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./camunda-h2-database
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+logging:
+  level:
+    org.camunda.bpm.engine: ERROR
+    org.camunda.bpm.engine.cmd: TRACE
+    org.camunda.bpm.engine.persistence: TRACE
+    org.camunda.bpm.engine.jobexecutor: TRACE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+camunda.bpm:
+  generic-properties:
+    properties:
+      historyTimeToLive: P1D
+  admin-user:
+    id: demo
+    password: demo
+  authorization:
+    enabled: false
+  application:
+    delete-upon-undeploy: false
+    scan-for-process-definitions: false
+    deploy-changed-only: true
+    resume-previous-versions: true
+    resume-previous-by: a value
+  job-execution:
+    enabled: true
+    deployment-aware: false
+    #job executor pool settings
+    core-pool-size: 5
+    max-pool-size: 10
+    queue-capacity: 6
+    keep-alive-seconds: 0
+    #job acquisition settings
+    max-job-per-acquisition: 6
+    lock-time-in-millis: 300000
+    wait-time-in-millis: 5000
+    max-wait: 60000
+    wait-increase-factor: 2
+    #backoff settings
+    backoff-time-in-millis: 0
+    max-backoff: 0
+    backoff-decrease-threshold: 100
+  metrics:
+    enabled: false
+    db-reporter-activate: false

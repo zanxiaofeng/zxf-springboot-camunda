@@ -1,4 +1,4 @@
-package zxf.camunda;
+package zxf.camunda.arch.app;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;

@@ -1,0 +1,12 @@
+server:
+  port: 8191
+
+logging:
+  level:
+    org.camunda.bpm.engine: ERROR
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
