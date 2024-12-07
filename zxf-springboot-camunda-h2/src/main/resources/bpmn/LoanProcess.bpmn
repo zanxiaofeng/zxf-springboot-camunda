@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.29.0">
+  <bpmn:process id="LoanProcess" name="LoanProcess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_2y4re2e" name="Start">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_14bdz4q</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_14bdz4q" sourceRef="StartEvent_2y4re2e" targetRef="Activity_1mor6rr" />
+    <bpmn:endEvent id="EndEvent_1y4bj2w" name="End">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1s49wir</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0d726xt" sourceRef="ServiceTask_1tvk8uj" targetRef="Activity_08igk5s" />
+    <bpmn:sequenceFlow id="SequenceFlow_1s49wir" sourceRef="UserTask_0eay4mh" targetRef="EndEvent_1y4bj2w" />
+    <bpmn:userTask id="UserTask_0eay4mh" name="Loan Approve">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+        <camunda:inputOutput>
+          <camunda:outputParameter name="loanApproveResponse">
+            <camunda:script scriptFormat="freemarker" resource="templates/loan.approve.response.ftl" />
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0m2uq0a</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1s49wir</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="ServiceTask_1tvk8uj" name="Loan Request" camunda:delegateExpression="${loanRequestDelegate}">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1m75dpu</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0d726xt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1foaprw" sourceRef="Activity_1mor6rr" targetRef="Activity_1xu7hd3" />
+    <bpmn:scriptTask id="Activity_1mor6rr" name="Prepare  Loan Request" scriptFormat="freemarker" camunda:resultVariable="loanRequestRequestString">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_14bdz4q</bpmn:incoming>
+      <bpmn:incoming>Flow_0rxqh05</bpmn:incoming>
+      <bpmn:outgoing>Flow_1foaprw</bpmn:outgoing>
+      <bpmn:script>{
+    "amount": #{amount}
+}</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:boundaryEvent id="Event_02ddah1" name="Loan Request Precheck Failed" attachedToRef="UserTask_0eay4mh">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1sjqk78</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_0b49vrp" camunda:variableName="amount">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${loanRequestRequest.amount &gt;= 200000}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1sjqk78" sourceRef="Event_02ddah1" targetRef="Event_0cwuxgn" />
+    <bpmn:intermediateCatchEvent id="Event_0cwuxgn" name="Wait for Loan Request Updated">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1sjqk78</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rxqh05</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0eakos8" messageRef="Message_0ai2r1e" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_0rxqh05" sourceRef="Event_0cwuxgn" targetRef="Activity_1mor6rr" />
+    <bpmn:serviceTask id="Activity_08igk5s" name="Prepare Loan Approve" camunda:delegateExpression="${deserializeDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="loanApproveRequestString">
+            <camunda:script scriptFormat="freemarker" resource="templates/loan.approve.request.ftl" />
+          </camunda:inputParameter>
+          <camunda:inputParameter name="variableIn">loanApproveRequestString</camunda:inputParameter>
+          <camunda:inputParameter name="variableOut">loanApproveRequest</camunda:inputParameter>
+        </camunda:inputOutput>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0d726xt</bpmn:incoming>
+      <bpmn:outgoing>Flow_0m2uq0a</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0m2uq0a" sourceRef="Activity_08igk5s" targetRef="UserTask_0eay4mh" />
+    <bpmn:sequenceFlow id="Flow_1m75dpu" sourceRef="Activity_1xu7hd3" targetRef="ServiceTask_1tvk8uj" />
+    <bpmn:serviceTask id="Activity_1xu7hd3" name="Deserialize" camunda:delegateExpression="${deserializeDelegate}">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+        <camunda:inputOutput>
+          <camunda:inputParameter name="variableIn">loanRequestRequestString</camunda:inputParameter>
+          <camunda:inputParameter name="variableOut">loanRequestRequest</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1foaprw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m75dpu</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_0ai2r1e" name="LoanProcess.LoanRequestUpdated" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="LoanProcess">
+      <bpmndi:BPMNShape id="UserTask_0eay4mh_di" bpmnElement="UserTask_0eay4mh">
+        <dc:Bounds x="1080" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fru46j_di" bpmnElement="Activity_1mor6rr">
+        <dc:Bounds x="300" y="90" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_2y4re2e">
+        <dc:Bounds x="173" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="180" y="155" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1amlswz_di" bpmnElement="Activity_08igk5s">
+        <dc:Bounds x="890" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1y4bj2w_di" bpmnElement="EndEvent_1y4bj2w">
+        <dc:Bounds x="1262" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1270" y="165" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1oz42uq_di" bpmnElement="Event_0cwuxgn">
+        <dc:Bounds x="732" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="708" y="295" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1tvk8uj_di" bpmnElement="ServiceTask_1tvk8uj">
+        <dc:Bounds x="693" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02g8l6e_di" bpmnElement="Activity_1xu7hd3">
+        <dc:Bounds x="487" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ioitla_di" bpmnElement="Event_02ddah1">
+        <dc:Bounds x="1112" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1092" y="205" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_14bdz4q_di" bpmnElement="SequenceFlow_14bdz4q">
+        <di:waypoint x="209" y="130" />
+        <di:waypoint x="300" y="130" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="197" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0d726xt_di" bpmnElement="SequenceFlow_0d726xt">
+        <di:waypoint x="793" y="140" />
+        <di:waypoint x="890" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="366" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1s49wir_di" bpmnElement="SequenceFlow_1s49wir">
+        <di:waypoint x="1180" y="140" />
+        <di:waypoint x="1262" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="544" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1foaprw_di" bpmnElement="Flow_1foaprw">
+        <di:waypoint x="400" y="140" />
+        <di:waypoint x="487" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sjqk78_di" bpmnElement="Flow_1sjqk78">
+        <di:waypoint x="1130" y="198" />
+        <di:waypoint x="1130" y="270" />
+        <di:waypoint x="768" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rxqh05_di" bpmnElement="Flow_0rxqh05">
+        <di:waypoint x="732" y="270" />
+        <di:waypoint x="350" y="270" />
+        <di:waypoint x="350" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0m2uq0a_di" bpmnElement="Flow_0m2uq0a">
+        <di:waypoint x="990" y="140" />
+        <di:waypoint x="1080" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m75dpu_di" bpmnElement="Flow_1m75dpu">
+        <di:waypoint x="587" y="140" />
+        <di:waypoint x="693" y="140" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

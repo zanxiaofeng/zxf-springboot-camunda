@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class CamundaService {
     private ProcessEngine processEngine;
 
     public String instanceInfo(ProcessInstance instance) {
-        return String.format("(ProcessInstanceId=%s, %s, ProcessDefinitionId=%s, BusinessKey=%s, CaseInstanceId=%s, isSuspended=%s, TenantId=%s)", instance.getProcessInstanceId(), instance.getRootProcessInstanceId(), instance.getProcessDefinitionId(), instance.getBusinessKey(), instance.getCaseInstanceId(), instance.isSuspended(), instance.getTenantId());
+        return String.format("(ProcessInstanceId=%s, ProcessDefinitionId=%s, BusinessKey=%s, CaseInstanceId=%s, isSuspended=%s, TenantId=%s)", instance.getProcessInstanceId(), instance.getProcessDefinitionId(), instance.getBusinessKey(), instance.getCaseInstanceId(), instance.isSuspended(), instance.getTenantId());
     }
 
     public String definitionInfo(ProcessDefinition definition) {
@@ -24,12 +25,14 @@ public class CamundaService {
     }
 
     public String jobInfo(Job job) {
-        return String.format("(Id=%s, Duedate=%s, ProcessInstanceId=%s,%s, ProcessDefinitionId=%s, ExecutionId=%s, Retries=%d, ExceptionMessage=%s, FailedActivityId=%s, DeploymentId=%s, JobDefinitionId=%s, IsSuspended=%s, Priority=%d, CreateTime=%s, TenantId=%s)", job.getId(), job.getDuedate(), job.getProcessInstanceId(), job.getRootProcessInstanceId(), job.getProcessDefinitionId(), job.getExecutionId(), job.getRetries(), job.getExceptionMessage(), job.getFailedActivityId(), job.getDeploymentId(), job.getJobDefinitionId(), job.isSuspended(), job.getPriority(), job.getCreateTime(), job.getTenantId());
+        return String.format("(Id=%s, Duedate=%s, ProcessInstanceId=%s, ProcessDefinitionId=%s, ExecutionId=%s, Retries=%d, ExceptionMessage=%s, FailedActivityId=%s, DeploymentId=%s, JobDefinitionId=%s, IsSuspended=%s, Priority=%d, CreateTime=%s, TenantId=%s)", job.getId(), job.getDuedate(), job.getProcessInstanceId(), job.getProcessDefinitionId(), job.getExecutionId(), job.getRetries(), job.getExceptionMessage(), job.getFailedActivityId(), job.getDeploymentId(), job.getJobDefinitionId(), job.isSuspended(), job.getPriority(), job.getCreateTime(), job.getTenantId());
     }
 
     public String executionInfo(DelegateExecution execution) {
-        return String.format("(Id=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, CurrentActivityName=%s, BusinessKey=%s, Variables=%s)", execution.getId(),
-                execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getCurrentActivityName(),
-                execution.getBusinessKey(), execution.getVariables());
+        return String.format("(Id=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, CurrentActivityName=%s, BusinessKey=%s, Variables=%s)", execution.getId(), execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getCurrentActivityName(), execution.getBusinessKey(), execution.getVariables());
+    }
+
+    public String executionInfo(Execution execution) {
+        return String.format("(Id=%s, ProcessInstanceId=%s)", execution.getId(), execution.getProcessInstanceId());
     }
 }

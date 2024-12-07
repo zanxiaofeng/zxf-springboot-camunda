@@ -69,24 +69,6 @@
 - 进程部署或重新部署的流程Deployment会在部署后自动注册.
 - 可以通过调用ManagementService::registerDeploymentForJobExecutor来注册特定的部署.
 
-# zxf-springboot-camunda-h2
-## Camunda UI
-- http://localhost:8080/
-
-## Actuator UI
-- http://localhost:8080/actuator
-
-## H2 UI
-- http://localhost:8080/h2
-
-## Start process instance
-- http://localhost:8080/deployments/registered
-- http://localhost:8080/process/loanRequest/definitions
-- http://localhost:8080/process/loanRequest/start
-- http://localhost:8080/process/loanRequest/instances
-- http://localhost:8080/process/loanRequest/tasks
-- http://localhost:8080/process/loanRequest/tasks/{taskId}/complete
-
 # zxf-springboot-camunda-saga
 ## Camunda UI(Setup admin)
 - http://localhost:8090/
