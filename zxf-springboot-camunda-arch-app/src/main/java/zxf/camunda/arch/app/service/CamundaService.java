@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
+import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,10 @@ public class CamundaService {
     }
 
     public String executionInfo(DelegateExecution execution) {
-        return String.format("(Id=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, CurrentActivityName=%s, BusinessKey=%s, Variables=%s)", execution.getId(),
-                execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getCurrentActivityName(),
-                execution.getBusinessKey(), execution.getVariables());
+        return String.format("(Id=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, CurrentActivityName=%s, BusinessKey=%s, Variables=%s)", execution.getId(), execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getCurrentActivityName(), execution.getBusinessKey(), execution.getVariables());
+    }
+
+    public String executionInfo(Execution execution) {
+        return String.format("(Id=%s, ProcessInstanceId=%s)", execution.getId(), execution.getProcessInstanceId());
     }
 }

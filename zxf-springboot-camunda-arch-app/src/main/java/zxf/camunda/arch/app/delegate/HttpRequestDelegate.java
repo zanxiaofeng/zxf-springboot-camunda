@@ -9,7 +9,7 @@ import zxf.camunda.arch.app.service.CamundaService;
 
 @Slf4j
 @Service
-public class MyDelegate implements JavaDelegate {
+public class HttpRequestDelegate implements JavaDelegate {
     @Autowired
     private CamundaService camundaService;
 

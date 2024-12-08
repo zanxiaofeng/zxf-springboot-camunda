@@ -43,4 +43,10 @@ public class AppController {
         log.info("packageReceived, {}", executionId);
         processEngine.getRuntimeService().messageEventReceived("PaymentProcess.PackageReceived", executionId);
     }
+
+    @GetMapping("/payment/cancel")
+    public void paymentCancel(@RequestParam String executionId) {
+        log.info("paymentCancel, {}", executionId);
+        processEngine.getRuntimeService().messageEventReceived("PaymentProcess.Cancel", executionId);
+    }
 }
