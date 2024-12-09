@@ -17,7 +17,12 @@ public class NotificationDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws JsonProcessingException {
         String message = (String) execution.getVariable("message");
-        log.info("notification, {}", message);
-        processEngine.getRuntimeService().correlateMessage("PaymentProcess.Notification", execution.getBusinessKey());
+        log.info("notification.start, {}", message);
+
+        processEngine.getRuntimeService()
+                .createMessageCorrelation("PaymentProcess.Notification")
+                .processInstanceBusinessKey(execution.getBusinessKey())
+                .correlateWithResult();
+        log.info("notification.end, {}", message);
     }
 }

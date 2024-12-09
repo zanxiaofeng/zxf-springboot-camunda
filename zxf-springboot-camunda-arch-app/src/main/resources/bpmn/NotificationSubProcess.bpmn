@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.29.0">
+  <bpmn:process id="NotificationSubProcess" name="NotificationSubProcess" isExecutable="true">
+    <bpmn:extensionElements />
+    <bpmn:startEvent id="Event_1lctwok" name="Notification Flow Start">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0tqeimh</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_1akznxp" name="Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+        <camunda:inputOutput>
+          <camunda:inputParameter name="method">POST</camunda:inputParameter>
+          <camunda:inputParameter name="url">Order Expiry</camunda:inputParameter>
+          <camunda:inputParameter name="errorInfo">error123</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0tqeimh</bpmn:incoming>
+      <bpmn:outgoing>Flow_0loxtkh</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_1e7i0b0" name="Notification Error" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_1akznxp">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_1fhrcpf</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0q022sh" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="Event_0f3n0e6" name="Notification Flow End">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0loxtkh</bpmn:incoming>
+      <bpmn:incoming>Flow_1fhrcpf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0tqeimh" sourceRef="Event_1lctwok" targetRef="Activity_1akznxp" />
+    <bpmn:sequenceFlow id="Flow_0loxtkh" sourceRef="Activity_1akznxp" targetRef="Event_0f3n0e6" />
+    <bpmn:sequenceFlow id="Flow_1fhrcpf" sourceRef="Event_1e7i0b0" targetRef="Event_0f3n0e6" />
+  </bpmn:process>
+  <bpmn:message id="Message_0dqpff6" name="PaymentProcess.Start" />
+  <bpmn:message id="Message_2vun4eq" name="PaymentProcess.PackageReceived" />
+  <bpmn:message id="Message_2fejuef" name="PaymentProcess.Notification" />
+  <bpmn:message id="Message_15n0fu0" name="PaymentProcess.InfoUpdate" />
+  <bpmn:message id="Message_39jqfe5" name="PaymentProcess.Cancel" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="NotificationSubProcess">
+      <bpmndi:BPMNShape id="Event_1lctwok_di" bpmnElement="Event_1lctwok">
+        <dc:Bounds x="172" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="151" y="145" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0e0w6mq_di" bpmnElement="Activity_1akznxp">
+        <dc:Bounds x="360" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f3n0e6_di" bpmnElement="Event_0f3n0e6">
+        <dc:Bounds x="632" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="611" y="72" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_09lcwoc_di" bpmnElement="Event_1e7i0b0">
+        <dc:Bounds x="402" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="380" y="185" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0tqeimh_di" bpmnElement="Flow_0tqeimh">
+        <di:waypoint x="208" y="120" />
+        <di:waypoint x="360" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0loxtkh_di" bpmnElement="Flow_0loxtkh">
+        <di:waypoint x="460" y="120" />
+        <di:waypoint x="632" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fhrcpf_di" bpmnElement="Flow_1fhrcpf">
+        <di:waypoint x="420" y="178" />
+        <di:waypoint x="420" y="198" />
+        <di:waypoint x="570" y="198" />
+        <di:waypoint x="570" y="120" />
+        <di:waypoint x="632" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
