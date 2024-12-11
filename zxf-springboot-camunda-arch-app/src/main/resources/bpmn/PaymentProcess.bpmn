@@ -91,8 +91,8 @@
       <bpmn:incoming>Flow_1yjs2rw</bpmn:incoming>
       <bpmn:outgoing>Flow_024uins</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1lw9r4f" sourceRef="ServiceTask_Create-Order" targetRef="Activity_165ae0x" />
-    <bpmn:subProcess id="Activity_165ae0x">
+    <bpmn:sequenceFlow id="Flow_1lw9r4f" sourceRef="ServiceTask_Create-Order" targetRef="Activity_Expired-Sub-Process" />
+    <bpmn:subProcess id="Activity_Expired-Sub-Process" name="Expired Sub Process">
       <bpmn:incoming>Flow_1lw9r4f</bpmn:incoming>
       <bpmn:startEvent id="Event_Expiry-Monitor-Start" name="Expiry Monitor Start">
         <bpmn:extensionElements>
@@ -130,28 +130,28 @@
         <bpmn:incoming>Flow_1f7zrsa</bpmn:incoming>
       </bpmn:endEvent>
     </bpmn:subProcess>
-    <bpmn:subProcess id="Activity_195web3" name="Notification Event Sub Process" triggeredByEvent="true">
+    <bpmn:subProcess id="Activity_Notification-Event-Sub-Process" name="Notification Event Sub Process" triggeredByEvent="true">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
       </bpmn:extensionElements>
-      <bpmn:sequenceFlow id="Flow_17bdjry" sourceRef="Event_0zes6aj" targetRef="Activity_1akznxp" />
-      <bpmn:endEvent id="Event_0f3n0e6" name=" Notification End">
+      <bpmn:sequenceFlow id="Flow_17bdjry" sourceRef="Event_Notification-Start" targetRef="Activity_Notification" />
+      <bpmn:endEvent id="Event_Notification-End" name="Notification End">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_1x8sz36</bpmn:incoming>
         <bpmn:incoming>Flow_03sbgn2</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:sequenceFlow id="Flow_1x8sz36" sourceRef="Activity_1akznxp" targetRef="Event_0f3n0e6" />
-      <bpmn:sequenceFlow id="Flow_03sbgn2" sourceRef="Event_1e7i0b0" targetRef="Event_0f3n0e6" />
-      <bpmn:boundaryEvent id="Event_1e7i0b0" name="Notification Error" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_1akznxp">
+      <bpmn:sequenceFlow id="Flow_1x8sz36" sourceRef="Activity_Notification" targetRef="Event_Notification-End" />
+      <bpmn:sequenceFlow id="Flow_03sbgn2" sourceRef="Event_Notification-Error" targetRef="Event_Notification-End" />
+      <bpmn:boundaryEvent id="Event_Notification-Error" name="Notification Error" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_Notification">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         </bpmn:extensionElements>
         <bpmn:outgoing>Flow_03sbgn2</bpmn:outgoing>
         <bpmn:errorEventDefinition id="ErrorEventDefinition_0q022sh" />
       </bpmn:boundaryEvent>
-      <bpmn:serviceTask id="Activity_1akznxp" name="Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
+      <bpmn:serviceTask id="Activity_Notification" name="Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
           <camunda:inputOutput>
@@ -163,7 +163,7 @@
         <bpmn:incoming>Flow_17bdjry</bpmn:incoming>
         <bpmn:outgoing>Flow_1x8sz36</bpmn:outgoing>
       </bpmn:serviceTask>
-      <bpmn:startEvent id="Event_0zes6aj" name="Notification Start" camunda:asyncBefore="true" camunda:asyncAfter="true" isInterrupting="false">
+      <bpmn:startEvent id="Event_Notification-Start" name="Notification Start" camunda:asyncBefore="true" camunda:asyncAfter="true" isInterrupting="false">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         </bpmn:extensionElements>
@@ -180,19 +180,19 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_1g7rua4" messageRef="Message_2vun4eq" />
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_024uins" sourceRef="Activity_Sipping-Order" targetRef="Event_End" />
-    <bpmn:subProcess id="Activity_1ascfcu" name="Global Error Handling Sub Process" triggeredByEvent="true">
+    <bpmn:subProcess id="Activity_Global-Error-Handling-Sub-Process" name="Global Error Handling Sub Process" triggeredByEvent="true">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
       </bpmn:extensionElements>
-      <bpmn:startEvent id="Event_0ym4jhb" name="Error Start" camunda:asyncBefore="true" camunda:asyncAfter="true">
+      <bpmn:startEvent id="Event_Error-Start" name="Error Start" camunda:asyncBefore="true" camunda:asyncAfter="true">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         </bpmn:extensionElements>
         <bpmn:outgoing>Flow_180q8a8</bpmn:outgoing>
         <bpmn:errorEventDefinition id="ErrorEventDefinition_0wbp6mi" />
       </bpmn:startEvent>
-      <bpmn:sequenceFlow id="Flow_180q8a8" sourceRef="Event_0ym4jhb" targetRef="Activity_0zx9wz6" />
-      <bpmn:endEvent id="Event_1klezgq" name="Error End">
+      <bpmn:sequenceFlow id="Flow_180q8a8" sourceRef="Event_Error-Start" targetRef="Activity_Error-Notification" />
+      <bpmn:endEvent id="Event_Error-End" name="Error End">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
           <camunda:inputOutput>
@@ -201,8 +201,8 @@
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_0tgwt92</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:sequenceFlow id="Flow_0tgwt92" sourceRef="Activity_0zx9wz6" targetRef="Event_1klezgq" />
-      <bpmn:callActivity id="Activity_0zx9wz6" name="Error Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="NotificationSubProcess">
+      <bpmn:sequenceFlow id="Flow_0tgwt92" sourceRef="Activity_Error-Notification" targetRef="Event_Error-End" />
+      <bpmn:callActivity id="Activity_Error-Notification" name="Error Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="NotificationSubProcess">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
           <camunda:inputOutput>
@@ -223,7 +223,7 @@
       <bpmn:incoming>Flow_024uins</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0fabkqy" sourceRef="Event_Order-Canceled" targetRef="Event_Cancel-End" />
-    <bpmn:boundaryEvent id="Event_Order-Canceled" name="Order Canceled" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_165ae0x">
+    <bpmn:boundaryEvent id="Event_Order-Canceled" name="Order Canceled" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_Expired-Sub-Process">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
       </bpmn:extensionElements>
@@ -300,8 +300,9 @@
           <dc:Bounds x="1232" y="435" width="57" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1exxqn3_di" bpmnElement="Activity_165ae0x" isExpanded="true">
+      <bpmndi:BPMNShape id="Activity_1exxqn3_di" bpmnElement="Activity_Expired-Sub-Process" isExpanded="true">
         <dc:Bounds x="460" y="340" width="670" height="160" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_07t96y7_di" bpmnElement="Event_Expiry-Monitor-Start">
         <dc:Bounds x="527" y="392" width="36" height="36" />
@@ -337,27 +338,27 @@
         <di:waypoint x="900" y="410" />
         <di:waypoint x="1012" y="410" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_058ty22_di" bpmnElement="Activity_195web3" isExpanded="true">
+      <bpmndi:BPMNShape id="Activity_058ty22_di" bpmnElement="Activity_Notification-Event-Sub-Process" isExpanded="true">
         <dc:Bounds x="830" y="605" width="500" height="170" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0f3n0e6_di" bpmnElement="Event_0f3n0e6">
+      <bpmndi:BPMNShape id="Event_0f3n0e6_di" bpmnElement="Event_Notification-End">
         <dc:Bounds x="1242" y="666" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1222" y="636" width="78" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0e0w6mq_di" bpmnElement="Activity_1akznxp">
+      <bpmndi:BPMNShape id="Activity_0e0w6mq_di" bpmnElement="Activity_Notification">
         <dc:Bounds x="1040" y="644" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0tc34xr_di" bpmnElement="Event_0zes6aj">
+      <bpmndi:BPMNShape id="Event_0tc34xr_di" bpmnElement="Event_Notification-Start">
         <dc:Bounds x="882" y="666" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="860" y="709" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_09lcwoc_di" bpmnElement="Event_1e7i0b0">
+      <bpmndi:BPMNShape id="Event_09lcwoc_di" bpmnElement="Event_Notification-Error">
         <dc:Bounds x="1082" y="706" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1060" y="749" width="82" height="14" />
@@ -383,23 +384,23 @@
           <dc:Bounds x="1198" y="115" width="84" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1q4dw05_di" bpmnElement="Activity_1ascfcu" isExpanded="true">
+      <bpmndi:BPMNShape id="Activity_1q4dw05_di" bpmnElement="Activity_Global-Error-Handling-Sub-Process" isExpanded="true">
         <dc:Bounds x="170" y="600" width="420" height="170" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1jbw4rn_di" bpmnElement="Event_0ym4jhb">
+      <bpmndi:BPMNShape id="Event_1jbw4rn_di" bpmnElement="Event_Error-Start">
         <dc:Bounds x="212" y="672" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="204" y="715" width="52" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1isjpfl_di" bpmnElement="Event_1klezgq">
+      <bpmndi:BPMNShape id="Event_1isjpfl_di" bpmnElement="Event_Error-End">
         <dc:Bounds x="502" y="672" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="497" y="715" width="48" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_090nogn_di" bpmnElement="Activity_0zx9wz6">
+      <bpmndi:BPMNShape id="Activity_090nogn_di" bpmnElement="Activity_Error-Notification">
         <dc:Bounds x="320" y="650" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_180q8a8_di" bpmnElement="Flow_180q8a8">
