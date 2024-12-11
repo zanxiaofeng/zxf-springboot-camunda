@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="definitions_8628ba0f-d30a-4709-8db0-fc0d6f92899e" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+    <process camunda:historyTimeToLive="P180D" id="app4-v16" isExecutable="true">
+        <startEvent id="Start-app4-v16" name="Start-app4-v16">
+            <outgoing>sequenceFlow_875dc72b-ea9e-423d-b297-a41222e84ab9</outgoing>
+        </startEvent>
+        <serviceTask camunda:asyncAfter="false" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app4.App4Task1Adapter" id="Activity-App4-Task-1" name="App4-Task 1">
+            <extensionElements>
+                <camunda:failedJobRetryTimeCycle>R3/PT0S</camunda:failedJobRetryTimeCycle>
+            </extensionElements>
+            <incoming>sequenceFlow_875dc72b-ea9e-423d-b297-a41222e84ab9</incoming>
+            <outgoing>sequenceFlow_406b28d3-826f-4210-9e11-c037b7851473</outgoing>
+        </serviceTask>
+        <sequenceFlow id="sequenceFlow_875dc72b-ea9e-423d-b297-a41222e84ab9" sourceRef="Start-app4-v16" targetRef="Activity-App4-Task-1"/>
+        <serviceTask camunda:asyncAfter="false" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app4.App4Task2Adapter" id="Activity-App4-Task-2" name="App4-Task 2">
+            <extensionElements>
+                <camunda:failedJobRetryTimeCycle>R0/PT0S</camunda:failedJobRetryTimeCycle>
+            </extensionElements>
+            <incoming>sequenceFlow_406b28d3-826f-4210-9e11-c037b7851473</incoming>
+            <outgoing>sequenceFlow_89381442-783b-4d34-8add-bc96aafb8372</outgoing>
+        </serviceTask>
+        <sequenceFlow id="sequenceFlow_406b28d3-826f-4210-9e11-c037b7851473" sourceRef="Activity-App4-Task-1" targetRef="Activity-App4-Task-2"/>
+        <serviceTask camunda:asyncAfter="false" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app4.App4Task3Adapter" id="Activity-App4-Task-3" name="App4-Task 3">
+            <extensionElements>
+                <camunda:failedJobRetryTimeCycle>R3/PT5S</camunda:failedJobRetryTimeCycle>
+            </extensionElements>
+            <incoming>sequenceFlow_89381442-783b-4d34-8add-bc96aafb8372</incoming>
+            <outgoing>sequenceFlow_f229ced1-5ad5-48a4-9537-6b004ef97e12</outgoing>
+        </serviceTask>
+        <sequenceFlow id="sequenceFlow_89381442-783b-4d34-8add-bc96aafb8372" sourceRef="Activity-App4-Task-2" targetRef="Activity-App4-Task-3"/>
+        <endEvent id="End-app4-v16" name="End-app4-v16">
+            <incoming>sequenceFlow_f229ced1-5ad5-48a4-9537-6b004ef97e12</incoming>
+        </endEvent>
+        <sequenceFlow id="sequenceFlow_f229ced1-5ad5-48a4-9537-6b004ef97e12" sourceRef="Activity-App4-Task-3" targetRef="End-app4-v16"/>
+    </process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_2dc1ba5d-4c59-41db-896b-0e0139e4fd3f">
+        <bpmndi:BPMNPlane bpmnElement="app4-v16" id="BPMNPlane_ec0441f5-dc1f-4286-a3aa-60174686d4ff">
+            <bpmndi:BPMNShape bpmnElement="Start-app4-v16" id="BPMNShape_59e55aba-d36d-479c-9b87-582eb297095b">
+                <dc:Bounds height="36.0" width="36.0" x="100.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Activity-App4-Task-1" id="BPMNShape_74824eaf-775e-4469-b2c1-7c04ba660d03">
+                <dc:Bounds height="80.0" width="100.0" x="186.0" y="78.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_875dc72b-ea9e-423d-b297-a41222e84ab9" id="BPMNEdge_aa62bc41-f061-406f-8bbb-70c21a36e13d">
+                <di:waypoint x="136.0" y="118.0"/>
+                <di:waypoint x="186.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Activity-App4-Task-2" id="BPMNShape_53247e83-be94-4ef8-9e31-ee7bf2e3e9fc">
+                <dc:Bounds height="80.0" width="100.0" x="336.0" y="78.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_406b28d3-826f-4210-9e11-c037b7851473" id="BPMNEdge_58ea1300-66bd-453e-8ea6-25e8ac520035">
+                <di:waypoint x="286.0" y="118.0"/>
+                <di:waypoint x="336.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Activity-App4-Task-3" id="BPMNShape_f005ba13-a795-4639-9095-6a277e981e53">
+                <dc:Bounds height="80.0" width="100.0" x="486.0" y="78.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_89381442-783b-4d34-8add-bc96aafb8372" id="BPMNEdge_5f1a2188-ac60-44c3-85e5-1600a57da9bb">
+                <di:waypoint x="436.0" y="118.0"/>
+                <di:waypoint x="486.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="End-app4-v16" id="BPMNShape_23dbfa46-370f-413a-9657-b83f9638efda">
+                <dc:Bounds height="36.0" width="36.0" x="636.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_f229ced1-5ad5-48a4-9537-6b004ef97e12" id="BPMNEdge_7fe37c5c-a25e-4027-a900-973a2d09e0ef">
+                <di:waypoint x="586.0" y="118.0"/>
+                <di:waypoint x="636.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</definitions>

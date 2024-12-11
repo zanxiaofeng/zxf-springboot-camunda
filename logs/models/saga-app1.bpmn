@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="definitions_ee7c76b7-931c-475f-bf63-a69b05fc3099" targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+    <process camunda:historyTimeToLive="P180D" id="app1-v16" isExecutable="true">
+        <startEvent id="Start-app1-v16" name="Start-app1-v16">
+            <outgoing>sequenceFlow_dc4b6ab2-5436-4c11-a333-8710942e39b5</outgoing>
+        </startEvent>
+        <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task1Adapter" id="Activity-App1-Task-1" name="App1-Task 1">
+            <extensionElements>
+                <camunda:failedJobRetryTimeCycle>R0/PT0S</camunda:failedJobRetryTimeCycle>
+            </extensionElements>
+            <incoming>sequenceFlow_dc4b6ab2-5436-4c11-a333-8710942e39b5</incoming>
+            <outgoing>sequenceFlow_39cc5c60-9963-4db2-ac87-532ca6bbef7d</outgoing>
+        </serviceTask>
+        <sequenceFlow id="sequenceFlow_dc4b6ab2-5436-4c11-a333-8710942e39b5" sourceRef="Start-app1-v16" targetRef="Activity-App1-Task-1"/>
+        <boundaryEvent attachedToRef="Activity-App1-Task-1" id="boundaryEvent_d9a97efd-8093-47f8-87a9-da87c6c4b397">
+            <compensateEventDefinition id="compensateEventDefinition_3283c4c8-2522-4fec-8e29-29442e135495"/>
+        </boundaryEvent>
+        <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task1UndoAdapter" id="Activity-App1-Undo-Task-1-compensation" isForCompensation="true" name="App1-Undo Task 1"/>
+        <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task2Adapter" id="Activity-App1-Task-2" name="App1-Task 2">
+            <extensionElements>
+                <camunda:failedJobRetryTimeCycle>R0/PT0S</camunda:failedJobRetryTimeCycle>
+            </extensionElements>
+            <incoming>sequenceFlow_39cc5c60-9963-4db2-ac87-532ca6bbef7d</incoming>
+            <outgoing>sequenceFlow_fb98c195-8b45-4baf-ab3e-5547fe906194</outgoing>
+        </serviceTask>
+        <sequenceFlow id="sequenceFlow_39cc5c60-9963-4db2-ac87-532ca6bbef7d" sourceRef="Activity-App1-Task-1" targetRef="Activity-App1-Task-2"/>
+        <boundaryEvent attachedToRef="Activity-App1-Task-2" id="boundaryEvent_e9dceaee-66da-4b4d-96f5-c33dbf7de9bf">
+            <compensateEventDefinition id="compensateEventDefinition_9234814b-45e6-40d6-8c16-74d52eeac736"/>
+        </boundaryEvent>
+        <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task2UndoAdapter" id="Activity-App1-Undo-Task-2-compensation" isForCompensation="true" name="App1-Undo Task 2"/>
+        <serviceTask camunda:asyncAfter="true" camunda:asyncBefore="true" camunda:class="zxf.camunda.saga.task.app1.App1Task3Adapter" id="Activity-App1-Task-3" name="App1-Task 3">
+            <extensionElements>
+                <camunda:failedJobRetryTimeCycle>R0/PT0S</camunda:failedJobRetryTimeCycle>
+            </extensionElements>
+            <incoming>sequenceFlow_fb98c195-8b45-4baf-ab3e-5547fe906194</incoming>
+            <outgoing>sequenceFlow_e9c31446-8108-4166-a311-f20c4bc6f05e</outgoing>
+        </serviceTask>
+        <sequenceFlow id="sequenceFlow_fb98c195-8b45-4baf-ab3e-5547fe906194" sourceRef="Activity-App1-Task-2" targetRef="Activity-App1-Task-3"/>
+        <endEvent id="End-app1-v16" name="End-app1-v16">
+            <incoming>sequenceFlow_e9c31446-8108-4166-a311-f20c4bc6f05e</incoming>
+        </endEvent>
+        <sequenceFlow id="sequenceFlow_e9c31446-8108-4166-a311-f20c4bc6f05e" sourceRef="Activity-App1-Task-3" targetRef="End-app1-v16"/>
+        <subProcess id="subProcess_65078edd-7d99-484e-9683-8c42461f264c" triggeredByEvent="true">
+            <startEvent id="ErrorCatched" name="ErrorCatched">
+                <outgoing>sequenceFlow_a9b102d4-23df-43be-9903-f2cda80417df</outgoing>
+                <errorEventDefinition errorRef="error_52f7c3f6-0b1a-4ad8-84b0-7dc00ac1f6af" id="errorEventDefinition_d95458a4-c8a9-4e27-b63d-f8c7273b047e"/>
+            </startEvent>
+            <intermediateThrowEvent id="ToBeCompensated" name="ToBeCompensated">
+                <incoming>sequenceFlow_a9b102d4-23df-43be-9903-f2cda80417df</incoming>
+                <outgoing>sequenceFlow_9668d9ad-1a6d-4925-8a3a-b9fc3cb733e0</outgoing>
+                <compensateEventDefinition id="compensateEventDefinition_712031a6-e757-4269-b5ab-37e35cc47c44"/>
+            </intermediateThrowEvent>
+            <sequenceFlow id="sequenceFlow_a9b102d4-23df-43be-9903-f2cda80417df" sourceRef="ErrorCatched" targetRef="ToBeCompensated"/>
+            <endEvent id="ErrorHandled" name="ErrorHandled">
+                <incoming>sequenceFlow_9668d9ad-1a6d-4925-8a3a-b9fc3cb733e0</incoming>
+            </endEvent>
+            <sequenceFlow id="sequenceFlow_9668d9ad-1a6d-4925-8a3a-b9fc3cb733e0" sourceRef="ToBeCompensated" targetRef="ErrorHandled"/>
+        </subProcess>
+        <association associationDirection="One" id="association_16c3c420-15c6-4859-8152-01d6c9ae9fe9" sourceRef="boundaryEvent_d9a97efd-8093-47f8-87a9-da87c6c4b397" targetRef="Activity-App1-Undo-Task-1-compensation"/>
+        <association associationDirection="One" id="association_8cb2bcd7-5103-4461-bcda-032c1e4fb9c7" sourceRef="boundaryEvent_e9dceaee-66da-4b4d-96f5-c33dbf7de9bf" targetRef="Activity-App1-Undo-Task-2-compensation"/>
+    </process>
+    <error errorCode="java.lang.Throwable" id="error_52f7c3f6-0b1a-4ad8-84b0-7dc00ac1f6af"/>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_f90dd49f-07ae-42d1-b0f8-c973ced3f757">
+        <bpmndi:BPMNPlane bpmnElement="app1-v16" id="BPMNPlane_66bdd130-e99b-4163-9579-c341399aef8b">
+            <bpmndi:BPMNShape bpmnElement="Start-app1-v16" id="BPMNShape_4a359ce8-f3ee-489d-a370-067ccf7b5683">
+                <dc:Bounds height="36.0" width="36.0" x="100.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Activity-App1-Task-1" id="BPMNShape_38f66295-4151-4041-9160-b70dc6a70d7e">
+                <dc:Bounds height="80.0" width="100.0" x="186.0" y="78.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_dc4b6ab2-5436-4c11-a333-8710942e39b5" id="BPMNEdge_1af4ad88-83db-441f-a6e4-42d4feff4170">
+                <di:waypoint x="136.0" y="118.0"/>
+                <di:waypoint x="186.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="boundaryEvent_d9a97efd-8093-47f8-87a9-da87c6c4b397" id="BPMNShape_e1a7b6f9-315c-4dba-86b3-b7d2041c8ab9">
+                <dc:Bounds height="36.0" width="36.0" x="218.0" y="140.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Activity-App1-Undo-Task-1-compensation" id="BPMNShape_ac4b45c0-105c-403a-a1e8-5d4966f1dec9">
+                <dc:Bounds height="80.0" width="100.0" x="266.5" y="186.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="association_16c3c420-15c6-4859-8152-01d6c9ae9fe9" id="BPMNEdge_a978b6e6-0a62-41fa-a932-5443f84f1e21">
+                <di:waypoint x="236.0" y="176.0"/>
+                <di:waypoint x="236.0" y="226.0"/>
+                <di:waypoint x="266.5" y="226.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Activity-App1-Task-2" id="BPMNShape_4a503415-ec83-4821-98cf-2b03ddf3ca49">
+                <dc:Bounds height="80.0" width="100.0" x="336.0" y="78.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_39cc5c60-9963-4db2-ac87-532ca6bbef7d" id="BPMNEdge_65a18611-3760-451c-b597-7cfa11adb20e">
+                <di:waypoint x="286.0" y="118.0"/>
+                <di:waypoint x="336.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="boundaryEvent_e9dceaee-66da-4b4d-96f5-c33dbf7de9bf" id="BPMNShape_836db838-ac64-4301-b262-7aa20c878788">
+                <dc:Bounds height="36.0" width="36.0" x="368.0" y="140.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Activity-App1-Undo-Task-2-compensation" id="BPMNShape_6ee6bb1d-c5f7-4df5-96d3-b1cd29f911b5">
+                <dc:Bounds height="80.0" width="100.0" x="416.5" y="186.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="association_8cb2bcd7-5103-4461-bcda-032c1e4fb9c7" id="BPMNEdge_031579e4-bef8-4ae6-8d9e-e96f41a21a52">
+                <di:waypoint x="386.0" y="176.0"/>
+                <di:waypoint x="386.0" y="226.0"/>
+                <di:waypoint x="416.5" y="226.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="Activity-App1-Task-3" id="BPMNShape_19229957-5fc7-45f4-8373-5f98e4f7c1e1">
+                <dc:Bounds height="80.0" width="100.0" x="486.0" y="78.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_fb98c195-8b45-4baf-ab3e-5547fe906194" id="BPMNEdge_b70781fa-314f-4e3e-91f0-f7e80bea8f80">
+                <di:waypoint x="436.0" y="118.0"/>
+                <di:waypoint x="486.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="End-app1-v16" id="BPMNShape_c17a6335-23e1-4247-b19a-355f34cf040c">
+                <dc:Bounds height="36.0" width="36.0" x="636.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_e9c31446-8108-4166-a311-f20c4bc6f05e" id="BPMNEdge_2c10358e-b260-4ec5-8038-e4b66e0e527b">
+                <di:waypoint x="586.0" y="118.0"/>
+                <di:waypoint x="636.0" y="118.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="subProcess_65078edd-7d99-484e-9683-8c42461f264c" id="BPMNShape_8afb7d91-9369-4cba-b3e8-a2b18074f958" isExpanded="true">
+                <dc:Bounds height="200.0" width="350.0" x="100.0" y="316.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ErrorCatched" id="BPMNShape_fa6296f8-a720-43d8-a0f9-17031689cf18">
+                <dc:Bounds height="36.0" width="36.0" x="150.0" y="398.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ToBeCompensated" id="BPMNShape_120404c5-bbd9-4afb-ab8c-29e4d1574b6d">
+                <dc:Bounds height="36.0" width="36.0" x="236.0" y="398.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_a9b102d4-23df-43be-9903-f2cda80417df" id="BPMNEdge_6a4eeeef-0c1b-4737-bb7d-845279068f48">
+                <di:waypoint x="186.0" y="416.0"/>
+                <di:waypoint x="236.0" y="416.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="ErrorHandled" id="BPMNShape_e227cf49-ad1e-4d70-ae8b-6c05f2b36690">
+                <dc:Bounds height="36.0" width="36.0" x="322.0" y="398.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="sequenceFlow_9668d9ad-1a6d-4925-8a3a-b9fc3cb733e0" id="BPMNEdge_ed940c57-a7da-4bea-90d1-4c6fbd901c8d">
+                <di:waypoint x="272.0" y="416.0"/>
+                <di:waypoint x="322.0" y="416.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</definitions>

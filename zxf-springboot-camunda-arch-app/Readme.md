@@ -22,4 +22,4 @@
 - http://localhost:8190/info/definitions/message?message=PaymentProcess.Start
 - http://localhost:8190/app/message-start?orderId=3
 - http://localhost:8190/info/executions/message?message=PaymentProcess.Cancel
-- http://localhost:8190/app/payment/cancel?executionId=af66bbb5-b391-11ef-a8d4-0242e141deb4
+- http://localhost:8190/app/payment/cancel?executionId=e7c47340-b776-11ef-95de-7606d5c7fdbe
