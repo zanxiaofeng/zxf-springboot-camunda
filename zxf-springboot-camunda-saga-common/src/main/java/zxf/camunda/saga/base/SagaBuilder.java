@@ -34,6 +34,8 @@ public class SagaBuilder {
             bpmnModelInstance = saga.done();
         }
         log.info("BPMN: " + IoUtil.convertXmlDocumentToString(bpmnModelInstance.getDocument()));
+        //Bpmn.writeModelToFile(...);
+        //Bpmn.readModelFromFile(...)
         return bpmnModelInstance;
     }
 
