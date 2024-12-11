@@ -29,6 +29,8 @@ management:
         include: "*"
 
 camunda.bpm:
+  auto-deployment-enabled: true
+  deployment-resource-pattern: classpath*:bpmn/*.bpmn
   generic-properties:
     properties:
       historyTimeToLive: P1D

@@ -1,11 +1,15 @@
-# Camunda UI
-- http://localhost:8190/
+# Camunda Web UI(camunda-bpm-spring-boot-starter-webapp)
+- http://localhost:8080/camunda/app/
 
-# Actuator UI
-- http://localhost:8190/actuator
+# Camunda Rest API(camunda-bpm-spring-boot-starter-api)
+- http://localhost:8080/engine-rest
 
-# H2 UI
-- http://localhost:8190/h2
+# H2 Web UI
+- http://localhost:8080/h2
+
+# Actuator Entrypoint
+- http://localhost:8080/actuator
+
 
 # Testing case success
 - http://localhost:8190/info/definitions/message?message=PaymentProcess.Start

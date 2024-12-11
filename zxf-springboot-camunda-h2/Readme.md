@@ -1,11 +1,15 @@
-# Camunda UI
-- http://localhost:8080/
+# Camunda Web UI(camunda-bpm-spring-boot-starter-webapp)
+- http://localhost:8080/camunda/app/
 
-# Actuator UI
+# Camunda Rest API(camunda-bpm-spring-boot-starter-api)
+- http://localhost:8080/engine-rest
+
+# H2 Web UI
+- http://localhost:8080/h2
+
+# Actuator Entrypoint
 - http://localhost:8080/actuator
 
-# H2 UI
-- http://localhost:8080/h2
 
 # Testing case 1
 - http://localhost:8080/info/definitions/message?message=LaonProcess.Start
