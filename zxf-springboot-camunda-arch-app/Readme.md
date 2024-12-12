@@ -9,7 +9,7 @@
 
 # Actuator Entrypoint
 - http://localhost:8080/actuator
-
+- http://localhost:8080/actuator/mappings
 
 # Testing case success
 - http://localhost:8190/info/definitions/message?message=PaymentProcess.Start

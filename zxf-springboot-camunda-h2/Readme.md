@@ -9,7 +9,7 @@
 
 # Actuator Entrypoint
 - http://localhost:8080/actuator
-
+- http://localhost:8080/actuator/mappings
 
 # Testing case 1
 - http://localhost:8080/info/definitions/message?message=LaonProcess.Start
