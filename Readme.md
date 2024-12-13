@@ -72,12 +72,8 @@
 # zxf-springboot-camunda-saga
 ## Camunda Web UI(Setup admin)
 - http://localhost:8090/
-- http://localhost:8091/
-- http://localhost:8092/
 ## Camunda Rest Api
 - http://localhost:8090/engine-rest/*
-- http://localhost:8091/engine-rest/*
-- http://localhost:8092/engine-rest/*
 ## app-1(变更流程需要升级版本)
 - http://localhost:8090/saga/all?count=100
 - http://localhost:8090/saga/app-1?count=100

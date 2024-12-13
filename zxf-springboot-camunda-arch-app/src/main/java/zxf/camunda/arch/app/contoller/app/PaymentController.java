@@ -1,4 +1,4 @@
-package zxf.camunda.arch.app.contoller;
+package zxf.camunda.arch.app.contoller.app;
 
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
@@ -13,7 +13,7 @@ import java.util.Collections;
 
 @Slf4j
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/app/payment")
 public class PaymentController {
     @Autowired
     ProcessEngine processEngine;
