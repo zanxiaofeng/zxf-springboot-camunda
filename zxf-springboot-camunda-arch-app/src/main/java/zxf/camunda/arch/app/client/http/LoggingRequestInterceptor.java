@@ -1,6 +1,7 @@
 package zxf.camunda.arch.app.client.http;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -20,29 +21,31 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
             logRequest(request, body, log::debug);
         }
 
-        ClientHttpResponse response;
         try {
-            response = execution.execute(request, body);
+            ClientHttpResponse response = execution.execute(request, body);
+
+            if (log.isDebugEnabled()) {
+                logResponse(response, log::debug);
+            }
+
+            if (!response.getStatusCode().is2xxSuccessful()) {
+                logRequest(request, body, log::error);
+                logResponse(response, log::error);
+            }
+
+            return response;
         } catch (Exception ex) {
             log.error("Exception when seng request", ex);
             logRequest(request, body, log::error);
             throw ex;
         }
-        if (log.isDebugEnabled()) {
-            logResponse(response, log::debug);
-        }
-        if (!response.getStatusCode().is2xxSuccessful()) {
-            logRequest(request, body, log::error);
-            logResponse(response, log::error);
-        }
-        return response;
     }
 
     private void logRequest(HttpRequest request, byte[] body, Consumer<String> logger) {
         logger.accept("=================================================Request begin=================================================");
         logger.accept("URI             : " + request.getURI());
         logger.accept("Methed          : " + request.getMethod());
-        logger.accept("Headers         : " + request.getHeaders());
+        logger.accept("Headers         : " + removeSensitiveHeaders(request.getHeaders()));
         logger.accept("Request Body    : " + new String(body, StandardCharsets.UTF_8));
         logger.accept("=================================================Request end=================================================");
     }
@@ -64,5 +67,13 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
             }
             return builder.toString();
         }
+    }
+
+    private HttpHeaders removeSensitiveHeaders(HttpHeaders originalHttpHeaders) {
+        HttpHeaders clearHttpHeaders = new HttpHeaders();
+        clearHttpHeaders.putAll(originalHttpHeaders);
+        clearHttpHeaders.remove("Token");
+        clearHttpHeaders.remove("Authorization");
+        return clearHttpHeaders;
     }
 }
