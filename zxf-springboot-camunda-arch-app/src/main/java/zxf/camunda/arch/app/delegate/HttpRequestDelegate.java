@@ -7,7 +7,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestTemplate;
+import zxf.camunda.arch.app.client.HttpClient;
 import zxf.camunda.arch.app.service.CamundaService;
 
 import java.util.Map;
@@ -17,14 +17,29 @@ import java.util.Map;
 public class HttpRequestDelegate implements JavaDelegate {
     @Autowired
     private CamundaService camundaService;
+    @Autowired
+    private HttpClient httpClient;
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-//        String method = (String)execution.getVariable("method");
-//        String url = (String)execution.getVariable("url");
-//        Map<String, String> headers = (Map<String, String>)execution.getVariable("headers");
-//        String body = (String)execution.getVariable("body");
+        try {
+            String method = (String) execution.getVariable("method");
+            String url = (String) execution.getVariable("url");
+            String body = (String) execution.getVariable("body");
+            Map<String, String> headers = (Map<String, String>) execution.getVariable("headers");
+            String responseVariable = (String) execution.getVariable("responseVariable");
+            execution.setVariable(responseVariable, httpClient.request(method, url, body, headers));
+        } catch (Exception ex) {
+            log.error("Exception when sending http request", ex);
+        } finally {
+            execution.removeVariable("method");
+            execution.removeVariable("url");
+            execution.removeVariable("body");
+            execution.removeVariable("headers");
+        }
+    }
 
+    private void error(DelegateExecution execution) {
         execution.setVariable("paymentStatus", "OK");
 
         if (StringUtils.hasText((String) execution.getVariable("errorInfo"))) {

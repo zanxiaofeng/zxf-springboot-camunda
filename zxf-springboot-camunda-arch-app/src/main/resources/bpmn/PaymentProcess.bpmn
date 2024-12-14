@@ -6,7 +6,19 @@
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>
           <camunda:inputParameter name="method">POST</camunda:inputParameter>
-          <camunda:inputParameter name="url">Create Order</camunda:inputParameter>
+          <camunda:inputParameter name="url">http://localhost:8191/task/a</camunda:inputParameter>
+          <camunda:inputParameter name="body">{
+    "task": 200
+}</camunda:inputParameter>
+          <camunda:inputParameter name="headers">
+            <camunda:map>
+              <camunda:entry key="Content-Type">application/json</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="responseVariable">createOrderResponse</camunda:inputParameter>
+          <camunda:outputParameter name="paymentOrderCode">200</camunda:outputParameter>
+          <camunda:outputParameter name="shippingRequestCode">200</camunda:outputParameter>
+          <camunda:outputParameter name="shippingOrderCode">200</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_01210fd</bpmn:incoming>
@@ -32,10 +44,20 @@
     <bpmn:sequenceFlow id="Flow_1xy67hz" sourceRef="ServiceTask_Create-Order" targetRef="Activity_Payment-Order" />
     <bpmn:serviceTask id="Activity_Payment-Order" name="Payment Order" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
       <bpmn:extensionElements>
-        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="end" />
         <camunda:inputOutput>
           <camunda:inputParameter name="method">POST</camunda:inputParameter>
-          <camunda:inputParameter name="url">Payment Order</camunda:inputParameter>
+          <camunda:inputParameter name="url">http://localhost:8191/task/a</camunda:inputParameter>
+          <camunda:inputParameter name="body">{
+    "task": ${paymentOrderCode}
+}</camunda:inputParameter>
+          <camunda:inputParameter name="headers">
+            <camunda:map>
+              <camunda:entry key="Content-Type">application/json</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="responseVariable">paymentOrderResponse</camunda:inputParameter>
+          <camunda:outputParameter name="paymentStatus">${paymentOrderResponse.code == 200 ? "OK": "FAILED"}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1xy67hz</bpmn:incoming>
@@ -59,19 +81,31 @@
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>
-          <camunda:inputParameter name="mehod">POST</camunda:inputParameter>
-          <camunda:inputParameter name="url">Shipping Request</camunda:inputParameter>
+          <camunda:inputParameter name="method">POST</camunda:inputParameter>
+          <camunda:inputParameter name="url">http://localhost:8191/task/b</camunda:inputParameter>
+          <camunda:inputParameter name="body">{
+    "task": ${shippingRequestCode}
+}</camunda:inputParameter>
+          <camunda:inputParameter name="headers">
+            <camunda:map>
+              <camunda:entry key="Content-Type">application/json</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="responseVariable">shippingRequestResponse</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ot07yz</bpmn:incoming>
       <bpmn:outgoing>Flow_0qs2wkb</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0e3ig8c" sourceRef="Gateway_Status-Check" targetRef="Event_Wait-for-Payment-Info-Update">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentStatus == 'Failed'}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentStatus == 'FAILED'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:intermediateCatchEvent id="Event_Wait-for-Payment-Info-Update" name="Wait for Payment Info Update" camunda:asyncBefore="true" camunda:asyncAfter="true">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+        <camunda:inputOutput>
+          <camunda:outputParameter name="paymentOrderCode">200</camunda:outputParameter>
+        </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0e3ig8c</bpmn:incoming>
       <bpmn:outgoing>Flow_1fsm0pz</bpmn:outgoing>
@@ -85,7 +119,16 @@
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>
           <camunda:inputParameter name="method">POST</camunda:inputParameter>
-          <camunda:inputParameter name="url">Shipping Order</camunda:inputParameter>
+          <camunda:inputParameter name="url">http://localhost:8191/task/c</camunda:inputParameter>
+          <camunda:inputParameter name="body">{
+    "task": ${shippingOrderCode}
+}</camunda:inputParameter>
+          <camunda:inputParameter name="headers">
+            <camunda:map>
+              <camunda:entry key="Content-Type">application/json</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="responseVariable">shippingOrderResponse</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1yjs2rw</bpmn:incoming>
@@ -156,8 +199,16 @@
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
           <camunda:inputOutput>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="url">Order Expiry</camunda:inputParameter>
-            <camunda:inputParameter name="errorInfo">error123</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://localhost:8191/task/c</camunda:inputParameter>
+            <camunda:inputParameter name="body">{
+    "task": 500
+}</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="responseVariable">notificationResponse</camunda:inputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_17bdjry</bpmn:incoming>

@@ -1,22 +1,14 @@
-package zxf.camunda.arch.app.client;
+package zxf.camunda.arch.app.client.http;
 
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.client.support.BasicAuthenticationInterceptor;
 import org.springframework.web.client.RestTemplate;
-import zxf.camunda.arch.app.client.http.LoggingRequestInterceptor;
-import zxf.camunda.arch.app.client.http.MyResponseErrorHandler;
-import zxf.camunda.arch.app.client.http.SetHeaderRequestInterceptor;
 
 public class RestTemplateFactory {
-    private final ClientHttpRequestFactory clientHttpRequestFactory;
-
-    public RestTemplateFactory(ClientHttpRequestFactory clientHttpRequestFactory) {
-        this.clientHttpRequestFactory = clientHttpRequestFactory;
-    }
-
-    public RestTemplate basicRestTemplate(Boolean exceptionable) {
-        RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(clientHttpRequestFactory));
+    public static RestTemplate basicRestTemplate(Boolean exceptionable) {
+        RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory());
         if (!exceptionable) {
             restTemplate.setErrorHandler(new MyResponseErrorHandler());
         }
@@ -24,15 +16,19 @@ public class RestTemplateFactory {
         return restTemplate;
     }
 
-    public RestTemplate restTemplateWithBasicAuth(Boolean exceptionable, String username, String passwd) {
+    public static RestTemplate restTemplateWithBasicAuth(Boolean exceptionable, String username, String passwd) {
         RestTemplate basicRestTemplate = basicRestTemplate(exceptionable);
         basicRestTemplate.getInterceptors().add(0, new BasicAuthenticationInterceptor(username, passwd));
         return basicRestTemplate;
     }
 
-    public RestTemplate restTemplateWithTokenAuth(Boolean exceptionable, String token) {
+    public static RestTemplate restTemplateWithTokenAuth(Boolean exceptionable, String token) {
         RestTemplate basicRestTemplate = basicRestTemplate(exceptionable);
         basicRestTemplate.getInterceptors().add(0, new SetHeaderRequestInterceptor("X-Token", token));
         return basicRestTemplate;
+    }
+
+    private static ClientHttpRequestFactory clientHttpRequestFactory() {
+        return new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
     }
 }
