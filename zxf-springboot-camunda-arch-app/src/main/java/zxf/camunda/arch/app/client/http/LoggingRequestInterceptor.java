@@ -17,20 +17,13 @@ import java.util.function.Consumer;
 public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        if (log.isDebugEnabled()) {
-            logRequest(request, body, log::debug);
-        }
-
         try {
             ClientHttpResponse response = execution.execute(request, body);
+            boolean isError = !response.getStatusCode().is2xxSuccessful();
 
-            if (log.isDebugEnabled()) {
-                logResponse(response, log::debug);
-            }
-
-            if (!response.getStatusCode().is2xxSuccessful()) {
-                logRequest(request, body, log::error);
-                logResponse(response, log::error);
+            if (isError || log.isDebugEnabled()) {
+                logRequest(request, body, isError ? log::error : log::debug);
+                logResponse(response, isError ? log::error : log::debug);
             }
 
             return response;
