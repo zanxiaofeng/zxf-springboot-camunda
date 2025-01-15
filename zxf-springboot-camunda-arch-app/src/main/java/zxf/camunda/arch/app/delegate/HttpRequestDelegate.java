@@ -32,10 +32,7 @@ public class HttpRequestDelegate implements JavaDelegate {
         } catch (Exception ex) {
             log.error("Exception when sending http request", ex);
         } finally {
-            execution.removeVariable("method");
-            execution.removeVariable("url");
-            execution.removeVariable("body");
-            execution.removeVariable("headers");
+            //All entities that can have variables are called variable scopes. These are executions (which include process instances) and tasks. As described in the Concepts section, the runtime state of a process instance is represented by a tree of executions.
         }
     }
 

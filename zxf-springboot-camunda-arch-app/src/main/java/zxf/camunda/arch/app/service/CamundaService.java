@@ -28,11 +28,17 @@ public class CamundaService {
         return String.format("(Id=%s, Duedate=%s, ProcessInstanceId=%s,%s, ProcessDefinitionId=%s, ExecutionId=%s, Retries=%d, ExceptionMessage=%s, FailedActivityId=%s, DeploymentId=%s, JobDefinitionId=%s, IsSuspended=%s, Priority=%d, CreateTime=%s, TenantId=%s)", job.getId(), job.getDuedate(), job.getProcessInstanceId(), job.getRootProcessInstanceId(), job.getProcessDefinitionId(), job.getExecutionId(), job.getRetries(), job.getExceptionMessage(), job.getFailedActivityId(), job.getDeploymentId(), job.getJobDefinitionId(), job.isSuspended(), job.getPriority(), job.getCreateTime(), job.getTenantId());
     }
 
-    public String executionInfo(DelegateExecution execution) {
-        return String.format("(Id=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, CurrentActivityName=%s, BusinessKey=%s, Variables=%s)", execution.getId(), execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getCurrentActivityName(), execution.getBusinessKey(), execution.getVariables());
-    }
-
     public String executionInfo(Execution execution) {
         return String.format("(Id=%s, ProcessInstanceId=%s)", execution.getId(), execution.getProcessInstanceId());
+    }
+
+    public String executionInfo(DelegateExecution execution) {
+        return String.format("(Id=%s, ParentId=%s, EventName=%s, BusinessKey=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, ProcessBusinessKey=%s, CurrentActivityId=%s, CurrentActivityName=%s, CurrentTransitionId=%s, ActivityInstanceId=%s, ParentActivityInstanceId=%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
+                execution.getId(), execution.getParentId(),
+                execution.getEventName(), execution.getBusinessKey(),
+                execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getProcessBusinessKey(),
+                execution.getCurrentActivityId(), execution.getCurrentActivityName(), execution.getCurrentTransitionId(),
+                execution.getActivityInstanceId(), execution.getParentActivityInstanceId(),
+                execution.getVariableScopeKey(), execution.getVariables(), execution.getVariableNamesLocal());
     }
 }
