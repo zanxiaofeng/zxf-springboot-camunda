@@ -24,9 +24,6 @@
               <camunda:entry key="Downstream-ReturnCode-Variable">createOrderReturnCode</camunda:entry>
             </camunda:map>
           </camunda:inputParameter>
-          <camunda:outputParameter name="paymentOrderCode">200</camunda:outputParameter>
-          <camunda:outputParameter name="shippingRequestCode">200</camunda:outputParameter>
-          <camunda:outputParameter name="shippingOrderCode">200</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_01210fd</bpmn:incoming>
@@ -127,9 +124,6 @@
     <bpmn:intermediateCatchEvent id="Event_Wait-for-Payment-Info-Update" name="Wait for Payment Info Update" camunda:asyncBefore="true" camunda:asyncAfter="true">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
-        <camunda:inputOutput>
-          <camunda:outputParameter name="paymentOrderCode">200</camunda:outputParameter>
-        </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0e3ig8c</bpmn:incoming>
       <bpmn:outgoing>Flow_1fsm0pz</bpmn:outgoing>
@@ -241,14 +235,14 @@
               </camunda:map>
             </camunda:inputParameter>
             <camunda:inputParameter name="responseHandler">commonResponseHandler</camunda:inputParameter>
-          <camunda:inputParameter name="responseHandleSetting">
-            <camunda:map>
-              <camunda:entry key="Downstream-Non200-Throw">false</camunda:entry>
-              <camunda:entry key="Downstream-ErrorCode-Throw">false</camunda:entry>
-              <camunda:entry key="Downstream-Response-Variable">notificationResponse</camunda:entry>
-              <camunda:entry key="Downstream-ReturnCode-Variable">notificationReturnCode</camunda:entry>
-            </camunda:map>
-          </camunda:inputParameter>
+            <camunda:inputParameter name="responseHandleSetting">
+              <camunda:map>
+                <camunda:entry key="Downstream-Non200-Throw">false</camunda:entry>
+                <camunda:entry key="Downstream-ErrorCode-Throw">false</camunda:entry>
+                <camunda:entry key="Downstream-Response-Variable">notificationResponse</camunda:entry>
+                <camunda:entry key="Downstream-ReturnCode-Variable">notificationReturnCode</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_17bdjry</bpmn:incoming>

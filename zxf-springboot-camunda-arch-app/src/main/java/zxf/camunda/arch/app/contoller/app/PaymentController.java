@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -19,16 +21,28 @@ public class PaymentController {
     ProcessEngine processEngine;
 
     @GetMapping("/normal-start")
-    public String normalStart(@RequestParam String orderId) {
-        log.info("normalStart, {}", orderId);
-        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("PaymentProcess", orderId, Collections.singletonMap("OrderId", orderId));
+    public String normalStart(@RequestParam String orderId, @RequestParam String paymentOrderCode, @RequestParam String shippingRequestCode, @RequestParam String shippingOrderCode) {
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("OrderId", orderId);
+        variables.put("paymentOrderCode", paymentOrderCode);
+        variables.put("shippingRequestCode", shippingRequestCode);
+        variables.put("shippingOrderCode", shippingOrderCode);
+
+        log.info("normalStart, {}, {}", orderId, variables);
+        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("PaymentProcess", orderId, variables);
         return processInstance.getProcessInstanceId();
     }
 
     @GetMapping("/message-start")
-    public String messageStart(@RequestParam String orderId) {
-        log.info("messageStart, {}", orderId);
-        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByMessage("PaymentProcess.Start", orderId, Collections.singletonMap("OrderId", orderId));
+    public String messageStart(@RequestParam String orderId, @RequestParam String paymentOrderCode, @RequestParam String shippingRequestCode, @RequestParam String shippingOrderCode) {
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("OrderId", orderId);
+        variables.put("paymentOrderCode", paymentOrderCode);
+        variables.put("shippingRequestCode", shippingRequestCode);
+        variables.put("shippingOrderCode", shippingOrderCode);
+
+        log.info("messageStart, {}, {}", orderId, variables);
+        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByMessage("PaymentProcess.Start", orderId, variables);
         return processInstance.getProcessInstanceId();
     }
 

@@ -26,8 +26,10 @@ public class HttpRequestDelegate implements JavaDelegate {
     private BeanFactory beanFactory;
 
     /* Note:
-    1. Do not need to remove local variables
-    2. new BpmnError(error, error) will not cause the retry
+    1. Do not need to remove local variables.
+    2. new BpmnError(error, error) will not cause the retry.
+    3. In bpmn fle, the input variables are local variables.
+    4. In bpmn fle, the output variables are process variables.
     */
     @Override
     public void execute(DelegateExecution execution) throws Exception {
