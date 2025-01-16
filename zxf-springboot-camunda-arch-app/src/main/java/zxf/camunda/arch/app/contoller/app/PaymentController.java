@@ -3,6 +3,8 @@ package zxf.camunda.arch.app.contoller.app;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
+import org.camunda.bpm.engine.variable.VariableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ public class PaymentController {
     ProcessEngine processEngine;
 
     @GetMapping("/normal-start")
-    public String normalStart(@RequestParam String orderId, @RequestParam String paymentOrderCode, @RequestParam String shippingRequestCode, @RequestParam String shippingOrderCode) {
+    public VariableMap normalStart(@RequestParam String orderId, @RequestParam String paymentOrderCode, @RequestParam String shippingRequestCode, @RequestParam String shippingOrderCode) {
         Map<String, Object> variables = new HashMap<>();
         variables.put("OrderId", orderId);
         variables.put("paymentOrderCode", paymentOrderCode);
@@ -29,8 +31,11 @@ public class PaymentController {
         variables.put("shippingOrderCode", shippingOrderCode);
 
         log.info("normalStart, {}, {}", orderId, variables);
-        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("PaymentProcess", orderId, variables);
-        return processInstance.getProcessInstanceId();
+        ProcessInstanceWithVariables processInstance = processEngine.getRuntimeService().createProcessInstanceByKey("PaymentProcess")
+                .businessKey(orderId)
+                .setVariables(variables)
+                .executeWithVariablesInReturn();
+        return processInstance.getVariables();
     }
 
     @GetMapping("/message-start")

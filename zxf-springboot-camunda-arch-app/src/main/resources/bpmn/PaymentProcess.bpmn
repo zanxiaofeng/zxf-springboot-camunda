@@ -227,7 +227,7 @@
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="url">http://localhost:8191/task/c</camunda:inputParameter>
             <camunda:inputParameter name="body">{
-    "task": 500
+    "task": 200
 }</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
