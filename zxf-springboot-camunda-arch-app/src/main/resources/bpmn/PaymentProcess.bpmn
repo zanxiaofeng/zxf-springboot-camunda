@@ -162,6 +162,9 @@
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_1lw9r4f" sourceRef="ServiceTask_Create-Order" targetRef="Activity_Expired-Sub-Process" />
     <bpmn:subProcess id="Activity_Expired-Sub-Process" name="Expired Sub Process">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1lw9r4f</bpmn:incoming>
       <bpmn:startEvent id="Event_Expiry-Monitor-Start" name="Expiry Monitor Start">
         <bpmn:extensionElements>
@@ -386,12 +389,6 @@
       <bpmndi:BPMNShape id="Activity_0y1dh1r_di" bpmnElement="Activity_Sipping-Order">
         <dc:Bounds x="1340" y="130" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_00bvqob_di" bpmnElement="Event_Cancel-End">
-        <dc:Bounds x="1152" y="372" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1142" y="415" width="57" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1exxqn3_di" bpmnElement="Activity_Expired-Sub-Process" isExpanded="true">
         <dc:Bounds x="460" y="340" width="570" height="190" />
         <bpmndi:BPMNLabel />
@@ -509,6 +506,12 @@
         <dc:Bounds x="1522" y="152" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1531" y="195" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00bvqob_di" bpmnElement="Event_Cancel-End">
+        <dc:Bounds x="1152" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1142" y="415" width="57" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_150637i_di" bpmnElement="Event_Order-Canceled">
