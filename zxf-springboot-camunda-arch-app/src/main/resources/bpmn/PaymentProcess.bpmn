@@ -301,20 +301,7 @@
         <bpmn:outgoing>Flow_0tgwt92</bpmn:outgoing>
       </bpmn:callActivity>
     </bpmn:subProcess>
-    <bpmn:endEvent id="Event_End" name="End">
-      <bpmn:extensionElements>
-        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_024uins</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0fabkqy" sourceRef="Event_Order-Canceled" targetRef="Event_Cancel-End" />
-    <bpmn:boundaryEvent id="Event_Order-Canceled" name="Order Canceled" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_Expired-Sub-Process">
-      <bpmn:extensionElements>
-        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
-      </bpmn:extensionElements>
-      <bpmn:outgoing>Flow_0fabkqy</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1aftlc8" messageRef="Message_39jqfe5" />
-    </bpmn:boundaryEvent>
     <bpmn:serviceTask id="Activity_Package-Notification" name="Package Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
@@ -333,6 +320,31 @@
       <bpmn:incoming>Flow_0fabkqy</bpmn:incoming>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0hqvgnn" errorRef="Error_07bn4il" />
     </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Event_Order-Completed" name="Order Completed" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_Expired-Sub-Process">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0ogto3w</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_17kmpwm" messageRef="Message_2lmnlh7" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_Order-Canceled" name="Order Canceled" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_Expired-Sub-Process">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0fabkqy</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1aftlc8" messageRef="Message_39jqfe5" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="Event_07iiavw" name="Completed End">
+      <bpmn:incoming>Flow_0ogto3w</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ogto3w" sourceRef="Event_Order-Completed" targetRef="Event_07iiavw" />
+    <bpmn:endEvent id="Event_End" name="End">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_024uins</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_08dj39k" messageRef="Message_2lmnlh7" camunda:delegateExpression="${messageThrowDelegate}" />
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_0dqpff6" name="PaymentProcess.Start" />
   <bpmn:message id="Message_2vun4eq" name="PaymentProcess.PackageReceived" />
@@ -340,6 +352,7 @@
   <bpmn:message id="Message_15n0fu0" name="PaymentProcess.InfoUpdate" />
   <bpmn:message id="Message_39jqfe5" name="PaymentProcess.Cancel" />
   <bpmn:error id="Error_07bn4il" name="Error_Canceled" errorCode="001" camunda:errorMessage="Order Canceled" />
+  <bpmn:message id="Message_2lmnlh7" name="PaymentProcess.Completed" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PaymentProcess">
       <bpmndi:BPMNShape id="ServiceTask_1tvk8uj_di" bpmnElement="ServiceTask_Create-Order">
@@ -379,8 +392,26 @@
       <bpmndi:BPMNShape id="Activity_0y1dh1r_di" bpmnElement="Activity_Sipping-Order">
         <dc:Bounds x="1340" y="130" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03ciz5c_di" bpmnElement="Event_Cancel-End">
+        <dc:Bounds x="1294" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1284" y="415" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_07iiavw_di" bpmnElement="Event_07iiavw">
+        <dc:Bounds x="1294" y="462" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1274" y="505" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01ekyuw_di" bpmnElement="Event_End">
+        <dc:Bounds x="1522" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1531" y="195" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1exxqn3_di" bpmnElement="Activity_Expired-Sub-Process" isExpanded="true">
-        <dc:Bounds x="460" y="340" width="670" height="160" />
+        <dc:Bounds x="460" y="340" width="670" height="190" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_07t96y7_di" bpmnElement="Event_Expiry-Monitor-Start">
@@ -490,26 +521,20 @@
         <di:waypoint x="420" y="690" />
         <di:waypoint x="502" y="690" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_11roies_di" bpmnElement="Event_End">
-        <dc:Bounds x="1522" y="152" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1531" y="195" width="20" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1xl37k3" bpmnElement="Activity_Package-Notification">
         <dc:Bounds x="1030" y="130" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_03ciz5c_di" bpmnElement="Event_Cancel-End">
-        <dc:Bounds x="1242" y="392" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_150637i_di" bpmnElement="Event_Order-Canceled">
+        <dc:Bounds x="1112" y="372" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1232" y="435" width="57" height="14" />
+          <dc:Bounds x="1091" y="415" width="78" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_150637i_di" bpmnElement="Event_Order-Canceled">
-        <dc:Bounds x="1112" y="392" width="36" height="36" />
+      <bpmndi:BPMNShape id="BPMNShape_0h2772y" bpmnElement="Event_Order-Completed">
+        <dc:Bounds x="1112" y="462" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1091" y="435" width="78" height="14" />
+          <dc:Bounds x="1088" y="505" width="85" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_01210fd_di" bpmnElement="Flow_01210fd">
@@ -563,12 +588,16 @@
         <di:waypoint x="1522" y="170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0fabkqy_di" bpmnElement="Flow_0fabkqy">
-        <di:waypoint x="1148" y="410" />
-        <di:waypoint x="1242" y="410" />
+        <di:waypoint x="1148" y="390" />
+        <di:waypoint x="1294" y="390" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pkd7iv_di" bpmnElement="Flow_0pkd7iv">
         <di:waypoint x="1130" y="170" />
         <di:waypoint x="1222" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ogto3w_di" bpmnElement="Flow_0ogto3w">
+        <di:waypoint x="1148" y="480" />
+        <di:waypoint x="1294" y="480" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
