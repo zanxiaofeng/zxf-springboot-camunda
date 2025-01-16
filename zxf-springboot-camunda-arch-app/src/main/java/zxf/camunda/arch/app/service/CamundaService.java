@@ -33,11 +33,10 @@ public class CamundaService {
     }
 
     public String executionInfo(DelegateExecution execution) {
-        return String.format("(Id=%s, ParentId=%s, EventName=%s, BusinessKey=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, ProcessBusinessKey=%s, CurrentActivityId=%s, CurrentActivityName=%s, CurrentTransitionId=%s, ActivityInstanceId=%s, ParentActivityInstanceId=%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
+        return String.format("(Id=%s::%s, EventName=%s, BusinessKey=%s, CurrentActivityName=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, ProcessBusinessKey=%s, ActivityInstance=%s::%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
                 execution.getId(), execution.getParentId(),
-                execution.getEventName(), execution.getBusinessKey(),
+                execution.getEventName(), execution.getBusinessKey(), execution.getCurrentActivityName(),
                 execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getProcessBusinessKey(),
-                execution.getCurrentActivityId(), execution.getCurrentActivityName(), execution.getCurrentTransitionId(),
                 execution.getActivityInstanceId(), execution.getParentActivityInstanceId(),
                 execution.getVariableScopeKey(), execution.getVariables(), execution.getVariableNamesLocal());
     }

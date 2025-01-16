@@ -169,34 +169,24 @@
         </bpmn:extensionElements>
         <bpmn:outgoing>Flow_10fhle2</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:sequenceFlow id="Flow_10fhle2" sourceRef="Event_Expiry-Monitor-Start" targetRef="Event_Countdown-5-mins" />
-      <bpmn:intermediateCatchEvent id="Event_Countdown-5-mins" name="Countdown 5 mins" camunda:asyncBefore="true" camunda:asyncAfter="true">
+      <bpmn:sequenceFlow id="Flow_10fhle2" sourceRef="Event_Expiry-Monitor-Start" targetRef="Event_Countdown-30-mins" />
+      <bpmn:intermediateCatchEvent id="Event_Countdown-30-mins" name="Countdown 30 mins" camunda:asyncBefore="true" camunda:asyncAfter="true">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_10fhle2</bpmn:incoming>
         <bpmn:outgoing>Flow_1dtnsfp</bpmn:outgoing>
         <bpmn:timerEventDefinition id="TimerEventDefinition_1a52vul">
-          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT3M</bpmn:timeDuration>
         </bpmn:timerEventDefinition>
       </bpmn:intermediateCatchEvent>
-      <bpmn:sequenceFlow id="Flow_1dtnsfp" sourceRef="Event_Countdown-5-mins" targetRef="Activity_Expired-Notification" />
-      <bpmn:serviceTask id="Activity_Expired-Notification" name="Expired Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${notificationDelegate}">
-        <bpmn:extensionElements>
-          <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
-          <camunda:inputOutput>
-            <camunda:inputParameter name="message">Expired</camunda:inputParameter>
-          </camunda:inputOutput>
-        </bpmn:extensionElements>
-        <bpmn:incoming>Flow_1dtnsfp</bpmn:incoming>
-        <bpmn:outgoing>Flow_1f7zrsa</bpmn:outgoing>
-      </bpmn:serviceTask>
-      <bpmn:sequenceFlow id="Flow_1f7zrsa" sourceRef="Activity_Expired-Notification" targetRef="Event_Expiry-Monitor-End" />
+      <bpmn:sequenceFlow id="Flow_1dtnsfp" sourceRef="Event_Countdown-30-mins" targetRef="Event_Expiry-Monitor-End" />
       <bpmn:endEvent id="Event_Expiry-Monitor-End" name="Expiry Monitor End">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         </bpmn:extensionElements>
-        <bpmn:incoming>Flow_1f7zrsa</bpmn:incoming>
+        <bpmn:incoming>Flow_1dtnsfp</bpmn:incoming>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_1yq62me" errorRef="Error_1h0rrnu" />
       </bpmn:endEvent>
     </bpmn:subProcess>
     <bpmn:subProcess id="Activity_Notification-Event-Sub-Process" name="Notification Event Sub Process" triggeredByEvent="true">
@@ -313,13 +303,6 @@
       <bpmn:outgoing>Flow_0pkd7iv</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0pkd7iv" sourceRef="Activity_Package-Notification" targetRef="Event_Wait-for-Package-Receive" />
-    <bpmn:endEvent id="Event_Cancel-End" name="Cancel End">
-      <bpmn:extensionElements>
-        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_0fabkqy</bpmn:incoming>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_0hqvgnn" errorRef="Error_07bn4il" />
-    </bpmn:endEvent>
     <bpmn:boundaryEvent id="Event_Order-Completed" name="Order Completed" camunda:asyncBefore="true" camunda:asyncAfter="true" attachedToRef="Activity_Expired-Sub-Process">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
@@ -335,6 +318,9 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_1aftlc8" messageRef="Message_39jqfe5" />
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="Event_07iiavw" name="Completed End">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0ogto3w</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0ogto3w" sourceRef="Event_Order-Completed" targetRef="Event_07iiavw" />
@@ -345,14 +331,22 @@
       <bpmn:incoming>Flow_024uins</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_08dj39k" messageRef="Message_2lmnlh7" camunda:delegateExpression="${messageThrowDelegate}" />
     </bpmn:endEvent>
+    <bpmn:endEvent id="Event_Cancel-End" name="Cancel End">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0fabkqy</bpmn:incoming>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1tf6w4a" errorRef="Error_07bn4il" />
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_0dqpff6" name="PaymentProcess.Start" />
   <bpmn:message id="Message_2vun4eq" name="PaymentProcess.PackageReceived" />
   <bpmn:message id="Message_2fejuef" name="PaymentProcess.Notification" />
   <bpmn:message id="Message_15n0fu0" name="PaymentProcess.InfoUpdate" />
   <bpmn:message id="Message_39jqfe5" name="PaymentProcess.Cancel" />
-  <bpmn:error id="Error_07bn4il" name="Error_Canceled" errorCode="001" camunda:errorMessage="Order Canceled" />
   <bpmn:message id="Message_2lmnlh7" name="PaymentProcess.Completed" />
+  <bpmn:error id="Error_07bn4il" name="Error_Canceled" errorCode="001" camunda:errorMessage="Order Canceled" />
+  <bpmn:error id="Error_1h0rrnu" name="Error_Expired" errorCode="002" camunda:errorMessage="Order Expired" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PaymentProcess">
       <bpmndi:BPMNShape id="ServiceTask_1tvk8uj_di" bpmnElement="ServiceTask_Create-Order">
@@ -392,61 +386,41 @@
       <bpmndi:BPMNShape id="Activity_0y1dh1r_di" bpmnElement="Activity_Sipping-Order">
         <dc:Bounds x="1340" y="130" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_03ciz5c_di" bpmnElement="Event_Cancel-End">
-        <dc:Bounds x="1294" y="372" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_00bvqob_di" bpmnElement="Event_Cancel-End">
+        <dc:Bounds x="1152" y="372" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1284" y="415" width="57" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_07iiavw_di" bpmnElement="Event_07iiavw">
-        <dc:Bounds x="1294" y="462" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1274" y="505" width="76" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_01ekyuw_di" bpmnElement="Event_End">
-        <dc:Bounds x="1522" y="152" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1531" y="195" width="20" height="14" />
+          <dc:Bounds x="1142" y="415" width="57" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1exxqn3_di" bpmnElement="Activity_Expired-Sub-Process" isExpanded="true">
-        <dc:Bounds x="460" y="340" width="670" height="190" />
+        <dc:Bounds x="460" y="340" width="570" height="190" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_07t96y7_di" bpmnElement="Event_Expiry-Monitor-Start">
-        <dc:Bounds x="527" y="392" width="36" height="36" />
+        <dc:Bounds x="542" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="510" y="435" width="71" height="27" />
+          <dc:Bounds x="525" y="455" width="71" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_028r3gy_di" bpmnElement="Event_Countdown-5-mins">
-        <dc:Bounds x="647" y="392" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_028r3gy_di" bpmnElement="Event_Countdown-30-mins">
+        <dc:Bounds x="712" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="634" y="435" width="65" height="27" />
+          <dc:Bounds x="697" y="455" width="71" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ulhzzp_di" bpmnElement="Activity_Expired-Notification">
-        <dc:Bounds x="800" y="370" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0nakfwz_di" bpmnElement="Event_Expiry-Monitor-End">
-        <dc:Bounds x="1012" y="392" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_07oovvc_di" bpmnElement="Event_Expiry-Monitor-End">
+        <dc:Bounds x="872" y="412" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="995" y="435" width="71" height="27" />
+          <dc:Bounds x="855" y="455" width="71" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_10fhle2_di" bpmnElement="Flow_10fhle2">
-        <di:waypoint x="563" y="410" />
-        <di:waypoint x="647" y="410" />
+        <di:waypoint x="578" y="430" />
+        <di:waypoint x="712" y="430" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1dtnsfp_di" bpmnElement="Flow_1dtnsfp">
-        <di:waypoint x="683" y="410" />
-        <di:waypoint x="800" y="410" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1f7zrsa_di" bpmnElement="Flow_1f7zrsa">
-        <di:waypoint x="900" y="410" />
-        <di:waypoint x="1012" y="410" />
+        <di:waypoint x="748" y="430" />
+        <di:waypoint x="872" y="430" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_058ty22_di" bpmnElement="Activity_Notification-Event-Sub-Process" isExpanded="true">
         <dc:Bounds x="830" y="605" width="500" height="170" />
@@ -525,16 +499,28 @@
         <dc:Bounds x="1030" y="130" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_150637i_di" bpmnElement="Event_Order-Canceled">
-        <dc:Bounds x="1112" y="372" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_07iiavw_di" bpmnElement="Event_07iiavw">
+        <dc:Bounds x="1152" y="462" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1091" y="415" width="78" height="14" />
+          <dc:Bounds x="1132" y="505" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01ekyuw_di" bpmnElement="Event_End">
+        <dc:Bounds x="1522" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1531" y="195" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_150637i_di" bpmnElement="Event_Order-Canceled">
+        <dc:Bounds x="1012" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="991" y="415" width="78" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0h2772y" bpmnElement="Event_Order-Completed">
-        <dc:Bounds x="1112" y="462" width="36" height="36" />
+        <dc:Bounds x="1012" y="462" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1088" y="505" width="85" height="14" />
+          <dc:Bounds x="988" y="505" width="85" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_01210fd_di" bpmnElement="Flow_01210fd">
@@ -580,24 +566,24 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1lw9r4f_di" bpmnElement="Flow_1lw9r4f">
         <di:waypoint x="380" y="210" />
-        <di:waypoint x="380" y="405" />
-        <di:waypoint x="460" y="405" />
+        <di:waypoint x="380" y="435" />
+        <di:waypoint x="460" y="435" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_024uins_di" bpmnElement="Flow_024uins">
         <di:waypoint x="1440" y="170" />
         <di:waypoint x="1522" y="170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0fabkqy_di" bpmnElement="Flow_0fabkqy">
-        <di:waypoint x="1148" y="390" />
-        <di:waypoint x="1294" y="390" />
+        <di:waypoint x="1048" y="390" />
+        <di:waypoint x="1152" y="390" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0pkd7iv_di" bpmnElement="Flow_0pkd7iv">
         <di:waypoint x="1130" y="170" />
         <di:waypoint x="1222" y="170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0ogto3w_di" bpmnElement="Flow_0ogto3w">
-        <di:waypoint x="1148" y="480" />
-        <di:waypoint x="1294" y="480" />
+        <di:waypoint x="1048" y="480" />
+        <di:waypoint x="1152" y="480" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

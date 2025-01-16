@@ -26,4 +26,4 @@
 - http://localhost:8190/info/definitions/message?message=PaymentProcess.Start
 - http://localhost:8190/app/payment/message-start?orderId=3&paymentOrderCode=200&shippingRequestCode=200&shippingOrderCode=200
 - http://localhost:8190/info/executions/message?message=PaymentProcess.Cancel
-- http://localhost:8190/app/payment/cancel?executionId=e7c47340-b776-11ef-95de-7606d5c7fdbe
+- http://localhost:8190/app/payment/cancel?executionId=04789986-d3f7-11ef-b825-c6118aa45c47

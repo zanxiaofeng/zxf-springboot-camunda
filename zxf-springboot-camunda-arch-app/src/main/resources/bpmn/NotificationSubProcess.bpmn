@@ -12,9 +12,25 @@
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>
-          <camunda:inputParameter name="method">POST</camunda:inputParameter>
-          <camunda:inputParameter name="url">Order Expiry</camunda:inputParameter>
-          <camunda:inputParameter name="errorInfo">error123</camunda:inputParameter>
+<camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://localhost:8191/task/c</camunda:inputParameter>
+            <camunda:inputParameter name="body">{
+    "task": 200
+}</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="responseHandler">commonResponseHandler</camunda:inputParameter>
+            <camunda:inputParameter name="responseHandleSetting">
+              <camunda:map>
+                <camunda:entry key="Downstream-Non200-Throw">false</camunda:entry>
+                <camunda:entry key="Downstream-ErrorCode-Throw">false</camunda:entry>
+                <camunda:entry key="Downstream-Response-Variable">notificationResponse</camunda:entry>
+                <camunda:entry key="Downstream-ReturnCode-Variable">notificationReturnCode</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0tqeimh</bpmn:incoming>
