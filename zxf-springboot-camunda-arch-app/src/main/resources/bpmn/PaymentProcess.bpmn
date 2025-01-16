@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.29.0">
   <bpmn:process id="PaymentProcess" name="PaymentProcess" isExecutable="true">
-    <bpmn:serviceTask id="ServiceTask_Create-Order" name="Create Order" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
+    <bpmn:serviceTask id="ServiceTask_Create-Order" name="Create Order" camunda:delegateExpression="${httpRequestDelegate}">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>
@@ -15,7 +15,15 @@
               <camunda:entry key="Content-Type">application/json</camunda:entry>
             </camunda:map>
           </camunda:inputParameter>
-          <camunda:inputParameter name="responseVariable">createOrderResponse</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandler">commonResponseHandler</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandleSetting">
+            <camunda:map>
+              <camunda:entry key="Downstream-Non200-Throw">true</camunda:entry>
+              <camunda:entry key="Downstream-ErrorCode-Throw">true</camunda:entry>
+              <camunda:entry key="Downstream-Response-Variable">createOrderResponse</camunda:entry>
+              <camunda:entry key="Downstream-ReturnCode-Variable">createOrderReturnCode</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
           <camunda:outputParameter name="paymentOrderCode">200</camunda:outputParameter>
           <camunda:outputParameter name="shippingRequestCode">200</camunda:outputParameter>
           <camunda:outputParameter name="shippingOrderCode">200</camunda:outputParameter>
@@ -56,8 +64,16 @@
               <camunda:entry key="Content-Type">application/json</camunda:entry>
             </camunda:map>
           </camunda:inputParameter>
-          <camunda:inputParameter name="responseVariable">paymentOrderResponse</camunda:inputParameter>
-          <camunda:outputParameter name="paymentStatus">${paymentOrderResponse.code == 200 ? "OK": "FAILED"}</camunda:outputParameter>
+          <camunda:inputParameter name="responseHandler">commonResponseHandler</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandleSetting">
+            <camunda:map>
+              <camunda:entry key="Downstream-Non200-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-ErrorCode-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-Response-Variable">paymentOrderResponse</camunda:entry>
+              <camunda:entry key="Downstream-ReturnCode-Variable">paymentOrderReturnCode</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
+          <camunda:outputParameter name="paymentStatus">${paymentOrderReturnCode == "200" ? "OK": "FAILED"}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1xy67hz</bpmn:incoming>
@@ -91,7 +107,15 @@
               <camunda:entry key="Content-Type">application/json</camunda:entry>
             </camunda:map>
           </camunda:inputParameter>
-          <camunda:inputParameter name="responseVariable">shippingRequestResponse</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandler">commonResponseHandler</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandleSetting">
+            <camunda:map>
+              <camunda:entry key="Downstream-Non200-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-ErrorCode-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-Response-Variable">shippingRequestResponse</camunda:entry>
+              <camunda:entry key="Downstream-ReturnCode-Variable">shippingRequestReturnCode</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1ot07yz</bpmn:incoming>
@@ -128,7 +152,15 @@
               <camunda:entry key="Content-Type">application/json</camunda:entry>
             </camunda:map>
           </camunda:inputParameter>
-          <camunda:inputParameter name="responseVariable">shippingOrderResponse</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandler">commonResponseHandler</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandleSetting">
+            <camunda:map>
+              <camunda:entry key="Downstream-Non200-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-ErrorCode-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-Response-Variable">shippingOrderResponse</camunda:entry>
+              <camunda:entry key="Downstream-ReturnCode-Variable">shippingOrderReturnCode</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1yjs2rw</bpmn:incoming>
@@ -208,7 +240,15 @@
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
               </camunda:map>
             </camunda:inputParameter>
-            <camunda:inputParameter name="responseVariable">notificationResponse</camunda:inputParameter>
+            <camunda:inputParameter name="responseHandler">commonResponseHandler</camunda:inputParameter>
+          <camunda:inputParameter name="responseHandleSetting">
+            <camunda:map>
+              <camunda:entry key="Downstream-Non200-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-ErrorCode-Throw">false</camunda:entry>
+              <camunda:entry key="Downstream-Response-Variable">notificationResponse</camunda:entry>
+              <camunda:entry key="Downstream-ReturnCode-Variable">notificationReturnCode</camunda:entry>
+            </camunda:map>
+          </camunda:inputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_17bdjry</bpmn:incoming>
@@ -345,12 +385,6 @@
       <bpmndi:BPMNShape id="Activity_0y1dh1r_di" bpmnElement="Activity_Sipping-Order">
         <dc:Bounds x="1340" y="130" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_03ciz5c_di" bpmnElement="Event_Cancel-End">
-        <dc:Bounds x="1242" y="392" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1232" y="435" width="57" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1exxqn3_di" bpmnElement="Activity_Expired-Sub-Process" isExpanded="true">
         <dc:Bounds x="460" y="340" width="670" height="160" />
         <bpmndi:BPMNLabel />
@@ -471,6 +505,12 @@
       <bpmndi:BPMNShape id="BPMNShape_1xl37k3" bpmnElement="Activity_Package-Notification">
         <dc:Bounds x="1030" y="130" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03ciz5c_di" bpmnElement="Event_Cancel-End">
+        <dc:Bounds x="1242" y="392" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1232" y="435" width="57" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_150637i_di" bpmnElement="Event_Order-Canceled">
         <dc:Bounds x="1112" y="392" width="36" height="36" />

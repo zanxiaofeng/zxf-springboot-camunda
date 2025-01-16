@@ -12,7 +12,7 @@ import static org.springframework.http.HttpStatus.*;
 public class TaskService {
     public static ResponseEntity<Map<String, Object>> result(Integer task, String service) throws InterruptedException {
         Map<String, Object> result = new HashMap<>();
-        result.put("code", task);
+        result.put("code", task.toString());
         result.put("task", service + "-" + task);
         result.put("value", LocalDate.now());
         switch (HttpStatus.resolve(task)) {
