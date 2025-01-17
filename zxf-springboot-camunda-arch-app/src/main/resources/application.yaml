@@ -21,6 +21,7 @@ logging:
     org.camunda.bpm.engine.cmd: ERROR
     org.camunda.bpm.engine.persistence: ERROR
     org.camunda.bpm.engine.jobexecutor: ERROR
+    zxf.camunda.arch.app.client.http.LoggingRequestInterceptor: DEBUG
 
 management:
   endpoints:

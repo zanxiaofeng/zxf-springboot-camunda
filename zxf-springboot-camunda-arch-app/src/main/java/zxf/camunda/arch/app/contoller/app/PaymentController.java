@@ -35,7 +35,9 @@ public class PaymentController {
                 .businessKey(orderId)
                 .setVariables(variables)
                 .executeWithVariablesInReturn();
-        return processInstance.getVariables();
+        VariableMap returnVariables = processInstance.getVariables();
+        returnVariables.put("ProcessInstanceId", processInstance.getProcessInstanceId());
+        return returnVariables;
     }
 
     @GetMapping("/message-start")
