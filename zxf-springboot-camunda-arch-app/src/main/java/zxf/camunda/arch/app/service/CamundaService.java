@@ -32,12 +32,13 @@ public class CamundaService {
         return String.format("(Id=%s, ProcessInstanceId=%s)", execution.getId(), execution.getProcessInstanceId());
     }
 
-    public String executionInfo(DelegateExecution execution) {
-        return String.format("(Id=%s::%s, EventName=%s, BusinessKey=%s, CurrentActivityName=%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, ProcessBusinessKey=%s, ActivityInstance=%s::%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
-                execution.getId(), execution.getParentId(),
-                execution.getEventName(), execution.getBusinessKey(), execution.getCurrentActivityName(),
+    public String executionInfo(DelegateExecution execution, Boolean shortenFormat) {
+        //Note: The DelegateExecution::getEventName() is only for ExecutionListener.
+        return String.format("(Id=%s::%s, BusinessKey=%s, CurrentActivityName=%s..%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, ProcessBusinessKey=%s, ActivityInstance=%s::%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
+                execution.getId(), execution.getParentId(), execution.getBusinessKey(),
+                execution.getCurrentActivityName(), execution.getEventName(),
                 execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getProcessBusinessKey(),
                 execution.getActivityInstanceId(), execution.getParentActivityInstanceId(),
-                execution.getVariableScopeKey(), execution.getVariables(), execution.getVariableNamesLocal());
+                execution.getVariableScopeKey(), shortenFormat ? execution.getVariableNames() : execution.getVariables(), execution.getVariableNamesLocal());
     }
 }

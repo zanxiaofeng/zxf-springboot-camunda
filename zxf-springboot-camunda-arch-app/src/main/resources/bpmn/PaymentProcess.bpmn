@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.29.0">
-  <bpmn:process id="PaymentProcess" name="PaymentProcess" isExecutable="true">
+  <bpmn:process id="PaymentProcess" name="Payment Process" isExecutable="true">
     <bpmn:serviceTask id="ServiceTask_Create-Order" name="Create Order" camunda:delegateExpression="${httpRequestDelegate}">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
@@ -90,7 +90,7 @@
       <bpmn:extensionElements />
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${paymentStatus == 'OK'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="Activity_Shipping-Request" name="Shipping Request" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
+    <bpmn:serviceTask id="Activity_Shipping-Request" name="Shipping Request" camunda:asyncBefore="true" camunda:delegateExpression="${httpRequestDelegate}">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>
@@ -132,7 +132,7 @@
     <bpmn:sequenceFlow id="Flow_1fsm0pz" sourceRef="Event_Wait-for-Payment-Info-Update" targetRef="Activity_Payment-Order" />
     <bpmn:sequenceFlow id="Flow_0qs2wkb" sourceRef="Activity_Shipping-Request" targetRef="Activity_Package-Notification" />
     <bpmn:sequenceFlow id="Flow_1yjs2rw" sourceRef="Event_Wait-for-Package-Receive" targetRef="Activity_Sipping-Order" />
-    <bpmn:serviceTask id="Activity_Sipping-Order" name="Sipping Order" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
+    <bpmn:serviceTask id="Activity_Sipping-Order" name="Sipping Order" camunda:delegateExpression="${httpRequestDelegate}">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>
@@ -213,7 +213,7 @@
         <bpmn:outgoing>Flow_03sbgn2</bpmn:outgoing>
         <bpmn:errorEventDefinition id="ErrorEventDefinition_0q022sh" />
       </bpmn:boundaryEvent>
-      <bpmn:serviceTask id="Activity_Notification" name="Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${httpRequestDelegate}">
+      <bpmn:serviceTask id="Activity_Notification" name="Notification" camunda:delegateExpression="${httpRequestDelegate}">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
           <camunda:inputOutput>
@@ -280,7 +280,7 @@
         <bpmn:incoming>Flow_0tgwt92</bpmn:incoming>
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_0tgwt92" sourceRef="Activity_Error-Notification" targetRef="Event_Error-End" />
-      <bpmn:callActivity id="Activity_Error-Notification" name="Error Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" calledElement="NotificationSubProcess">
+      <bpmn:callActivity id="Activity_Error-Notification" name="Error Notification" calledElement="NotificationSubProcess">
         <bpmn:extensionElements>
           <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
           <camunda:inputOutput>
@@ -295,7 +295,7 @@
       </bpmn:callActivity>
     </bpmn:subProcess>
     <bpmn:sequenceFlow id="Flow_0fabkqy" sourceRef="Event_Order-Canceled" targetRef="Event_Cancel-End" />
-    <bpmn:serviceTask id="Activity_Package-Notification" name="Package Notification" camunda:asyncBefore="true" camunda:asyncAfter="true" camunda:delegateExpression="${notificationDelegate}">
+    <bpmn:serviceTask id="Activity_Package-Notification" name="Package Notification" camunda:asyncAfter="true" camunda:delegateExpression="${notificationDelegate}">
       <bpmn:extensionElements>
         <camunda:executionListener delegateExpression="${loggingExecutionListener}" event="start" />
         <camunda:inputOutput>

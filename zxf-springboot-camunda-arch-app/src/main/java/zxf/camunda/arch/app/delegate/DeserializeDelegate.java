@@ -24,7 +24,7 @@ public class DeserializeDelegate implements JavaDelegate {
         String variableIn = (String) execution.getVariable("variableIn");
         String variableOut = (String) execution.getVariable("variableOut");
         execution.setVariable(variableOut, deserializeVariable(variableIn, execution));
-        log.info("Deserialize, {}", camundaService.executionInfo(execution));
+        log.info("Deserialize, {}", camundaService.executionInfo(execution, false));
     }
 
     protected HashMap<String, Object> deserializeVariable(String variableName, DelegateExecution execution) throws JsonProcessingException {

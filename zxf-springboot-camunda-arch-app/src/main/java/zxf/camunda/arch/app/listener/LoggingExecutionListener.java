@@ -10,11 +10,12 @@ import zxf.camunda.arch.app.service.CamundaService;
 @Slf4j
 @Component
 public class LoggingExecutionListener implements ExecutionListener {
+    private static Boolean SHORTEN_FORMAT = true;
     @Autowired
     private CamundaService camundaService;
 
     @Override
     public void notify(DelegateExecution execution) throws Exception {
-        log.info("{}", camundaService.executionInfo(execution));
+        log.info("{}", camundaService.executionInfo(execution, SHORTEN_FORMAT));
     }
 }
