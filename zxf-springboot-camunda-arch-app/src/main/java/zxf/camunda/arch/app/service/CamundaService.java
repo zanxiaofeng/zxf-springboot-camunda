@@ -7,8 +7,15 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
+import org.camunda.bpm.engine.variable.VariableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import zxf.camunda.arch.app.exception.BusinessErrorException;
+import zxf.camunda.arch.app.exception.BusinessErrors;
+
+import java.util.Collections;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -40,5 +47,26 @@ public class CamundaService {
                 execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getProcessBusinessKey(),
                 execution.getActivityInstanceId(), execution.getParentActivityInstanceId(),
                 execution.getVariableScopeKey(), shortenFormat ? execution.getVariableNames() : execution.getVariables(), execution.getVariableNamesLocal());
+    }
+
+    public void correlateMessage(String messageName, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
+        try {
+            processEngine.getRuntimeService().correlateMessage(messageName, businessKey, processVariables);
+        } catch (Exception ex) {
+            throw new BusinessErrorException(BusinessErrors.APP_FLOW_002.getCode(), BusinessErrors.APP_FLOW_002.getDescription() + messageName + ", " + businessKey);
+        }
+    }
+
+    public VariableMap startWithVariablesInReturn(String processDefinitionKey, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
+        try {
+            ProcessInstanceWithVariables processInstance = processEngine.getRuntimeService()
+                    .createProcessInstanceByKey(processDefinitionKey)
+                    .businessKey(businessKey).setVariables(processVariables).executeWithVariablesInReturn();
+            VariableMap returnVariables = processInstance.getVariables();
+            returnVariables.put("ProcessInstanceId", processInstance.getProcessInstanceId());
+            return returnVariables;
+        } catch (Exception ex) {
+            throw new BusinessErrorException(BusinessErrors.APP_FLOW_001.getCode(), BusinessErrors.APP_FLOW_001.getDescription() + processDefinitionKey + ", " + businessKey);
+        }
     }
 }

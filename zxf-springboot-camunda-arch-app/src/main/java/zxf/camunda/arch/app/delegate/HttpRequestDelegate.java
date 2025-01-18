@@ -11,6 +11,7 @@ import zxf.camunda.arch.app.client.HttpClient;
 import zxf.camunda.arch.app.client.http.response.ResponseHandler;
 import zxf.camunda.arch.app.exception.BusinessErrorException;
 import zxf.camunda.arch.app.exception.DownstreamErrorException;
+import zxf.camunda.arch.app.exception.BusinessErrors;
 import zxf.camunda.arch.app.service.CamundaService;
 
 import java.util.Map;
@@ -51,7 +52,7 @@ public class HttpRequestDelegate implements JavaDelegate {
             throw ex;
         } catch (Exception ex) {
             log.error("Exception when sending http request", ex);
-            throw new BusinessErrorException("APP-01-001", "Call Downstream error with exception: " + ex.getMessage());
+            throw new BusinessErrorException(BusinessErrors.APP_DOWNSTREAM_001.getCode(), BusinessErrors.APP_DOWNSTREAM_001.getDescription() + ex.getMessage());
         }
     }
 }

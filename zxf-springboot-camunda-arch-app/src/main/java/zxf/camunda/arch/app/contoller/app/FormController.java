@@ -1,13 +1,14 @@
 package zxf.camunda.arch.app.contoller.app;
 
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import zxf.camunda.arch.app.exception.BusinessErrorException;
+import zxf.camunda.arch.app.service.CamundaService;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,23 +17,22 @@ import java.util.UUID;
 @RequestMapping("/app/form")
 public class FormController {
     @Autowired
-    ProcessEngine processEngine;
+    CamundaService camundaService;
+
 
     @PostMapping("/start")
-    public VariableMap start(@RequestBody Map<String, Object> requestBody) {
+    public VariableMap start(@RequestBody Map<String, Object> requestBody) throws BusinessErrorException {
         String formId = UUID.randomUUID().toString();
         log.info("start, fromId: {}", formId);
-        ProcessInstanceWithVariables processInstance = processEngine.getRuntimeService()
-                .createProcessInstanceByKey("Flow-Form-Process")
-                .businessKey(formId).setVariables(Collections.singletonMap("requestBody", requestBody)).executeWithVariablesInReturn();
-        VariableMap returnVariables = processInstance.getVariables();
-        returnVariables.put("ProcessInstanceId", processInstance.getProcessInstanceId());
-        return returnVariables;
+        return camundaService.startWithVariablesInReturn("Flow-Form-Process", formId, Collections.singletonMap("requestBody", requestBody));
     }
 
     @PostMapping("/message")
-    public void message(@RequestParam String formId, @RequestParam String action, Map<String, Object> messageBody) {
+    public void message(@RequestParam String formId, @RequestParam String action, @RequestBody Map<String, Object> messageBody) throws BusinessErrorException {
         log.info("message, fromId: {}, action: {}", formId, action);
-        processEngine.getRuntimeService().correlateMessage("FormProcess.message", formId, Collections.singletonMap("messageBody", messageBody));
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("messageAction", action);
+        parameters.put("messageBody", messageBody);
+        camundaService.correlateMessage("FormProcess.message", formId, parameters);
     }
 }

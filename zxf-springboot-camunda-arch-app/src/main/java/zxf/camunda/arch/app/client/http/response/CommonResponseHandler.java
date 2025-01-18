@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import zxf.camunda.arch.app.exception.BusinessErrorException;
 import zxf.camunda.arch.app.exception.DownstreamErrorException;
+import zxf.camunda.arch.app.exception.BusinessErrors;
 
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class CommonResponseHandler implements ResponseHandler {
     @Override
     public void handle(DelegateExecution execution, ResponseEntity<Map<String, Object>> response, Map<String, String> handleSetting) throws BusinessErrorException, DownstreamErrorException {
         if (Boolean.parseBoolean(handleSetting.getOrDefault("Downstream-Non200-Throw", "false")) && !response.getStatusCode().is2xxSuccessful()) {
-            throw new BusinessErrorException("APP-01-002", "Downstream error with http code: " + response.getStatusCode());
+            throw new BusinessErrorException(BusinessErrors.APP_DOWNSTREAM_002.getCode(), BusinessErrors.APP_DOWNSTREAM_002.getDescription() + response.getStatusCode());
         }
 
         String downstreamReturnCode = getDownstreamReturnCode(response);
