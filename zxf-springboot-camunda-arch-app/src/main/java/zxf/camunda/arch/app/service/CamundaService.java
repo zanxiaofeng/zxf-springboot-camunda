@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import zxf.camunda.arch.app.exception.BusinessErrorException;
 import zxf.camunda.arch.app.exception.BusinessErrors;
 
-import java.util.Collections;
 import java.util.Map;
 
 @Slf4j
@@ -39,13 +38,19 @@ public class CamundaService {
         return String.format("(Id=%s, ProcessInstanceId=%s)", execution.getId(), execution.getProcessInstanceId());
     }
 
-    public String executionInfo(DelegateExecution execution, Boolean shortenFormat) {
+    public String executionInfoForService(DelegateExecution execution, Boolean shortenFormat) {
+        return String.format("(Id=%s, BusinessKey=%s, CurrentActivityName=%s..%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
+                execution.getId(), execution.getBusinessKey(), execution.getCurrentActivityName(), execution.getActivityInstanceId(),
+                execution.getVariableScopeKey(), shortenFormat ? execution.getVariableNames() : execution.getVariables(), execution.getVariableNamesLocal());
+    }
+
+    public String executionInfoForListener(DelegateExecution execution, Boolean shortenFormat) {
         //Note: The DelegateExecution::getEventName() is only for ExecutionListener.
-        return String.format("(Id=%s::%s, BusinessKey=%s, CurrentActivityName=%s..%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, ProcessBusinessKey=%s, ActivityInstance=%s::%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
-                execution.getId(), execution.getParentId(), execution.getBusinessKey(),
-                execution.getCurrentActivityName(), execution.getEventName(),
-                execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getProcessBusinessKey(),
+        return String.format("CurrentActivityName=%s..%s, BusinessKey=%s, (Id=%s::%s, ActivityInstance=%s::%s, ProcessDefinitionId=%s, ProcessInstanceId=%s, ProcessBusinessKey=%s, VariableScopeKey=%s, Variables=%s, Locals=%s)",
+                execution.getCurrentActivityName(), execution.getEventName(), execution.getBusinessKey(),
+                execution.getId(), execution.getParentId(),
                 execution.getActivityInstanceId(), execution.getParentActivityInstanceId(),
+                execution.getProcessDefinitionId(), execution.getProcessInstanceId(), execution.getProcessBusinessKey(),
                 execution.getVariableScopeKey(), shortenFormat ? execution.getVariableNames() : execution.getVariables(), execution.getVariableNamesLocal());
     }
 

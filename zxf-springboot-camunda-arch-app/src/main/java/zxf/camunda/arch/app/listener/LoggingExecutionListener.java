@@ -16,6 +16,6 @@ public class LoggingExecutionListener implements ExecutionListener {
 
     @Override
     public void notify(DelegateExecution execution) throws Exception {
-        log.info("{}", camundaService.executionInfo(execution, SHORTEN_FORMAT));
+        log.info("{}", camundaService.executionInfoForListener(execution, SHORTEN_FORMAT));
     }
 }
