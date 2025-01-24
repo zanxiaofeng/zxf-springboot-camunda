@@ -113,8 +113,13 @@ public class CamundaService {
     }
 
     private int getLeftRetryTimes(DelegateExecution execution) {
-        int leftRetryTimes = execution.getProcessEngine().getManagementService().createJobQuery()
-                .executionId(execution.getId()).singleResult().getRetries();
+        Job job = execution.getProcessEngine().getManagementService().createJobQuery()
+                .executionId(execution.getId()).singleResult();
+        if (job == null){
+            throw new IllegalStateException("This task is not a Job. Please be noted that only async task is a job)");
+        }
+
+        int leftRetryTimes = job.getRetries();
         if (leftRetryTimes > initialRetryNumber) {
             throw new IllegalStateException(String.format("The default retry number must be set to a large number. initial=%d, left=%d", initialRetryNumber, leftRetryTimes));
         }
