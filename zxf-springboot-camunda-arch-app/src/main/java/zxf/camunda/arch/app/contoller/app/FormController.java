@@ -19,20 +19,20 @@ public class FormController {
     @Autowired
     CamundaService camundaService;
 
-
     @PostMapping("/start")
     public VariableMap start(@RequestBody Map<String, Object> requestBody) throws BusinessErrorException {
         String formId = UUID.randomUUID().toString();
         log.info("start, fromId: {}", formId);
-        return camundaService.startWithVariablesInReturn("Flow-Form-Process", formId, Collections.singletonMap("requestBody", requestBody));
+        return camundaService.startProcessWithVariablesInReturn("Flow-Form-Process", formId, Collections.singletonMap("requestBody", requestBody));
     }
 
     @PostMapping("/message")
-    public void message(@RequestParam String formId, @RequestParam String action, @RequestBody Map<String, Object> messageBody) throws BusinessErrorException {
+    public VariableMap message(@RequestParam String formId, @RequestParam String action, @RequestBody Map<String, Object> messageBody) throws BusinessErrorException {
         log.info("message, fromId: {}, action: {}", formId, action);
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("messageAction", action);
         parameters.put("messageBody", messageBody);
-        camundaService.correlateMessage("FormProcess.message", formId, parameters);
+
+        return camundaService.correlateMessageWithVariablesInReturn("FormProcess.message", formId, parameters);
     }
 }

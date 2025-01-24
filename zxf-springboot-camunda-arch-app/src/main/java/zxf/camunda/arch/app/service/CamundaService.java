@@ -62,7 +62,28 @@ public class CamundaService {
         }
     }
 
-    public VariableMap startWithVariablesInReturn(String processDefinitionKey, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
+
+    public VariableMap correlateMessageWithVariablesInReturn(String messageName, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
+        try {
+            return processEngine.getRuntimeService()
+                    .createMessageCorrelation(messageName)
+                    .processInstanceBusinessKey(businessKey)
+                    .setVariables(processVariables)
+                    .correlateWithResultAndVariables(true).getVariables();
+        } catch (Exception ex) {
+            throw new BusinessErrorException(BusinessErrors.APP_FLOW_002.getCode(), BusinessErrors.APP_FLOW_002.getDescription() + messageName + ", " + businessKey);
+        }
+    }
+
+    public ProcessInstance startProcess(String processDefinitionKey, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
+        try {
+            return processEngine.getRuntimeService().startProcessInstanceByKey(processDefinitionKey, businessKey, processVariables);
+        } catch (Exception ex) {
+            throw new BusinessErrorException(BusinessErrors.APP_FLOW_001.getCode(), BusinessErrors.APP_FLOW_001.getDescription() + processDefinitionKey + ", " + businessKey);
+        }
+    }
+
+    public VariableMap startProcessWithVariablesInReturn(String processDefinitionKey, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
         try {
             ProcessInstanceWithVariables processInstance = processEngine.getRuntimeService()
                     .createProcessInstanceByKey(processDefinitionKey)
