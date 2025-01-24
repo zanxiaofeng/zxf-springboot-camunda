@@ -8,5 +8,5 @@ import zxf.camunda.arch.app.exception.DownstreamErrorException;
 import java.util.Map;
 
 public interface ResponseHandler {
-    void handle(DelegateExecution execution, ResponseEntity<Map<String, Object>> response, Map<String, String> handleSetting) throws BusinessErrorException, DownstreamErrorException;
+    void handle(DelegateExecution execution, ResponseEntity<Map<String, Object>> response, Map<String, String> handleSetting) throws BusinessErrorException;
 }

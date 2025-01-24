@@ -14,14 +14,14 @@ import java.util.Map;
 @Service
 public class CommonResponseHandler implements ResponseHandler {
     @Override
-    public void handle(DelegateExecution execution, ResponseEntity<Map<String, Object>> response, Map<String, String> handleSetting) throws BusinessErrorException, DownstreamErrorException {
+    public void handle(DelegateExecution execution, ResponseEntity<Map<String, Object>> response, Map<String, String> handleSetting) throws BusinessErrorException {
         if (Boolean.parseBoolean(handleSetting.getOrDefault("Downstream-Non200-Throw", "false")) && !response.getStatusCode().is2xxSuccessful()) {
-            throw new BusinessErrorException(BusinessErrors.APP_DOWNSTREAM_002.getCode(), BusinessErrors.APP_DOWNSTREAM_002.getDescription() + response.getStatusCode());
+            throw DownstreamErrorException.downstreamErrorWithHttpStatus(response.getStatusCode());
         }
 
         String downstreamReturnCode = getDownstreamReturnCode(response);
         if (Boolean.parseBoolean(handleSetting.getOrDefault("Downstream-ErrorCode-Throw", "false")) && !"200".equals(downstreamReturnCode)) {
-            throw new DownstreamErrorException(response.getStatusCode().value(), downstreamReturnCode);
+            throw DownstreamErrorException.downstreamErrorWithHttpStatusAndReturnCode(response.getStatusCode(), downstreamReturnCode);
         }
 
         if (handleSetting.get("Downstream-Response-Variable") != null) {

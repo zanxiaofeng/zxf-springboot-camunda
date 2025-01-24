@@ -54,30 +54,11 @@ public class CamundaService {
                 execution.getVariableScopeKey(), shortenFormat ? execution.getVariableNames() : execution.getVariables(), execution.getVariableNamesLocal());
     }
 
-    public void correlateMessage(String messageName, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
-        try {
-            processEngine.getRuntimeService().correlateMessage(messageName, businessKey, processVariables);
-        } catch (Exception ex) {
-            throw new BusinessErrorException(BusinessErrors.APP_FLOW_002.getCode(), BusinessErrors.APP_FLOW_002.getDescription() + messageName + ", " + businessKey);
-        }
-    }
-
-
-    public VariableMap correlateMessageWithVariablesInReturn(String messageName, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
-        try {
-            return processEngine.getRuntimeService()
-                    .createMessageCorrelation(messageName)
-                    .processInstanceBusinessKey(businessKey)
-                    .setVariables(processVariables)
-                    .correlateWithResultAndVariables(true).getVariables();
-        } catch (Exception ex) {
-            throw new BusinessErrorException(BusinessErrors.APP_FLOW_002.getCode(), BusinessErrors.APP_FLOW_002.getDescription() + messageName + ", " + businessKey);
-        }
-    }
-
     public ProcessInstance startProcess(String processDefinitionKey, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
         try {
             return processEngine.getRuntimeService().startProcessInstanceByKey(processDefinitionKey, businessKey, processVariables);
+        } catch (BusinessErrorException exception) {
+            throw exception;
         } catch (Exception ex) {
             throw new BusinessErrorException(BusinessErrors.APP_FLOW_001.getCode(), BusinessErrors.APP_FLOW_001.getDescription() + processDefinitionKey + ", " + businessKey);
         }
@@ -91,8 +72,35 @@ public class CamundaService {
             VariableMap returnVariables = processInstance.getVariables();
             returnVariables.put("ProcessInstanceId", processInstance.getProcessInstanceId());
             return returnVariables;
+        } catch (BusinessErrorException exception) {
+            throw exception;
         } catch (Exception ex) {
             throw new BusinessErrorException(BusinessErrors.APP_FLOW_001.getCode(), BusinessErrors.APP_FLOW_001.getDescription() + processDefinitionKey + ", " + businessKey);
+        }
+    }
+
+    public void correlateMessage(String messageName, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
+        try {
+            processEngine.getRuntimeService().correlateMessage(messageName, businessKey, processVariables);
+        } catch (BusinessErrorException exception) {
+            throw exception;
+        } catch (Exception ex) {
+            throw new BusinessErrorException(BusinessErrors.APP_FLOW_002.getCode(), BusinessErrors.APP_FLOW_002.getDescription() + messageName + ", " + businessKey);
+        }
+    }
+
+
+    public VariableMap correlateMessageWithVariablesInReturn(String messageName, String businessKey, Map<String, Object> processVariables) throws BusinessErrorException {
+        try {
+            return processEngine.getRuntimeService()
+                    .createMessageCorrelation(messageName)
+                    .processInstanceBusinessKey(businessKey)
+                    .setVariables(processVariables)
+                    .correlateWithResultAndVariables(true).getVariables();
+        } catch (BusinessErrorException exception) {
+            throw exception;
+        } catch (Exception ex) {
+            throw new BusinessErrorException(BusinessErrors.APP_FLOW_002.getCode(), BusinessErrors.APP_FLOW_002.getDescription() + messageName + ", " + businessKey);
         }
     }
 }

@@ -48,11 +48,11 @@ public class HttpRequestDelegate implements JavaDelegate {
             if (responseHandleSetting != null) {
                 responseHandler.handle(execution, response, responseHandleSetting);
             }
-        } catch (BusinessErrorException | DownstreamErrorException ex) {
+        } catch (BusinessErrorException ex) {
             throw ex;
         } catch (Exception ex) {
             log.error("Exception when sending http request", ex);
-            throw new BusinessErrorException(BusinessErrors.APP_DOWNSTREAM_001.getCode(), BusinessErrors.APP_DOWNSTREAM_001.getDescription() + ex.getMessage());
+            throw DownstreamErrorException.downstreamErrorWithException(ex);
         }
     }
 }
