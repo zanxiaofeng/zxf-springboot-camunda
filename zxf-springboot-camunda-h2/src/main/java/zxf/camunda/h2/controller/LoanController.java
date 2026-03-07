@@ -1,20 +1,20 @@
 package zxf.camunda.h2.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/loan")
 public class LoanController {
-    @Autowired
-    ProcessEngine processEngine;
+    private final ProcessEngine processEngine;
 
     @GetMapping("/request")
     public String loadRequest(@RequestParam Integer amount) {

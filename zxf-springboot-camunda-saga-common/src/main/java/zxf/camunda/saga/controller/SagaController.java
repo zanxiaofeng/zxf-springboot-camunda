@@ -1,7 +1,7 @@
 package zxf.camunda.saga.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,21 +14,16 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 public class SagaController {
     private final AtomicInteger counter = new AtomicInteger(0);
-    @Autowired
-    private App1Saga app1Saga;
-    @Autowired
-    private App2Saga app2Saga;
-    @Autowired
-    private App3Saga app3Saga;
-    @Autowired
-    private App4Saga app4Saga;
-    @Autowired
-    private ByIdSaga byIdSaga;
-    @Autowired
-    private CamundaService camundaService;
+    private final App1Saga app1Saga;
+    private final App2Saga app2Saga;
+    private final App3Saga app3Saga;
+    private final App4Saga app4Saga;
+    private final ByIdSaga byIdSaga;
+    private final CamundaService camundaService;
 
     @GetMapping("/saga/all")
     public String all(@RequestParam Integer count, @RequestParam(required = false) Integer start) {

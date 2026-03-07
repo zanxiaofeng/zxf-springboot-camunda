@@ -1,18 +1,18 @@
-package zxf.camunda.arch.app.contoller;
+package zxf.camunda.arch.app.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import zxf.camunda.arch.app.contoller.model.ProcessParameters;
+import zxf.camunda.arch.app.controller.model.ProcessParameters;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/app")
 public class AppController {
-    @Autowired
-    ProcessEngine processEngine;
+    private final ProcessEngine processEngine;
 
     @PostMapping("/normal-start")
     public String normalStart(@RequestParam String processKey, @RequestBody ProcessParameters processParameters) {

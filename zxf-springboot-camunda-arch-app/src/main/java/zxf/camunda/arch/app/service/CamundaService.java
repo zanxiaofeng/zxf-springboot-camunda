@@ -1,5 +1,6 @@
 package zxf.camunda.arch.app.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -9,7 +10,6 @@ import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.camunda.bpm.engine.variable.VariableMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.arch.app.exception.BusinessErrorException;
 import zxf.camunda.arch.app.exception.BusinessErrors;
@@ -17,10 +17,10 @@ import zxf.camunda.arch.app.exception.BusinessErrors;
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class CamundaService {
-    @Autowired
-    private ProcessEngine processEngine;
+    private final ProcessEngine processEngine;
 
     public String instanceInfo(ProcessInstance instance) {
         return String.format("(ProcessInstanceId=%s, %s, ProcessDefinitionId=%s, BusinessKey=%s, CaseInstanceId=%s, isSuspended=%s, TenantId=%s)", instance.getProcessInstanceId(), instance.getRootProcessInstanceId(), instance.getProcessDefinitionId(), instance.getBusinessKey(), instance.getCaseInstanceId(), instance.isSuspended(), instance.getTenantId());

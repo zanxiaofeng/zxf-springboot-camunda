@@ -3,20 +3,18 @@ package zxf.camunda.saga.task.app2;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.CamundaService;
 
 @Slf4j
 @Component
 public class App2Task1UndoAdapter implements JavaDelegate {
+    private final CamundaService camundaService;
 
-    public App2Task1UndoAdapter() {
+    public App2Task1UndoAdapter(CamundaService camundaService) {
+        this.camundaService = camundaService;
         log.info("ctor()");
     }
-
-    @Autowired
-    private CamundaService camundaService;
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         String taskId = (String) execution.getVariable("task-id");

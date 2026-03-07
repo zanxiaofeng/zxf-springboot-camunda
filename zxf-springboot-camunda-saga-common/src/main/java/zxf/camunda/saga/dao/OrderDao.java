@@ -1,14 +1,14 @@
 package zxf.camunda.saga.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class OrderDao {
-    @Autowired
-    private NamedParameterJdbcTemplate restTemplate;
+    private final NamedParameterJdbcTemplate restTemplate;
 
     public boolean createOrder(String orderId) {
         String sql = "INSERT INTO TBL_ORDER(ORDER_ID,CREATED_AT) value(:orderId, NOW())";

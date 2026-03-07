@@ -1,5 +1,6 @@
 package zxf.camunda.h2.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
@@ -8,7 +9,6 @@ import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.JobQuery;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zxf.camunda.h2.service.CamundaService;
 
@@ -17,13 +17,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/info")
 public class InfoController {
-    @Autowired
-    private ProcessEngine processEngine;
-    @Autowired
-    private CamundaService camundaService;
+    private final ProcessEngine processEngine;
+    private final CamundaService camundaService;
 
     @GetMapping("/definitions")
     public List<String> definitions() {
@@ -89,16 +88,16 @@ public class InfoController {
     public List<String> activeJobs() {
         log.info("activeJobs");
         JobQuery jobQuery = processEngine.getManagementService().createJobQuery().processDefinitionKey("LoanProcess");
-        List<Job> failedJobs = jobQuery.active().orderByJobRetries().desc().list();
-        return failedJobs.stream().map(camundaService::jobInfo).collect(Collectors.toList());
+        List<Job> activeJobs = jobQuery.active().orderByJobRetries().desc().list();
+        return activeJobs.stream().map(camundaService::jobInfo).collect(Collectors.toList());
     }
 
     @GetMapping("/jobs/retry")
     public List<String> retryJobs() {
         log.info("retryJobs");
         JobQuery jobQuery = processEngine.getManagementService().createJobQuery().processDefinitionKey("LoanProcess");
-        List<Job> failedJobs = jobQuery.withRetriesLeft().orderByJobRetries().desc().list();
-        return failedJobs.stream().map(camundaService::jobInfo).collect(Collectors.toList());
+        List<Job> retryableJobs = jobQuery.withRetriesLeft().orderByJobRetries().desc().list();
+        return retryableJobs.stream().map(camundaService::jobInfo).collect(Collectors.toList());
     }
 
     @GetMapping("/deployments/registered")

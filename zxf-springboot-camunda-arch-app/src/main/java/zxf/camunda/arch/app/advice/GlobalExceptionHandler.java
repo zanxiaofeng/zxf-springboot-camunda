@@ -13,15 +13,15 @@ import java.util.Map;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    @ExceptionHandler(DownstreamErrorException.class)
+    public ResponseEntity<Map<String, Object>> handleDownstreamErrorException(DownstreamErrorException downstreamErrorException) {
+        log.error("DownstreamErrorException ", downstreamErrorException);
+        return ResponseEntity.internalServerError().body(downstreamErrorException.response());
+    }
+
     @ExceptionHandler(BusinessErrorException.class)
     public ResponseEntity<Map<String, Object>> handleBusinessErrorException(BusinessErrorException businessErrorException) {
         log.error("BusinessErrorException ", businessErrorException);
         return ResponseEntity.internalServerError().body(businessErrorException.response());
-    }
-
-    @ExceptionHandler(DownstreamErrorException.class)
-    public ResponseEntity<Map<String, Object>> handleBusinessErrorException(DownstreamErrorException downstreamErrorException) {
-        log.error("DownstreamErrorException ", downstreamErrorException);
-        return ResponseEntity.internalServerError().body(downstreamErrorException.response());
     }
 }

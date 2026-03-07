@@ -1,5 +1,6 @@
 package zxf.camunda.saga.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ManagementService;
 import org.camunda.bpm.engine.ProcessEngine;
@@ -9,7 +10,6 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.model.xml.instance.ModelElementInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class CamundaService {
     //In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
@@ -35,8 +36,7 @@ public class CamundaService {
     @Value("${saga.throw-exception}")
     private boolean throwException;
 
-    @Autowired
-    private ProcessEngine processEngine;
+    private final ProcessEngine processEngine;
 
     public String appName() {
         return appName;
@@ -55,7 +55,7 @@ public class CamundaService {
     }
 
     public boolean registerDeployment() {
-        return throwException;
+        return registerDeployment;
     }
 
     public boolean throwException() {

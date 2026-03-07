@@ -1,9 +1,9 @@
 package zxf.camunda.saga.saga;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.CamundaService;
 
@@ -13,12 +13,11 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class ByIdSaga {
-    @Autowired
-    private ProcessEngine processEngine;
-    @Autowired
-    private CamundaService camundaService;
+    private final ProcessEngine processEngine;
+    private final CamundaService camundaService;
 
     public String trigger(String processDefinitionId, Integer times, Integer count, Integer start) {
         start = Optional.ofNullable(start).orElse(10000);

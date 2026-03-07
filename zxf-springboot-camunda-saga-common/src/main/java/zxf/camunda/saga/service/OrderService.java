@@ -1,14 +1,14 @@
 package zxf.camunda.saga.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zxf.camunda.saga.dao.OrderDao;
 
+@RequiredArgsConstructor
 @Service
 public class OrderService {
-    @Autowired
-    private OrderDao orderDao;
+    private final OrderDao orderDao;
 
     @Transactional(rollbackFor = Throwable.class, value = "businessTransactionManager")
     public boolean createOrder(String orderId) {

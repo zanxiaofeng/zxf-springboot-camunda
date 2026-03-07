@@ -1,8 +1,8 @@
-package zxf.camunda.arch.app.contoller.app;
+package zxf.camunda.arch.app.controller.app;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.variable.VariableMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zxf.camunda.arch.app.exception.BusinessErrorException;
 import zxf.camunda.arch.app.service.CamundaService;
@@ -13,11 +13,11 @@ import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/app/form")
 public class FormController {
-    @Autowired
-    CamundaService camundaService;
+    private final CamundaService camundaService;
 
     @PostMapping("/start")
     public VariableMap start(@RequestBody Map<String, Object> requestBody) throws BusinessErrorException {

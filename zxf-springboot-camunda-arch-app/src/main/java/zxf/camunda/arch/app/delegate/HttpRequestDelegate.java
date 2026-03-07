@@ -1,30 +1,27 @@
 package zxf.camunda.arch.app.delegate;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import zxf.camunda.arch.app.client.HttpClient;
 import zxf.camunda.arch.app.client.http.response.ResponseHandler;
 import zxf.camunda.arch.app.exception.BusinessErrorException;
 import zxf.camunda.arch.app.exception.DownstreamErrorException;
-import zxf.camunda.arch.app.exception.BusinessErrors;
 import zxf.camunda.arch.app.service.CamundaService;
 
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class HttpRequestDelegate implements JavaDelegate {
-    @Autowired
-    private CamundaService camundaService;
-    @Autowired
-    private HttpClient httpClient;
-    @Autowired
-    private BeanFactory beanFactory;
+    private final CamundaService camundaService;
+    private final HttpClient httpClient;
+    private final BeanFactory beanFactory;
 
     /* Note:
     1. Do not need to remove local variables.

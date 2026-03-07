@@ -1,11 +1,11 @@
-package zxf.camunda.arch.app.contoller.app;
+package zxf.camunda.arch.app.controller.app;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
 import org.camunda.bpm.engine.variable.VariableMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,11 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/app/payment")
 public class PaymentController {
-    @Autowired
-    ProcessEngine processEngine;
+    private final ProcessEngine processEngine;
 
     @GetMapping("/normal-start")
     public VariableMap normalStart(@RequestParam String orderId, @RequestParam String paymentOrderCode, @RequestParam String shippingRequestCode, @RequestParam String shippingOrderCode) {

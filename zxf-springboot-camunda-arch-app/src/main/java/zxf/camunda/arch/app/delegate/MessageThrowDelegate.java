@@ -1,19 +1,19 @@
 package zxf.camunda.arch.app.delegate;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.model.bpmn.instance.MessageEventDefinition;
 import org.camunda.bpm.model.bpmn.instance.ThrowEvent;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zxf.camunda.arch.app.service.CamundaService;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class MessageThrowDelegate implements JavaDelegate {
-    @Autowired
-    private CamundaService camundaService;
+    private final CamundaService camundaService;
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {

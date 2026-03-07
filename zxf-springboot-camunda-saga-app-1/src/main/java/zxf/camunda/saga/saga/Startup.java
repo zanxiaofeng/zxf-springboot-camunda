@@ -1,16 +1,15 @@
 package zxf.camunda.saga.saga;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 
 import jakarta.annotation.PostConstruct;
 
+@RequiredArgsConstructor
 @Configuration
 public class Startup {
-    @Autowired
-    private App1Saga app1Saga;
-    @Autowired
-    private App3Saga app3Saga;
+    private final App1Saga app1Saga;
+    private final App3Saga app3Saga;
 
     @PostConstruct
     public void startUp() {

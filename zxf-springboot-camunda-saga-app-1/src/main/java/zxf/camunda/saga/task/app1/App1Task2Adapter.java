@@ -3,7 +3,6 @@ package zxf.camunda.saga.task.app1;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.service.CamundaService;
 import zxf.camunda.saga.service.OrderService;
@@ -13,16 +12,14 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class App1Task2Adapter implements JavaDelegate {
+    private final CamundaService camundaService;
+    private final OrderService orderService;
 
-    @Autowired
-    private OrderService orderService;
-
-    public App1Task2Adapter() {
+    public App1Task2Adapter(CamundaService camundaService, OrderService orderService) {
+        this.camundaService = camundaService;
+        this.orderService = orderService;
         log.info("ctor()");
     }
-
-    @Autowired
-    private CamundaService camundaService;
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {

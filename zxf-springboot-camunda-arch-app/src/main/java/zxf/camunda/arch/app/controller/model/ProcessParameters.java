@@ -1,4 +1,4 @@
-package zxf.camunda.arch.app.contoller.model;
+package zxf.camunda.arch.app.controller.model;
 
 import lombok.Data;
 

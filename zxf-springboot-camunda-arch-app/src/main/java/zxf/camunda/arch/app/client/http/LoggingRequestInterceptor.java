@@ -28,7 +28,7 @@ public class LoggingRequestInterceptor implements ClientHttpRequestInterceptor {
 
             return response;
         } catch (Exception ex) {
-            log.error("Exception when seng request", ex);
+            log.error("Exception when sending request", ex);
             logRequest(request, body, log::error);
             throw ex;
         }

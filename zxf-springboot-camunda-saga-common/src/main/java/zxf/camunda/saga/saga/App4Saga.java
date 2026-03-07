@@ -1,12 +1,12 @@
 package zxf.camunda.saga.saga;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import zxf.camunda.saga.base.SagaBuilder;
 import zxf.camunda.saga.service.CamundaService;
@@ -16,13 +16,12 @@ import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 @Component
 public class App4Saga {
     private final String sagaName = "app4-v16";
-    @Autowired
-    private ProcessEngine processEngine;
-    @Autowired
-    private CamundaService camundaService;
+    private final ProcessEngine processEngine;
+    private final CamundaService camundaService;
 
     public void deploySaga() {
         log.info("{} deploySaga start", this.sagaName);
@@ -47,7 +46,7 @@ public class App4Saga {
             log.error("Exception when deploy {} saga or register job executor", this.sagaName, ex);
         }
 
-        log.info("{} deploySaga start", this.sagaName);
+        log.info("{} deploySaga end", this.sagaName);
     }
 
     public String trigger(Integer times, Integer count, Integer start) {
