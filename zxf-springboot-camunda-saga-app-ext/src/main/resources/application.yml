@@ -1,0 +1,83 @@
+server:
+  port: 8093
+
+spring:
+  datasource:
+    camunda:
+      url: jdbc:mysql://localhost:3306/camunda?useSSL=false&serverTimezone=GMT%2B8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: camunda
+      password: camunda
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 5
+        idle-timeout: 30000
+        connection-timeout: 20000
+        connection-test-query: SELECT 1
+    business:
+      url: jdbc:mysql://localhost:3307/business?useSSL=false&serverTimezone=GMT%2B8
+      driverClassName: com.mysql.cj.jdbc.Driver
+      username: business
+      password: business
+      hikari:
+        maximum-pool-size: 20
+        minimum-idle: 5
+        idle-timeout: 30000
+        connection-timeout: 20000
+        connection-test-query: SELECT 1
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: true
+    locations: classpath:db/migration
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics"
+
+logging:
+  level:
+    org.springframework.jdbc.datasource.DataSourceTransactionManager: DEBUG
+    org.camunda.bpm.application: ERROR
+    org.camunda.bpm.engine: ERROR
+    org.camunda.bpm.engine.context: ERROR
+    org.camunda.bpm.engine.pvm: ERROR
+    camunda.bpm.engine.bpmn.behavior: ERROR
+    org.camunda.bpm.engine.util: ERROR
+    org.camunda.bpm.engine.cmd: TRACE
+    org.camunda.bpm.engine.bpmn.parser: TRACE
+    org.camunda.bpm.engine.persistence: ERROR
+    org.camunda.bpm.engine.impl.persistence.entity: TRACE
+    org.camunda.bpm.engine.jobexecutor: ERROR
+
+saga:
+  re-deploy: true
+  app-name: zxf-ext-app
+  async-before: true
+  async-after: false
+  register-deployment: true
+  throw-exception: false
+
+camunda:
+  bpm:
+    default-number-of-retries: 11
+    auto-deployment-enabled: false
+    history-level: none
+    metrics:
+      enabled: false
+      db-reporter-activate: false
+    job-execution:
+      enabled: true
+      deployment-aware: true
+      core-pool-size: 1
+      max-pool-size: 3
+      queue-capacity: 6
+      max-job-per-acquisition: 1
+    database:
+      type: mysql
+      jdbc-batch-processing: false

@@ -77,6 +77,32 @@ public class SagaBuilder {
     }
 
     @SuppressWarnings("rawtypes")
+    public SagaBuilder externalActivity(String name, String topic) {
+        String id = "Activity-" + name.replace(" ", "-");
+        saga = saga.serviceTask(id)
+                .name(name)
+                .camundaFailedJobRetryTimeCycle("R0/PT0S")
+                .camundaType("external")
+                .camundaTopic(topic)
+                .camundaAsyncBefore(asyncBefore)
+                .camundaAsyncAfter(asyncAfter);
+        return this;
+    }
+
+    @SuppressWarnings("rawtypes")
+    public SagaBuilder externalActivity(String name, String topic, String retryTimeCycle) {
+        String id = "Activity-" + name.replace(" ", "-");
+        saga = saga.serviceTask(id)
+                .name(name)
+                .camundaFailedJobRetryTimeCycle(retryTimeCycle)
+                .camundaType("external")
+                .camundaTopic(topic)
+                .camundaAsyncBefore(asyncBefore)
+                .camundaAsyncAfter(asyncAfter);
+        return this;
+    }
+
+    @SuppressWarnings("rawtypes")
     public SagaBuilder compensationActivity(String name, String adapterClass) {
         if (!(saga instanceof AbstractActivityBuilder)) {
             throw new RuntimeException("Compensation activity can only be specified right after activity");

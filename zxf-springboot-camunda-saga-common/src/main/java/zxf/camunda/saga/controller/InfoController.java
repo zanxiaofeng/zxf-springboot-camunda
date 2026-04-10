@@ -3,6 +3,7 @@ package zxf.camunda.saga.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.externaltask.ExternalTask;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.JobQuery;
@@ -91,5 +92,14 @@ public class InfoController {
         return registeredDeployments.stream().map((deploymentId) -> processEngine.getRepositoryService()
                         .createProcessDefinitionQuery().deploymentId(deploymentId).singleResult())
                 .map(camundaService::definitionInfo).collect(Collectors.toList());
+    }
+
+    @GetMapping("/external-tasks")
+    public List<String> externalTasks() {
+        log.info("externalTasks");
+        List<ExternalTask> tasks = processEngine.getExternalTaskService().createExternalTaskQuery().list();
+        return tasks.stream().map(t -> String.format("(Id=%s, Topic=%s, ProcessInstanceId=%s, Retries=%d, WorkerId=%s, LockExpirationTime=%s)",
+                t.getId(), t.getTopicName(), t.getProcessInstanceId(), t.getRetries(), t.getWorkerId(), t.getLockExpirationTime()))
+                .collect(Collectors.toList());
     }
 }

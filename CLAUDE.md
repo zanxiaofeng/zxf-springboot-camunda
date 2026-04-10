@@ -16,6 +16,9 @@ JAVA_HOME=/home/davis/.jdks/ms-21.0.10 mvn clean package -DskipTests
 # Run individual saga apps (requires MySQL via docker-compose)
 JAVA_HOME=/home/davis/.jdks/ms-21.0.10 mvn -pl zxf-springboot-camunda-saga-app-1 spring-boot:run
 
+# Run external task saga app (requires MySQL via docker-compose)
+JAVA_HOME=/home/davis/.jdks/ms-21.0.10 mvn -pl zxf-springboot-camunda-saga-app-ext spring-boot:run
+
 # Run H2-based modules (no external DB needed)
 JAVA_HOME=/home/davis/.jdks/ms-21.0.10 mvn -pl zxf-springboot-camunda-h2 spring-boot:run
 JAVA_HOME=/home/davis/.jdks/ms-21.0.10 mvn -pl zxf-springboot-camunda-arch-app spring-boot:run
@@ -42,6 +45,7 @@ zxf-springboot-camunda (parent pom)
 ├── zxf-springboot-camunda-saga-app-1  (:8090) - Deploys App1Saga + App3Saga, deployment-aware=false
 ├── zxf-springboot-camunda-saga-app-2  (:8091) - Deploys App2Saga + App4Saga, deployment-aware=true
 └── zxf-springboot-camunda-saga-app-3  (:8092) - Deploys all 4 sagas, deployment-aware=true
+└── zxf-springboot-camunda-saga-app-ext (:8093) - External Task saga using LocalExternalTaskWorker, deployment-aware=true
 ```
 
 ## Key Architectural Patterns
@@ -70,6 +74,9 @@ Controls which saga-app instance processes which jobs:
 
 ### BPMN File Processes (arch-app, h2)
 Static `.bpmn` files in `src/main/resources/bpmn/` — auto-deployed via `camunda.bpm.auto-deployment-enabled: true`.
+
+### Local External Task Pattern (saga-app-ext)
+Service tasks marked as `camunda:externalTask` with a topic. A `LocalExternalTaskWorker` polls `ExternalTaskService.fetchAndLock()` within the same JVM, processing tasks in its own thread pool. Unlike the JavaDelegate pattern, the worker's `Thread.sleep()` does NOT block the Camunda Job Executor. SagaBuilder supports `externalActivity(name, topic)` for building external task flows.
 
 ## Configuration Properties (saga modules)
 

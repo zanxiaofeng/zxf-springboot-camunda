@@ -22,6 +22,7 @@
         <module>zxf-springboot-camunda-saga-app-1</module>
         <module>zxf-springboot-camunda-saga-app-2</module>
         <module>zxf-springboot-camunda-saga-app-3</module>
+        <module>zxf-springboot-camunda-saga-app-ext</module>
     </modules>
 
     <properties>
