@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     camunda:
-      url: jdbc:mysql://localhost:3306/camunda?useSSL=false&serverTimezone=GMT%2B8
+      url: jdbc:mysql://localhost:3306/camunda?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
       driverClassName: com.mysql.cj.jdbc.Driver
       username: camunda
       password: camunda
@@ -15,7 +15,7 @@ spring:
         connection-timeout: 20000
         connection-test-query: SELECT 1
     business:
-      url: jdbc:mysql://localhost:3307/business?useSSL=false&serverTimezone=GMT%2B8
+      url: jdbc:mysql://localhost:3307/business?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
       driverClassName: com.mysql.cj.jdbc.Driver
       username: business
       password: business
