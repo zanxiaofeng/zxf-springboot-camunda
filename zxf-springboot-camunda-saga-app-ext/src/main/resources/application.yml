@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     camunda:
-      url: jdbc:mysql://localhost:3306/camunda?useSSL=false&serverTimezone=GMT%2B8
+      url: jdbc:mysql://localhost:3306/camunda?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&sessionVariables=transaction_isolation='READ-COMMITTED'
       driverClassName: com.mysql.cj.jdbc.Driver
       username: camunda
       password: camunda
@@ -15,7 +15,7 @@ spring:
         connection-timeout: 20000
         connection-test-query: SELECT 1
     business:
-      url: jdbc:mysql://localhost:3307/business?useSSL=false&serverTimezone=GMT%2B8
+      url: jdbc:mysql://localhost:3307/business?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
       driverClassName: com.mysql.cj.jdbc.Driver
       username: business
       password: business
@@ -42,6 +42,7 @@ management:
 
 logging:
   level:
+    #org.springframework.boot.autoconfigure: DEBUG
     org.springframework.jdbc.datasource.DataSourceTransactionManager: DEBUG
     org.camunda.bpm.application: ERROR
     org.camunda.bpm.engine: ERROR
@@ -56,28 +57,46 @@ logging:
     org.camunda.bpm.engine.jobexecutor: ERROR
 
 saga:
+  #re-deploy=true and deployment-aware=true will make that the application only process the instance with specified version
   re-deploy: true
   app-name: zxf-ext-app
   async-before: true
-  async-after: false
+  async-after: true
   register-deployment: true
-  throw-exception: false
+  throw-exception: true
 
 camunda:
   bpm:
+    #In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
     default-number-of-retries: 11
     auto-deployment-enabled: false
+    #Disable insert data to history tables.
     history-level: none
     metrics:
+      #Disable insert data to meter tables.
       enabled: false
       db-reporter-activate: false
     job-execution:
-      enabled: true
+      enabled: false
+      #Set it to true will bind the job executor to the specified version of definition(deployment)
+      #Set it to false will ignore the version of definition(deployment)
       deployment-aware: true
+      #job executor pool settings
       core-pool-size: 1
       max-pool-size: 3
       queue-capacity: 6
+      #keep-alive-seconds: 0
+      #job acquisition settings
+      # set to a small value for monitor the deployment-aware
       max-job-per-acquisition: 1
+      #lock-time-in-millis: 300000
+      #wait-time-in-millis: 5000
+      #max-wait: 60000
+      #wait-increase-factor: 2
+      #backoff settings
+      #backoff-time-in-millis: 0
+      #max-backoff: 0
+      #backoff-decrease-threshold: 100
     database:
       type: mysql
       jdbc-batch-processing: false

@@ -24,7 +24,7 @@ public class LocalExternalTaskWorker {
 
     private final ExternalTaskService externalTaskService;
 
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 30000)
     public void pollTasks() {
         var fetchBuilder = externalTaskService.fetchAndLock(MAX_TASKS, WORKER_ID);
         TOPICS.forEach(topic -> fetchBuilder.topic(topic, LOCK_DURATION));
