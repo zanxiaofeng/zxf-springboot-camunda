@@ -82,8 +82,11 @@ public class App3Saga {
 
     private BpmnModelInstance buildSaga() {
         SagaBuilder sagaBuilder = SagaBuilder.newSaga(this.sagaName, camundaService.asyncBefore(), camundaService.asyncAfter())
+                //R3/PT0S: execute at most 3 times, no delay between executions
                 .activity("App3-Task 1", "zxf.camunda.saga.task.app3.App3Task1Adapter", "R3/PT0S")
+                //R1/PT0S: execute at most 1 time, no retry
                 .activityNoRetry("App3-Task 2", "zxf.camunda.saga.task.app3.App3Task2Adapter")
+                //R3/PT5S: execute at most 3 times, 5 seconds between executions
                 .activity("App3-Task 3", "zxf.camunda.saga.task.app3.App3Task3Adapter", "R3/PT5S")
                 .end();
         return sagaBuilder.getModel();

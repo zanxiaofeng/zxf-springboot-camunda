@@ -56,8 +56,8 @@ public class SagaBuilder {
         //By default, a failed job will be retried three times and the retries are performed immediately after the failure
         saga = saga.serviceTask(id)
                 .name(name)
-                //Override the value of camunda.bpm.default-number-of-retries.
-                .camundaFailedJobRetryTimeCycle("R0/PT0S")
+                //R1/PT0S: execute once, no retry on failure (R0 would set retries=0 and prevent execution)
+                .camundaFailedJobRetryTimeCycle("R1/PT0S")
                 .camundaClass(adapterClass)
                 .camundaAsyncBefore(asyncBefore)
                 .camundaAsyncAfter(asyncAfter);
@@ -69,6 +69,7 @@ public class SagaBuilder {
         String id = "Activity-" + name.replace(" ", "-");
         saga = saga.serviceTask(id)
                 .name(name)
+                //Format: R<count>/<period>, e.g. R3/PT5S = execute at most 3 times with 5-second interval
                 .camundaFailedJobRetryTimeCycle(retryTimeCycle)
                 .camundaClass(adapterClass)
                 .camundaAsyncBefore(asyncBefore)
@@ -77,11 +78,12 @@ public class SagaBuilder {
     }
 
     @SuppressWarnings("rawtypes")
-    public SagaBuilder externalActivity(String name, String topic) {
+    public SagaBuilder externalActivityNoRetry(String name, String topic) {
         String id = "Activity-" + name.replace(" ", "-");
         saga = saga.serviceTask(id)
                 .name(name)
-                .camundaFailedJobRetryTimeCycle("R0/PT0S")
+                //R1/PT0S: execute once, no retry on failure (R0 would set retries=0 and prevent execution)
+                .camundaFailedJobRetryTimeCycle("R1/PT0S")
                 .camundaType("external")
                 .camundaTopic(topic)
                 .camundaAsyncBefore(asyncBefore)
@@ -94,6 +96,7 @@ public class SagaBuilder {
         String id = "Activity-" + name.replace(" ", "-");
         saga = saga.serviceTask(id)
                 .name(name)
+                //Format: R<count>/<period>, e.g. R3/PT5S = execute at most 3 times with 5-second interval
                 .camundaFailedJobRetryTimeCycle(retryTimeCycle)
                 .camundaType("external")
                 .camundaTopic(topic)
