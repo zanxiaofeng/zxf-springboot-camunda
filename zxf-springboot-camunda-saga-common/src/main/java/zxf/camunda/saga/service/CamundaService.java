@@ -2,10 +2,8 @@ package zxf.camunda.saga.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.engine.ManagementService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.management.JobDefinition;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
@@ -13,16 +11,12 @@ import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
 public class CamundaService {
-    //In order to check the first call, the camunda.bpm.default-number-of-retries must be set to a large number.
-    @Value("${camunda.bpm.default-number-of-retries}")
-    private int initialRetryNumber;
     @Value("${saga.app-name}")
     private String appName;
     @Value("${saga.re-deploy}")
@@ -67,7 +61,7 @@ public class CamundaService {
         int totalRetryCount = getTotalRetryCount(execution);
         int leftRetryTimes = getLeftRetryTimes(execution);
 
-        boolean isFirstExecution = leftRetryTimes == initialRetryNumber;
+        boolean isFirstExecution = totalRetryCount == leftRetryTimes;
         log.info("check, firstCall={}, total={}, rest={}, {}", isFirstExecution, totalRetryCount, leftRetryTimes, taskInfo(execution));
         return isFirstExecution;
     }
@@ -115,15 +109,11 @@ public class CamundaService {
     private int getLeftRetryTimes(DelegateExecution execution) {
         Job job = execution.getProcessEngine().getManagementService().createJobQuery()
                 .executionId(execution.getId()).singleResult();
-        if (job == null){
+        if (job == null) {
             throw new IllegalStateException("This task is not a Job. Please be noted that only async task is a job)");
         }
 
-        int leftRetryTimes = job.getRetries();
-        if (leftRetryTimes > initialRetryNumber) {
-            throw new IllegalStateException(String.format("The default retry number must be set to a large number. initial=%d, left=%d", initialRetryNumber, leftRetryTimes));
-        }
-        return leftRetryTimes;
+        return job.getRetries();
     }
 
     private int getTotalRetryCount(DelegateExecution execution) {
@@ -131,11 +121,7 @@ public class CamundaService {
                 .map(ele -> ele.getUniqueChildElementByNameNs("http://camunda.org/schema/1.0/bpmn", "failedJobRetryTimeCycle"))
                 .map(ModelElementInstance::getTextContent)
                 .map(this::parseRetryTimes);
-        int totalRetryCount = failedJobRetryCount.map(failedRetryCount -> failedRetryCount == 0 ? 1 : failedRetryCount).orElseGet(() -> initialRetryNumber);
-        if (totalRetryCount > initialRetryNumber) {
-            throw new IllegalStateException(String.format("The default retry number must be set to a large number. initial=%d, total=%d", initialRetryNumber, totalRetryCount));
-        }
-        return totalRetryCount;
+        return failedJobRetryCount.map(failedRetryCount -> failedRetryCount == 0 ? 1 : failedRetryCount).get();
     }
 
     private Integer parseRetryTimes(String failedJobRetryTimeCycle) {
