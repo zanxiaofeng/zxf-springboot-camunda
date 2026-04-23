@@ -80,9 +80,9 @@ public class ExtSaga {
 
     private BpmnModelInstance buildSaga() {
         return SagaBuilder.newSaga(this.sagaName, camundaService.asyncBefore(), camundaService.asyncAfter())
-                .externalActivity("Ext-Task 1", "ext-topic-1")
-                .externalActivity("Ext-Task 2", "ext-topic-2")
-                .externalActivity("Ext-Task 3", "ext-topic-3")
+                .externalActivityNoRetry("Ext-Task 1", "ext-topic-1")
+                .externalActivityNoRetry("Ext-Task 2", "ext-topic-2")
+                .externalActivityNoRetry("Ext-Task 3", "ext-topic-3")
                 .end()
                 .getModel();
     }
