@@ -1,4 +1,8 @@
 spring:
+  autoconfigure:
+    exclude:
+      # Boot4: JerseyApplicationPath 已迁移到 spring-boot-jersey，Camunda 7.24 REST autoconfig 字节码硬编码旧路径，无法加载
+      - org.camunda.bpm.spring.boot.starter.rest.CamundaBpmRestJerseyAutoConfiguration
   datasource:
     url: jdbc:h2:file:./camunda-h2-database
     driverClassName: org.h2.Driver

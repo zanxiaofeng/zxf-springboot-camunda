@@ -10,9 +10,4 @@ public class MyResponseErrorHandler implements ResponseErrorHandler {
     public boolean hasError(ClientHttpResponse response) throws IOException {
         return false;
     }
-
-    @Override
-    public void handleError(ClientHttpResponse response) throws IOException {
-
-    }
 }

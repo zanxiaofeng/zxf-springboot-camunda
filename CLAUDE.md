@@ -28,7 +28,7 @@ No Maven wrapper — use system `mvn`. No automated tests exist in the project.
 
 ## Tech Stack
 
-- **Spring Boot 3.5.11** / **Camunda BPM 7.24** / **JDK 21**
+- **Spring Boot 4.0.7** / **Camunda BPM 7.24** / **JDK 21** (upgraded from Spring Boot 3.5.11; see UPGRADE-SPRINGBOOT4.md for breakpoints)
 - Jakarta EE namespace (`jakarta.annotation`, not `javax.annotation`)
 - Lombok with `@Slf4j` for logging (never manual Logger fields)
 - MySQL (saga modules, dual datasource) / H2 (h2 and arch-app modules)

@@ -2,6 +2,10 @@ server:
   port: 8090
 
 spring:
+  autoconfigure:
+    exclude:
+      # Boot4: JerseyApplicationPath 已迁移到 spring-boot-jersey，Camunda 7.24 REST autoconfig 字节码硬编码旧路径，无法加载
+      - org.camunda.bpm.spring.boot.starter.rest.CamundaBpmRestJerseyAutoConfiguration
   datasource:
     camunda:
       url: jdbc:mysql://localhost:3306/camunda?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&sessionVariables=transaction_isolation='READ-COMMITTED'
